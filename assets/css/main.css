@@ -1,0 +1,14 @@
+*,html, body {
+    top: 0;
+    right: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: white;
+}
+
+/* .napigais {
+    background-color:#2589BD;
+} */
+

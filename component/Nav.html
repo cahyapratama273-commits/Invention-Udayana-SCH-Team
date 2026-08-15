@@ -1,0 +1,61 @@
+<!--  komponen navbar akan di-fetch & disuntik oleh loadNavigasi() lewat NavRender.js -->
+<nav class="w-full  bg-blue-700/90 backdrop-blur sticky top-0 z-40">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="flex items-center justify-between h-16 gap-6">
+
+      <!-- logo -->
+      <a href="/beranda/" class="flex items-center gap-2 shrink-0">
+        <span class="w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-bold" style="background:#1E413F;">T</span>
+        <span class="font-semibold text-lg tracking-tight" style="color:#1E413F;">BerTeduh</span>
+      </a>
+
+
+      <!-- menu desktop -->
+      <div class="hidden lg:flex items-center gap-1 shrink-0" id="nav-menu">
+        <a href="/beranda/" data-nav="beranda" class="nav-link px-4 py-2 rounded-full text-sm font-medium text-[#233330] hover:bg-[#EEF2EE] transition">Beranda</a>
+        <a href="/blog/" data-nav="blog" class="nav-link px-4 py-2 rounded-full text-sm font-medium text-[#233330] hover:bg-[#EEF2EE] transition">Blog</a>
+        <a href="/konsultasi/" data-nav="cek-emosi" class="nav-link px-4 py-2 rounded-full text-sm font-medium text-[#233330] hover:bg-[#EEF2EE] transition">konsultasi</a>
+        <a href="/relaksasi/" data-nav="refleksi" class="nav-link px-4 py-2 rounded-full text-sm font-medium text-[#233330] transition" style="background:#CDC6AE;">Relaksasi</a>
+        <a href="/faqs/" data-nav="bantuan" class="nav-link ml-1 px-4 py-2 rounded-full text-sm font-medium text-[#233330] hover:bg-[#EEF2EE] transition">FAQs</a>
+      </div>
+
+      <!-- tombol menu krabby patty -->
+      <button id="nav-burger" class="lg:hidden p-2 rounded-lg hover:bg-[#EEF2EE]">
+        <svg class="w-6 h-6 text-[#233330]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- menu mobile -->
+    <div id="nav-menu-mobile" class="hidden lg:hidden pb-4 flex flex-col gap-1 absolute top-full left-0 right-0  bg-blue-500 shadow-lg">
+      <a href="/beranda/" data-nav="beranda" class="nav-link px-4 py-2.5 rounded-lg text-sm font-medium text-[#233330]">Beranda</a>
+      <a href="/blog/" data-nav="blog" class="nav-link px-4 py-2.5 rounded-lg text-sm font-medium text-[#233330]">Blog</a>
+      <a href="/konsultasi/" data-nav="cek-emosi" class="nav-link px-4 py-2.5 rounded-lg text-sm font-medium text-[#233330]" >Konsultasi</a>
+      <a href="/relaksasi/" data-nav="refleksi" class="nav-link px-4 py-2.5 rounded-lg text-sm font-medium text-[#233330]">Relaksasi</a>
+      <a href="/faqs/" data-nav="bantuan" class="nav-link px-4 py-2.5 rounded-lg text-sm font-semibold text-[#233330]">FAQs</a>
+    </div>
+  </div>
+</nav>
+
+<script>
+  // toggle menu mobile
+  (function () {
+    const burger = document.getElementById("nav-burger");
+    const mobileMenu = document.getElementById("nav-menu-mobile");
+    if (burger && mobileMenu) {
+      burger.addEventListener("click", () => mobileMenu.classList.toggle("hidden"));
+    }
+
+    const current = document.body.dataset.page; // baca halaman aktif dari <body data-page="...">
+    if (current) {
+      document.querySelectorAll(`[data-nav="${current}"]`).forEach((el) => {
+        el.classList.add("font-semibold"); // tebalin menu yang cocok
+        if (el.dataset.nav !== "bantuan") {
+          el.style.background = "#EEF2EE";
+          el.style.color = "#1E413F";
+        }
+      });
+    }
+  })();
+</script>

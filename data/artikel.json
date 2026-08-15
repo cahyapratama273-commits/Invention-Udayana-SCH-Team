@@ -1,0 +1,85 @@
+[
+  {
+    "id": "baik-1",
+    "kondisi": "baik",
+    "kategori": "Produktivitas",
+    "judul": "5 Cara Kecil Menjaga Mood Baikmu Tetap Nyala",
+    "ringkasan": "Kondisi hati lagi baik? Ini saatnya menabung kebiasaan kecil biar energi positifmu bertahan lebih lama.",
+    "waktu_baca": "4 menit baca",
+    "gambar": "../assets/images/AngsaDiDanau.webp"
+  },
+  {
+    "id": "baik-2",
+    "kondisi": "baik",
+    "kategori": "Relasi",
+    "judul": "Kenapa Berbagi Energi Positif Bikin Kamu Makin Bahagia",
+    "ringkasan": "Riset menunjukkan kebaikan kecil ke orang lain juga memperkuat kesehatan mental diri sendiri.",
+    "waktu_baca": "5 menit baca",
+    "gambar": "../assets/images/Image-Bertapa.webp"
+  },
+  {
+    "id": "baik-3",
+    "kondisi": "baik",
+    "kategori": "Kebiasaan",
+    "judul": "Journaling Syukur: Latihan 2 Menit Sebelum Tidur",
+    "ringkasan": "Kebiasaan sederhana ini terbukti membantu mempertahankan suasana hati yang stabil dari hari ke hari.",
+    "waktu_baca": "3 menit baca",
+    "gambar": "../assets/images/Image-Nature-Forest.webp"
+  },
+
+  {
+    "id": "cemas-1",
+    "kondisi": "cemas",
+    "kategori": "Kecemasan",
+    "judul": "Overthinking di Malam Hari? Coba Teknik Ini",
+    "ringkasan": "Pikiran yang muter terus jelang tidur itu wajar. Ini langkah sederhana buat meredakannya pelan-pelan.",
+    "waktu_baca": "6 menit baca",
+    "gambar": "../assets/images/AngsaDiDanau.webp"
+  },
+  {
+    "id": "cemas-2",
+    "kondisi": "cemas",
+    "kategori": "Pernapasan",
+    "judul": "Teknik Napas 4-7-8: Cara Cepat Menenangkan Sistem Saraf",
+    "ringkasan": "Dipakai banyak terapis buat meredakan cemas dalam hitungan menit. Begini cara melakukannya dengan benar.",
+    "waktu_baca": "4 menit baca",
+    "gambar": "../assets/images/Image-Bertapa.webp"
+  },
+  {
+    "id": "cemas-3",
+    "kondisi": "cemas",
+    "kategori": "Kelelahan",
+    "judul": "Capek tapi Susah Istirahat? Ini Bedanya Lelah Fisik dan Mental",
+    "ringkasan": "Kadang tubuh diam tapi kepala tetap bekerja. Kenali tandanya biar istirahatmu benar-benar efektif.",
+    "waktu_baca": "5 menit baca",
+    "gambar": "../assets/images/Image-Nature-Forest.webp"
+  },
+
+  {
+    "id": "berat-1",
+    "kondisi": "berat",
+    "kategori": "Krisis",
+    "judul": "Merasa Kewalahan Banget? Ini yang Bisa Kamu Lakukan Sekarang",
+    "ringkasan": "Kalau semuanya terasa terlalu berat, mulai dari satu langkah kecil ini dulu sebelum apa pun yang lain.",
+    "waktu_baca": "5 menit baca",
+    "gambar": "../assets/images/AngsaDiDanau.webp"
+  },
+  {
+    "id": "berat-2",
+    "kondisi": "berat",
+    "kategori": "Grounding",
+    "judul": "Panduan Grounding 5-4-3-2-1 untuk Meredakan Panik",
+    "ringkasan": "Teknik sederhana berbasis panca indra ini bisa membantu menarikmu kembali ke momen saat ini.",
+    "waktu_baca": "4 menit baca",
+    "gambar": "../assets/images/Image-Bertapa.webp"
+  },
+  {
+    "id": "berat-3",
+    "kondisi": "berat",
+    "kategori": "Bantuan Profesional",
+    "judul": "Kapan Waktu yang Tepat untuk Menemui Psikolog?",
+    "ringkasan": "Nggak perlu menunggu 'cukup parah'. Ini tanda-tanda kamu sudah boleh mencari bantuan profesional.",
+    "waktu_baca": "6 menit baca",
+    "gambar": "../assets/images/Image-Nature-Forest.webp"
+  }
+]
