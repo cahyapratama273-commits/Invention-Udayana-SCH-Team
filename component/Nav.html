@@ -14,9 +14,9 @@
       <div class="hidden lg:flex items-center gap-1 shrink-0" id="nav-menu">
         <a href="/beranda/" data-nav="beranda" class="nav-link px-4 py-2 rounded-full text-sm font-medium text-[#233330] hover:bg-[#EEF2EE] transition">Beranda</a>
         <a href="/blog/" data-nav="blog" class="nav-link px-4 py-2 rounded-full text-sm font-medium text-[#233330] hover:bg-[#EEF2EE] transition">Blog</a>
-        <a href="/konsultasi/" data-nav="cek-emosi" class="nav-link px-4 py-2 rounded-full text-sm font-medium text-[#233330] hover:bg-[#EEF2EE] transition">konsultasi</a>
-        <a href="/relaksasi/" data-nav="refleksi" class="nav-link px-4 py-2 rounded-full text-sm font-medium text-[#233330] transition" style="background:#CDC6AE;">Relaksasi</a>
-        <a href="/faqs/" data-nav="bantuan" class="nav-link ml-1 px-4 py-2 rounded-full text-sm font-medium text-[#233330] hover:bg-[#EEF2EE] transition">FAQs</a>
+        <a href="/konsultasi/" data-nav="konsultasi" class="nav-link px-4 py-2 rounded-full text-sm font-medium text-[#233330] hover:bg-[#EEF2EE] transition">Konsultasi</a>
+        <a href="/relaksasi/" data-nav="relaksasi" class="nav-link px-4 py-2 rounded-full text-sm font-medium text-[#233330] hover:bg-[#EEF2EE] transition">Relaksasi</a>
+        <a href="/faqs/" data-nav="faqs" class="nav-link ml-1 px-4 py-2 rounded-full text-sm font-medium text-[#233330] hover:bg-[#EEF2EE] transition">FAQs</a>
       </div>
 
       <!-- tombol menu krabby patty -->
@@ -31,9 +31,9 @@
     <div id="nav-menu-mobile" class="hidden lg:hidden pb-4 flex flex-col gap-1 absolute top-full left-0 right-0  bg-blue-500 shadow-lg">
       <a href="/beranda/" data-nav="beranda" class="nav-link px-4 py-2.5 rounded-lg text-sm font-medium text-[#233330]">Beranda</a>
       <a href="/blog/" data-nav="blog" class="nav-link px-4 py-2.5 rounded-lg text-sm font-medium text-[#233330]">Blog</a>
-      <a href="/konsultasi/" data-nav="cek-emosi" class="nav-link px-4 py-2.5 rounded-lg text-sm font-medium text-[#233330]" >Konsultasi</a>
-      <a href="/relaksasi/" data-nav="refleksi" class="nav-link px-4 py-2.5 rounded-lg text-sm font-medium text-[#233330]">Relaksasi</a>
-      <a href="/faqs/" data-nav="bantuan" class="nav-link px-4 py-2.5 rounded-lg text-sm font-semibold text-[#233330]">FAQs</a>
+      <a href="/konsultasi/" data-nav="konsultasi" class="nav-link px-4 py-2.5 rounded-lg text-sm font-medium text-[#233330]" >Konsultasi</a>
+      <a href="/relaksasi/" data-nav="relaksasi" class="nav-link px-4 py-2.5 rounded-lg text-sm font-medium text-[#233330]">Relaksasi</a>
+      <a href="/faqs/" data-nav="faqs" class="nav-link px-4 py-2.5 rounded-lg text-sm font-semibold text-[#233330]">FAQs</a>
     </div>
   </div>
 </nav>
@@ -51,7 +51,7 @@
     if (current) {
       document.querySelectorAll(`[data-nav="${current}"]`).forEach((el) => {
         el.classList.add("font-semibold"); // tebalin menu yang cocok
-        if (el.dataset.nav !== "bantuan") {
+        if (el.dataset.nav !== "faqs") {
           el.style.background = "#EEF2EE";
           el.style.color = "#1E413F";
         }

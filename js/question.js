@@ -117,7 +117,7 @@
     localStorage.setItem("userMentalCheckedAt", new Date().toISOString());
 
     // Direct ke beranda
-    window.location.href = "./beranda/";
+    window.location.href = "./beranda/index.html";
   }
 
   init();

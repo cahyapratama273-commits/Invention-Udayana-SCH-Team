@@ -42,7 +42,7 @@
     const current = document.body.dataset.page; // baca data-page halaman aktif
     document.querySelectorAll("[data-nav]").forEach((el) => {
       el.classList.remove("font-semibold");
-      if (el.dataset.nav !== "bantuan") {
+      if (el.dataset.nav !== "faqs") {
         el.style.background = "";
         el.style.color = "";
       }
@@ -50,7 +50,7 @@
     if (!current) return;
     document.querySelectorAll(`[data-nav="${current}"]`).forEach((el) => {
       el.classList.add("font-semibold"); // tebalin menu yang lagi aktif
-      if (el.dataset.nav !== "bantuan") {
+      if (el.dataset.nav !== "faqs") {
         el.style.background = "#EEF2EE";
         el.style.color = "#1E413F";
       }
