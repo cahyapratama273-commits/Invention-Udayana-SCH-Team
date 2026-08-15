@@ -20,12 +20,17 @@
     return true;
   }
 
-  function runInlineScripts(container) {
+  // FIX: terima baseUrl (URL halaman yang di-fetch), dipakai buat resolve manual.
+  // Sebelumnya pakai oldScript.src, yang salah karena document hasil DOMParser
+  // base URL-nya "about:blank", bukan URL halaman yang di-fetch.
+  function runInlineScripts(container, baseUrl) {
     container.querySelectorAll("script").forEach((oldScript) => {
       const newScript = document.createElement("script"); // <script> dari innerHTML nggak auto-jalan
       [...oldScript.attributes].forEach((attr) => newScript.setAttribute(attr.name, attr.value));
-      if (oldScript.src) {
-        newScript.src = oldScript.src; // script eksternal, re-fetch & jalanin ulang
+      const rawSrc = oldScript.getAttribute("src"); // ambil string mentah dari HTML, bukan properti .src
+      if (rawSrc) {
+        newScript.src = new URL(rawSrc, baseUrl).href; // resolve manual relatif ke baseUrl yang benar
+        newScript.async = false; // FIX: paksa jalan sesuai urutan HTML, bukan siapa cepat download duluan
       } else {
         newScript.textContent = oldScript.textContent; // script inline, copy isinya
       }
@@ -72,10 +77,15 @@
       document.title = doc.title || document.title; // update judul tab
       document.body.dataset.page = doc.body.dataset.page || ""; // update penanda halaman aktif
 
-      runInlineScripts(content); // jalanin script halaman baru
+      // FIX: pushState dipindah ke SINI, sebelum script dijalankan -> supaya
+      // document.location udah benar duluan, karena script yang baru (mis.
+      // fetch("../data/x.json") di Beranda.js) resolve path relatifnya
+      // berdasarkan document.location saat itu.
+      if (push) history.pushState({ url }, "", url);
+
+      runInlineScripts(content, url); // jalanin script halaman baru, resolve path relatif ke `url`
       document.dispatchEvent(new CustomEvent("spa:loaded", { detail: { url } }));
 
-      if (push) history.pushState({ url }, "", url); // update URL browser tanpa reload
       window.scrollTo({ top: 0, behavior: "instant" });
       highlightActiveNav();
     } catch (err) {

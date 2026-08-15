@@ -10,11 +10,11 @@
   ];
 
   const SCORE_VALUE = { hijau: 0, kuning: 1, merah: 2 };
-  const MAX_SCORE = questionFiles.length * SCORE_VALUE.merah; //  nyesuain jumlah soal
+  const MAX_SCORE = questionFiles.length * SCORE_VALUE.merah; //  menasmpung skor maksimal (semua jawaban merah)
 
   let currentQuestionIndex = 0;
   let userScores = [];
-  let isLoading = false; // guard anti double-click
+  let isLoading = false; // antipasi user double click 
 
   function init() {
     currentQuestionIndex = 0;
@@ -117,7 +117,7 @@
     localStorage.setItem("userMentalCheckedAt", new Date().toISOString());
 
     // Direct ke beranda
-    window.location.href = "./Beranda/index.html";
+    window.location.href = "./beranda/";
   }
 
   init();

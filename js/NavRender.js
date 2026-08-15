@@ -14,8 +14,10 @@ async function loadNavigasi(navPath = "../component/Nav.html", slotId = "navbar-
 
     slot.querySelectorAll("script").forEach((oldScript) => {
       const newScript = document.createElement("script"); // <script> dari innerHTML nggak auto-jalan
-      if (oldScript.src) {
-        newScript.src = oldScript.src;
+      const rawSrc = oldScript.getAttribute("src"); // ambil string mentah, bukan properti .src (fix sama kayak Nav.js)
+      if (rawSrc) {
+        newScript.src = new URL(rawSrc, navPath).href; // resolve manual relatif ke navPath
+        newScript.async = false; // paksa urutan eksekusi sesuai HTML
       } else {
         newScript.textContent = oldScript.textContent;
       }
