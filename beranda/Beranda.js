@@ -63,7 +63,7 @@
       const semuaArtikel = await res.json();
       const artikelRelevan = semuaArtikel.filter((a) => a.kondisi === kondisi); // saring sesuai kondisi
 
-      gridEl.innerHTML = artikelRelevan.map(renderKartuArtikel).join(""); // render jadi HTML
+      gridEl.innerHTML = artikelRelevan.map(renderKartuArtikel).join(""); // render menjadi HTML
     } catch (err) {
       console.error("Gagal memuat artikel:", err);
       gridEl.innerHTML = `<p class="text-sm text-[#5B6E68] col-span-full">Belum bisa memuat rekomendasi artikel. Coba refresh halaman ya.</p>`;
@@ -75,7 +75,7 @@
       <a href="../Blog/index.html?id=${artikel.id}" class="tile rounded-2xl overflow-hidden flex flex-col hover:-translate-y-1 transition group">
         <div class="h-40 overflow-hidden bg-[#E4EAE5]">
           <img src="${artikel.gambar}" alt="${artikel.judul}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500"
-          onerror="this.onerror=null; this.src='../assets/images/Image-Nature-Forest.webp';" />
+          onerror="this.onerror=null; this.src='../assets/Images/placeholder.svg';" />
         </div>
         <div class="p-5 flex flex-col gap-2 flex-1">
           <span class="text-[11px] font-bold uppercase tracking-wide text-[#7FA593]">${artikel.kategori}</span>
