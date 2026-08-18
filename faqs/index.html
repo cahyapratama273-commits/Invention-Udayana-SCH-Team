@@ -1,192 +1,153 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
+  <!-- SESSION akan blokir akses jiak kuis belum diisi  -->
+  <script src="../js/session-gate.js"></script>
   <meta name="author" content="SCH Team - Invention Udayana 2026">
-  <meta property="og:title" content="BerTeduh">
+  <meta property="og:title" content="BerTeduh — FAQs">
   <meta property="og:description" content="Atasi stres dan cemas dengan Teduh, platform yang membantu kamu memahami emosi dan meningkatkan kesehatan mental.">
-  <meta property="og:image" content="./assets/Images/Image-Bertapa.webp">
+  <meta property="og:image" content="../assets/Images/Image-Bertapa.webp">
   <meta property="og:url" content="https://youtube.com">
   <meta name="description" content="Atasi stres dan cemas dengan Teduh, platform yang membantu kamu memahami emosi dan meningkatkan kesehatan mental.">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Teduh - FAQs</title>
+  <title>Teduh — FAQs</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="../assets/css/main.css" />
 </head>
-<body data-page="faqs" class="bg-gray-300 ">
+<body data-page="faqs" style="background:#0D1220; color:#F5F5F5;">
 
   <div id="navbar-slot"></div>
 
   <main id="app-content" data-page="faqs">
+    <div class="max-w-2xl mx-auto px-6 py-16">
 
-
-
-    <div class="max-w-2xl mx-auto p-4 text-center my-auto bg-blue-400 rounded-2xl shadow-lg">
-      <div class="mt-8">
-        <h2 class="text-2xl font-semibold text-gray-900">Frequently  Asked Questions</h2>
-        <p class="mx-4 text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec pulvinar ipsum at dapibus venenatis. Aliquam sodales metus eu quam sodales vehicula. <a href="./" class="underline underline-offset-1">Nullam tempor tincidunt laoreet.</a> </p>
+      <!-- Header -->
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-medium mb-3" style="font-family:'Playfair Display',serif; color:#F5F5F5;">Frequently Asked Questions</h2>
+        <p class="text-sm" style="color:#8A93A8;">
+          Semua yang perlu kamu ketahui tentang BerTeduh.
+          <a href="/konsultasi/" class="underline underline-offset-2 transition" style="color:#2DD4A8;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Hubungi kami</a> jika belum terjawab.
+        </p>
       </div>
 
-      <div class="mt-8">
+      <!-- FAQ Item -->
+      <div class="space-y-3">
 
-
-        <div class="space-y-4 max-w-3xl mx-auto p-4">
-  
-          <!-- FAQ yang terbuka -->
-          <details class="group border-s-4  bg-white/50 backdrop-blur-md p-5 rounded-2xl border  shadow-sm [&_summary::-webkit-details-marker]:hidden" open>
-            <summary class="flex items-center justify-between text-gray-900 cursor-pointer list-none">
-              
-
-              <div class="flex items-center gap-4">
-
-                <div class="bg-white/80 border border-gray-200/60 w-12 h-12 flex items-center justify-center rounded-xl shadow-sm shrink-0">
-                  <span class="text-2xl">😊</span>
-                </div>
-
-                <h2 class="text-lg font-medium text-gray-800">Cara konsultasi?</h2>
+        <details class="faq-item rounded-xl p-5 group [&_summary::-webkit-details-marker]:hidden" open>
+          <summary class="flex items-center justify-between cursor-pointer list-none">
+            <div class="flex items-center gap-4">
+              <div class="w-10 h-10 flex items-center justify-center rounded-lg shrink-0" style="background:rgba(45,212,168,0.1); border:1px solid rgba(45,212,168,0.2);">
+                <span class="text-xl" onmouseover="this.style.transform='scale(1.10)'" onmouseout="this.style.transform='scale(1)'">😊</span>
               </div>
+              <h3 class="text-base font-medium" style="color:#F5F5F5;">Cara konsultasi?</h3>
+            </div>
+            <svg aria-hidden="true" class="w-5 h-5 shrink-0 transition-transform duration-300 group-open:-rotate-180" style="color:#8A93A8;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <p class="pt-4 ps-14 text-sm leading-relaxed" style="color:#8A93A8;">
+            Kamu bisa langsung mengunjungi halaman <a href="/konsultasi/" class="underline" style="color:#2DD4A8;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'" >Konsultasi</a> dan memilih jadwal yang tersedia.
+          </p>
+        </details>
 
-          
-              <svg aria-hidden="true" class="size-5 shrink-0 text-gray-500 transition-transform duration-300 group-open:-rotate-180" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-              </svg>
-              
-            </summary>
-
-            <!-- Jawaban -->
-            <p class="pt-4 ps-16 text-gray-600 text-sm leading-relaxed">
-              Yes, you can try us for free for 30 days. If you want, we'll provide you with a free 30-minute onboarding call to get you up and running. Book a call <a href="/konsultasi/" class="text-blue-600 underline">here</a>.
-            </p>
-          </details>
-
-          <!-- FAQ sisanya tertutup -->
-           
-          <details class="group border-s-4 border-transparent hover:border-gray-300 bg-white/50 backdrop-blur-md p-5 rounded-2xl border shadow-sm [&_summary::-webkit-details-marker]:hidden">
-            <summary class="flex items-center justify-between text-gray-900 cursor-pointer list-none">
-              
-              <div class="flex items-center gap-4">
-                <div class="bg-white/80 border border-gray-200/60 w-12 h-12 flex items-center justify-center rounded-xl shadow-sm shrink-0">
-                  <span class="text-2xl">📋</span>
-                </div>
-                <h2 class="text-lg font-medium text-gray-800">Can I change my plan later?</h2>
+        <details class="faq-item rounded-xl p-5 group [&_summary::-webkit-details-marker]:hidden">
+          <summary class="flex items-center justify-between cursor-pointer list-none">
+            <div class="flex items-center gap-4">
+              <div class="w-10 h-10 flex items-center justify-center rounded-lg shrink-0" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.08);">
+                <span class="text-xl">📋</span>
               </div>
+              <h3 class="text-base font-medium" style="color:#F5F5F5;">Apakah layanan ini gratis?</h3>
+            </div>
+            <svg aria-hidden="true" class="w-5 h-5 shrink-0 transition-transform duration-300 group-open:-rotate-180" style="color:#8A93A8;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <p class="pt-4 ps-14 text-sm leading-relaxed" style="color:#8A93A8;">
+            Sebagian besar konten di BerTeduh dapat diakses secara gratis. Beberapa fitur konsultasi lanjutan mungkin memerlukan pendaftaran.
+          </p>
+        </details>
 
-              <svg aria-hidden="true" class="size-5 shrink-0 text-gray-500 transition-transform duration-300 group-open:-rotate-180" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-              </svg>
-
-            </summary>
-
-            <p class="pt-4 ps-16 text-gray-600 text-sm leading-relaxed">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ab hic veritatis molestias culpa in.
-            </p>
-          </details>
-
-          <details class="group border-s-4 border-transparent hover:border-gray-300 bg-white/50 backdrop-blur-md p-5 rounded-2xl border shadow-sm [&_summary::-webkit-details-marker]:hidden">
-            <summary class="flex items-center justify-between text-gray-900 cursor-pointer list-none">
-              
-              <div class="flex items-center gap-4">
-                <div class="bg-white/80 border border-gray-200/60 w-12 h-12 flex items-center justify-center rounded-xl shadow-sm shrink-0">
-                  <span class="text-2xl">📋</span>
-                </div>
-                <h2 class="text-lg font-medium text-gray-800">Can I change my plan later?</h2>
+        <details class="faq-item rounded-xl p-5 group [&_summary::-webkit-details-marker]:hidden">
+          <summary class="flex items-center justify-between cursor-pointer list-none">
+            <div class="flex items-center gap-4">
+              <div class="w-10 h-10 flex items-center justify-center rounded-lg shrink-0" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.08);">
+                <span class="text-xl">🔒</span>
               </div>
+              <h3 class="text-base font-medium" style="color:#F5F5F5;">Apakah data saya aman dan privat?</h3>
+            </div>
+            <svg aria-hidden="true" class="w-5 h-5 shrink-0 transition-transform duration-300 group-open:-rotate-180" style="color:#8A93A8;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <p class="pt-4 ps-14 text-sm leading-relaxed" style="color:#8A93A8;">
+            Ya. Semua jawaban kuesioner disimpan secara lokal di browser kamu dan tidak dikirim ke server mana pun. Privasi kamu adalah prioritas kami.
+          </p>
+        </details>
 
-              <svg aria-hidden="true" class="size-5 shrink-0 text-gray-500 transition-transform duration-300 group-open:-rotate-180" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-              </svg>
-
-            </summary>
-
-            <p class="pt-4 ps-16 text-gray-600 text-sm leading-relaxed">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ab hic veritatis molestias culpa in.
-            </p>
-          </details>
-
-          <details class="group border-s-4 border-transparent hover:border-gray-300 bg-white/50 backdrop-blur-md p-5 rounded-2xl border shadow-sm [&_summary::-webkit-details-marker]:hidden">
-            <summary class="flex items-center justify-between text-gray-900 cursor-pointer list-none">
-              
-              <div class="flex items-center gap-4">
-                <div class="bg-white/80 border border-gray-200/60 w-12 h-12 flex items-center justify-center rounded-xl shadow-sm shrink-0">
-                  <span class="text-2xl">📋</span>
-                </div>
-                <h2 class="text-lg font-medium text-gray-800">Can I change my plan later?</h2>
+        <details class="faq-item rounded-xl p-5 group [&_summary::-webkit-details-marker]:hidden">
+          <summary class="flex items-center justify-between cursor-pointer list-none">
+            <div class="flex items-center gap-4">
+              <div class="w-10 h-10 flex items-center justify-center rounded-lg shrink-0" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.08);">
+                <span class="text-xl">🧘</span>
               </div>
+              <h3 class="text-base font-medium" style="color:#F5F5F5;">Apa itu fitur Relaksasi?</h3>
+            </div>
+            <svg aria-hidden="true" class="w-5 h-5 shrink-0 transition-transform duration-300 group-open:-rotate-180" style="color:#8A93A8;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <p class="pt-4 ps-14 text-sm leading-relaxed" style="color:#8A93A8;">
+            Fitur Relaksasi menyediakan panduan meditasi, latihan pernapasan, dan teknik grounding untuk membantu kamu menenangkan pikiran kapan saja.
+          </p>
+        </details>
 
-              <svg aria-hidden="true" class="size-5 shrink-0 text-gray-500 transition-transform duration-300 group-open:-rotate-180" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-              </svg>
-
-            </summary>
-
-            <p class="pt-4 ps-16 text-gray-600 text-sm leading-relaxed">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ab hic veritatis molestias culpa in.
-            </p>
-          </details>
-
-          <details class="group border-s-4 border-transparent hover:border-gray-300 bg-white/50 backdrop-blur-md p-5 rounded-2xl border shadow-sm [&_summary::-webkit-details-marker]:hidden">
-            <summary class="flex items-center justify-between text-gray-900 cursor-pointer list-none">
-              
-              <div class="flex items-center gap-4">
-                <div class="bg-white/80 border border-gray-200/60 w-12 h-12 flex items-center justify-center rounded-xl shadow-sm shrink-0">
-                  <span class="text-2xl">📋</span>
-                </div>
-                <h2 class="text-lg font-medium text-gray-800">Can I change my plan later?</h2>
+        <details class="faq-item rounded-xl p-5 group [&_summary::-webkit-details-marker]:hidden">
+          <summary class="flex items-center justify-between cursor-pointer list-none">
+            <div class="flex items-center gap-4">
+              <div class="w-10 h-10 flex items-center justify-center rounded-lg shrink-0" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.08);">
+                <span class="text-xl">📝</span>
               </div>
+              <h3 class="text-base font-medium" style="color:#F5F5F5;">Apakah hasil kuesioner saya tersimpan?</h3>
+            </div>
+            <svg aria-hidden="true" class="w-5 h-5 shrink-0 transition-transform duration-300 group-open:-rotate-180" style="color:#8A93A8;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <p class="pt-4 ps-14 text-sm leading-relaxed" style="color:#8A93A8;">
+            Hasil kuesioner disimpan di localStorage browser kamu, sehingga rekomendasi tetap terjaga selama kamu menggunakan perangkat yang sama.
+          </p>
+        </details>
 
-              <svg aria-hidden="true" class="size-5 shrink-0 text-gray-500 transition-transform duration-300 group-open:-rotate-180" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-              </svg>
-
-            </summary>
-
-            <p class="pt-4 ps-16 text-gray-600 text-sm leading-relaxed">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ab hic veritatis molestias culpa in.
-            </p>
-          </details>
-
-          <details class="group border-s-4 border-transparent hover:border-gray-300 bg-white/50 backdrop-blur-md p-5 rounded-2xl border shadow-sm [&_summary::-webkit-details-marker]:hidden">
-            <summary class="flex items-center justify-between text-gray-900 cursor-pointer list-none">
-              
-              <div class="flex items-center gap-4">
-                <div class="bg-white/80 border border-gray-200/60 w-12 h-12 flex items-center justify-center rounded-xl shadow-sm shrink-0">
-                  <span class="text-2xl">📋</span>
-                </div>
-                <h2 class="text-lg font-medium text-gray-800">Can I change my plan later?</h2>
+        <details class="faq-item rounded-xl p-5 group [&_summary::-webkit-details-marker]:hidden">
+          <summary class="flex items-center justify-between cursor-pointer list-none">
+            <div class="flex items-center gap-4">
+              <div class="w-10 h-10 flex items-center justify-center rounded-lg shrink-0" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.08);">
+                <span class="text-xl">💬</span>
               </div>
+              <h3 class="text-base font-medium" style="color:#F5F5F5;">Bagaimana cara menghubungi tim?</h3>
+            </div>
+            <svg aria-hidden="true" class="w-5 h-5 shrink-0 transition-transform duration-300 group-open:-rotate-180" style="color:#8A93A8;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <p class="pt-4 ps-14 text-sm leading-relaxed" style="color:#8A93A8;">
+            Kamu dapat menghubungi kami melalui email atau media sosial yang tersedia di bagian footer halaman ini.
+          </p>
+        </details>
 
-              <svg aria-hidden="true" class="size-5 shrink-0 text-gray-500 transition-transform duration-300 group-open:-rotate-180" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-              </svg>
-
-            </summary>
-
-            <p class="pt-4 ps-16 text-gray-600 text-sm leading-relaxed">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ab hic veritatis molestias culpa in.
-            </p>
-          </details>
-
-        </div>
-
-
-
-
-
-
-
+      </div>
+    </div>
 
     <script src="../js/NavRender.js"></script>
     <script src="./main.js"></script>
   </main>
 
-  <!-- Footer -->
   <div id="footer"></div>
-
-  <!-- panggil router sekali aja di luar #app-content -->
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <script src="../js/Nav.js"></script>
   <script src="../js/Footer.js"></script>
 </body>
 </html>
-

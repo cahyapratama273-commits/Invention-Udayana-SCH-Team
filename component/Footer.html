@@ -1,57 +1,59 @@
-<footer class=" bg-blue-600/90">
-  <div class="mx-auto max-w-7xl px-4 pt-16 pb-6 sm:px-6 lg:px-8 lg:pt-24">
-    <div class="grid grid-cols-1 gap-8 lg:grid-cols-3">
-      
-      <!-- Kolom Info & Brand -->
+<footer style="background:#0A0E1A; border-top:1px solid rgba(255,255,255,0.08);">
+  <div class="max-w-7xl mx-auto px-6 pt-14 pb-8">
+    <div class="grid grid-cols-1 gap-10 lg:grid-cols-3">
+
+      <!-- Kolom Brand -->
       <div class="space-y-4">
-        <h3 class="text-xl font-bold">BerTeduh</h3>
-        <p class="mt-6 max-w-md text-center leading-relaxed text-gray-500 sm:max-w-xs sm:text-left">
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Incidunt consequuntur amet culpa cum itaque neque.
+        <div class="flex items-center gap-2">
+          <span class="w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold" style="background:#2DD4A8; color:#0D1220;">T</span>
+          <span class="font-semibold text-lg" style="color:#F5F5F5;">BerTeduh<span style="color:#2DD4A8;">.</span></span>
+        </div>
+        <p class="text-sm leading-relaxed max-w-xs" style="color:#8A93A8;">
+          Ruang aman untuk mengurai isi kepala, memahami emosi, dan merawat kesehatan mental kamu.
         </p>
-        <div class="flex space-x-6">
-          <a class="flex h-8 w-8 items-center justify-center rounded-full bg-gray-600 transition-colors hover:bg-gray-700" href="#">
-            <i class="fab fa-twitter text-white"></i>
+        <div class="flex gap-3 pt-1">
+          <a href="#" aria-label="Twitter" class="w-8 h-8 flex items-center justify-center rounded-full transition" style="background:rgba(255,255,255,0.06); color:#8A93A8;" onmouseover="this.style.color='#2DD4A8'" onmouseout="this.style.color='#8A93A8'">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.253 5.622 5.911-5.622Zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+          <a href="#" aria-label="Instagram" class="w-8 h-8 flex items-center justify-center rounded-full transition" style="background:rgba(255,255,255,0.06); color:#8A93A8;" onmouseover="this.style.color='#2DD4A8'" onmouseout="this.style.color='#8A93A8'">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
           </a>
         </div>
       </div>
 
-      <!-- Kolom Daftar Link -->
-      <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:col-span-2">
-        
-        <!-- About Us -->
-        <div class="text-center sm:text-left">
-          <h3 class="text-lg font-bold text-gray-900">About Us</h3>
-          <ul class="mt-8 space-y-4 text-sm">
-            <li><a class="text-gray-700 transition hover:text-gray-700/75" href="#">Company History</a></li>
-            <li><a class="text-gray-700 transition hover:text-gray-700/75" href="#">Meet the Team</a></li>
-            <li><a class="text-gray-700 transition hover:text-gray-700/75" href="#">Employee Handbook</a></li>
-            <li><a class="text-gray-700 transition hover:text-gray-700/75" href="#">Careers</a></li>
+      <!-- Kolom Link -->
+      <div class="grid grid-cols-2 gap-8 lg:col-span-2">
+        <div>
+          <h3 class="text-sm font-semibold uppercase tracking-wider mb-4" style="color:#F5F5F5;">Navigasi</h3>
+          <ul class="space-y-3 text-sm">
+            <li><a href="/beranda/"    class="transition" style="color:#8A93A8;" onmouseover="this.style.color='#2DD4A8'" onmouseout="this.style.color='#8A93A8'">Beranda</a></li>
+            <li><a href="/blog/"       class="transition" style="color:#8A93A8;" onmouseover="this.style.color='#2DD4A8'" onmouseout="this.style.color='#8A93A8'">Blog</a></li>
+            <li><a href="/konsultasi/" class="transition" style="color:#8A93A8;" onmouseover="this.style.color='#2DD4A8'" onmouseout="this.style.color='#8A93A8'">Konsultasi</a></li>
+            <li><a href="/relaksasi/"  class="transition" style="color:#8A93A8;" onmouseover="this.style.color='#2DD4A8'" onmouseout="this.style.color='#8A93A8'">Relaksasi</a></li>
+            <li><a href="/faqs/"       class="transition" style="color:#8A93A8;" onmouseover="this.style.color='#2DD4A8'" onmouseout="this.style.color='#8A93A8'">FAQs</a></li>
           </ul>
         </div>
-      </div>
-      <!-- Kontak -->
-        <div class="text-center sm:text-left">
-          <h3 class="text-lg font-bold text-gray-900">Kontak</h3>
-          <ul class="mt-8 space-y-4 text-sm">
-            <li><a class="text-gray-700 transition hover:text-gray-700/75" href="#">Company History</a></li>
-            <li><a class="text-gray-700 transition hover:text-gray-700/75" href="#">Meet the Team</a></li>
-            <li><a class="text-gray-700 transition hover:text-gray-700/75" href="#">Employee Handbook</a></li>
-            <li><a class="text-gray-700 transition hover:text-gray-700/75" href="#">Careers</a></li>
+
+        <div>
+          <h3 class="text-sm font-semibold uppercase tracking-wider mb-4" style="color:#F5F5F5;">Kontak</h3>
+          <ul class="space-y-3 text-sm">
+            <li><a href="mailto:halo@berteduh.id" class="transition" style="color:#8A93A8;" onmouseover="this.style.color='#2DD4A8'" onmouseout="this.style.color='#8A93A8'">halo@berteduh.id</a></li>
+            <li><a href="#" class="transition" style="color:#8A93A8;" onmouseover="this.style.color='#2DD4A8'" onmouseout="this.style.color='#8A93A8'">Instagram: @berteduh</a></li>
+            <li><a href="#" class="transition" style="color:#8A93A8;" onmouseover="this.style.color='#2DD4A8'" onmouseout="this.style.color='#8A93A8'">Twitter: @berteduh</a></li>
           </ul>
         </div>
       </div>
     </div>
 
-    <!-- Bagian Hak Cipta -->
-    <div class="mt-12 border-t border-gray-100 pt-6">
-      <div class="text-center sm:flex sm:justify-between sm:text-left">
-        <p class="text-sm text-gray-500">
-          <span class="block sm:inline">All rights reserved.</span>
-          <a class="inline-block text-teal-600 underline transition hover:text-teal-600/75" href="#">Terms & Conditions</a>
-          <span>&middot;</span>
-          <a class="inline-block text-teal-600 underline transition hover:text-teal-600/75" href="#">Privacy Policy</a>
-        </p>
-        <p class="mt-4 text-sm text-gray-500 sm:order-first sm:mt-0">&copy; 2022 Company Name</p>
+    <!-- Copyright -->
+    <div class="mt-12 pt-6" style="border-top:1px solid rgba(255,255,255,0.08); display:flex; flex-direction:column; gap:0.75rem;">
+      <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 w-full">
+        <p class="text-xs" style="color:#8A93A8;">&copy; 2026 BerTeduh — SCH Team, Invention Udayana</p>
+        <div class="flex gap-4 text-xs">
+          <a href="#" class="transition" style="color:#8A93A8;" onmouseover="this.style.color='#2DD4A8'" onmouseout="this.style.color='#8A93A8'">Terms &amp; Conditions</a>
+          <span style="color:#8A93A8;">·</span>
+          <a href="#" class="transition" style="color:#8A93A8;" onmouseover="this.style.color='#2DD4A8'" onmouseout="this.style.color='#8A93A8'">Privacy Policy</a>
+        </div>
       </div>
     </div>
   </div>

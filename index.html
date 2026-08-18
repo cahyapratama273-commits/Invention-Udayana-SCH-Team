@@ -1,42 +1,36 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta name="author" content="SCH Team - Invention Udayana 2026">
-    <meta property="og:title" content="BerTeduh">
-    <meta property="og:description" content="Atasi stres dan cemas dengan Teduh, platform yang membantu kamu memahami emosi dan meningkatkan kesehatan mental.">
-    <meta property="og:image" content="./assets/images/Image-Bertapa.webp">
-    <meta property="og:url" content="https://youtube.com">
-    <meta name="description" content="Atasi stres dan cemas dengan Teduh, platform yang membantu kamu memahami emosi dan meningkatkan kesehatan mental.">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teduh - Tes</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="./assets/css/main.css">
-    <style> body { font-family: 'Plus Jakarta Sans', sans-serif; } </style>
+  <meta name="author" content="SCH Team - Invention Udayana 2026">
+  <meta property="og:title" content="BerTeduh">
+  <meta property="og:description" content="Atasi stres dan cemas dengan Teduh, platform yang membantu kamu memahami emosi dan meningkatkan kesehatan mental.">
+  <meta property="og:image" content="./assets/Images/Image-Bertapa.webp">
+  <meta property="og:url" content="https://youtube.com">
+  <meta name="description" content="Atasi stres dan cemas dengan Teduh, platform yang membantu kamu memahami emosi dan meningkatkan kesehatan mental.">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teduh — Kenali Perasaanmu</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="./assets/css/main.css">
 </head>
-<body class="bg-gray-300 flex items-center justify-center min-h-screen">
+<body style="background:#0D1220; color:#F5F5F5;" class="flex items-center justify-center min-h-screen">
 
-    <div class="w-full max-w-md p-6 bg-white rounded-xl shadow-md">
+    <div class="w-full max-w-md p-7 rounded-2xl" style="background:#151B2E; border:1px solid rgba(255,255,255,0.08);">
         <div class="mb-6">
-            <p class="text-xs font-semibold text-emerald-600 uppercase tracking-wide mb-2">Sebelum kita mulai</p>
-            <h1 class="text-lg font-bold text-slate-800 mb-1">Yuk kenalan dulu sama perasaanmu</h1>
-            <p class="text-xs text-slate-500 mb-4">Jawab sejujurnya ya, nggak akan ada jawaban salah kok</p>
+            <p class="text-xs font-semibold uppercase tracking-widest mb-3" style="color:#2DD4A8;">Sebelum kita mulai</p>
+            <h1 class="text-xl font-bold mb-1" style="color:#F5F5F5; font-family:'Playfair Display',serif;">Yuk kenalan dulu sama perasaanmu</h1>
+            <p class="text-xs mb-5" style="color:#8A93A8;">Jawab sejujurnya ya, nggak akan ada jawaban salah kok</p>
             <div class="flex items-center gap-3">
-                <div class="flex-1 h-1.5 rounded-full bg-slate-200 overflow-hidden">
-                    <div id="quiz-progress-fill" class="h-full rounded-full bg-emerald-500 transition-all duration-500" style="width:0%"></div>
+                <div class="flex-1 h-1 rounded-full overflow-hidden" style="background:rgba(255,255,255,0.08);">
+                    <div id="quiz-progress-fill" class="h-full rounded-full transition-all duration-500" style="width:0%; background:#2DD4A8;"></div>
                 </div>
-                <span id="quiz-progress-label" class="text-xs font-semibold text-slate-500 whitespace-nowrap">1 / 7</span>
+                <span id="quiz-progress-label" class="text-xs font-semibold whitespace-nowrap" style="color:#8A93A8;">1 / 7</span>
             </div>
         </div>
 
         <div id="quiz-slot"></div>
-
-        <!-- <div class="flex justify-between items-center mt-5">
-            <button id="quiz-back-btn" class="text-xs font-semibold text-slate-400 hover:text-slate-700 transition invisible">&larr; Kembaili</button>
-            <span class="text-[11px] text-slate-400">Jawaban Anda Dijamin Anonim & Privat</span>
-        </div> -->
     </div>
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>

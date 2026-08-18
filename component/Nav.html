@@ -1,45 +1,43 @@
 <!--  komponen navbar akan di-fetch & disuntik oleh loadNavigasi() lewat NavRender.js -->
-<nav class="w-full  bg-blue-700/90 backdrop-blur sticky top-0 z-40">
+<nav style="background:#0D1220; border-bottom:1px solid rgba(255,255,255,0.08);" class="w-full backdrop-blur sticky top-0 z-40">
   <div class="max-w-7xl mx-auto px-6">
     <div class="flex items-center justify-between h-16 gap-6">
 
       <!-- logo -->
       <a href="/beranda/" class="flex items-center gap-2 shrink-0">
-        <span class="w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-bold" style="background:#1E413F;">T</span>
-        <span class="font-semibold text-lg tracking-tight" style="color:#1E413F;">BerTeduh</span>
+        <span class="w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold" style="background:#2DD4A8; color:#0D1220;">T</span>
+        <span class="font-semibold text-lg tracking-tight" style="color:#F5F5F5;">BerTeduh<span style="color:#2DD4A8;">.</span></span>
       </a>
-
 
       <!-- menu desktop -->
       <div class="hidden lg:flex items-center gap-1 shrink-0" id="nav-menu">
-        <a href="/beranda/" data-nav="beranda" class="nav-link px-4 py-2 rounded-full text-sm font-medium text-[#233330] hover:bg-[#EEF2EE] transition">Beranda</a>
-        <a href="/blog/" data-nav="blog" class="nav-link px-4 py-2 rounded-full text-sm font-medium text-[#233330] hover:bg-[#EEF2EE] transition">Blog</a>
-        <a href="/konsultasi/" data-nav="konsultasi" class="nav-link px-4 py-2 rounded-full text-sm font-medium text-[#233330] hover:bg-[#EEF2EE] transition">Konsultasi</a>
-        <a href="/relaksasi/" data-nav="relaksasi" class="nav-link px-4 py-2 rounded-full text-sm font-medium text-[#233330] hover:bg-[#EEF2EE] transition">Relaksasi</a>
-        <a href="/faqs/" data-nav="faqs" class="nav-link ml-1 px-4 py-2 rounded-full text-sm font-medium text-[#233330] hover:bg-[#EEF2EE] transition">FAQs</a>
+        <a href="/beranda/"     data-nav="beranda"    class="nav-link px-4 py-2 rounded-full text-sm font-medium hover:text-[#2DD4A8] transition" style="color:#8A93A8;">Beranda</a>
+        <a href="/blog/"        data-nav="blog"       class="nav-link px-4 py-2 rounded-full text-sm font-medium hover:text-[#2DD4A8] transition" style="color:#8A93A8;">Blog</a>
+        <a href="/konsultasi/"  data-nav="konsultasi" class="nav-link px-4 py-2 rounded-full text-sm font-medium hover:text-[#2DD4A8] bg-[rgba(45,212,168,0.12)] transition" style="color:#2DD4A8;">Konsultasi</a>
+        <a href="/relaksasi/"   data-nav="relaksasi"  class="nav-link px-4 py-2 rounded-full text-sm font-medium hover:text-[#2DD4A8] transition" style="color:#8A93A8;">Relaksasi</a>
+        <a href="/faqs/"        data-nav="faqs"       class="nav-link ml-1 px-4 py-2 rounded-full text-sm font-medium hover:text-[#2DD4A8] transition" style="color:#8A93A8;">FAQs</a>
       </div>
 
       <!-- tombol menu krabby patty -->
-      <button id="nav-burger" class="lg:hidden p-2 rounded-lg hover:bg-[#EEF2EE]">
-        <svg class="w-6 h-6 text-[#233330]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <button id="nav-burger" class="lg:hidden p-2 rounded-lg" style="color:#8A93A8;">
+        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
         </svg>
       </button>
     </div>
 
     <!-- menu mobile -->
-    <div id="nav-menu-mobile" class="hidden lg:hidden pb-4 flex flex-col gap-1 absolute top-full left-0 right-0  bg-blue-500 shadow-lg">
-      <a href="/beranda/" data-nav="beranda" class="nav-link px-4 py-2.5 rounded-lg text-sm font-medium text-[#233330]">Beranda</a>
-      <a href="/blog/" data-nav="blog" class="nav-link px-4 py-2.5 rounded-lg text-sm font-medium text-[#233330]">Blog</a>
-      <a href="/konsultasi/" data-nav="konsultasi" class="nav-link px-4 py-2.5 rounded-lg text-sm font-medium text-[#233330]" >Konsultasi</a>
-      <a href="/relaksasi/" data-nav="relaksasi" class="nav-link px-4 py-2.5 rounded-lg text-sm font-medium text-[#233330]">Relaksasi</a>
-      <a href="/faqs/" data-nav="faqs" class="nav-link px-4 py-2.5 rounded-lg text-sm font-semibold text-[#233330]">FAQs</a>
+    <div id="nav-menu-mobile" class="hidden lg:hidden pb-4 flex flex-col gap-1 absolute top-full left-0 right-0 shadow-lg" style="background:#0D1220; border-bottom:1px solid rgba(255,255,255,0.08);">
+      <a href="/beranda/"     data-nav="beranda"    class="nav-link px-6 py-3 text-sm font-medium transition" style="color:#8A93A8;">Beranda</a>
+      <a href="/blog/"        data-nav="blog"       class="nav-link px-6 py-3 text-sm font-medium transition" style="color:#8A93A8;">Blog</a>
+      <a href="/konsultasi/"  data-nav="konsultasi" class="nav-link px-6 py-3 text-sm font-medium transition" style="color:#8A93A8;">Konsultasi</a>
+      <a href="/relaksasi/"   data-nav="relaksasi"  class="nav-link px-6 py-3 text-sm font-medium transition" style="color:#8A93A8;">Relaksasi</a>
+      <a href="/faqs/"        data-nav="faqs"       class="nav-link px-6 py-3 text-sm font-medium transition" style="color:#8A93A8;">FAQs</a>
     </div>
   </div>
 </nav>
 
 <script>
-  // toggle menu mobile
   (function () {
     const burger = document.getElementById("nav-burger");
     const mobileMenu = document.getElementById("nav-menu-mobile");
@@ -47,13 +45,13 @@
       burger.addEventListener("click", () => mobileMenu.classList.toggle("hidden"));
     }
 
-    const current = document.body.dataset.page; // baca halaman aktif dari <body data-page="...">
+    const current = document.body.dataset.page;
     if (current) {
       document.querySelectorAll(`[data-nav="${current}"]`).forEach((el) => {
-        el.classList.add("font-semibold"); // tebalin menu yang cocok
+        el.style.color = "#2DD4A8";
+        el.style.fontWeight = "600";
         if (el.dataset.nav !== "faqs") {
-          el.style.background = "#EEF2EE";
-          el.style.color = "#1E413F";
+          el.style.background = "rgba(45,212,168,0.12)";
         }
       });
     }
