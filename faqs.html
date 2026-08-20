@@ -1,46 +1,40 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <!-- SESSION akan blokir akses jiak kuis belum diisi  -->
-  <script src="../js/session-gate.js"></script>
+  <script src="./js/session-gate.js"></script>
   <meta name="author" content="SCH Team - Invention Udayana 2026">
   <meta property="og:title" content="BerTeduh — FAQs">
   <meta property="og:description" content="Atasi stres dan cemas dengan Teduh, platform yang membantu kamu memahami emosi dan meningkatkan kesehatan mental.">
-  <meta property="og:image" content="../assets/Images/Image-Bertapa.webp"> // Sumber : Unsplash.com
-  <meta property="og:url" content="https://youtube.com">
-  <meta name="description" content="Atasi stres dan cemas dengan Teduh, platform yang membantu kamu memahami emosi dan meningkatkan kesehatan mental.">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta property="og:image" content="./assets/Images/Image-Bertapa.webp">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Teduh — FAQs</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="../assets/css/main.css" />
+  <link rel="stylesheet" href="./assets/css/main.css" />
 </head>
 <body data-page="faqs" style="background:#0D1220; color:#F5F5F5;">
 
-  <div id="navbar-slot"></div>
+  <div id="navbar-slot" class="relative z-50"></div>
 
   <main id="app-content" data-page="faqs">
-    <div class="max-w-2xl mx-auto px-6 py-16">
+    <div class="max-w-2xl mx-auto px-6 pt-28 pb-16">
 
-      <!-- Header -->
       <div class="text-center mb-12">
         <h2 class="text-3xl font-medium mb-3" style="font-family:'Playfair Display',serif; color:#F5F5F5;">Frequently Asked Questions</h2>
         <p class="text-sm" style="color:#8A93A8;">
           Semua yang perlu kamu ketahui tentang BerTeduh.
-          <a href="/konsultasi/" class="underline underline-offset-2 transition" style="color:#2DD4A8;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Hubungi kami</a> jika belum terjawab.
+          <a href="/konsultasi" class="underline underline-offset-2 transition" style="color:#2DD4A8;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Hubungi kami</a> jika belum terjawab.
         </p>
       </div>
 
-      <!-- FAQ Item -->
       <div class="space-y-3">
 
         <details class="faq-item rounded-xl p-5 group [&_summary::-webkit-details-marker]:hidden" open>
           <summary class="flex items-center justify-between cursor-pointer list-none">
             <div class="flex items-center gap-4">
               <div class="w-10 h-10 flex items-center justify-center rounded-lg shrink-0" style="background:rgba(45,212,168,0.1); border:1px solid rgba(45,212,168,0.2);">
-                <span class="text-xl" onmouseover="this.style.transform='scale(1.10)'" onmouseout="this.style.transform='scale(1)'">😊</span>
+                <span class="text-xl">&#x1F60A;</span>
               </div>
               <h3 class="text-base font-medium" style="color:#F5F5F5;">Cara konsultasi?</h3>
             </div>
@@ -49,7 +43,7 @@
             </svg>
           </summary>
           <p class="pt-4 ps-14 text-sm leading-relaxed" style="color:#8A93A8;">
-            Kamu bisa langsung mengunjungi halaman <a href="/konsultasi/" class="underline" style="color:#2DD4A8;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'" >Konsultasi</a> dan memilih jadwal yang tersedia.
+            Kamu bisa langsung mengunjungi halaman <a href="/konsultasi" class="underline" style="color:#2DD4A8;">Konsultasi</a> dan memilih jadwal yang tersedia.
           </p>
         </details>
 
@@ -57,7 +51,7 @@
           <summary class="flex items-center justify-between cursor-pointer list-none">
             <div class="flex items-center gap-4">
               <div class="w-10 h-10 flex items-center justify-center rounded-lg shrink-0" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.08);">
-                <span class="text-xl">📋</span>
+                <span class="text-xl">&#x1F4CB;</span>
               </div>
               <h3 class="text-base font-medium" style="color:#F5F5F5;">Apakah layanan ini gratis?</h3>
             </div>
@@ -74,7 +68,7 @@
           <summary class="flex items-center justify-between cursor-pointer list-none">
             <div class="flex items-center gap-4">
               <div class="w-10 h-10 flex items-center justify-center rounded-lg shrink-0" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.08);">
-                <span class="text-xl">🔒</span>
+                <span class="text-xl">&#x1F512;</span>
               </div>
               <h3 class="text-base font-medium" style="color:#F5F5F5;">Apakah data saya aman dan privat?</h3>
             </div>
@@ -91,7 +85,7 @@
           <summary class="flex items-center justify-between cursor-pointer list-none">
             <div class="flex items-center gap-4">
               <div class="w-10 h-10 flex items-center justify-center rounded-lg shrink-0" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.08);">
-                <span class="text-xl">🧘</span>
+                <span class="text-xl">&#x1F9D8;</span>
               </div>
               <h3 class="text-base font-medium" style="color:#F5F5F5;">Apa itu fitur Relaksasi?</h3>
             </div>
@@ -108,7 +102,7 @@
           <summary class="flex items-center justify-between cursor-pointer list-none">
             <div class="flex items-center gap-4">
               <div class="w-10 h-10 flex items-center justify-center rounded-lg shrink-0" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.08);">
-                <span class="text-xl">📝</span>
+                <span class="text-xl">&#x1F4DD;</span>
               </div>
               <h3 class="text-base font-medium" style="color:#F5F5F5;">Apakah hasil kuesioner saya tersimpan?</h3>
             </div>
@@ -125,7 +119,7 @@
           <summary class="flex items-center justify-between cursor-pointer list-none">
             <div class="flex items-center gap-4">
               <div class="w-10 h-10 flex items-center justify-center rounded-lg shrink-0" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.08);">
-                <span class="text-xl">💬</span>
+                <span class="text-xl">&#x1F4AC;</span>
               </div>
               <h3 class="text-base font-medium" style="color:#F5F5F5;">Bagaimana cara menghubungi tim?</h3>
             </div>
@@ -141,13 +135,13 @@
       </div>
     </div>
 
-    <script src="../js/NavRender.js"></script>
-    <script src="./main.js"></script>
+    <script src="./js/NavRender.js"></script>
+    <script src="./js/faqs/main.js"></script>
   </main>
 
   <div id="footer"></div>
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-  <script src="../js/Nav.js"></script>
-  <script src="../js/Footer.js"></script>
+  <script src="./js/Nav.js"></script>
+  <script src="./js/Footer.js"></script>
 </body>
 </html>

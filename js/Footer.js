@@ -8,5 +8,5 @@
  */
 $(document).ready(function () {
     // Cari div dengan id="footer", lalu suntikkan konten dari file komponen
-    $('#footer').load('../component/Footer.html');
+    $('#footer').load('./component/Footer.html');
 });

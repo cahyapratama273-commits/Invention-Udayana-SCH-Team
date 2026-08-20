@@ -178,7 +178,7 @@
     localStorage.setItem("userMentalCheckedAt", new Date().toISOString());
 
     // 6. Selesai -> Arahkan user masuk ke aplikasi utama (Beranda)
-    window.location.href = "/beranda/";
+    window.location.href = "/beranda";
   }
 
   // Mulai kuis saat script pertama kali jalan

@@ -4,7 +4,7 @@
     box-sizing: border-box;
 }
 
-/* ─── DARK THEME VARIABLES ─── */
+/* ─── Tema Dark ─── */
 :root {
     --bg-base:        #0D1220;
     --bg-card:        #151B2E;
@@ -25,7 +25,7 @@ body {
     font-family: 'Inter', system-ui, sans-serif;
 }
 
-/* ─── TYPOGRAPHY ─── */
+/* ─── IMPORT FONT ─── */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
 
 h1, h2, h3, .font-display {
@@ -63,12 +63,11 @@ p, span, li, a {
     opacity: 0.35;
 }
 
-body > *:not(#starfield-canvas) {
-    position: relative;
-    z-index: 1;
-}
+#app-content { position: relative; z-index: 10; }
+#navbar-slot { position: relative; z-index: 50; }
+#footer { position: relative; z-index: 10; }
 
-/* ─── QUIZ OPTION BUTTONS ─── */
+/* ─── BATEN QUIZ ─── */
 .option-btn {
     background: var(--bg-card-alt) !important;
     border-color: var(--border-subtle) !important;
@@ -81,7 +80,7 @@ body > *:not(#starfield-canvas) {
     color: var(--text-heading) !important;
 }
 
-/* ─── FAQ DETAILS ─── */
+/* ─── FAQ CARD DETAIL ─── */
 details.faq-item {
     background: var(--bg-card-alt);
     border: 1px solid var(--border-subtle);

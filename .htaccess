@@ -1,0 +1,11 @@
+# .htaccess — Menyembunyikan ekstensi .html dari URL
+# Contoh: /beranda akan otomatis mengarah ke /beranda.html
+
+RewriteEngine On
+
+# Jika bukan file atau direktori yang benar-benar ada,
+# coba tambahkan .html di belakangnya
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^(.+)$ $1.html [L]

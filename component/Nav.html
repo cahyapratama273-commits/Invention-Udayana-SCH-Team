@@ -1,21 +1,21 @@
 <!--  komponen navbar akan di-fetch & disuntik oleh loadNavigasi() lewat NavRender.js -->
-<nav style="background:#0D1220; border-bottom:1px solid rgba(255,255,255,0.08);" class="w-full backdrop-blur sticky top-0 z-40">
+<nav style="background:rgba(13,18,32,0.85); border-bottom:1px solid rgba(255,255,255,0.08);" class="w-full fixed top-0 left-0 right-0 z-40 backdrop-blur-md">
   <div class="max-w-7xl mx-auto px-6">
     <div class="flex items-center justify-between h-16 gap-6">
 
       <!-- logo -->
-      <a href="/beranda/" class="flex items-center gap-2 shrink-0">
+      <a href="/beranda" class="flex items-center gap-2 shrink-0">
         <span class="w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold" style="background:#2DD4A8; color:#0D1220;">T</span>
         <span class="font-semibold text-lg tracking-tight" style="color:#F5F5F5;">BerTeduh<span style="color:#2DD4A8;">.</span></span>
       </a>
 
       <!-- menu desktop -->
       <div class="hidden lg:flex items-center gap-1 shrink-0" id="nav-menu">
-        <a href="/beranda/"     data-nav="beranda"    class="nav-link px-4 py-2 rounded-full text-sm font-medium text-[#8A93A8] hover:text-[#2DD4A8] hover:bg-[rgba(45,212,168,0.12)]  transition">Beranda</a>
-        <a href="/blog/"        data-nav="blog"       class="nav-link px-4 py-2 rounded-full text-sm font-medium text-[#8A93A8] hover:text-[#2DD4A8] hover:bg-[rgba(45,212,168,0.12)] transition">Blog</a>
-        <a href="/konsultasi/"  data-nav="konsultasi" class="nav-link px-4 py-2 rounded-full text-sm font-medium text-[#8A93A8] hover:text-[#2DD4A8] hover:bg-[rgba(45,212,168,0.12)] transition">Konsultasi</a>
-        <a href="/relaksasi/"   data-nav="relaksasi"  class="nav-link px-4 py-2 rounded-full text-sm font-medium text-[#8A93A8] hover:text-[#2DD4A8] hover:bg-[rgba(45,212,168,0.12)] transition">Relaksasi</a>
-        <a href="/faqs/"        data-nav="faqs"       class="nav-link ml-1 px-4 py-2 rounded-full text-sm font-medium text-[#8A93A8] hover:text-[#2DD4A8] hover:bg-[rgba(45,212,168,0.12)] transition">FAQs</a>
+        <a href="/beranda"     data-nav="beranda"    class="nav-link px-4 py-2 rounded-full text-sm font-medium text-[#8A93A8] hover:text-[#2DD4A8] hover:bg-[rgba(45,212,168,0.12)]  transition">Beranda</a>
+        <a href="/blog"        data-nav="blog"       class="nav-link px-4 py-2 rounded-full text-sm font-medium text-[#8A93A8] hover:text-[#2DD4A8] hover:bg-[rgba(45,212,168,0.12)] transition">Blog</a>
+        <a href="/konsultasi"  data-nav="konsultasi" class="nav-link px-4 py-2 rounded-full text-sm font-medium text-[#8A93A8] hover:text-[#2DD4A8] hover:bg-[rgba(45,212,168,0.12)] transition">Konsultasi</a>
+        <a href="/relaksasi"   data-nav="relaksasi"  class="nav-link px-4 py-2 rounded-full text-sm font-medium text-[#8A93A8] hover:text-[#2DD4A8] hover:bg-[rgba(45,212,168,0.12)] transition">Relaksasi</a>
+        <a href="/faqs"        data-nav="faqs"       class="nav-link ml-1 px-4 py-2 rounded-full text-sm font-medium text-[#8A93A8] hover:text-[#2DD4A8] hover:bg-[rgba(45,212,168,0.12)] transition">FAQs</a>
       </div>
 
       <!-- tombol menu krabby patty -->
@@ -28,11 +28,11 @@
 
     <!-- menu mobile -->
     <div id="nav-menu-mobile" class="hidden lg:hidden pb-4 flex flex-col gap-1 absolute top-full left-0 right-0 shadow-lg" style="background:#0D1220; border-bottom:1px solid rgba(255,255,255,0.08);">
-      <a href="/beranda/"     data-nav="beranda"    class="nav-link px-6 py-3 text-sm font-medium transition" style="color:#8A93A8;">Beranda</a>
-      <a href="/blog/"        data-nav="blog"       class="nav-link px-6 py-3 text-sm font-medium transition" style="color:#8A93A8;">Blog</a>
-      <a href="/konsultasi/"  data-nav="konsultasi" class="nav-link px-6 py-3 text-sm font-medium transition" style="color:#8A93A8;">Konsultasi</a>
-      <a href="/relaksasi/"   data-nav="relaksasi"  class="nav-link px-6 py-3 text-sm font-medium transition" style="color:#8A93A8;">Relaksasi</a>
-      <a href="/faqs/"        data-nav="faqs"       class="nav-link px-6 py-3 text-sm font-medium transition" style="color:#8A93A8;">FAQs</a>
+      <a href="/beranda"     data-nav="beranda"    class="nav-link px-6 py-3 text-sm font-medium transition" style="color:#8A93A8;">Beranda</a>
+      <a href="/blog"        data-nav="blog"       class="nav-link px-6 py-3 text-sm font-medium transition" style="color:#8A93A8;">Blog</a>
+      <a href="/konsultasi"  data-nav="konsultasi" class="nav-link px-6 py-3 text-sm font-medium transition" style="color:#8A93A8;">Konsultasi</a>
+      <a href="/relaksasi"   data-nav="relaksasi"  class="nav-link px-6 py-3 text-sm font-medium transition" style="color:#8A93A8;">Relaksasi</a>
+      <a href="/faqs"        data-nav="faqs"       class="nav-link px-6 py-3 text-sm font-medium transition" style="color:#8A93A8;">FAQs</a>
     </div>
   </div>
 </nav>
