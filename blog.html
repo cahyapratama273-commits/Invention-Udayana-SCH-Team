@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <script src="./js/session-gate.js"></script>
+  <script src="/js/session-gate.js"></script>
   <meta name="author" content="SCH Team - Invention Udayana 2026">
   <meta property="og:title" content="BerTeduh — Blog">
   <meta property="og:description" content="Kumpulan artikel kesehatan mental.">
-  <meta property="og:image" content="./assets/Images/Image-Bertapa.webp">
+  <meta property="og:image" content="/assets/Images/Image-Bertapa.webp">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Teduh | Blog</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="./assets/css/main.css" />
+  <link rel="stylesheet" href="/assets/css/main.css" />
 </head>
 <body data-page="blog" style="background:#0D1220; color:#F5F5F5;">
   
@@ -20,7 +20,7 @@
   <main id="app-content" data-page="blog">
     
     <!-- Header Blog -->
-    <section class="max-w-7xl mx-auto px-6 pt-32 pb-12 text-center">
+    <section class="max-w-7xl mx-auto px-6 pt-32 pb-10 text-center">
       <h1 class="text-4xl md:text-5xl font-bold mb-4" style="font-family:'Playfair Display',serif; color:#F5F5F5;">
         Ruang Baca
       </h1>
@@ -29,8 +29,53 @@
       </p>
     </section>
 
-    <!-- Grid Artikel -->
+    <!-- Featured Section -->
+    <section class="max-w-7xl mx-auto px-6 pb-12">
+      <div id="featured-artikel-slot" class="w-full">
+        <!-- Featured artikel placeholder -->
+        <div class="rounded-2xl h-80 animate-pulse" style="background:#151B2E;"></div>
+      </div>
+    </section>
+
+    <!-- Filter, Search, and Grid Section -->
     <section class="max-w-7xl mx-auto px-6 pb-24">
+      
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-6">
+        
+        <!-- Judul Section -->
+        <h2 class="text-2xl font-bold shrink-0" style="font-family:'Playfair Display',serif; color:#F5F5F5;">
+          Semua Artikel
+        </h2>
+
+        <div class="flex items-center gap-3 w-full md:w-auto">
+          <!-- Button Toggle Filter -->
+          <button id="toggle-filter-btn" class="flex items-center justify-center gap-2 text-sm text-[#8A93A8] hover:text-[#F5F5F5] transition px-4 py-2.5 bg-[#151B2E] rounded-full border border-[rgba(255,255,255,0.08)] whitespace-nowrap shrink-0">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/>
+            </svg>
+            <span class="hidden sm:inline">Kategori</span>
+          </button>
+
+          <!-- Search Bar -->
+          <div class="relative flex-1 md:w-64 lg:w-72">
+            <input type="text" id="blog-search-input" placeholder="Cari artikel..." 
+                   class="w-full bg-[#151B2E] border border-[rgba(255,255,255,0.08)] rounded-full py-2.5 pl-5 pr-12 text-sm text-[#F5F5F5] placeholder-[#8A93A8] focus:outline-none focus:border-[#2DD4A8] transition">
+            <svg class="w-5 h-5 absolute right-4 top-1/2 -translate-y-1/2 text-[#8A93A8]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Kategori Panel (Tersembunyi by default) -->
+      <div id="filter-panel" class="hidden mb-8 p-6 bg-[#151B2E] rounded-2xl border border-[rgba(255,255,255,0.05)]">
+        <p class="text-sm text-[#8A93A8] mb-4">Pilih Kategori:</p>
+        <div id="blog-category-filter" class="flex flex-wrap gap-3">
+          <!-- Kategori dinamis akan di-inject lewat JS -->
+        </div>
+      </div>
+
+      <!-- Grid Artikel -->
       <div id="blog-artikel-grid" class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         <div class="tile rounded-2xl h-72 animate-pulse" style="background:#151B2E;"></div>
         <div class="tile rounded-2xl h-72 animate-pulse" style="background:#151B2E;"></div>
@@ -41,14 +86,14 @@
       </div>
     </section>
 
-    <script src="./js/ArtikelCard.js"></script>
-    <script src="./js/NavRender.js"></script>
-    <script src="./js/blog/main.js"></script>
+    <script src="/js/ArtikelCard.js"></script>
+    <script src="/js/NavRender.js"></script>
+    <script src="/js/blog/main.js"></script>
   </main>
 
   <div id="footer"></div>
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-  <script src="./js/Nav.js"></script>
-  <script src="./js/Footer.js"></script>
+  <script src="/js/Nav.js"></script>
+  <script src="/js/Footer.js"></script>
 </body>
 </html>

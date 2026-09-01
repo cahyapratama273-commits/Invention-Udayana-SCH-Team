@@ -1,5 +1,5 @@
 /**
- * main.js — Entry point khusus halaman ini
+ * main.js: Entry point khusus halaman ini
  * 
  * Script ini berjalan ketika struktur HTML selesai dimuat.
  * Fungsi utamanya adalah memanggil loadNavigasi() dari NavRender.js

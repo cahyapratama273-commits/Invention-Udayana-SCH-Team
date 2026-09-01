@@ -7,7 +7,7 @@ function renderArtikelCard(artikel) {
       <div class="overflow-hidden" style="height:160px; background:#1A2138;">
         <img src="${artikel.gambar}" alt="${artikel.judul}" style="width:100%; height:100%; object-fit:cover; transition:transform 0.5s;"
              onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"
-             onerror="this.onerror=null; this.src='../assets/Images/placeholder.svg';" />
+             onerror="this.onerror=null; this.src='/assets/Images/placeholder.svg';" />
       </div>
       <div class="p-5 flex flex-col gap-2 flex-1">
         <span class="text-[11px] font-bold uppercase tracking-widest" style="color:#2DD4A8;">${artikel.kategori}</span>

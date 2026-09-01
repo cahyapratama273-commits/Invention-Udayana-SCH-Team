@@ -6,7 +6,7 @@
  * (sudah mengisi kuesioner awal). 
  * 
  * Jika belum, script ini akan memblokir rendering halaman dan segera mengalihkan 
- * user ke halaman utama (root /) untuk mengisi kuis terlebih dahulu.
+ * user ke file index untuk untuk mengisi kuis terlebih dahulu.
  */
 (function () {
   const path = window.location.pathname;

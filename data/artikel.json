@@ -2,11 +2,12 @@
   {
     "id": "baik-1",
     "kondisi": "baik",
+    "featured": true,
     "kategori": "Produktivitas",
     "judul": "5 Cara Kecil Menjaga Mood Baikmu Tetap Nyala",
     "ringkasan": "Kondisi hati lagi baik? Ini saatnya menabung kebiasaan kecil biar energi positifmu bertahan lebih lama.",
     "waktu_baca": "4 menit baca",
-    "gambar": "../assets/Images/AngsaDiDanau.webp",
+    "gambar": "/assets/Images/artikel/AngsaDiDanau.webp",
     "konten": [
       "Mood baik itu nggak datang buat menetap selamanya -- dia butuh 'dirawat' biar nggak cepat luntur begitu hari mulai berat lagi.",
       "Mulai dari hal sekecil minum air putih yang cukup, jalan kaki 10 menit di pagi hari, sampai kirim pesan singkat ke teman yang lama nggak dihubungi. Kebiasaan kecil ini kelihatan sepele, tapi efeknya numpuk dari waktu ke waktu.",
@@ -20,7 +21,7 @@
     "judul": "Kenapa Berbagi Energi Positif Bikin Kamu Makin Bahagia",
     "ringkasan": "Riset menunjukkan kebaikan kecil ke orang lain juga memperkuat kesehatan mental diri sendiri.",
     "waktu_baca": "5 menit baca",
-    "gambar": "../assets/Images/Image-Bertapa.webp",
+    "gambar": "/assets/Images/artikel/Image-Bertapa.webp",
     "konten": [
       "Ada fenomena namanya 'helper's high' -- perasaan senang yang muncul justru pas kita nolong orang lain, bukan pas dibantu.",
       "Ini bukan cuma soal jadi orang baik doang, tapi ada mekanisme biologis di baliknya: otak melepas oksitosin dan dopamin pas kita melakukan tindakan prososial, efeknya mirip kayak reward system pas kita dapat pencapaian pribadi.",
@@ -34,7 +35,7 @@
     "judul": "Journaling Syukur: Latihan 2 Menit Sebelum Tidur",
     "ringkasan": "Kebiasaan sederhana ini terbukti membantu mempertahankan suasana hati yang stabil dari hari ke hari.",
     "waktu_baca": "3 menit baca",
-    "gambar": "../assets/Images/Image-Nature-Forest.webp",
+    "gambar": "/assets/Images/artikel/Image-Nature-Forest.webp",
     "konten": [
       "Journaling syukur itu simpel: tiap malam, tulis 3 hal (sekecil apapun) yang kamu syukuri hari itu. Bisa secangkir kopi enak, obrolan singkat sama teman, atau cuma cuaca yang cerah.",
       "Yang bikin ini beda dari sekadar 'berpikir positif' adalah tindakan menulisnya sendiri -- proses ini bikin otak lebih fokus mengolah pengalaman baik, bukan cuma lewat begitu aja di kepala.",
@@ -48,7 +49,7 @@
     "judul": "Olahraga Ringan yang Ternyata Ampuh Jaga Mood",
     "ringkasan": "Nggak perlu ke gym, gerakan tubuh sederhana ini cukup buat bikin harimu tetap semangat.",
     "waktu_baca": "4 menit baca",
-    "gambar": "../assets/Images/AngsaDiDanau.webp",
+    "gambar": "/assets/Images/artikel/AngsaDiDanau.webp",
     "konten": [
       "Olahraga sering diasosiasikan sama target berat badan atau otot, padahal manfaatnya buat mood itu sama pentingnya -- bahkan bisa lebih cepat kerasa.",
       "Jalan kaki 20 menit, stretching pagi, atau naik-turun tangga beberapa kali udah cukup memicu pelepasan endorfin yang bikin perasaan lebih ringan.",
@@ -62,7 +63,7 @@
     "judul": "Cara Menjaga Fokus Tanpa Bikin Diri Kelelahan",
     "ringkasan": "Produktif bukan berarti harus kerja terus tanpa jeda. Ini caranya biar fokus tetap terjaga.",
     "waktu_baca": "5 menit baca",
-    "gambar": "../assets/Images/Image-Bertapa.webp",
+    "gambar": "/assets/Images/artikel/Image-Bertapa.webp",
     "konten": [
       "Teknik Pomodoro (kerja 25 menit, istirahat 5 menit) populer bukan tanpa alasan -- otak manusia emang nggak didesain buat fokus penuh berjam-jam nonstop.",
       "Selingi juga dengan jeda yang beneran istirahat -- jauhin layar, gerak sedikit, minum air -- bukan cuma pindah dari 1 tugas ke tugas lain.",
@@ -76,7 +77,7 @@
     "judul": "Rutinitas Malam Simpel Biar Bangun Makin Segar",
     "ringkasan": "Kualitas tidur yang baik itu dimulai dari 1 jam sebelum kamu beneran tidur.",
     "waktu_baca": "4 menit baca",
-    "gambar": "../assets/Images/Image-Nature-Forest.webp",
+    "gambar": "/assets/Images/artikel/Image-Nature-Forest.webp",
     "konten": [
       "Kondisi baik itu juga perlu dijaga lewat tidur yang cukup dan berkualitas -- bukan cuma soal durasi, tapi juga rutinitas sebelum tidur.",
       "Coba matikan layar HP 30 menit sebelum tidur, ganti dengan baca buku ringan atau dengerin musik pelan. Ini bantu otak transisi ke mode istirahat.",
@@ -90,7 +91,7 @@
     "judul": "Merayakan Pencapaian Kecil, Kenapa Penting?",
     "ringkasan": "Kamu nggak perlu nunggu pencapaian besar buat kasih diri sendiri apresiasi.",
     "waktu_baca": "3 menit baca",
-    "gambar": "../assets/Images/AngsaDiDanau.webp",
+    "gambar": "/assets/Images/artikel/AngsaDiDanau.webp",
     "konten": [
       "Banyak orang nunggu 'sesuatu yang besar' dulu baru ngerasa pantas dirayakan -- padahal pencapaian kecil sehari-hari itu sama berharganya.",
       "Berhasil bangun tepat waktu, nyelesain 1 tugas kecil, atau berhasil nolak ajakan yang bikin capek -- semua itu layak diapresiasi.",
@@ -104,7 +105,7 @@
     "judul": "Kenapa Menyusun Rencana Kecil untuk Besok Bikin Lebih Tenang?",
     "ringkasan": "Nggak perlu rencana besar, cukup 1-2 hal simpel buat besok bisa bikin pikiran lebih siap.",
     "waktu_baca": "2 menit baca",
-    "gambar": "../assets/Images/Image-Bertapa.webp",
+    "gambar": "/assets/Images/artikel/Image-Bertapa.webp",
     "konten": [
       "Rasa tenang soal masa depan sering datang bukan dari tau semua akan baik-baik saja, tapi dari punya bayangan kecil soal apa yang mau dilakukan selanjutnya.",
       "Coba tulis 1-2 hal sederhana yang mau dikerjakan besok sebelum tidur. Nggak perlu rencana detail, cukup gambaran kasar aja.",
@@ -118,7 +119,7 @@
     "judul": "Momentum Positif Itu Rapuh, Ini Cara Menjaganya Tetap Jalan",
     "ringkasan": "Lagi on fire dengan mood baik? Begini cara supaya nggak gampang goyah pas ada hari yang berat dikit.",
     "waktu_baca": "2 menit baca",
-    "gambar": "../assets/Images/AngsaDiDanau.webp",
+    "gambar": "/assets/Images/artikel/AngsaDiDanau.webp",
     "konten": [
       "Momentum positif itu enak dijalani, tapi juga gampang goyah pas ketemu 1 hari yang berat -- dan itu wajar, bukan berarti 'gagal jaga mood'.",
       "Kuncinya bukan nggak boleh punya hari buruk, tapi punya rutinitas kecil yang tetap dijalani meski moodnya lagi turun sedikit -- misal tetap jalan pagi walau cuma 5 menit.",
@@ -132,11 +133,95 @@
     "judul": "Menjaga Ritme Kerja Tanpa Sampai Kelelahan",
     "ringkasan": "Produktif itu bukan soal kerja terus-terusan, tapi soal tau kapan harus berhenti sejenak.",
     "waktu_baca": "2 menit baca",
-    "gambar": "../assets/Images/Image-Nature-Forest.webp",
+    "gambar": "/assets/Images/artikel/Image-Nature-Forest.webp",
     "konten": [
       "Salah satu cara paling gampang bikin mood baik cepat drop adalah maksa diri kerja terus tanpa jeda, sampai akhirnya kelelahan.",
       "Coba terapkan aturan sederhana: tiap 90 menit kerja, kasih diri jeda 10-15 menit buat benar-benar lepas dari layar.",
       "Menjaga ritme itu lebih penting daripada ngebut di awal terus habis energi di tengah jalan."
+    ]
+  },
+  {
+    "id": "baik-11",
+    "kondisi": "baik",
+    "kategori": "Kebiasaan",
+    "judul": "Self-Reward yang Nggak Bikin Kantong Bolong",
+    "ringkasan": "Menghargai diri sendiri nggak harus selalu soal belanja atau makan mahal.",
+    "waktu_baca": "3 menit baca",
+    "gambar": "/assets/Images/artikel/PLACEHOLDER.webp",
+    "konten": [
+      "Self-reward sering diasosiasikan sama beli sesuatu -- padahal itu cuma salah satu bentuknya, dan kadang malah bikin capek di akhir bulan.",
+      "Reward nggak harus berupa barang. Waktu buat rebahan tanpa rasa bersalah, nonton ulang film favorit, atau tidur siang 20 menit juga bentuk apresiasi ke diri sendiri.",
+      "Coba bikin daftar 5 'reward kecil' yang nggak butuh uang, biar pas capek kamu punya opsi cepat tanpa mikir panjang."
+    ]
+  },
+  {
+    "id": "baik-12",
+    "kondisi": "baik",
+    "kategori": "Produktivitas",
+    "judul": "Kenapa Batasan Kerja-Hidup Itu Bukan Soal Malas",
+    "ringkasan": "Punya batas jelas antara kerja dan waktu pribadi justru bikin kamu lebih produktif, bukan sebaliknya.",
+    "waktu_baca": "4 menit baca",
+    "gambar": "/assets/Images/artikel/PLACEHOLDER.webp",
+    "konten": [
+      "Banyak yang ngerasa nggak enak matiin notifikasi kerja di luar jam kerja, padahal batasan itu penting biar otak dapat waktu buat 'reset'.",
+      "Otak yang terus-terusan siaga (meski cuma mikirin kerjaan sambil rebahan) nggak beneran istirahat, walau badannya diam.",
+      "Coba tentukan 1 jam tetap di malam hari buat benar-benar lepas dari hal-hal terkait kerja atau sekolah, mulai dari hal kecil kayak silent notifikasi grup kerja."
+    ]
+  },
+  {
+    "id": "baik-13",
+    "kondisi": "baik",
+    "kategori": "Hobi",
+    "judul": "Punya Hobi yang 'Nggak Berguna' Itu Sehat, Kok",
+    "ringkasan": "Nggak semua waktu luang harus produktif -- ini alasan kenapa hobi santai juga penting.",
+    "waktu_baca": "3 menit baca",
+    "gambar": "/assets/Images/artikel/PLACEHOLDER.webp",
+    "konten": [
+      "Ada tekanan buat selalu 'menghasilkan' dari waktu luang -- belajar skill baru, side hustle, dan lain-lain. Padahal hobi yang cuma buat senang-senang aja juga valid.",
+      "Aktivitas yang dilakukan murni karena suka (bukan buat pencapaian) bantu otak dapat jeda dari mode 'harus produktif terus'.",
+      "Kasih diri kamu izin buat main game, gambar asal-asalan, atau susun puzzle tanpa merasa itu 'buang-buang waktu'."
+    ]
+  },
+  {
+    "id": "baik-14",
+    "kondisi": "baik",
+    "kategori": "Relasi",
+    "judul": "Menjaga Circle Pertemanan yang Bikin Kamu Nyaman",
+    "ringkasan": "Lingkungan pertemanan yang suportif ikut berperan besar dalam menjaga mood tetap stabil.",
+    "waktu_baca": "4 menit baca",
+    "gambar": "/assets/Images/artikel/PLACEHOLDER.webp",
+    "konten": [
+      "Circle pertemanan yang sehat itu bukan soal jumlah teman, tapi soal seberapa nyaman kamu jadi diri sendiri di sekitar mereka.",
+      "Coba perhatikan, ada nggak pertemanan yang justru bikin kamu capek terus tiap habis ketemu? Itu sinyal buat mulai kasih jarak, pelan-pelan aja.",
+      "Sebaliknya, luangkan waktu lebih buat orang-orang yang bikin kamu ngerasa 'boleh apa adanya'. Hubungan kayak gitu yang worth dijaga."
+    ]
+  },
+  {
+    "id": "baik-15",
+    "kondisi": "baik",
+    "kategori": "Kebiasaan",
+    "judul": "Belajar Bersyukur ke Diri Sendiri, Bukan Cuma ke Keadaan",
+    "ringkasan": "Selain bersyukur atas hal di luar diri, coba juga apresiasi usaha yang udah kamu lakukan sendiri.",
+    "waktu_baca": "3 menit baca",
+    "gambar": "/assets/Images/artikel/PLACEHOLDER.webp",
+    "konten": [
+      "Rasa syukur sering diarahkan ke hal-hal eksternal -- cuaca bagus, rezeki datang -- tapi jarang diarahkan ke diri sendiri.",
+      "Padahal, mengakui usaha diri sendiri (walau hasilnya belum sempurna) juga bagian penting dari menjaga hubungan baik sama diri sendiri.",
+      "Coba akhiri hari dengan bilang ke diri sendiri: 'aku udah coba yang terbaik hari ini', meski hasilnya belum sesuai ekspektasi."
+    ]
+  },
+  {
+    "id": "baik-16",
+    "kondisi": "baik",
+    "kategori": "Fisik",
+    "judul": "Minum Air Cukup: Kebiasaan Kecil yang Sering Dilupakan",
+    "ringkasan": "Hal sesederhana ini ternyata berpengaruh besar ke energi dan mood harianmu.",
+    "waktu_baca": "2 menit baca",
+    "gambar": "/assets/Images/artikel/PLACEHOLDER.webp",
+    "konten": [
+      "Dehidrasi ringan aja udah bisa bikin badan lemas dan sulit fokus, meski sering nggak disadari sebagai penyebabnya.",
+      "Kita cenderung baru sadar haus setelah tubuh benar-benar kekurangan cairan, karena sinyalnya sering ketutup sama rasa lapar atau capek.",
+      "Coba taruh botol minum di tempat yang gampang keliatan, biar kebiasaan minum air jadi lebih otomatis sepanjang hari."
     ]
   },
   {
@@ -146,7 +231,7 @@
     "judul": "Overthinking di Malam Hari? Coba Teknik Ini",
     "ringkasan": "Pikiran yang muter terus jelang tidur itu wajar. Ini langkah sederhana buat meredakannya pelan-pelan.",
     "waktu_baca": "6 menit baca",
-    "gambar": "../assets/Images/AngsaDiDanau.webp",
+    "gambar": "/assets/Images/artikel/AngsaDiDanau.webp",
     "konten": [
       "Malam hari sering jadi waktu paling rawan buat overthinking -- nggak ada distraksi, badan capek tapi pikiran malah makin aktif.",
       "Salah satu teknik yang bisa dicoba: tulis semua yang mengganggu pikiranmu di kertas (brain dump), tanpa perlu menyusun atau mencari solusinya saat itu juga. Tujuannya cuma 'mengeluarkan' dulu dari kepala.",
@@ -160,7 +245,7 @@
     "judul": "Teknik Napas 4-7-8: Cara Cepat Menenangkan Sistem Saraf",
     "ringkasan": "Dipakai banyak terapis buat meredakan cemas dalam hitungan menit. Begini cara melakukannya dengan benar.",
     "waktu_baca": "4 menit baca",
-    "gambar": "../assets/Images/Image-Bertapa.webp",
+    "gambar": "/assets/Images/artikel/Image-Bertapa.webp",
     "konten": [
       "Teknik 4-7-8 kerja dengan cara: tarik napas lewat hidung selama 4 detik, tahan napas selama 7 detik, lalu buang napas lewat mulut pelan-pelan selama 8 detik.",
       "Pola napas ini bantu mengaktifkan sistem saraf parasimpatis -- bagian tubuh yang bertanggung jawab bikin kamu tenang, kebalikan dari mode 'fight or flight' yang aktif pas cemas.",
@@ -174,7 +259,7 @@
     "judul": "Capek tapi Susah Istirahat? Ini Bedanya Lelah Fisik dan Mental",
     "ringkasan": "Kadang tubuh diam tapi kepala tetap bekerja. Kenali tandanya biar istirahatmu benar-benar efektif.",
     "waktu_baca": "5 menit baca",
-    "gambar": "../assets/Images/Image-Nature-Forest.webp",
+    "gambar": "/assets/Images/artikel/Image-Nature-Forest.webp",
     "konten": [
       "Lelah fisik biasanya reda dengan tidur atau rebahan. Tapi lelah mental sering nggak hilang meski udah 'istirahat' -- soalnya pikiran tetap aktif meski badan diam.",
       "Tanda-tanda lelah mental antara lain: susah fokus, gampang tersinggung, atau ngerasa hampa meskipun nggak ngapa-ngapain seharian.",
@@ -188,7 +273,7 @@
     "judul": "Pikiran Kemana-mana? Coba Teknik Grounding Sederhana",
     "ringkasan": "Saat pikiran susah dikendalikan, coba tarik perhatianmu balik ke momen saat ini.",
     "waktu_baca": "4 menit baca",
-    "gambar": "../assets/Images/AngsaDiDanau.webp",
+    "gambar": "/assets/Images/artikel/AngsaDiDanau.webp",
     "konten": [
       "Grounding itu teknik buat 'menarik' perhatian dari pikiran yang muter-muter, balik ke apa yang bisa dirasakan tubuh saat ini.",
       "Coba sebut: 5 hal yang bisa kamu lihat, 4 hal yang bisa disentuh, 3 hal yang bisa didengar, 2 hal yang bisa dicium, 1 hal yang bisa dirasa lewat lidah.",
@@ -202,7 +287,7 @@
     "judul": "Kenapa Kadang Kita Pengen Sendiri Aja Pas Lagi Cemas?",
     "ringkasan": "Menarik diri sesekali itu wajar, tapi ada batas antara istirahat dan isolasi.",
     "waktu_baca": "5 menit baca",
-    "gambar": "../assets/Images/Image-Bertapa.webp",
+    "gambar": "/assets/Images/artikel/Image-Bertapa.webp",
     "konten": [
       "Pas cemas, banyak orang cenderung menarik diri dari interaksi sosial -- ini respons alami buat 'menghemat energi' yang lagi terkuras.",
       "Sesekali butuh waktu sendiri itu sehat. Tapi kalau berlangsung berhari-hari dan bikin makin terasa sendirian, ini bisa jadi tanda perlu bantuan lebih lanjut.",
@@ -216,7 +301,7 @@
     "judul": "Menulis Kekhawatiran: Kenapa Bisa Bikin Lega?",
     "ringkasan": "Menuliskan apa yang kamu khawatirkan bisa jadi cara sederhana buat meringankan beban pikiran.",
     "waktu_baca": "4 menit baca",
-    "gambar": "../assets/Images/Image-Nature-Forest.webp",
+    "gambar": "/assets/Images/artikel/Image-Nature-Forest.webp",
     "konten": [
       "Menulis kekhawatiran secara bebas (tanpa mikirin tata bahasa atau struktur) terbukti bantu otak 'melepas' beban yang selama ini cuma berputar di kepala.",
       "Coba sisihkan 10 menit, tulis semua yang bikin cemas tanpa sensor. Nggak perlu dibaca ulang atau dicari solusinya saat itu juga.",
@@ -230,7 +315,7 @@
     "judul": "Kenapa Cemas Bisa Bikin Jantung Berdebar dan Dada Sesak?",
     "ringkasan": "Reaksi fisik saat cemas itu nyata, bukan cuma 'di kepala'. Ini penjelasannya.",
     "waktu_baca": "5 menit baca",
-    "gambar": "../assets/Images/AngsaDiDanau.webp",
+    "gambar": "/assets/Images/artikel/AngsaDiDanau.webp",
     "konten": [
       "Cemas memicu pelepasan hormon adrenalin, yang bikin jantung berdetak lebih cepat dan otot menegang -- ini respons tubuh buat 'siap-siap' menghadapi ancaman, meski ancamannya cuma di pikiran.",
       "Sensasi dada sesak atau napas pendek juga bagian dari respons yang sama, bukan tanda ada masalah fisik yang serius (meski tetap penting cek ke dokter kalau sering & mengganggu).",
@@ -244,7 +329,7 @@
     "judul": "Cemas Mikirin Masa Depan? Coba Fokus ke 24 Jam ke Depan Aja",
     "ringkasan": "Kalau mikirin jangka panjang bikin makin cemas, coba persempit fokus ke besok aja dulu.",
     "waktu_baca": "3 menit baca",
-    "gambar": "../assets/Images/AngsaDiDanau.webp",
+    "gambar": "/assets/Images/artikel/AngsaDiDanau.webp",
     "konten": [
       "Kadang yang bikin cemas bukan hari ini, tapi bayangan soal masa depan yang belum tentu terjadi -- dan otak sering nganggep bayangan itu se-nyata kejadian beneran.",
       "Coba teknik mempersempit fokus: alih-alih mikirin 'bagaimana nanti', coba tanya ke diri sendiri 'apa yang bisa aku lakukan dalam 24 jam ke depan?'",
@@ -258,7 +343,7 @@
     "judul": "Takut Mengecewakan Orang Lain? Ini yang Perlu Kamu Tahu",
     "ringkasan": "Rasa takut mengecewakan orang lain itu wajar, tapi jangan sampai bikin kamu lupa jaga diri sendiri.",
     "waktu_baca": "3 menit baca",
-    "gambar": "../assets/Images/Image-Bertapa.webp",
+    "gambar": "/assets/Images/artikel/Image-Bertapa.webp",
     "konten": [
       "Takut mengecewakan orang lain sering bikin kita terus-terusan bilang 'iya' meski sebenarnya udah kelelahan atau nggak sanggup.",
       "Penting diingat: menjaga batas diri sendiri bukan berarti egois. Justru kalau terus dipaksakan, kamu bisa berakhir nggak bisa bantu siapa-siapa termasuk diri sendiri.",
@@ -272,11 +357,109 @@
     "judul": "Scrolling HP Terus Padahal Tau Bikin Makin Cemas, Kenapa Ya?",
     "ringkasan": "Kadang kita tau sesuatu nggak baik buat mood, tapi tetap susah berhenti. Ini penjelasannya.",
     "waktu_baca": "3 menit baca",
-    "gambar": "../assets/Images/Image-Nature-Forest.webp",
+    "gambar": "/assets/Images/artikel/Image-Nature-Forest.webp",
     "konten": [
       "Scrolling HP tanpa tujuan jelas sering jadi pelarian pas cemas -- padahal ujung-ujungnya malah bikin pikiran makin penuh, bukan lega.",
       "Ini karena otak nyari distraksi cepat buat 'kabur' dari rasa nggak nyaman, meski distraksi itu sendiri nggak beneran menyelesaikan apa-apa.",
       "Coba ganti sesekali dengan aktivitas yang butuh fokus tangan, kayak nulis, gambar coret-coret, atau beres-beres kecil -- efeknya lebih menenangkan dibanding scrolling tanpa arah."
+    ]
+  },
+  {
+    "id": "cemas-11",
+    "kondisi": "cemas",
+    "kategori": "Media Sosial",
+    "judul": "Cemas Gara-Gara Scroll Media Sosial? Kamu Nggak Sendirian",
+    "ringkasan": "Perasaan ketinggalan atau minder abis buka medsos itu punya penjelasan, bukan cuma soal 'kamu yang kurang bersyukur'.",
+    "waktu_baca": "5 menit baca",
+    "gambar": "/assets/Images/artikel/PLACEHOLDER.webp",
+    "konten": [
+      "FOMO (fear of missing out) muncul karena medsos nunjukin highlight terbaik orang lain, sementara kita ngebandinginnya sama hari-hari biasa kita sendiri.",
+      "Perbandingan ini nggak adil dari awal -- yang kita lihat cuma potongan kecil, bukan gambaran utuh kehidupan orang lain.",
+      "Coba batasi waktu scrolling tanpa tujuan, misalnya pakai timer 15 menit, dan perhatikan akun mana yang bikin kamu ngerasa nggak nyaman -- nggak apa-apa buat unfollow atau mute."
+    ]
+  },
+  {
+    "id": "cemas-12",
+    "kondisi": "cemas",
+    "kategori": "Performa",
+    "judul": "Deg-degan Sebelum Ujian atau Interview? Ini Normal",
+    "ringkasan": "Rasa cemas menjelang momen penting itu wajar, asal tau cara mengelolanya biar nggak menghambat.",
+    "waktu_baca": "4 menit baca",
+    "gambar": "/assets/Images/artikel/PLACEHOLDER.webp",
+    "konten": [
+      "Cemas sebelum momen penting sebenarnya tanda tubuh lagi 'siap-siap' -- bukan berarti kamu bakal gagal, tapi sinyal kamu peduli sama hasilnya.",
+      "Masalahnya muncul kalau cemas ini berlebihan sampai bikin susah fokus atau malah lupa hal yang udah dipelajari.",
+      "Coba teknik simpel: tarik napas dalam beberapa kali sebelum mulai, dan ingatkan diri sendiri kalau persiapan yang udah dilakukan itu cukup, apapun hasilnya nanti."
+    ]
+  },
+  {
+    "id": "cemas-13",
+    "kondisi": "cemas",
+    "kategori": "Perfeksionisme",
+    "judul": "Ngerasa Semua Harus Sempurna? Ini Bisa Jadi Sumber Cemasmu",
+    "ringkasan": "Standar tinggi ke diri sendiri itu bagus, tapi kalau berlebihan justru bikin capek sendiri.",
+    "waktu_baca": "5 menit baca",
+    "gambar": "/assets/Images/artikel/PLACEHOLDER.webp",
+    "konten": [
+      "Perfeksionisme sering keliatan kayak hal positif, padahal kalau berlebihan bisa bikin kamu susah mulai sesuatu karena takut hasilnya nggak sempurna.",
+      "Rasa cemas ini muncul karena standar yang ditetapkan sering nggak realistis, dan kegagalan kecil dirasa kayak kegagalan besar.",
+      "Coba latihan 'cukup baik' -- selesaikan 1 tugas dengan standar 80%, lalu perhatikan, apa beneran ada dampak besar dari itu?"
+    ]
+  },
+  {
+    "id": "cemas-14",
+    "kondisi": "cemas",
+    "kategori": "Kecemasan",
+    "judul": "Takut Gagal Bikin Susah Mulai? Ini Cara Pelan-Pelan Ngatasinnya",
+    "ringkasan": "Rasa takut gagal kadang bikin kita nggak mulai apa-apa sama sekali. Ini langkah kecil buat mulai bergerak.",
+    "waktu_baca": "4 menit baca",
+    "gambar": "/assets/Images/artikel/PLACEHOLDER.webp",
+    "konten": [
+      "Takut gagal sering bikin kita menunda-nunda, karena otak lebih milih 'nggak mulai' daripada 'mulai lalu gagal'.",
+      "Padahal, nggak mulai sama sekali itu sendiri udah semacam kegagalan versi lain -- cuma bentuknya lebih diam-diam.",
+      "Coba pecah target besar jadi langkah sekecil mungkin, sekecil apapun itu -- kadang yang susah bukan tugasnya, tapi langkah pertamanya aja."
+    ]
+  },
+  {
+    "id": "cemas-15",
+    "kondisi": "cemas",
+    "kategori": "Karier",
+    "judul": "Cemas Soal Masa Depan Karier atau Keuangan? Kamu Nggak Sendiri",
+    "ringkasan": "Kekhawatiran soal masa depan finansial itu umum banget dialami anak muda sekarang.",
+    "waktu_baca": "5 menit baca",
+    "gambar": "/assets/Images/artikel/PLACEHOLDER.webp",
+    "konten": [
+      "Cemas soal karier atau keuangan sering muncul dari ketidakpastian -- dan otak cenderung ngerasa nggak nyaman sama hal yang belum jelas.",
+      "Bandingin pencapaian sendiri sama orang lain di medsos juga sering bikin kecemasan ini makin terasa berat, padahal jalan tiap orang beda-beda.",
+      "Coba fokus ke 1 langkah kecil yang bisa dikontrol sekarang, misalnya update CV atau belajar 1 skill baru, daripada mikirin semuanya sekaligus."
+    ]
+  },
+  {
+    "id": "cemas-16",
+    "kondisi": "cemas",
+    "kategori": "Pernapasan",
+    "judul": "Box Breathing: Teknik Napas Simpel yang Dipakai Banyak Orang",
+    "ringkasan": "Teknik ini gampang diingat dan bisa dilakukan di mana aja saat cemas mulai muncul.",
+    "waktu_baca": "3 menit baca",
+    "gambar": "/assets/Images/artikel/PLACEHOLDER.webp",
+    "konten": [
+      "Box breathing kerja dengan pola 4 fase yang sama panjang: tarik napas 4 detik, tahan 4 detik, buang napas 4 detik, tahan lagi 4 detik.",
+      "Pola yang teratur ini bantu tubuh keluar dari mode 'siaga' dan pelan-pelan masuk ke kondisi lebih tenang.",
+      "Coba bayangkan menggambar sisi kotak tiap fase napas -- ini bantu kamu tetap fokus ke ritme, bukan ke pikiran yang bikin cemas."
+    ]
+  },
+  {
+    "id": "cemas-17",
+    "kondisi": "cemas",
+    "kategori": "Kebiasaan",
+    "judul": "Cemas Soal Hal yang Belum Tentu Terjadi? Ini Pola Pikirnya",
+    "ringkasan": "Otak kita kadang bereaksi ke kemungkinan buruk seolah itu udah pasti kejadian.",
+    "waktu_baca": "4 menit baca",
+    "gambar": "/assets/Images/artikel/PLACEHOLDER.webp",
+    "konten": [
+      "Kecemasan sering muncul dari 'apa yang mungkin terjadi', bukan dari kenyataan yang beneran ada di depan mata.",
+      "Otak nggak selalu bisa bedain antara ancaman nyata dan bayangan ancaman -- makanya badan bisa ikut tegang meski yang dicemaskan belum tentu kejadian.",
+      "Coba tanya ke diri sendiri: 'seberapa besar kemungkinan ini beneran terjadi?' dan 'kalau pun terjadi, apa yang bisa aku lakukan?' -- ini bantu mengembalikan fokus ke hal yang lebih nyata."
     ]
   },
   {
@@ -286,7 +469,7 @@
     "judul": "Merasa Kewalahan Banget? Ini yang Bisa Kamu Lakukan Sekarang",
     "ringkasan": "Kalau semuanya terasa terlalu berat, mulai dari satu langkah kecil ini dulu sebelum apa pun yang lain.",
     "waktu_baca": "5 menit baca",
-    "gambar": "../assets/Images/AngsaDiDanau.webp",
+    "gambar": "/assets/Images/artikel/AngsaDiDanau.webp",
     "konten": [
       "Saat semuanya terasa terlalu berat, kamu nggak perlu langsung 'menyelesaikan' semuanya sekaligus. Cukup fokus ke 1 langkah kecil paling depan.",
       "Coba pastikan dulu kebutuhan paling dasar: udah minum air? Udah makan sesuatu? Udah duduk di tempat yang aman?",
@@ -300,7 +483,7 @@
     "judul": "Panduan Grounding 5-4-3-2-1 untuk Meredakan Panik",
     "ringkasan": "Teknik sederhana berbasis panca indra ini bisa membantu menarikmu kembali ke momen saat ini.",
     "waktu_baca": "4 menit baca",
-    "gambar": "../assets/Images/Image-Bertapa.webp",
+    "gambar": "/assets/Images/artikel/Image-Bertapa.webp",
     "konten": [
       "Saat panik, tubuh dan pikiran terasa lepas kendali. Teknik grounding 5-4-3-2-1 bantu menarik fokus kembali ke sini dan sekarang, lewat panca indra.",
       "Langkahnya: sebut 5 hal yang kamu lihat, 4 hal yang bisa disentuh, 3 hal yang bisa didengar, 2 hal yang bisa dicium, 1 hal yang bisa dirasa lewat lidah.",
@@ -314,7 +497,7 @@
     "judul": "Kapan Waktu yang Tepat untuk Menemui Psikolog?",
     "ringkasan": "Nggak perlu menunggu 'cukup parah'. Ini tanda-tanda kamu sudah boleh mencari bantuan profesional.",
     "waktu_baca": "6 menit baca",
-    "gambar": "../assets/Images/Image-Nature-Forest.webp",
+    "gambar": "/assets/Images/artikel/Image-Nature-Forest.webp",
     "konten": [
       "Banyak orang menunda cari bantuan profesional karena merasa masalahnya 'belum cukup parah'. Padahal, nggak ada standar minimum buat berhak dapat dukungan.",
       "Beberapa tanda yang bisa jadi sinyal: kesulitan itu udah mengganggu aktivitas sehari-hari, berlangsung berminggu-minggu, atau kamu sendiri ngerasa nggak sanggup menghadapinya sendiri lagi.",
@@ -328,7 +511,7 @@
     "judul": "Tubuh Lemas & Sulit Bergerak Saat Kondisi Berat, Ini Wajar",
     "ringkasan": "Kondisi mental yang berat sering ikut terasa di tubuh. Kenali gejalanya biar nggak makin cemas soal itu.",
     "waktu_baca": "5 menit baca",
-    "gambar": "../assets/Images/AngsaDiDanau.webp",
+    "gambar": "/assets/Images/artikel/AngsaDiDanau.webp",
     "konten": [
       "Saat kondisi mental sedang sangat berat, tubuh sering ikut merasakannya -- lemas, susah bangun dari tempat tidur, atau gerakan terasa berat kayak nggak ada tenaga.",
       "Ini respons yang nyata secara biologis, bukan soal 'malas' atau 'kurang niat'. Tubuh dan pikiran saling terhubung erat.",
@@ -342,7 +525,7 @@
     "judul": "Susah Cerita ke Orang Lain? Ini Cara Memulainya",
     "ringkasan": "Kadang yang paling berat bukan masalahnya, tapi cara mengomunikasikannya. Ini bisa jadi titik awal.",
     "waktu_baca": "5 menit baca",
-    "gambar": "../assets/Images/Image-Bertapa.webp",
+    "gambar": "/assets/Images/artikel/Image-Bertapa.webp",
     "konten": [
       "Saat kondisi lagi berat, memulai cerita ke orang lain sering terasa lebih susah dari masalahnya sendiri -- takut jadi beban, takut nggak dimengerti.",
       "Kamu nggak perlu langsung cerita detail semuanya. Kalimat sesederhana 'aku lagi nggak baik-baik aja, bisa nggak nemenin aku sebentar?' udah cukup buat memulai.",
@@ -356,7 +539,7 @@
     "judul": "Mengenali Tanda Butuh Bantuan Darurat, Bukan Cuma Istirahat",
     "ringkasan": "Ada kondisi yang butuh penanganan segera, bukan sekadar 'tunggu sampai membaik sendiri'.",
     "waktu_baca": "6 menit baca",
-    "gambar": "../assets/Images/Image-Nature-Forest.webp",
+    "gambar": "/assets/Images/artikel/Image-Nature-Forest.webp",
     "konten": [
       "Sebagian besar kondisi berat bisa membaik dengan istirahat dan dukungan sekitar. Tapi ada kondisi yang butuh penanganan lebih cepat -- penting buat kenali bedanya.",
       "Kalau muncul pikiran untuk menyakiti diri sendiri atau merasa hidup terasa nggak ada artinya lagi, ini sinyal buat segera hubungi bantuan profesional atau layanan darurat, bukan ditunggu sampai 'reda sendiri'.",
@@ -370,7 +553,7 @@
     "judul": "Ketika Masa Depan Terasa Gelap, Ini Langkah yang Bisa Diambil",
     "ringkasan": "Rasa nggak ada harapan itu berat banget, dan kamu nggak harus menghadapinya sendirian.",
     "waktu_baca": "4 menit baca",
-    "gambar": "../assets/Images/AngsaDiDanau.webp",
+    "gambar": "/assets/Images/artikel/AngsaDiDanau.webp",
     "konten": [
       "Saat masa depan terasa gelap dan nggak ada tenaga buat mikirin apa-apa lagi, itu bukan tanda kamu lemah -- itu tanda kamu lagi menanggung beban yang beneran berat.",
       "Kamu nggak perlu langsung 'menemukan harapan' sekarang juga. Cukup fokus dulu ke bertahan di hari ini, satu jam ke depan, sekecil apapun langkahnya.",
@@ -384,11 +567,81 @@
     "judul": "Nggak Sanggup Ngapa-ngapain Sama Sekali? Ini Nggak Apa-apa",
     "ringkasan": "Kadang yang paling berat itu bukan masalahnya, tapi rasa bersalah karena nggak bisa 'berfungsi normal'.",
     "waktu_baca": "3 menit baca",
-    "gambar": "../assets/Images/Image-Bertapa.webp",
+    "gambar": "/assets/Images/artikel/Image-Bertapa.webp",
     "konten": [
       "Saat kondisi lagi sangat berat, bahkan hal sekecil mandi atau makan bisa terasa kayak tugas raksasa -- dan itu bukan berarti kamu malas atau kurang usaha.",
       "Nggak apa-apa buat nggak produktif dulu di masa-masa seperti ini. Yang paling penting sekarang adalah bertahan, bukan mencapai sesuatu.",
       "Kalau ada orang di sekitar yang bisa dimintai bantuan buat hal-hal kecil (masak, beres-beres, nemenin), nggak apa-apa buat minta tolong. Itu bukan tanda kegagalan."
+    ]
+  },
+  {
+    "id": "berat-9",
+    "kondisi": "berat",
+    "kategori": "Energi",
+    "judul": "Kehilangan Motivasi Sama Sekali? Ini Bukan Salahmu",
+    "ringkasan": "Saat semangat rasanya hilang total, penting buat nggak menyalahkan diri sendiri atas hal itu.",
+    "waktu_baca": "5 menit baca",
+    "gambar": "/assets/Images/artikel/PLACEHOLDER.webp",
+    "konten": [
+      "Kehilangan motivasi total itu beda dari sekadar males -- ini bisa jadi tanda tubuh dan pikiran lagi kelelahan secara mendalam.",
+      "Nggak apa-apa kalau saat ini kamu ngerasa nggak ada dorongan buat ngapa-ngapain. Itu bukan berarti kamu orang yang gagal atau kurang niat.",
+      "Kalau kondisi ini berlangsung lama dan bikin aktivitas sehari-hari makin susah dijalani, penting buat cerita ke orang yang kamu percaya atau bantuan profesional -- kamu nggak harus melewatinya sendirian."
+    ]
+  },
+  {
+    "id": "berat-10",
+    "kondisi": "berat",
+    "kategori": "Krisis",
+    "judul": "Burnout Itu Nyata, Bukan Cuma 'Kecapean Biasa'",
+    "ringkasan": "Kalau capek yang kamu rasa udah nggak hilang meski udah istirahat, ini penting buat dikenali.",
+    "waktu_baca": "6 menit baca",
+    "gambar": "/assets/Images/artikel/PLACEHOLDER.webp",
+    "konten": [
+      "Burnout bukan cuma soal capek fisik -- ini kondisi kelelahan emosional dan mental yang muncul dari tekanan berkepanjangan, sering tanpa disadari sampai udah cukup berat.",
+      "Tanda-tandanya bisa berupa ngerasa hampa sama hal yang dulu disukai, sulit fokus, atau ngerasa nggak ada gunanya usaha sekeras apapun.",
+      "Kalau kamu ngerasa ini terjadi ke kamu, penting banget buat nggak dianggap remeh -- cerita ke orang terdekat atau tenaga profesional adalah langkah yang valid, bukan tanda kamu lemah."
+    ]
+  },
+  {
+    "id": "berat-11",
+    "kondisi": "berat",
+    "kategori": "Sosial",
+    "judul": "Merasa Jadi Beban Buat Orang Sekitar? Ini yang Perlu Kamu Tahu",
+    "ringkasan": "Perasaan ini berat banget untuk dipendam sendiri, dan penting buat tahu kamu nggak seharusnya menghadapinya sendirian.",
+    "waktu_baca": "5 menit baca",
+    "gambar": "/assets/Images/artikel/PLACEHOLDER.webp",
+    "konten": [
+      "Merasa jadi beban buat orang lain adalah perasaan yang berat, tapi penting diingat: perasaan ini sering nggak sejalan dengan kenyataan tentang bagaimana orang-orang di sekitarmu sebenarnya melihatmu.",
+      "Kondisi berat sering bikin kita melihat diri sendiri dan hubungan dengan orang lain lewat 'kacamata' yang lebih gelap dari yang sebenarnya.",
+      "Kalau perasaan ini terus muncul, penting banget untuk cerita ke orang yang kamu percaya atau hubungi bantuan profesional segera -- cek halaman Bantuan di situs ini buat kontak yang bisa dihubungi kapan aja. Kamu berharga, dan kamu nggak sendirian menghadapi ini."
+    ]
+  },
+  {
+    "id": "berat-12",
+    "kondisi": "berat",
+    "kategori": "Tidur",
+    "judul": "Susah Tidur Berhari-Hari? Ini Bisa Jadi Sinyal Penting",
+    "ringkasan": "Kesulitan tidur yang berkepanjangan sering jadi tanda ada beban lain yang perlu diperhatikan.",
+    "waktu_baca": "4 menit baca",
+    "gambar": "/assets/Images/artikel/PLACEHOLDER.webp",
+    "konten": [
+      "Sesekali susah tidur itu wajar, tapi kalau berlangsung berhari-hari atau berminggu-minggu, ini bisa jadi tanda pikiran atau perasaan sedang menanggung beban berat.",
+      "Pikiran yang terus aktif menjelang tidur, atau bangun berkali-kali di tengah malam, sering berkaitan erat sama kondisi mental yang lagi berat.",
+      "Kalau ini terus berlangsung dan mulai mengganggu aktivitas sehari-hari, jangan ragu buat cerita ke orang terdekat atau tenaga profesional -- ini langkah yang valid buat menjaga diri, bukan sesuatu yang harus ditunda."
+    ]
+  },
+  {
+    "id": "berat-13",
+    "kondisi": "berat",
+    "kategori": "Sosial",
+    "judul": "Ngerasa Terputus dari Orang Sekitar? Ini Bisa Dipulihkan Pelan-Pelan",
+    "ringkasan": "Rasa terasing meski dikelilingi orang lain itu berat, tapi ada langkah kecil buat mulai terhubung lagi.",
+    "waktu_baca": "5 menit baca",
+    "gambar": "/assets/Images/artikel/PLACEHOLDER.webp",
+    "konten": [
+      "Kondisi berat kadang bikin kita ngerasa terputus dari orang-orang sekitar, walau secara fisik mereka ada dekat kita -- ini bisa terasa membingungkan dan berat sendirian.",
+      "Perasaan ini nggak berarti hubunganmu dengan orang lain rusak, tapi lebih ke tanda kalau kapasitas kamu buat terhubung lagi sedang terbatas karena beban yang kamu tanggung.",
+      "Nggak perlu langsung 'kembali dekat' seperti biasa. Coba mulai dari kontak kecil, dan kalau perasaan ini terus berat, cerita ke orang terpercaya atau bantuan profesional bisa jadi langkah penting -- kamu nggak harus menghadapinya sendirian."
     ]
   }
 ]

@@ -8,7 +8,7 @@
  * Ini adalah cara "Component-Based" versi vanilla JS, sehingga jika ada perubahan
  * pada menu navbar, kita hanya perlu mengubah 1 file (Nav.html) saja.
  */
-async function loadNavigasi(navPath = "./component/Nav.html", slotId = "navbar-slot") {
+async function loadNavigasi(navPath = "/component/Nav.html", slotId = "navbar-slot") {
   // 1. Cari elemen penampung (container) di halaman aktif
   const slot = document.getElementById(slotId); 
   

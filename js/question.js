@@ -8,13 +8,13 @@
 (function () {
   // Array berisi path ke komponen HTML untuk masing-masing pertanyaan
   const questionFiles = [
-    "component/questions/q1.html",
-    "component/questions/q2.html",
-    "component/questions/q3.html",
-    "component/questions/q4.html",
-    "component/questions/q5.html",
-    "component/questions/q6.html",
-    "component/questions/q7.html",
+    "/component/questions/q1.html",
+    "/component/questions/q2.html",
+    "/component/questions/q3.html",
+    "/component/questions/q4.html",
+    "/component/questions/q5.html",
+    "/component/questions/q6.html",
+    "/component/questions/q7.html",
   ];
 
   // Bobot nilai untuk setiap kategori jawaban
@@ -178,7 +178,7 @@
     localStorage.setItem("userMentalCheckedAt", new Date().toISOString());
 
     // 6. Selesai -> Arahkan user masuk ke aplikasi utama (Beranda)
-    window.location.href = "/beranda";
+    window.location.href = "/beranda.html";
   }
 
   // Mulai kuis saat script pertama kali jalan

@@ -136,7 +136,7 @@
 
     try {
       // Fetch file JSON
-      const res = await fetch("./data/artikel.json");
+      const res = await fetch("../../data/artikel.json");
       const semuaArtikel = await res.json();
       
       // Saring artikel: Hanya ambil artikel yang field "kondisi"-nya cocok
