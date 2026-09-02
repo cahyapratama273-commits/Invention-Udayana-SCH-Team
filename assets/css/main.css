@@ -4,7 +4,7 @@
     box-sizing: border-box;
 }
 
-/* ─── Tema Dark ─── */
+/* Tempalte Tema */
 :root {
     --bg-base:        #0D1220;
     --bg-card:        #151B2E;
@@ -25,7 +25,7 @@ body {
     font-family: 'Inter', system-ui, sans-serif;
 }
 
-/* ─── IMPORT FONT ─── */
+/* Import font dari gugel*/
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
 
 h1, h2, h3, .font-display {
@@ -80,21 +80,4 @@ p, span, li, a {
     color: var(--text-heading) !important;
 }
 
-/* ─── FAQ CARD DETAIL ─── */
-details.faq-item {
-    background: var(--bg-card-alt);
-    border: 1px solid var(--border-subtle);
-    border-left: 4px solid transparent;
-    transition: border-color 0.2s;
-}
-details.faq-item[open],
-details.faq-item:hover {
-    border-left-color: var(--accent);
-}
-details.faq-item summary {
-    color: var(--text-heading);
-    cursor: pointer;
-}
-details.faq-item p {
-    color: var(--text-body);
-}
+

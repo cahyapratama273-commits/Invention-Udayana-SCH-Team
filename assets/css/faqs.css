@@ -1,0 +1,81 @@
+ /* Menampilkan detail card faq */
+details.faq-item {
+    background: var(--bg-card-alt);
+    border: 1px solid var(--border-subtle);
+    border-left: 4px solid transparent;
+    transition: border-color 0.2s;
+}
+details.faq-item[open],
+details.faq-item:hover {
+    border-left-color: var(--accent);
+}
+details.faq-item summary {
+    color: var(--text-heading);
+    cursor: pointer;
+}
+details.faq-item p {
+    color: var(--text-body);
+}
+
+.faq-item {
+  transition: background-color 0.2s ease;
+}
+
+.faq-answer {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition: grid-template-rows 0.3s ease, opacity 0.3s ease;
+  overflow: hidden;
+}
+
+.faq-item[open] .faq-answer {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.faq-answer > p {
+  min-height: 0;
+}
+
+
+/* transisi smooth saat di hover atau klik */
+.faq-item {
+  transition: background-color 0.25s ease, border-color 0.25s ease;
+}
+
+/* easin yang dikustom agar lebih halus */
+.faq-answer {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition: 
+    grid-template-rows 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.35s ease-out;
+  overflow: hidden;
+}
+
+.faq-item[open] .faq-answer {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  transition: 
+    grid-template-rows 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.4s ease-in 0.1s; /* opacity nyusul dikit setelah height mulai dibuka, biar gak bug/aneh gitu */
+}
+
+.faq-answer > p {
+  min-height: 0;
+}
+
+.faq-item summary svg {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Subtle scale saat card di-hover */
+.faq-item summary {
+  transition: opacity 0.2s ease;
+}
+
+.faq-item:hover summary h3 {
+  transition: color 0.25s ease;
+}

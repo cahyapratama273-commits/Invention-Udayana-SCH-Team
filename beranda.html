@@ -36,11 +36,15 @@
     <section class="max-w-7xl mx-auto px-6 pb-16">
 
       <!-- Kartu Sapaan -->
-      <div id="sapaan-card" class="rounded-2xl p-8 md:p-10 mb-10 min-h-[100px]"
+       <div class="fade-left opacity-0 -translate-x-10 transition-all duration-700 ease-out"> 
+        <!-- card untuk animasi fade in -->
+         <div id="sapaan-card" class="rounded-2xl p-8 md:p-10 mb-10 min-h-[100px]"
            style="background:#1A2138; border:1px solid rgba(255,255,255,0.08); border-left:4px solid #2DD4A8;">
-        <p id="element-judul-beranda" class="text-xl md:text-2xl font-semibold mb-2"
+           <p id="element-judul-beranda" class="text-xl md:text-2xl font-semibold mb-2"
            style="color:#F5F5F5; font-family:'Playfair Display',serif;"></p>
-        <p id="element-pesan-beranda" class="text-sm max-w-2xl" style="color:#8A93A8;"></p>
+           <p id="element-pesan-beranda" class="text-sm max-w-2xl" style="color:#8A93A8;"></p>
+          </div>
+
       </div>
 
       <!-- Bagian Rekomendasi artikel -->
@@ -70,5 +74,6 @@
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <script src="/js/Nav.js"></script>
   <script src="/js/Footer.js"></script>
+  <script src="/js/main.js"></script>
 </body>
 </html>

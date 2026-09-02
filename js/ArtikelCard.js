@@ -1,5 +1,5 @@
 /**
- * ArtikelCard.js — Komponen Kartu Artikel (Reusable)
+    Komponen Kartu Artikel (Reusable)
  */
 function renderArtikelCard(artikel) {
   return `
