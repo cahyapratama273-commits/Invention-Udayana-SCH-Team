@@ -15,6 +15,11 @@
     "/component/questions/q5.html",
     "/component/questions/q6.html",
     "/component/questions/q7.html",
+    "/component/questions/q8.html",
+    "/component/questions/q9.html",
+    "/component/questions/q10.html",
+    "/component/questions/q11.html",
+    "/component/questions/q12.html",
   ];
 
   // Bobot nilai untuk setiap kategori jawaban
