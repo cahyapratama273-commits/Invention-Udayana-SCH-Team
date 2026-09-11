@@ -64,24 +64,24 @@
       if (!featuredArticle) return;
 
       var html = `
-        <a href="/blog/?id=${featuredArticle.id}" class="group block rounded-2xl overflow-hidden transition-transform hover:-translate-y-1" style="background:#151B2E; text-decoration:none;">
+        <a href="/blog/?id=${featuredArticle.id}" class="group block rounded-2xl overflow-hidden border border-[rgba(255,255,255,0.08)] hover:border-[#2DD4A8] transition-colors duration-300" style="background:#151B2E; text-decoration:none;">
           <div class="flex flex-col md:flex-row h-full">
-            <div class="w-full md:w-1/2 overflow-hidden" style="background:#1A2138; aspect-ratio:4/3;">
+            <div class="w-full md:w-1/2 overflow-hidden aspect-[16/9] md:aspect-[4/3]" style="background:#1A2138;">
               <!-- Placeholder background #1A2138 -->
               <div class="w-full h-full relative">
                 <!-- Image dari dataArtikel -->
-                <img src="${featuredArticle.gambar}" alt="${featuredArticle.judul}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" onerror="this.style.display='none';">
+                <img src="${featuredArticle.gambar}" alt="${featuredArticle.judul}" class="w-full h-full object-cover" onerror="this.style.display='none';">
               </div>
             </div>
-            <div class="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-center">
-              <span class="text-xs font-bold uppercase tracking-widest mb-4" style="color:#2DD4A8;">${featuredArticle.kategori}</span>
-              <h3 class="text-3xl lg:text-4xl font-bold mb-4 leading-tight" style="font-family:'Playfair Display',serif; color:#F5F5F5;">
+            <div class="w-full md:w-1/2 p-5 sm:p-8 md:p-10 lg:p-12 flex flex-col justify-center">
+              <span class="text-[11px] sm:text-xs font-bold uppercase tracking-widest mb-2 sm:mb-3 md:mb-4" style="color:#2DD4A8;">${featuredArticle.kategori}</span>
+              <h3 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-2 sm:mb-3 md:mb-4 leading-snug md:leading-tight" style="font-family:'Playfair Display',serif; color:#F5F5F5;">
                 ${featuredArticle.judul}
               </h3>
-              <p class="text-base leading-relaxed mb-6" style="color:#8A93A8;">
+              <p class="text-xs sm:text-sm md:text-base leading-relaxed mb-4 sm:mb-6 line-clamp-3 md:line-clamp-none" style="color:#8A93A8;">
                 ${featuredArticle.ringkasan}
               </p>
-              <span class="text-sm font-medium" style="color:#2DD4A8;">Baca selengkapnya &rarr;</span>
+              <span class="text-xs sm:text-sm font-medium mt-auto" style="color:#2DD4A8;">Baca selengkapnya &rarr;</span>
             </div>
           </div>
         </a>

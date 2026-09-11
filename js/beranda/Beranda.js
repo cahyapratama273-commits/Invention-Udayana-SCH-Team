@@ -86,6 +86,7 @@
     },
   };
 
+
   /**
    * Mengambil kondisi (baik/cemas/berat) dari localStorage.
    * Jika kosong atau tidak valid, default ke "baik".

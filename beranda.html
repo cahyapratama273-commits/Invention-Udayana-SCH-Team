@@ -9,6 +9,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Teduh - Beranda</title>
+  <link rel="icon" type="image/png" href="/assets/Images/for-icon.png">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="/assets/css/main.css" />
@@ -22,14 +23,61 @@
   <main id="app-content" data-page="beranda">
 
     <!-- HERO SECTION -->
-    <section class="flex flex-col items-center justify-center text-center px-6" style="min-height:80vh;">
-      <p class="text-xs font-semibold uppercase tracking-widest mb-6" style="color:#2DD4A8;">Ruang aman untukmu</p>
-      <h1 class="text-4xl md:text-6xl font-bold leading-tight mb-6 max-w-3xl" style="font-family:'Playfair Display',serif; color:#F5F5F5;">
-        Dunia Terlalu Terik.<br>Mari Berteduh Sejenak.
-      </h1>
-      <p class="text-base max-w-lg leading-relaxed" style="color:#8A93A8;">
-        Ruang aman untuk mengurai isi kepala, membaca kembali emosi, dan beristirahat sejenak dari segala tuntutan.
-      </p>
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 pt-24 sm:pt-28 pb-10">
+      <!-- Main Dark Block -->
+      <div class="rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden flex flex-col lg:flex-row relative mb-6" style="background:#151B2E; border:1px solid rgba(255,255,255,0.08);">
+        <!-- Left Content -->
+        <div class="w-full lg:w-1/2 p-6 sm:p-8 md:p-10 lg:p-16 flex flex-col justify-center relative z-10">
+          <div class="flex items-center gap-2 mb-4 sm:mb-6">
+            <span class="w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold" style="background:#2DD4A8; color:#0D1220;">T</span>
+            <span class="text-[11px] sm:text-xs font-semibold tracking-widest uppercase" style="color:#2DD4A8;">Ruang aman untukmu</span>
+          </div>
+          <h1 class="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold leading-tight mb-4 sm:mb-6" style="font-family:'Playfair Display',serif; color:#F5F5F5;">
+            Dunia Terlalu Terik. <br>
+            <span style="color:#2DD4A8; font-style: italic;">Mari Berteduh</span> Sejenak.
+          </h1>
+          <p class="text-sm sm:text-base leading-relaxed mb-6 sm:mb-8 lg:mb-10 max-w-md" style="color:#8A93A8;">
+            Ruang aman untuk mengurai isi kepala, membaca kembali emosi, dan beristirahat sejenak dari segala tuntutan.
+          </p>
+          <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
+            <a href="/index.html" class="px-6 py-3 rounded-full text-center text-xs sm:text-sm font-semibold transition hover:bg-[#25b892]" style="background:#2DD4A8; color:#0D1220;">
+              MULAI BERTEDUH &#8599;
+            </a>
+            <a href="/konsultasi.html" class="px-6 py-3 rounded-full text-center text-xs sm:text-sm font-semibold transition border border-[rgba(255,255,255,0.2)] hover:bg-white/5" style="color:#F5F5F5;">
+              LAYANAN KAMI &#8599;
+            </a>
+          </div>
+        </div>
+        <!-- Right Image -->
+        <div class="w-full lg:w-1/2 relative min-h-[220px] sm:min-h-[300px] lg:min-h-full flex">
+          <img src="/assets/Images/artikel/hutan1.webp" alt="Berteduh" class="absolute inset-0 w-full h-full object-cover object-center" style="opacity:0.8;">
+          <!-- Gradient overlay -->
+          <div class="absolute inset-0 bg-gradient-to-r from-[#151B2E] via-transparent to-transparent hidden lg:block"></div>
+          <div class="absolute inset-0 bg-gradient-to-t from-[#151B2E] via-[#151B2E]/50 to-transparent block lg:hidden"></div>
+        </div>
+      </div>
+
+      <!-- Stats Light Block -->
+      <div class="rounded-[1.5rem] sm:rounded-[2rem] p-5 sm:p-8 md:p-10 flex flex-col md:flex-row items-center justify-between gap-6 md:gap-8" style="background:#1A2138; border:1px solid rgba(255,255,255,0.08); color:#F5F5F5;">
+        <div class="w-full md:w-1/3">
+          <p class="text-xs sm:text-sm font-bold uppercase tracking-wider mb-1" style="color:#8A93A8;">JUMLAH PENGGUNA</p>
+          <p class="text-base sm:text-lg font-bold"><span style="color:#2DD4A8;">YANG</span> BERTEDUH</p>
+        </div>
+        <div class="w-full md:w-2/3 flex flex-wrap justify-between gap-4 sm:gap-6">
+          <div>
+            <h3 class="text-2xl sm:text-3xl font-black mb-1 counter" style="color:#F5F5F5;" data-target="1000" data-suffix="K+" data-divide="1000">0</h3>
+            <p class="text-[10px] md:text-xs font-semibold uppercase tracking-wide" style="color:#8A93A8;">Pengguna<br></p>
+          </div>
+          <div>
+            <h3 class="text-2xl sm:text-3xl font-black mb-1 counter" style="color:#F5F5F5;" data-target="100" data-suffix="+">0</h3>
+            <p class="text-[10px] md:text-xs font-semibold uppercase tracking-wide" style="color:#8A93A8;">Psikolog &<br>Konselor</p>
+          </div>
+          <div>
+            <h3 class="text-2xl sm:text-3xl font-black mb-1 counter" style="color:#F5F5F5;" data-target="98" data-suffix="%">0</h3>
+            <p class="text-[10px] md:text-xs font-semibold uppercase tracking-wide" style="color:#8A93A8;">Sesi Konseling<br>Berhasil</p>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- Bagian sapaan + artikel -->
@@ -75,5 +123,6 @@
   <script src="/js/Nav.js"></script>
   <script src="/js/Footer.js"></script>
   <script src="/js/main.js"></script>
+  <script src="/js/beranda/Count.js"></script>
 </body>
 </html>
