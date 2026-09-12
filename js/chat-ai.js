@@ -19,7 +19,7 @@ $(document).ready(function() {
 
   // Inisialisasi sapaan awal
   $chatContainer.empty();
-  const initialMessage = "Halo! Saya asisten virtual BerTeduh. Ada yang sedang mengganggu pikiranmu hari ini? Ceritakan saja perlahan-lahan.";
+  const initialMessage = "Halo! Aku asisten virtual BerTeduh. Ada yang lagi mengganggu pikiranmu hari ini? Ceritakan santai aja ya, aku siap dengerin.";
   
   // Tampilkan bubble awal
   addBubble("model", initialMessage);
@@ -105,13 +105,13 @@ $(document).ready(function() {
     const apiKey = apiKeys[currentKeyIndex];
     const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
 
-    const systemPrompt = `Anda adalah asisten virtual bernama 'AI BerTeduh'.
-Anda adalah teman ngobrol yang profesional, hangat, berempati, dan pengertian terkait kesehatan mental.
-Tugas Anda:
+    const systemPrompt = `Kamu adalah asisten virtual bernama 'AI BerTeduh'.
+Kamu adalah teman ngobrol yang hangat, berempati, dan pengertian terkait kesehatan mental.
+Tugasmu:
 1. Menjadi pendengar yang baik untuk keluh kesah pengguna.
 2. Memberikan saran ringan (seperti relaksasi, napas dalam) jika mereka cemas.
-3. Selalu ingatkan bahwa Anda adalah AI dan BUKAN pengganti psikolog profesional. Sarankan psikolog jika depresi berat.
-4. Gunakan bahasa Indonesia yang santai tapi sopan (seperti mengobrol dengan teman bijak).`;
+3. Selalu ingatkan bahwa kamu adalah AI dan BUKAN pengganti psikolog profesional. Sarankan psikolog jika depresi berat.
+4. Gunakan bahasa Indonesia yang santai, ramah, dan empatik. Gunakan panggilan 'kamu' kepada pengguna.`;
 
     const payload = {
       system_instruction: { parts: [{ text: systemPrompt }] },
@@ -184,6 +184,13 @@ Tugas Anda:
     if (e.which === 13) {
       handleSend();
     }
+  });
+
+  // Handler untuk Quick-Select Topics (Chip buttons)
+  $(document).on("click", ".quick-chip", function() {
+    const topicText = $(this).attr("data-topic") || $(this).text().trim();
+    $chatInput.val(topicText);
+    handleSend();
   });
 
 });

@@ -33,7 +33,7 @@ function getPhaseAtElapsed(elapsed) {
     }
     acc += phase.duration;
   }
-  // Fallback untuk antisipasi floating point error di akhir siklus
+  // Fallback untuk floating point kalau error di akhir siklus
   return { phase: phases[phases.length - 1], elapsedInPhase: phases[phases.length - 1].duration };
 }
 
@@ -54,7 +54,7 @@ function updateVisuals(progressPercent, phase, timeLeft) {
   // Konversi persentase jalan ke radian. Dikurangi pi/2 agar mulai dari titik atas (jam 12)
   const angle = (progressPercent * 2 * Math.PI) - (Math.PI / 2);
   
-  // Radius lingkaran di SVG adalah 90 dari viewBox 200, yang berarti 45% dari lebar kontainer
+  // Radius lingkaran di SVG adalah 90 dari viewBox 200, yang berarti sekitar 45% dari lebar kontainer
   const xPercent = 50 + 45 * Math.cos(angle);
   const yPercent = 50 + 45 * Math.sin(angle);
 
