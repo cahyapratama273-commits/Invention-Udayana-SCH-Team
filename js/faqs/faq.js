@@ -1,52 +1,46 @@
 /**
- * FAQ Accordion — Hover to open, Click to pin/toggle
- * 
- * - Hover (desktop): card terbuka otomatis, tertutup lagi saat mouse keluar
- * - Klik: "pin" card supaya tetap terbuka meski mouse keluar; klik lagi untuk unpin & tutup
- * - Touchscreen: fallback ke klik biasa (native <details> behavior)
+ * FAQ Accordion — Smooth Animated Toggle with Hover & Click Support
  */
 $(document).ready(function () {
-  const supportsHover = window.matchMedia('(hover: hover)').matches;
-  const HOVER_DELAY = 200; // ms, biar nggak kebuka pas mouse cuma lewat sekilas
-
-  if (!supportsHover) {
-    // Touchscreen: biarkan <details>/<summary> jalan native, tidak perlu JS tambahan
-    return;
-  }
+  const ANIM_DURATION = 350; // ms
 
   $('.faq-item').each(function () {
     const $item = $(this);
     const $summary = $item.find('summary');
-    let isPinned = $item.attr('open') !== undefined; // state awal, true kalau sudah ada attr "open" di HTML
-    let hoverTimeout = null;
+    let isAnimating = false;
 
-    // Hover masuk → buka (dengan sedikit delay biar nggak overly sensitive)
-    $item.on('mouseenter', function () {
-      clearTimeout(hoverTimeout);
-      hoverTimeout = setTimeout(() => {
-        $item.attr('open', '');
-      }, HOVER_DELAY);
-    });
+    function openItem() {
+      if ($item.attr('open') !== undefined || isAnimating) return;
+      isAnimating = true;
+      $item.removeClass('is-closing');
+      $item.attr('open', '');
+      setTimeout(() => {
+        isAnimating = false;
+      }, ANIM_DURATION);
+    }
 
-    // Hover keluar → tutup, KECUALI sudah di-pin via klik
-    $item.on('mouseleave', function () {
-      clearTimeout(hoverTimeout);
-      if (!isPinned) {
+    function closeItem() {
+      if ($item.attr('open') === undefined || isAnimating) return;
+      isAnimating = true;
+      $item.addClass('is-closing');
+      setTimeout(() => {
         $item.removeAttr('open');
-      }
-    });
+        $item.removeClass('is-closing');
+        isAnimating = false;
+      }, ANIM_DURATION);
+    }
 
-    // Klik summary → toggle pin state, full manual control
+    // Klik summary untuk membuka / menutup dengan animasi halus
     $summary.on('click', function (e) {
-      e.preventDefault(); // cegah toggle native <details>, kita kontrol sendiri
+      e.preventDefault();
+      if (isAnimating) return;
 
-      isPinned = !isPinned;
-
-      if (isPinned) {
-        $item.attr('open', '');
+      const isOpen = $item.attr('open') !== undefined && !$item.hasClass('is-closing');
+      if (isOpen) {
+        closeItem();
       } else {
-        $item.removeAttr('open');
+        openItem();
       }
     });
   });
-});
+});

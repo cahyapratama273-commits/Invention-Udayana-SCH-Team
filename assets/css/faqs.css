@@ -1,81 +1,91 @@
- /* Menampilkan detail card faq */
+/* ─── FAQ ITEM GLASSMORPHIC STYLING ─── */
 details.faq-item {
-    background: var(--bg-card-alt);
-    border: 1px solid var(--border-subtle);
-    border-left: 4px solid transparent;
-    transition: border-color 0.2s;
+  background: rgba(21, 27, 46, 0.65) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-left: 4px solid transparent !important;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  transition: background-color 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.25s ease-out;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
 }
-details.faq-item[open],
+
 details.faq-item:hover {
-    border-left-color: var(--accent);
+  background: rgba(26, 33, 56, 0.8) !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+  border-left-color: #2DD4A8 !important;
+  transform: translateY(-2px);
 }
+
+details.faq-item[open] {
+  background: rgba(26, 33, 56, 0.9) !important;
+  border-color: rgba(45, 212, 168, 0.3) !important;
+  border-left-color: #2DD4A8 !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35), 0 0 20px rgba(45, 212, 168, 0.08) !important;
+}
+
 details.faq-item summary {
-    color: var(--text-heading);
-    cursor: pointer;
-}
-details.faq-item p {
-    color: var(--text-body);
-}
-
-.faq-item {
-  transition: background-color 0.2s ease;
-}
-
-.faq-answer {
-  display: grid;
-  grid-template-rows: 0fr;
-  opacity: 0;
-  transition: grid-template-rows 0.3s ease, opacity 0.3s ease;
-  overflow: hidden;
-}
-
-.faq-item[open] .faq-answer {
-  grid-template-rows: 1fr;
-  opacity: 1;
-}
-
-.faq-answer > p {
-  min-height: 0;
-}
-
-
-/* transisi smooth saat di hover atau klik */
-.faq-item {
-  transition: background-color 0.25s ease, border-color 0.25s ease;
-}
-
-/* easin yang dikustom agar lebih halus */
-.faq-answer {
-  display: grid;
-  grid-template-rows: 0fr;
-  opacity: 0;
-  transition: 
-    grid-template-rows 0.45s cubic-bezier(0.16, 1, 0.3, 1),
-    opacity 0.35s ease-out;
-  overflow: hidden;
-}
-
-.faq-item[open] .faq-answer {
-  grid-template-rows: 1fr;
-  opacity: 1;
-  transition: 
-    grid-template-rows 0.45s cubic-bezier(0.16, 1, 0.3, 1),
-    opacity 0.4s ease-in 0.1s; /* opacity nyusul dikit setelah height mulai dibuka, biar gak bug/aneh gitu */
-}
-
-.faq-answer > p {
-  min-height: 0;
-}
-
-.faq-item summary svg {
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-/* Subtle scale saat card di-hover */
-.faq-item summary {
+  cursor: pointer;
+  outline: none;
+  user-select: none;
   transition: opacity 0.2s ease;
 }
 
-.faq-item:hover summary h3 {
-  transition: color 0.25s ease;
+details.faq-item summary::-webkit-details-marker {
+  display: none;
 }
+
+/* ─── SILKY SMOOTH ACCORDION GRID ANIMATION ─── */
+.faq-answer {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: grid-template-rows 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+
+details.faq-item[open] > .faq-answer {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+details.faq-item.is-closing > .faq-answer {
+  grid-template-rows: 0fr !important;
+  opacity: 0 !important;
+  transform: translateY(-6px) !important;
+  transition: grid-template-rows 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.25s ease-out,
+              transform 0.25s ease-out !important;
+}
+
+.faq-answer > p,
+.faq-answer > div {
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* ─── SVG ROTATION ANIMATION ─── */
+details.faq-item summary svg {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              color 0.3s ease;
+}
+
+details.faq-item[open] summary svg {
+  transform: rotate(-180deg);
+  color: #2DD4A8;
+}
+
+details.faq-item.is-closing summary svg {
+  transform: rotate(0deg) !important;
+  color: #8A93A8 !important;
+}
+
+details.faq-item:hover summary h3 {
+  color: #FFFFFF !important;
+}

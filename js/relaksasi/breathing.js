@@ -1,8 +1,11 @@
+// Durasi pernapasan total 20 detik dibagi 4 fase (5 detik / 5000 ms per fase)
+const PHASE_DURATION = 20000 / 4; // 5000 ms (5 detik)
+
 const phases = [
-  { label: 'Tarik Napas', duration: 4000, color: '#2DD4A8' },
-  { label: 'Tahan', duration: 4000, color: '#3B82F6' },
-  { label: 'Buang Napas', duration: 4000, color: '#F97316' },
-  { label: 'Tahan', duration: 4000, color: '#3B82F6' }
+  { label: 'Tarik Napas', duration: PHASE_DURATION, color: '#2DD4A8' },
+  { label: 'Tahan', duration: PHASE_DURATION, color: '#38BDF8' },
+  { label: 'Hembuskan', duration: PHASE_DURATION, color: '#FB923C' },
+  { label: 'Tahan / Jeda', duration: PHASE_DURATION, color: '#A78BFA' }
 ];
 
 const MAX_CYCLES = 4;

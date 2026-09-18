@@ -1,0 +1,116 @@
+[
+  {
+    "id": "dr-maya-chen",
+    "nama": "dr. Maya Chen, Sp.KJ",
+    "gelar": "Spesialis Kedokteran Jiwa (Psikiater)",
+    "instansi": "RS Pusat Jiwa & Sanatorium Harmoni Jakarta",
+    "pengalaman": "12 Tahun Praktik",
+    "rating": 4.9,
+    "review_count": 142,
+    "gambar": "https://images.unsplash.com/photo-1594824813572-c0ff0f37c35f?auto=format&fit=crop&w=600&q=80",
+    "fallback_gambar": "/assets/Images/artikel/hutan21.webp",
+    "deskripsi": "Berpengalaman mendampingi individu dalam mengatasi gangguan kecemasan berat, depresi klinis, serta manajemen stres kerja dengan pendekatan empati medis.",
+    "bidang": [
+      "Kecemasan (Anxiety)",
+      "Depresi Klinis",
+      "Manajemen Burnout",
+      "Regulasi Mood"
+    ],
+    "kontak_wa": "https://wa.me/6281234567890?text=Halo%20dr.%20Maya%20Chen,%20saya%20ingin%20menjadwalkan%20sesi%20konsultasi%20melalui%20BerTeduh."
+  },
+  {
+    "id": "andika-pratama",
+    "nama": "Andika Pratama, M.Psi., Psikolog",
+    "gelar": "Psikolog Klinis Dewasa (SIPP No. 2021-084)",
+    "instansi": "Pusat Pemulihan Psikologis Nusantara & Klinik Jiwa Sehat",
+    "pengalaman": "8 Tahun Praktik",
+    "rating": 4.9,
+    "review_count": 118,
+    "gambar": "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=600&q=80",
+    "fallback_gambar": "/assets/Images/artikel/hutan22.webp",
+    "deskripsi": "Menggunakan pendekatan Cognitive Behavioral Therapy (CBT) dan Mindfulness untuk membantu kamu mengurai overthinking, krisis kepercayaan diri, dan relasi interpersonal.",
+    "bidang": [
+      "Overthinking & Stres",
+      "Krisis Identitas / Quarter-life",
+      "Hubungan & Komunikasi",
+      "Terapi CBT"
+    ],
+    "kontak_wa": "https://wa.me/6281234567890?text=Halo%20Mas%20Andika,%20saya%20ingin%20konsultasi%20psikologi%20melalui%20BerTeduh."
+  },
+  {
+    "id": "sarah-amalia",
+    "nama": "Sarah Amalia, M.Psi., Psikolog",
+    "gelar": "Psikolog Klinis & Terapi Trauma (EMDR Trained)",
+    "instansi": "Lembaga Konseling Jiwa Harapan Bandung",
+    "pengalaman": "10 Tahun Praktik",
+    "rating": 5.0,
+    "review_count": 96,
+    "gambar": "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=600&q=80",
+    "fallback_gambar": "/assets/Images/artikel/hutan23.webp",
+    "deskripsi": "Fokus pada pemulihan luka emosional masa lalu, inner child healing, serta penanganan kecemasan berlebih akibat trauma dan kehilangan.",
+    "bidang": [
+      "Pemulihan Trauma",
+      "Inner Child Healing",
+      "Kecemasan Sosial",
+      "Self-Compassion"
+    ],
+    "kontak_wa": "https://wa.me/6281234567890?text=Halo%20Mbak%20Sarah,%20saya%20ingin%20menjadwalkan%20sesi%20konsultasi%20melalui%20BerTeduh."
+  },
+  {
+    "id": "dr-farhan-malik",
+    "nama": "dr. Farhan Malik, Sp.KJ",
+    "gelar": "Psikiater & Konselor Kesehatan Holistik",
+    "instansi": "Klinik Utama Sehat Mental Surabaya",
+    "pengalaman": "14 Tahun Praktik",
+    "rating": 4.8,
+    "review_count": 165,
+    "gambar": "https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&w=600&q=80",
+    "fallback_gambar": "/assets/Images/artikel/hutan24.webp",
+    "deskripsi": "Membantu individu dengan gangguan tidur kronis (insomnia), gangguan psikosomatis, serta regulasi emosi akibat tekanan pekerjaan yang tinggi.",
+    "bidang": [
+      "Insomnia & Gangguan Tidur",
+      "Psikosomatis",
+      "Stres Kerja & Eksekutif",
+      "Farmakoterapi & Konseling"
+    ],
+    "kontak_wa": "https://wa.me/6281234567890?text=Halo%20dr.%20Farhan,%20saya%20ingin%20konsultasi%20melalui%20BerTeduh."
+  },
+  {
+    "id": "nadia-paramita",
+    "nama": "Nadia Paramita, M.Psi., Psikolog",
+    "gelar": "Psikolog Keluarga & Pasangan",
+    "instansi": "Bina Asih Family Wellness Center Yogyakarta",
+    "pengalaman": "7 Tahun Praktik",
+    "rating": 4.9,
+    "review_count": 89,
+    "gambar": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80",
+    "fallback_gambar": "/assets/Images/artikel/hutan25.webp",
+    "deskripsi": "Mendampingi pasangan dan keluarga dalam mengatasi konflik komunikasi, parenting fatigue, serta pencarian ruang aman di dalam dinamika rumah tangga.",
+    "bidang": [
+      "Konseling Pasangan",
+      "Parenting & Family Stress",
+      "Komunikasi Asertif",
+      "Resolusi Konflik"
+    ],
+    "kontak_wa": "https://wa.me/6281234567890?text=Halo%20Mbak%20Nadia,%20saya%20ingin%20menjadwalkan%20konseling%20melalui%20BerTeduh."
+  },
+  {
+    "id": "reza-rahardian",
+    "nama": "Reza Rahadian, M.Psi., Psikolog",
+    "gelar": "Psikolog Klinis Remaja & Dewasa Muda",
+    "instansi": "Youth Mental Space Indonesia",
+    "pengalaman": "6 Tahun Praktik",
+    "rating": 4.9,
+    "review_count": 76,
+    "gambar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80",
+    "fallback_gambar": "/assets/Images/artikel/hutan26.webp",
+    "deskripsi": "Pendekatan santai dan suportif untuk mahasiswa atau pekerja muda yang merasa cemas dengan masa depan, kesepian, atau tantangan akademik dan karir.",
+    "bidang": [
+      "Kecemasan Karir & Akademik",
+      "Kesepian & Isolasi Diri",
+      "Pengembangan Diri",
+      "Mindfulness Therapy"
+    ],
+    "kontak_wa": "https://wa.me/6281234567890?text=Halo%20Mas%20Reza,%20saya%20ingin%20konsultasi%20melalui%20BerTeduh."
+  }
+]

@@ -19,7 +19,6 @@
     "/component/questions/q9.html",
     "/component/questions/q10.html",
     "/component/questions/q11.html",
-    "/component/questions/q12.html",
   ];
 
   // Bobot nilai untuk setiap kategori jawaban

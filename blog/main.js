@@ -1,26 +1,170 @@
+/**
+ * blog/main.js — Menangani Halaman Detail Artikel
+ */
 let dataArtikel = [];
 
 async function loadArtikel() {
-  try {
-    const res = await fetch('../data/artikel.json');
-    dataArtikel = await res.json();
+  if (typeof loadNavigasi === 'function') {
+    try { await loadNavigasi(); } catch(e) {}
+  }
+  const container = document.querySelector('#detail-container');
+  if (!container) return;
+
+  // Coba beberapa kemungkinan path untuk fetching artikel.json
+  const paths = [
+    '/data/artikel.json',
+    '../data/artikel.json',
+    '../../data/artikel.json',
+    'data/artikel.json'
+  ];
+
+  let loaded = false;
+  for (const p of paths) {
+    try {
+      const res = await fetch(p);
+      if (res.ok) {
+        dataArtikel = await res.json();
+        loaded = true;
+        break;
+      }
+    } catch (e) {
+      // Coba path berikutnya
+    }
+  }
+
+  if (loaded && dataArtikel.length > 0) {
     init();
-  } catch (err) {
-    console.error('Gagal load data artikel:', err);
-    document.querySelector('#detail-container').innerHTML = `<p>Gagal memuat data artikel.</p>`;
+  } else {
+    container.innerHTML = `
+      <div class="text-center py-16">
+        <div class="w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center text-2xl bg-white/5 border border-white/10 text-[#2DD4A8]">⚠️</div>
+        <h2 class="text-xl font-bold text-white mb-2" style="font-family:'Playfair Display',serif;">Gagal Memuat Data Artikel</h2>
+        <p class="text-sm text-[#8A93A8] mb-6 max-w-md mx-auto">Kami tidak dapat mengambil konten artikel saat ini. Silakan periksa koneksi atau coba kembali.</p>
+        <a href="/blog.html" class="inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-xs font-bold bg-[#2DD4A8] text-[#0D1220] hover:bg-[#25b892] transition-colors">
+          &larr; Kembali ke Blog
+        </a>
+      </div>
+    `;
   }
 }
 
 function init() {
+  const container = document.querySelector('#detail-container');
+  if (!container) return;
+
   const params = new URLSearchParams(window.location.search);
   const artikelId = params.get('id');
+
+  if (!artikelId) {
+    container.innerHTML = `
+      <div class="text-center py-16">
+        <h2 class="text-2xl font-bold text-white mb-3" style="font-family:'Playfair Display',serif;">Artikel Tidak Dipilih</h2>
+        <p class="text-sm text-[#8A93A8] mb-6">Silakan pilih artikel yang ingin kamu baca dari daftar artikel kami.</p>
+        <a href="/blog.html" class="inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-xs font-bold bg-[#2DD4A8] text-[#0D1220] hover:bg-[#25b892] transition-colors">
+          Lihat Semua Artikel &rarr;
+        </a>
+      </div>
+    `;
+    return;
+  }
+
   const artikel = dataArtikel.find(item => String(item.id) === String(artikelId));
 
   if (artikel) {
     renderDetailArtikel(artikel);
   } else {
-    document.querySelector('#detail-container').innerHTML = `<p>Artikel tidak ditemukan.</p>`;
+    container.innerHTML = `
+      <div class="text-center py-16">
+        <div class="w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center text-2xl bg-white/5 border border-white/10 text-[#8A93A8]">🔍</div>
+        <h2 class="text-2xl font-bold text-white mb-2" style="font-family:'Playfair Display',serif;">Artikel Tidak Ditemukan</h2>
+        <p class="text-sm text-[#8A93A8] mb-6">Artikel yang kamu cari tidak tersedia atau mungkin sudah dipindahkan.</p>
+        <a href="/blog.html" class="inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-xs font-bold bg-[#2DD4A8] text-[#0D1220] hover:bg-[#25b892] transition-colors">
+          &larr; Kembali ke Daftar Artikel
+        </a>
+      </div>
+    `;
   }
 }
 
-loadArtikel();
+function renderDetailArtikel(artikel) {
+  const container = document.querySelector('#detail-container');
+  if (!container) return;
+
+  // 1. Update Page Title
+  document.title = `${artikel.judul} — BerTeduh`;
+
+  // 2. Ganti Background Gambar Utama secara dinamis sesuai gambar artikel
+  const bgImg = document.getElementById('detail-bg-img');
+  if (bgImg && artikel.gambar) {
+    bgImg.src = artikel.gambar;
+  }
+
+  // 3. Render paragraphs
+  const kontenHtml = Array.isArray(artikel.konten)
+    ? artikel.konten.map(p => `<p class="text-[#E2E8F0] text-base sm:text-lg lg:text-xl leading-relaxed sm:leading-loose mb-6 font-normal">${p}</p>`).join('')
+    : `<p class="text-[#E2E8F0] text-base sm:text-lg lg:text-xl leading-relaxed sm:leading-loose mb-6">${artikel.konten || artikel.ringkasan}</p>`;
+
+  // 4. Data langsung menempel di depan background (tanpa kartu penutup tebal)
+  container.innerHTML = `
+    <!-- Top Navigation Breadcrumb -->
+    <div class="flex items-center justify-between gap-4 mb-8 pb-4 border-b border-white/15">
+      <a href="/blog.html" class="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-[#2DD4A8] hover:text-[#25b892] transition-colors group">
+        <span class="group-hover:-translate-x-1 transition-transform">&larr;</span> Kembali ke Semua Artikel
+      </a>
+      <div class="flex items-center gap-3">
+        <span class="px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-[#2DD4A8]/20 text-[#2DD4A8] border border-[#2DD4A8]/40 backdrop-blur-md">
+          ${artikel.kategori}
+        </span>
+        <span class="text-xs text-[#CBD5E1] hidden sm:inline">🕒 ${artikel.waktu_baca}</span>
+      </div>
+    </div>
+
+    <!-- Article Header -->
+    <div class="mb-10">
+      <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight drop-shadow-md" style="font-family:'Playfair Display',serif;">
+        ${artikel.judul}
+      </h1>
+      <p class="text-xs sm:text-sm text-[#CBD5E1] flex items-center gap-3">
+        <span>🕒 ${artikel.waktu_baca}</span>
+        <span>•</span>
+        <span>Ditinjau secara Medis & Psikologi oleh Tim BerTeduh</span>
+      </p>
+    </div>
+
+    <!-- Quote / Ringkasan Highlight -->
+    <div class="p-6 sm:p-8 rounded-2xl mb-12 border-l-4 border-[#2DD4A8] backdrop-blur-md shadow-2xl"
+         style="background:rgba(13,18,32,0.6); border-top:1px solid rgba(255,255,255,0.1); border-right:1px solid rgba(255,255,255,0.1); border-bottom:1px solid rgba(255,255,255,0.1);">
+      <p class="text-lg sm:text-xl text-[#F8FAFC] italic font-serif leading-relaxed">
+        "${artikel.ringkasan}"
+      </p>
+    </div>
+
+    <!-- Main Content Paragraphs (Directly on Background) -->
+    <div class="article-body max-w-none text-[#E2E8F0] space-y-6">
+      ${kontenHtml}
+    </div>
+
+    <!-- Author & Footer Call to Action -->
+    <div class="mt-16 pt-8 border-t border-white/15 flex flex-col sm:flex-row items-center justify-between gap-6">
+      <div class="flex items-center gap-3.5 w-full sm:w-auto">
+        <div class="w-12 h-12 rounded-2xl bg-[#2DD4A8]/20 border border-[#2DD4A8]/40 text-[#2DD4A8] flex items-center justify-center font-bold text-xl shrink-0 shadow-md">
+          🌿
+        </div>
+        <div>
+          <p class="text-xs text-[#94A3B8] uppercase tracking-wider font-semibold">Ditinjau oleh</p>
+          <p class="text-sm font-bold text-white">Care Team BerTeduh</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-3 w-full sm:w-auto justify-end">
+        <a href="/blog.html" class="w-full sm:w-auto text-center px-7 py-3 rounded-full text-xs font-bold text-[#0D1220] bg-[#2DD4A8] hover:bg-[#25b892] hover:scale-105 transition shadow-xl">
+          Jelajahi Artikel Lainnya &rarr;
+        </a>
+      </div>
+    </div>
+  `;
+}
+
+// Jalankan ketika DOM siap
+document.addEventListener('DOMContentLoaded', () => {
+  loadArtikel();
+});

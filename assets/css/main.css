@@ -25,8 +25,15 @@ body {
     font-family: 'Inter', system-ui, sans-serif;
 }
 
-/* Import font dari gugel*/
+
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
+
+/* Contoh penerapan ikon setelah di-import */
+.icon-home {
+    /* Font Awesome tetap bisa dipanggil seperti biasa */
+}
 
 h1, h2, h3, .font-display {
     font-family: 'Playfair Display', Georgia, serif;
@@ -39,7 +46,9 @@ p, span, li, a {
 
 /* ─── TILE CARD ─── */
 .tile {
-    background: var(--bg-card);
+    background: rgba(21, 27, 46, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border: 1px solid var(--border-subtle);
     color: var(--text-heading);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -75,7 +84,6 @@ p, span, li, a {
 }
 .option-btn:hover {
     transform: scale(1.02);
-    border-color: var(--accent) !important;
     background: var(--accent-bg) !important;
     color: var(--text-heading) !important;
 }

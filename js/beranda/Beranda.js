@@ -136,15 +136,27 @@
     if (!gridEl) return;
 
     try {
-      // Fetch file JSON
-      const res = await fetch("../../data/artikel.json");
-      const semuaArtikel = await res.json();
-      
+      // Fetch file JSON dengan fallback path
+      let semuaArtikel = [];
+      const paths = ["/data/artikel.json", "../../data/artikel.json", "data/artikel.json"];
+      for (const p of paths) {
+        try {
+          const res = await fetch(p);
+          if (res.ok) {
+            semuaArtikel = await res.json();
+            break;
+          }
+        } catch (e) {}
+      }
+
       // Saring artikel: Hanya ambil artikel yang field "kondisi"-nya cocok
       const artikelRelevan = semuaArtikel.filter((a) => a.kondisi === kondisi);
       
+      // Batasi maksimal 5 card yang dirender di beranda
+      const artikelDitampilkan = artikelRelevan.slice(0, 5);
+      
       // Render artikel ke dalam grid HTML menggunakan map() dan string template
-      gridEl.innerHTML = artikelRelevan.map(renderArtikelCard).join("");
+      gridEl.innerHTML = artikelDitampilkan.map(renderArtikelCard).join("");
     } catch (err) {
       console.error("Gagal memuat artikel:", err);
       // Fallback pesan jika gagal fetch data

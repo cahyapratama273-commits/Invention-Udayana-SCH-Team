@@ -19,13 +19,26 @@
   if (!gridEl) return;
 
   try {
-    var res = await fetch("../../data/artikel.json");
-    if (!res.ok) throw new Error("HTTP " + res.status);
-    var semuaArtikel = await res.json();
+    // Coba fetch dengan berbagai path fallback
+    var semuaArtikel = [];
+    var paths = ["/data/artikel.json", "../../data/artikel.json", "../data/artikel.json", "data/artikel.json"];
+    for (var p of paths) {
+      try {
+        var r = await fetch(p);
+        if (r.ok) {
+          semuaArtikel = await r.json();
+          break;
+        }
+      } catch (e) {}
+    }
+    if (semuaArtikel.length === 0) throw new Error("Gagal memuat artikel dari data source");
 
     // -- State
     var currentFilter = "Semua";
     var searchQuery = "";
+    var currentPage = 1;
+    var ITEMS_PER_PAGE = 8;
+    var paginationEl = document.getElementById("blog-pagination");
     
     // -- Extract unique categories and sort
     var categories = [...new Set(semuaArtikel.map(a => a.kategori))].sort();
@@ -64,13 +77,11 @@
       if (!featuredArticle) return;
 
       var html = `
-        <a href="/blog/?id=${featuredArticle.id}" class="group block rounded-2xl overflow-hidden border border-[rgba(255,255,255,0.08)] hover:border-[#2DD4A8] transition-colors duration-300" style="background:#151B2E; text-decoration:none;">
+        <a href="/blog/?id=${featuredArticle.id}" class="group block rounded-2xl overflow-hidden border border-[rgba(255,255,255,0.1)] hover:border-[#2DD4A8] backdrop-blur-md transition-all duration-300 shadow-xl hover:shadow-2xl" style="background:rgba(21,27,46,0.6); text-decoration:none;">
           <div class="flex flex-col md:flex-row h-full">
-            <div class="w-full md:w-1/2 overflow-hidden aspect-[16/9] md:aspect-[4/3]" style="background:#1A2138;">
-              <!-- Placeholder background #1A2138 -->
+            <div class="w-full md:w-1/2 overflow-hidden aspect-[16/9] md:aspect-[4/3]" style="background:rgba(26,33,56,0.5);">
               <div class="w-full h-full relative">
-                <!-- Image dari dataArtikel -->
-                <img src="${featuredArticle.gambar}" alt="${featuredArticle.judul}" class="w-full h-full object-cover" onerror="this.style.display='none';">
+                <img src="${featuredArticle.gambar}" alt="${featuredArticle.judul}" class="w-full h-full object-cover" onerror="this.src='/assets/Images/placeholder.svg';">
               </div>
             </div>
             <div class="w-full md:w-1/2 p-5 sm:p-8 md:p-10 lg:p-12 flex flex-col justify-center">
@@ -89,14 +100,13 @@
       featuredEl.innerHTML = html;
     }
 
-    // -- Render Filter Tabs (now in a panel as pills)
+    // -- Render Filter Tabs (in a panel as pills)
     function renderFilters() {
       if (!filterEl) return;
       var html = categories.map(cat => {
         var isActive = cat === currentFilter;
-        // Pill style for grid layout
         var activeClass = isActive 
-          ? 'bg-[#2DD4A8] border-[#2DD4A8] text-[#0D1220]' 
+          ? 'bg-[#2DD4A8] border-[#2DD4A8] text-[#0D1220] font-bold shadow-md' 
           : 'bg-transparent border-[rgba(255,255,255,0.08)] text-[#8A93A8] hover:border-[#2DD4A8] hover:text-[#2DD4A8]';
         
         return `<button class="category-tab px-4 py-2 rounded-full border transition whitespace-nowrap text-sm font-medium ${activeClass}" data-cat="${cat}">${cat}</button>`;
@@ -104,7 +114,82 @@
       filterEl.innerHTML = html;
     }
 
-    // -- Render Grid Articles based on Filter & Search
+    // -- Render Pagination Controls
+    function renderPagination(totalItems) {
+      if (!paginationEl) return;
+      var totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
+
+      if (totalPages <= 1) {
+        paginationEl.innerHTML = "";
+        return;
+      }
+
+      var html = [];
+
+      // Prev Button
+      var prevDisabled = currentPage === 1 ? 'opacity-40 cursor-not-allowed pointer-events-none' : 'hover:border-[#2DD4A8] hover:text-[#2DD4A8]';
+      html.push(`
+        <button class="page-nav-btn px-4 py-2 rounded-full border border-white/10 text-xs sm:text-sm font-semibold transition backdrop-blur-md ${prevDisabled}"
+                style="background:rgba(21,27,46,0.7); color:#F5F5F5;"
+                data-page="${currentPage - 1}">
+          &larr; sebelumnya
+        </button>
+      `);
+
+      // Page Numbers
+      for (var p = 1; p <= totalPages; p++) {
+        var isCurrent = p === currentPage;
+        if (isCurrent) {
+          html.push(`
+            <button class="page-num-btn w-9 h-9 sm:w-10 sm:h-10 rounded-full font-bold text-xs sm:text-sm shadow-lg transition"
+                    style="background:#2DD4A8; color:#0D1220; box-shadow:0 0 15px rgba(45,212,168,0.3);"
+                    data-page="${p}">
+              ${p}
+            </button>
+          `);
+        } else {
+          html.push(`
+            <button class="page-num-btn w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-white/10 text-xs sm:text-sm font-medium transition hover:border-[#2DD4A8] hover:text-[#2DD4A8] backdrop-blur-md"
+                    style="background:rgba(21,27,46,0.7); color:#8A93A8;"
+                    data-page="${p}">
+              ${p}
+            </button>
+          `);
+        }
+      }
+
+      // Next Button
+      var nextDisabled = currentPage === totalPages ? 'opacity-40 cursor-not-allowed pointer-events-none' : 'hover:border-[#2DD4A8] hover:text-[#2DD4A8]';
+      html.push(`
+        <button class="page-nav-btn px-4 py-2 rounded-full border border-white/10 text-xs sm:text-sm font-semibold transition backdrop-blur-md ${nextDisabled}"
+                style="background:rgba(21,27,46,0.7); color:#F5F5F5;"
+                data-page="${currentPage + 1}">
+          Selanjutnya &rarr;
+        </button>
+      `);
+
+      paginationEl.innerHTML = html.join("");
+
+      // Bind events to pagination buttons
+      paginationEl.querySelectorAll("button[data-page]").forEach(btn => {
+        btn.addEventListener("click", function () {
+          var targetPage = parseInt(this.getAttribute("data-page"), 10);
+          if (targetPage >= 1 && targetPage <= totalPages && targetPage !== currentPage) {
+            currentPage = targetPage;
+            renderArticles();
+            // Scroll ke atas grid dengan mulus
+            var scrollTarget = document.getElementById("blog-artikel-grid");
+            if (scrollTarget) {
+              const yOffset = -120;
+              const y = scrollTarget.getBoundingClientRect().top + window.pageYOffset + yOffset;
+              window.scrollTo({ top: y, behavior: 'smooth' });
+            }
+          }
+        });
+      });
+    }
+
+    // -- Render Grid Articles based on Filter, Search, and Pagination (8 per page)
     function renderArticles() {
       if (!gridEl) return;
       
@@ -121,16 +206,27 @@
           a.ringkasan.toLowerCase().includes(q)
         );
       }
+
+      var totalCount = filtered.length;
+      var totalPages = Math.max(1, Math.ceil(totalCount / ITEMS_PER_PAGE));
+      if (currentPage > totalPages) currentPage = 1;
+
+      // Slice 8 items for the current page
+      var startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+      var pageItems = filtered.slice(startIndex, startIndex + ITEMS_PER_PAGE);
         
       if (typeof renderArtikelCard === "function") {
-        if (filtered.length > 0) {
-          gridEl.innerHTML = filtered.map(renderArtikelCard).join("");
+        if (pageItems.length > 0) {
+          gridEl.innerHTML = pageItems.map(renderArtikelCard).join("");
         } else {
           gridEl.innerHTML = '<div class="col-span-full py-16 text-center"><p style="color:#8A93A8;" class="text-base">Tidak ada artikel yang cocok dengan pencarian / filter.</p></div>';
         }
       } else {
         console.error("Fungsi renderArtikelCard tidak ditemukan.");
       }
+
+      // Render pagination
+      renderPagination(totalCount);
     }
 
     // -- Events bindings
@@ -140,6 +236,7 @@
         if (!tab) return;
         
         currentFilter = tab.getAttribute('data-cat');
+        currentPage = 1; // Reset ke page 1
         renderFilters();
         renderArticles();
       });
@@ -148,6 +245,7 @@
     if (searchInput) {
       searchInput.addEventListener('input', function(e) {
         searchQuery = e.target.value;
+        currentPage = 1; // Reset ke page 1
         renderArticles();
       });
     }

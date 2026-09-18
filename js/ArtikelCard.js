@@ -3,8 +3,8 @@
  */
 function renderArtikelCard(artikel) {
   return `
-    <a href="/blog/?id=${artikel.id}" class="group flex flex-col sm:flex-row rounded-2xl overflow-hidden border border-[rgba(255,255,255,0.08)] hover:border-[#2DD4A8] transition-colors duration-300" style="background:#151B2E; text-decoration:none;">
-      <div class="w-full sm:w-56 md:w-64 shrink-0 overflow-hidden aspect-[16/9] sm:aspect-auto" style="background:#1A2138;">
+    <a href="/blog/?id=${artikel.id}" class="group flex flex-col sm:flex-row rounded-2xl overflow-hidden border border-[rgba(255,255,255,0.1)] hover:border-[#2DD4A8] backdrop-blur-md transition-all duration-300 shadow-lg hover:shadow-2xl" style="background:rgba(21,27,46,0.6); text-decoration:none;">
+      <div class="w-full sm:w-56 md:w-64 shrink-0 overflow-hidden aspect-[16/9] sm:aspect-auto" style="background:rgba(26,33,56,0.5);">
         <img src="${artikel.gambar}" alt="${artikel.judul}" loading="lazy" 
              class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
              onerror="this.onerror=null; this.src='/assets/Images/placeholder.svg';" />
