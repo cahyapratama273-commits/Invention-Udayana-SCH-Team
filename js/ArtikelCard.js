@@ -1,9 +1,17 @@
 /**
     Komponen Kartu Artikel (Reusable)
  */
+function createSlug(text) {
+  return text ? text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') : '';
+}
+
 function renderArtikelCard(artikel) {
+  const catSlug = createSlug(artikel.kategori);
+  const titleSlug = createSlug(artikel.judul);
+  const artikelUrl = `/artikel/?id=${artikel.id}&kategori=${catSlug}&slug=${titleSlug}`;
+
   return `
-    <a href="/blog/?id=${artikel.id}" class="group flex flex-col sm:flex-row rounded-2xl overflow-hidden border border-[rgba(255,255,255,0.1)] hover:border-[#2DD4A8] backdrop-blur-md transition-all duration-300 shadow-lg hover:shadow-2xl" style="background:rgba(21,27,46,0.6); text-decoration:none;">
+    <a href="${artikelUrl}" class="group flex flex-col sm:flex-row rounded-2xl overflow-hidden border border-[rgba(255,255,255,0.1)] hover:border-[#2DD4A8] backdrop-blur-md transition-all duration-300 shadow-lg hover:shadow-2xl" style="background:rgba(21,27,46,0.6); text-decoration:none;">
       <div class="w-full sm:w-56 md:w-64 shrink-0 overflow-hidden aspect-[16/9] sm:aspect-auto" style="background:rgba(26,33,56,0.5);">
         <img src="${artikel.gambar}" alt="${artikel.judul}" loading="lazy" 
              class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"

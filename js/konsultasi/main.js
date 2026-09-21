@@ -72,6 +72,18 @@
 
     btnKlinis.addEventListener("click", () => activateTab("klinis"));
     btnAi.addEventListener("click", () => activateTab("ai"));
+
+    // Check hash URL (e.g. #section-ai or #tab-ai)
+    const hash = window.location.hash.toLowerCase();
+    if (hash.includes("ai")) {
+      activateTab("ai");
+      setTimeout(() => {
+        const target = document.getElementById("chat-ai-view") || document.getElementById("layanan-section");
+        if (target) {
+          target.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 300);
+    }
   }
 
   // ─── 2. FETCH & RENDER KONSULTAN ─────────────────────────────

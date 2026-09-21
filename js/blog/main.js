@@ -70,14 +70,23 @@
       return candidates[randomIndex] || semuaArtikel[0];
     }
 
+    // -- Helper: Slug generator
+    function createSlug(text) {
+      return text ? text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') : '';
+    }
+
     // -- Render Featured Card
     function renderFeatured() {
       if (!featuredEl) return;
       var featuredArticle = getFeaturedArtikel();
       if (!featuredArticle) return;
 
+      var catSlug = createSlug(featuredArticle.kategori);
+      var titleSlug = createSlug(featuredArticle.judul);
+      var featuredUrl = `/artikel/?id=${featuredArticle.id}&kategori=${catSlug}&slug=${titleSlug}`;
+
       var html = `
-        <a href="/blog/?id=${featuredArticle.id}" class="group block rounded-2xl overflow-hidden border border-[rgba(255,255,255,0.1)] hover:border-[#2DD4A8] backdrop-blur-md transition-all duration-300 shadow-xl hover:shadow-2xl" style="background:rgba(21,27,46,0.6); text-decoration:none;">
+        <a href="${featuredUrl}" class="group block rounded-2xl overflow-hidden border border-[rgba(255,255,255,0.1)] hover:border-[#2DD4A8] backdrop-blur-md transition-all duration-300 shadow-xl hover:shadow-2xl" style="background:rgba(21,27,46,0.6); text-decoration:none;">
           <div class="flex flex-col md:flex-row h-full">
             <div class="w-full md:w-1/2 overflow-hidden aspect-[16/9] md:aspect-[4/3]" style="background:rgba(26,33,56,0.5);">
               <div class="w-full h-full relative">
