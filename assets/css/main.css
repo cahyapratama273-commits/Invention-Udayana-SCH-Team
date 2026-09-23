@@ -88,4 +88,331 @@ p, span, li, a {
     color: var(--text-heading) !important;
 }
 
+/* ─── CUSTOM VIDEO PLAYER STYLES ─── */
+.video-player-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    overflow: hidden;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.video-player-container video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Control Overlay */
+.player-controls-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.1) 40%, rgba(0,0,0,0.1) 60%, rgba(0,0,0,0.85) 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 12px 14px;
+    z-index: 20;
+    transition: opacity 0.3s ease;
+}
+
+@media (min-width: 640px) {
+    .player-controls-overlay {
+        padding: 16px 20px;
+    }
+}
+
+.player-controls-overlay.control-hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Control Buttons Touch Targets */
+.player-btn {
+    min-width: 44px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #FFFFFF;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.player-btn:hover {
+    background: rgba(45, 212, 168, 0.25);
+    border-color: rgba(45, 212, 168, 0.6);
+    color: #2DD4A8;
+    transform: scale(1.06);
+}
+
+.player-btn:active {
+    transform: scale(0.95);
+}
+
+.player-btn.active {
+    background: rgba(45, 212, 168, 0.35);
+    border-color: #2DD4A8;
+    color: #2DD4A8;
+}
+
+.player-btn.disabled, .player-btn:disabled {
+    opacity: 0.35;
+    pointer-events: none;
+    cursor: not-allowed;
+}
+
+/* Custom Sliders */
+input[type="range"].player-seekbar {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 6px;
+    border-radius: 9999px;
+    background: linear-gradient(to right, #2DD4A8 0%, rgba(255, 255, 255, 0.2) 0%);
+    outline: none;
+    cursor: pointer;
+    transition: height 0.15s ease;
+}
+
+input[type="range"].player-seekbar:hover {
+    height: 8px;
+}
+
+input[type="range"].player-seekbar::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #2DD4A8;
+    border: 2px solid #FFFFFF;
+    box-shadow: 0 0 10px rgba(45, 212, 168, 0.8);
+    cursor: pointer;
+    transition: transform 0.15s ease;
+}
+
+input[type="range"].player-seekbar::-webkit-slider-thumb:hover {
+    transform: scale(1.3);
+}
+
+input[type="range"].player-seekbar::-moz-range-thumb {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #2DD4A8;
+    border: 2px solid #FFFFFF;
+    box-shadow: 0 0 10px rgba(45, 212, 168, 0.8);
+    cursor: pointer;
+}
+
+/* Vertical Sliders - Clean Floating Bar without background box */
+.vertical-slider-panel {
+    position: absolute;
+    z-index: 35;
+    background: transparent !important;
+    border: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    padding: 4px 0 !important;
+    width: 32px !important;
+    box-shadow: none !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.vertical-slider-panel.hidden-panel {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-8px);
+}
+
+.vertical-slider-panel img {
+    filter: drop-shadow(0 2px 6px rgba(0,0,0,0.9));
+}
+
+/* Vertical Slider Input Container */
+.v-slider-wrapper {
+    height: 96px;
+    width: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+input[type="range"].v-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 90px;
+    height: 5px;
+    border-radius: 9999px;
+    background: linear-gradient(to right, #2DD4A8 50%, rgba(255, 255, 255, 0.25) 50%);
+    outline: none;
+    cursor: pointer;
+    transform: rotate(-90deg);
+    transform-origin: center center;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
+}
+
+input[type="range"].v-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #2DD4A8;
+    border: 2px solid #FFFFFF;
+    box-shadow: 0 0 8px rgba(45, 212, 168, 0.9);
+    cursor: pointer;
+}
+
+input[type="range"].v-slider::-moz-range-thumb {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #2DD4A8;
+    border: 2px solid #FFFFFF;
+    box-shadow: 0 0 8px rgba(45, 212, 168, 0.9);
+    cursor: pointer;
+}
+
+/* Fullscreen Video Player Styles */
+.video-player-container:fullscreen {
+    width: 100vw !important;
+    height: 100vh !important;
+    max-width: 100vw !important;
+    max-height: 100vh !important;
+    border-radius: 0 !important;
+    border: none !important;
+    background: #000000 !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.video-player-container:-webkit-full-screen {
+    width: 100vw !important;
+    height: 100vh !important;
+    max-width: 100vw !important;
+    max-height: 100vh !important;
+    border-radius: 0 !important;
+    border: none !important;
+    background: #000000 !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.video-player-container:fullscreen video,
+.video-player-container:-webkit-full-screen video {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+}
+
+.video-player-container:fullscreen .player-controls-overlay,
+.video-player-container:-webkit-full-screen .player-controls-overlay {
+    padding: 24px 32px;
+}
+
+/* Center 5s Skip Buttons */
+.player-center-btn {
+    width: 48px;
+    height: 48px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    background: rgba(13, 18, 32, 0.65);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #2DD4A8;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s ease, border-color 0.2s ease;
+}
+
+.player-center-btn:hover {
+    background: rgba(45, 212, 168, 0.2);
+    border-color: rgba(45, 212, 168, 0.6);
+    transform: scale(1.12);
+}
+
+.player-center-btn:active {
+    transform: scale(0.92);
+}
+
+/* VLC Touch HUD Indicators (Slim, compact vertical pills) */
+.vlc-indicator-hud {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%) scale(0.92);
+    z-index: 45;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    width: 38px !important;
+    max-width: 38px !important;
+    min-width: 38px !important;
+    padding: 10px 4px !important;
+    background: rgba(13, 18, 32, 0.75) !important;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: 9999px !important;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    box-sizing: border-box;
+}
+
+.vlc-indicator-hud.vlc-show {
+    opacity: 1 !important;
+    transform: translateY(-50%) scale(1) !important;
+}
+
+.vlc-indicator-track {
+    width: 5px !important;
+    height: 68px !important;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 9999px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.vlc-indicator-fill {
+    width: 100%;
+    background: #2DD4A8;
+    border-radius: 9999px;
+    transition: height 0.05s linear;
+}
+
+.vlc-indicator-text {
+    font-size: 10px !important;
+    line-height: 1 !important;
+    font-family: monospace, system-ui, sans-serif;
+    color: #FFFFFF;
+    font-weight: 700;
+}
+
+
+
+
 

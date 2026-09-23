@@ -14,7 +14,6 @@
         <a href="/blog.html"        data-nav="blog"       class="nav-link px-4 py-2 rounded-full text-sm font-medium text-[#8A93A8] hover:text-[#2DD4A8] hover:bg-[rgba(45,212,168,0.12)] transition">Blog</a>
         <a href="/konsultasi.html"  data-nav="konsultasi" class="nav-link px-4 py-2 rounded-full text-sm font-medium text-[#8A93A8] hover:text-[#2DD4A8] hover:bg-[rgba(45,212,168,0.12)] transition">Konsultasi</a>
         <a href="/relaksasi.html"   data-nav="relaksasi"  class="nav-link px-4 py-2 rounded-full text-sm font-medium text-[#8A93A8] hover:text-[#2DD4A8] hover:bg-[rgba(45,212,168,0.12)] transition">Relaksasi</a>
-        <a href="/faqs.html"        data-nav="faqs"       class="nav-link ml-1 px-4 py-2 rounded-full text-sm font-medium text-[#8A93A8] hover:text-[#2DD4A8] hover:bg-[rgba(45,212,168,0.12)] transition">FAQs</a>
       </div>
 
       <!-- tombol menu krabby patty -->
@@ -31,7 +30,6 @@
       <a href="/blog.html"        data-nav="blog"       class="nav-link px-6 py-3 text-sm font-medium transition" style="color:#8A93A8;">Blog</a>
       <a href="/konsultasi.html"  data-nav="konsultasi" class="nav-link px-6 py-3 text-sm font-medium transition" style="color:#8A93A8;">Konsultasi</a>
       <a href="/relaksasi.html"   data-nav="relaksasi"  class="nav-link px-6 py-3 text-sm font-medium transition" style="color:#8A93A8;">Relaksasi</a>
-      <a href="/faqs.html"        data-nav="faqs"       class="nav-link px-6 py-3 text-sm font-medium transition" style="color:#8A93A8;">FAQs</a>
     </div>
   </div>
 </nav>
@@ -49,9 +47,7 @@
       document.querySelectorAll(`[data-nav="${current}"]`).forEach((el) => {
         el.style.color = "#2DD4A8";
         el.style.fontWeight = "600";
-        if (el.dataset.nav !== "faqs") {
-          el.style.background = "rgba(45,212,168,0.12)";
-        }
+        el.style.background = "rgba(45,212,168,0.12)";
       });
     }
   })();

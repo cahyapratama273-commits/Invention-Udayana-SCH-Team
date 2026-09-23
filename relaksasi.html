@@ -41,8 +41,7 @@
 
     <!-- SECTION 2: LATIHAN PERNAPASAN (20 Detik dibagi 4 Fase) -->
     <section class="max-w-4xl mx-auto px-6 mb-24 text-center">
-      <div class="rounded-3xl p-6 sm:p-10 md:p-12 backdrop-blur-md border border-white/10 shadow-2xl"
-           style="background:rgba(21,27,46,0.65); box-shadow:0 8px 32px rgba(0,0,0,0.37);">
+      <div class="bg-white/10 backdrop-blur-md rounded-3xl p-6 sm:p-10 md:p-12 border border-white/20 shadow-2xl">
         
         <div class="mb-8">
           <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2" style="font-family:'Playfair Display',serif;">
@@ -81,207 +80,41 @@
       </div>
     </section>
 
-    <!-- SECTION 3: ALUR LANGKAH RELAKSASI TUBUH & PIKIRAN (TIMELINE) -->
+    <!-- SECTION 3: ALUR LANGKAH RELAKSASI TUBUH & PIKIRAN (CARD GRID) -->
     <section class="max-w-5xl mx-auto px-6 pb-28">
       
       <!-- Section Header -->
-      <div class="text-center max-w-2xl mx-auto mb-16">
-        <span class="text-xs font-bold uppercase tracking-widest text-[#2DD4A8] mb-2 block">Panduan Alur Langkah</span>
+      <div class="text-center max-w-2xl mx-auto mb-10">
+        <span class="text-xs font-bold uppercase tracking-widest text-[#2DD4A8] mb-2 block">PANDUAN YOGA</span>
         <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3" style="font-family:'Playfair Display',serif;">
           Alur Relaksasi Tubuh & Pikiran
         </h2>
-        <p class="text-xs sm:text-sm text-[#8A93A8]">
+        <p class="text-xs sm:text-sm text-gray-400 mb-4">
           Ikuti alur gerakan bertahap di bawah ini untuk melepaskan ketegangan otot leher, bahu, dan punggung secara optimal.
         </p>
+
+        <!-- Progress Label (Computed dynamically in JS) -->
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#2DD4A8]/10 border border-[#2DD4A8]/20 text-[#2DD4A8] text-xs font-semibold uppercase tracking-wider">
+          <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+          </svg>
+          <span id="relaksasi-progress-label">Memuat alur...</span>
+        </div>
       </div>
 
-      <!-- Timeline Container -->
-      <div class="relative border-l-2 border-[#2DD4A8]/30 ml-4 sm:ml-8 md:ml-10 pl-6 sm:pl-8 md:pl-10 space-y-12 sm:space-y-14">
-        
-        <!-- Step 1: Child's Pose -->
-        <div class="relative group">
-          <!-- Timeline Number Circle -->
-          <div class="absolute -left-[41px] sm:-left-[49px] md:-left-[57px] top-4 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-[#151B2E] border-2 border-[#2DD4A8] text-[#2DD4A8] font-bold text-xs sm:text-sm flex items-center justify-center shadow-[0_0_15px_rgba(45,212,168,0.25)] transition-transform group-hover:scale-110">
-            01
-          </div>
-
-          <!-- Card Content -->
-          <div class="rounded-2xl p-5 sm:p-7 backdrop-blur-md border border-white/10 hover:border-[#2DD4A8] transition-all duration-300 flex flex-col lg:flex-row gap-6 items-center shadow-xl"
-               style="background:rgba(21,27,46,0.65);">
-            <div class="flex-1">
-              <div class="flex items-center gap-2 mb-2 flex-wrap">
-                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-[#2DD4A8]/15 text-[#2DD4A8] border border-[#2DD4A8]/30">Langkah 1</span>
-                <span class="text-xs text-[#8A93A8]">⏱️ 1 - 2 Menit</span>
-              </div>
-              <h3 class="text-lg sm:text-xl font-bold text-white mb-2" style="font-family:'Playfair Display',serif;">
-                Child's Pose (Balasana) 🕊️
-              </h3>
-              <p class="text-xs sm:text-sm text-[#8A93A8] leading-relaxed mb-4">
-                Duduk bersimpuh di atas tumit, buka lutut selebar pinggul. Bungkukkan badan ke depan hingga dahi menyentuh matras dan julurkan kedua tangan rileks ke depan.
-              </p>
-              <div class="p-3 rounded-xl border border-white/5 bg-white/5 text-xs text-[#D1D5DB] flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                <span>🌿 <strong>Manfaat:</strong> Meredakan ketegangan punggung bawah & lelah mental</span>
-                <span class="text-[#2DD4A8] font-medium">💡 Tarik napas ke punggung</span>
-              </div>
-            </div>
-            <!-- Video Peragaan Frame -->
-            <div class="w-full lg:w-72 xl:w-80 shrink-0 rounded-xl overflow-hidden border border-white/15 aspect-video bg-black/60 relative group-hover:border-[#2DD4A8]/50 transition-colors shadow-lg">
-              <iframe class="w-full h-full object-cover" src="https://www.youtube.com/embed/82CX6WULNA0" title="Bagaimana Seseorang Bisa Memecahkan Puzzle $1.000.000!" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-            </div>
-          </div>
-        </div>
-
-        <!-- Step 2: Cat-Cow Stretch -->
-        <div class="relative group">
-          <div class="absolute -left-[41px] sm:-left-[49px] md:-left-[57px] top-4 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-[#151B2E] border-2 border-[#38BDF8] text-[#38BDF8] font-bold text-xs sm:text-sm flex items-center justify-center shadow-[0_0_15px_rgba(56,189,248,0.25)] transition-transform group-hover:scale-110">
-            02
-          </div>
-          <div class="rounded-2xl p-5 sm:p-7 backdrop-blur-md border border-white/10 hover:border-[#38BDF8] transition-all duration-300 flex flex-col lg:flex-row gap-6 items-center shadow-xl"
-               style="background:rgba(21,27,46,0.65);">
-            <div class="flex-1">
-              <div class="flex items-center gap-2 mb-2 flex-wrap">
-                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-[#38BDF8]/15 text-[#38BDF8] border border-[#38BDF8]/30">Langkah 2</span>
-                <span class="text-xs text-[#8A93A8]">⏱️ 5 - 8 Siklus</span>
-              </div>
-              <h3 class="text-lg sm:text-xl font-bold text-white mb-2" style="font-family:'Playfair Display',serif;">
-                Cat-Cow Stretch (Marjaryasana) 🐱
-              </h3>
-              <p class="text-xs sm:text-sm text-[#8A93A8] leading-relaxed mb-4">
-                Mulai dari posisi merangkak. Tarik napas sambil melengkungkan punggung ke bawah dan pandangan ke atas (Cow), lalu hembuskan napas sambil membulatkan punggung ke atas (Cat).
-              </p>
-              <div class="p-3 rounded-xl border border-white/5 bg-white/5 text-xs text-[#D1D5DB] flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                <span>🌿 <strong>Manfaat:</strong> Melenturkan ruas tulang belakang & membuka dada</span>
-                <span class="text-[#38BDF8] font-medium">💡 Gerakan selaras napas</span>
-              </div>
-            </div>
-            <div class="w-full lg:w-72 xl:w-80 shrink-0 rounded-xl overflow-hidden border border-white/15 aspect-video bg-black/60 relative group-hover:border-[#38BDF8]/50 transition-colors shadow-lg">
-              <iframe class="w-full h-full object-cover" src="https://www.youtube.com/embed/82CX6WULNA0" title="Bagaimana Seseorang Bisa Memecahkan Puzzle $1.000.000!" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-            </div>
-          </div>
-        </div>
-
-        <!-- Step 3: Neck & Shoulder Release -->
-        <div class="relative group">
-          <div class="absolute -left-[41px] sm:-left-[49px] md:-left-[57px] top-4 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-[#151B2E] border-2 border-[#FB923C] text-[#FB923C] font-bold text-xs sm:text-sm flex items-center justify-center shadow-[0_0_15px_rgba(251,146,60,0.25)] transition-transform group-hover:scale-110">
-            03
-          </div>
-          <div class="rounded-2xl p-5 sm:p-7 backdrop-blur-md border border-white/10 hover:border-[#FB923C] transition-all duration-300 flex flex-col lg:flex-row gap-6 items-center shadow-xl"
-               style="background:rgba(21,27,46,0.65);">
-            <div class="flex-1">
-              <div class="flex items-center gap-2 mb-2 flex-wrap">
-                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-[#FB923C]/15 text-[#FB923C] border border-[#FB923C]/30">Langkah 3</span>
-                <span class="text-xs text-[#8A93A8]">⏱️ 30 Detik / Sisi</span>
-              </div>
-              <h3 class="text-lg sm:text-xl font-bold text-white mb-2" style="font-family:'Playfair Display',serif;">
-                Neck & Shoulder Release 🧘
-              </h3>
-              <p class="text-xs sm:text-sm text-[#8A93A8] leading-relaxed mb-4">
-                Duduk tegak santai. Miringkan kepala perlahan ke arah bahu kanan dengan sentuhan tangan lembut tanpa menarik paksa. Rasakan peregangan leher kiri, lalu ganti sisi sebaliknya.
-              </p>
-              <div class="p-3 rounded-xl border border-white/5 bg-white/5 text-xs text-[#D1D5DB] flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                <span>🌿 <strong>Manfaat:</strong> Melepas otot kaku leher & pundak akibat gadget</span>
-                <span class="text-[#FB923C] font-medium">💡 Jangan menahan napas</span>
-              </div>
-            </div>
-            <div class="w-full lg:w-72 xl:w-80 shrink-0 rounded-xl overflow-hidden border border-white/15 aspect-video bg-black/60 relative group-hover:border-[#FB923C]/50 transition-colors shadow-lg">
-              <iframe class="w-full h-full object-cover" src="https://www.youtube.com/embed/82CX6WULNA0" title="Bagaimana Seseorang Bisa Memecahkan Puzzle $1.000.000!" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-            </div>
-          </div>
-        </div>
-
-        <!-- Step 4: Seated Forward Fold -->
-        <div class="relative group">
-          <div class="absolute -left-[41px] sm:-left-[49px] md:-left-[57px] top-4 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-[#151B2E] border-2 border-[#A78BFA] text-[#A78BFA] font-bold text-xs sm:text-sm flex items-center justify-center shadow-[0_0_15px_rgba(167,139,250,0.25)] transition-transform group-hover:scale-110">
-            04
-          </div>
-          <div class="rounded-2xl p-5 sm:p-7 backdrop-blur-md border border-white/10 hover:border-[#A78BFA] transition-all duration-300 flex flex-col lg:flex-row gap-6 items-center shadow-xl"
-               style="background:rgba(21,27,46,0.65);">
-            <div class="flex-1">
-              <div class="flex items-center gap-2 mb-2 flex-wrap">
-                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-[#A78BFA]/15 text-[#A78BFA] border border-[#A78BFA]/30">Langkah 4</span>
-                <span class="text-xs text-[#8A93A8]">⏱️ 1 - 2 Menit</span>
-              </div>
-              <h3 class="text-lg sm:text-xl font-bold text-white mb-2" style="font-family:'Playfair Display',serif;">
-                Seated Forward Fold (Paschimottanasana) 🌿
-              </h3>
-              <p class="text-xs sm:text-sm text-[#8A93A8] leading-relaxed mb-4">
-                Duduk dengan kedua kaki lurus ke depan. Tarik napas sambil memanjangkan punggung, lalu hembuskan napas perlahan sambil membungkuk ke depan meraih betis atau jemari kaki.
-              </p>
-              <div class="p-3 rounded-xl border border-white/5 bg-white/5 text-xs text-[#D1D5DB] flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                <span>🌿 <strong>Manfaat:</strong> Meregangkan hamstring & menenangkan overthinking</span>
-                <span class="text-[#A78BFA] font-medium">💡 Boleh tekuk lutut sedikit</span>
-              </div>
-            </div>
-            <div class="w-full lg:w-72 xl:w-80 shrink-0 rounded-xl overflow-hidden border border-white/15 aspect-video bg-black/60 relative group-hover:border-[#A78BFA]/50 transition-colors shadow-lg">
-              <iframe class="w-full h-full object-cover" src="https://www.youtube.com/embed/82CX6WULNA0" title="Bagaimana Seseorang Bisa Memecahkan Puzzle $1.000.000!" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-            </div>
-          </div>
-        </div>
-
-        <!-- Step 5: Legs-Up-The-Wall -->
-        <div class="relative group">
-          <div class="absolute -left-[41px] sm:-left-[49px] md:-left-[57px] top-4 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-[#151B2E] border-2 border-[#34D399] text-[#34D399] font-bold text-xs sm:text-sm flex items-center justify-center shadow-[0_0_15px_rgba(52,211,153,0.25)] transition-transform group-hover:scale-110">
-            05
-          </div>
-          <div class="rounded-2xl p-5 sm:p-7 backdrop-blur-md border border-white/10 hover:border-[#34D399] transition-all duration-300 flex flex-col lg:flex-row gap-6 items-center shadow-xl"
-               style="background:rgba(21,27,46,0.65);">
-            <div class="flex-1">
-              <div class="flex items-center gap-2 mb-2 flex-wrap">
-                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-[#34D399]/15 text-[#34D399] border border-[#34D399]/30">Langkah 5</span>
-                <span class="text-xs text-[#8A93A8]">⏱️ 3 - 5 Menit</span>
-              </div>
-              <h3 class="text-lg sm:text-xl font-bold text-white mb-2" style="font-family:'Playfair Display',serif;">
-                Legs-Up-The-Wall (Viparita Karani) 🌙
-              </h3>
-              <p class="text-xs sm:text-sm text-[#8A93A8] leading-relaxed mb-4">
-                Berbaring terlentang dekat dinding, lalu angkat kedua kaki lurus bersandar pada dinding membentuk sudut 90 derajat. Rentangkan tangan ke samping dan pejamkan mata.
-              </p>
-              <div class="p-3 rounded-xl border border-white/5 bg-white/5 text-xs text-[#D1D5DB] flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                <span>🌿 <strong>Manfaat:</strong> Melancarkan aliran darah & meningkatkan kualitas tidur</span>
-                <span class="text-[#34D399] font-medium">💡 Sangat bagus sebelum tidur</span>
-              </div>
-            </div>
-            <div class="w-full lg:w-72 xl:w-80 shrink-0 rounded-xl overflow-hidden border border-white/15 aspect-video bg-black/60 relative group-hover:border-[#34D399]/50 transition-colors shadow-lg">
-              <iframe class="w-full h-full object-cover" src="https://www.youtube.com/embed/82CX6WULNA0" title="Bagaimana Seseorang Bisa Memecahkan Puzzle $1.000.000!" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-            </div>
-          </div>
-        </div>
-
-        <!-- Step 6: Savasana -->
-        <div class="relative group">
-          <div class="absolute -left-[41px] sm:-left-[49px] md:-left-[57px] top-4 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-[#151B2E] border-2 border-[#F472B6] text-[#F472B6] font-bold text-xs sm:text-sm flex items-center justify-center shadow-[0_0_15px_rgba(244,114,182,0.25)] transition-transform group-hover:scale-110">
-            06
-          </div>
-          <div class="rounded-2xl p-5 sm:p-7 backdrop-blur-md border border-white/10 hover:border-[#F472B6] transition-all duration-300 flex flex-col lg:flex-row gap-6 items-center shadow-xl"
-               style="background:rgba(21,27,46,0.65);">
-            <div class="flex-1">
-              <div class="flex items-center gap-2 mb-2 flex-wrap">
-                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-[#F472B6]/15 text-[#F472B6] border border-[#F472B6]/30">Langkah 6</span>
-                <span class="text-xs text-[#8A93A8]">⏱️ 3 - 5 Menit</span>
-              </div>
-              <h3 class="text-lg sm:text-xl font-bold text-white mb-2" style="font-family:'Playfair Display',serif;">
-                Corpse Pose (Savasana) ✨
-              </h3>
-              <p class="text-xs sm:text-sm text-[#8A93A8] leading-relaxed mb-4">
-                Berbaring terlentang senyaman mungkin. Biarkan kedua telapak tangan menghadap ke atas dan kaki terbuka santai. Lepaskan seluruh kontrol napas dan rasakan tubuhmu tenggelam rileks.
-              </p>
-              <div class="p-3 rounded-xl border border-white/5 bg-white/5 text-xs text-[#D1D5DB] flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                <span>🌿 <strong>Manfaat:</strong> Relaksasi total sistem saraf & pemulihan energi</span>
-                <span class="text-[#F472B6] font-medium">💡 Pejamkan mata & lemaskan tubuh</span>
-              </div>
-            </div>
-            <div class="w-full lg:w-72 xl:w-80 shrink-0 rounded-xl overflow-hidden border border-white/15 aspect-video bg-black/60 relative group-hover:border-[#F472B6]/50 transition-colors shadow-lg">
-              <iframe class="w-full h-full object-cover" src="https://www.youtube.com/embed/82CX6WULNA0" title="Bagaimana Seseorang Bisa Memecahkan Puzzle $1.000.000!" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-            </div>
-          </div>
-        </div>
-
+      <!-- Card Grid Container (2 cols desktop, 1 col mobile) -->
+      <div id="relaksasi-grid-container" class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <!-- Skeleton Loaders -->
+        <div class="rounded-2xl h-96 animate-pulse backdrop-blur-md bg-white/5 border border-white/10"></div>
+        <div class="rounded-2xl h-96 animate-pulse backdrop-blur-md bg-white/5 border border-white/10"></div>
       </div>
+
     </section>
 
     <script src="/js/NavRender.js"></script>
     <script src="/js/relaksasi/main.js"></script>
     <script src="/js/relaksasi/breathing.js"></script>
+    <script src="/js/Relaksasi.js"></script>
   </main>
 
   <div id="footer"></div>
