@@ -21,16 +21,16 @@
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
   <link rel="stylesheet" href="/assets/css/main.css">
 </head>
-<body style="background:#0D1220; color:#F5F5F5;" class="flex items-center justify-center min-h-screen">
+<body style="background:#0D1220; color:#F5F5F5;" class="flex items-center justify-center min-h-screen p-4 sm:p-6">
 
-    <div class="w-full max-w-md p-7 rounded-2xl" style="background:#151B2E; border:1px solid rgba(255,255,255,0.08);">
+    <div class="w-full max-w-lg p-6 sm:p-8 rounded-3xl backdrop-blur-md shadow-2xl" style="background:#151B2E; border:1px solid rgba(255,255,255,0.12);">
         <div class="mb-6">
-            <a href="./beranda.html" class="w-full text-lg font-semibold text-right block" style="color:#2DD4A8;">X</a>
-            <p class="text-xs font-semibold uppercase tracking-widest mb-3" style="color:#2DD4A8;">Sebelum kita mulai</p>
-            <h1 class="text-xl font-bold mb-1" style="color:#F5F5F5; font-family:'Playfair Display',serif;">Yuk kenalan dulu sama perasaanmu</h1>
-            <p class="text-xs mb-5" style="color:#8A93A8;">Jawab sejujurnya ya, nggak akan ada jawaban salah kok</p>
+            <a href="./beranda.html" class="w-full text-lg font-semibold text-right block text-[#8A93A8] hover:text-[#2DD4A8] transition-colors" style="text-decoration:none;">✕</a>
+            <p class="text-[11px] sm:text-xs font-semibold uppercase tracking-widest mb-2 inline-block" style="color:#2DD4A8;">Sebelum kita mulai</p>
+            <h1 class="text-xl sm:text-2xl font-bold mb-2" style="color:#F5F5F5; font-family:'Playfair Display',serif;">Yuk kenalan dulu sama perasaanmu</h1>
+            <p class="text-xs sm:text-sm mb-5 leading-relaxed" style="color:#8A93A8;">Jawab sejujurnya ya, nggak akan ada jawaban salah kok</p>
             <div class="flex items-center gap-3">
-                <div class="flex-1 h-1 rounded-full overflow-hidden" style="background:rgba(255,255,255,0.08);">
+                <div class="flex-1 h-1.5 rounded-full overflow-hidden" style="background:rgba(255,255,255,0.08);">
                     <div id="quiz-progress-fill" class="h-full rounded-full transition-all duration-500" style="width:0%; background:#2DD4A8;"></div>
                 </div>
                 <span id="quiz-progress-label" class="text-xs font-semibold whitespace-nowrap" style="color:#8A93A8;">1 / 7</span>

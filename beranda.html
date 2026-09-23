@@ -43,7 +43,6 @@
           onerror="this.onerror=null; this.src='/assets/Images/placeholder.svg';">
         <div class="absolute inset-0 bg-gradient-to-b from-[#0D1220]/70 via-[#0D1220]/55 to-[#0D1220]"></div>
       </div>
-
       <!-- Main Content Container -->
       <div class="max-w-7xl mx-auto px-6 md:px-12 lg:px-16 w-full my-auto py-8">
         <div class="max-w-2xl">
@@ -62,30 +61,26 @@
             Ruang aman untuk mengurai isi kepala, membaca kembali emosi, dan beristirahat sejenak dari segala tuntutan.
           </p>
 
-          <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
-            <a href="/index.html"
-              class="px-6 py-3.5 rounded-full text-center text-xs sm:text-sm font-semibold transition hover:bg-[#25b892] shadow-lg"
-              style="background:#2DD4A8; color:#0D1220;">
+          <!-- Kartu Sapaan (Dipindah ke atas hero bottom dengan Transparent Blur) -->
+          <div class="max-w-7xl mx-auto px-6 md:px-12 w-full pt-4">
+            <div class="fade-left opacity-0 -translate-x-10 transition-all duration-700 ease-out">
+              <div id="sapaan-card"
+                class="rounded-2xl p-6 sm:p-8 md:p-10 backdrop-blur-md transition-all duration-300 min-h-[100px]"
+                style="background:rgba(26,33,56,0.6); border:1px solid rgba(255,255,255,0.12); border-left:4px solid #2DD4A8; box-shadow:0 8px 32px rgba(0,0,0,0.37);">
+                <p id="element-judul-beranda" class="text-xl md:text-2xl font-semibold mb-2"
+                  style="color:#F5F5F5; font-family:'Playfair Display',serif;"></p>
+                <p id="element-pesan-beranda" class="text-sm max-w-2xl" style="color:#8A93A8;"></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 mt-6">
+            <a href="/index.html" class="teduh-btn-primary">
               MULAI BERTEDUH &#8599;
             </a>
-            <a href="/konsultasi.html"
-              class="px-6 py-3.5 rounded-full text-center text-xs sm:text-sm font-semibold transition border border-white/30 backdrop-blur-sm hover:bg-white/10"
-              style="color:#F5F5F5;">
+            <a href="/konsultasi.html" class="teduh-btn-secondary">
               Konsultasi &#8599;
             </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Kartu Sapaan (Dipindah ke atas hero bottom dengan Transparent Blur) -->
-      <div class="max-w-7xl mx-auto px-6 md:px-12 lg:px-16 w-full pt-4">
-        <div class="fade-left opacity-0 -translate-x-10 transition-all duration-700 ease-out">
-          <div id="sapaan-card"
-            class="rounded-2xl p-6 sm:p-8 md:p-10 backdrop-blur-md transition-all duration-300 min-h-[100px]"
-            style="background:rgba(26,33,56,0.6); border:1px solid rgba(255,255,255,0.12); border-left:4px solid #2DD4A8; box-shadow:0 8px 32px rgba(0,0,0,0.37);">
-            <p id="element-judul-beranda" class="text-xl md:text-2xl font-semibold mb-2"
-              style="color:#F5F5F5; font-family:'Playfair Display',serif;"></p>
-            <p id="element-pesan-beranda" class="text-sm max-w-2xl" style="color:#8A93A8;"></p>
           </div>
         </div>
       </div>
@@ -111,7 +106,7 @@
             <div
               class="w-48 h-48 sm:w-64 sm:h-64 rounded-full flex flex-col items-center justify-center text-center shadow-2xl transition-transform duration-500 hover:scale-105 z-30 flex-shrink-0"
               style="background:linear-gradient(135deg, #151B2E, #0a0e17); border:1px solid rgba(45, 212, 168, 0.4);">
-              <h3 class="text-4xl sm:text-5xl font-bold tracking-tight text-white mb-1 counter" data-target="50"
+              <h3 class="text-4xl sm:text-5xl font-bold tracking-tight text-white mb-1 counter" data-target="40"
                 data-suffix="+">0</h3>
               <p class="text-xs sm:text-sm font-semibold tracking-wide mt-1 uppercase" style="color:#2DD4A8;">
                 Artikel</p>
@@ -173,7 +168,7 @@
 
             <h3 class="text-xl font-semibold mb-3 z-10 tracking-wide"
               style="font-family:'Playfair Display',serif; color:#F5F5F5;">Blog</h3>
-            <p class="text-sm leading-relaxed mb-7 flex-grow z-10 font-light" style="color:#8A93A8;">Temukan berbagai
+            <p class="text-sm leading-relaxed mb-7 flex-grow z-10 font-semibold group-hover:text-gray-500" style="color:#8A93A8;">Temukan berbagai
               artikel inspiratif dan tips seputar kesehatan mental.</p>
 
             <a href="./blog.html"
@@ -204,7 +199,7 @@
 
             <h3 class="text-xl font-semibold mb-3 z-10 tracking-wide"
               style="font-family:'Playfair Display',serif; color:#F5F5F5;">Konsultasi Psikolog</h3>
-            <p class="text-sm leading-relaxed mb-7 flex-grow z-10 font-light" style="color:#8A93A8;">Dapatkan penanganan
+            <p class="text-sm leading-relaxed mb-7 flex-grow z-10 font-semibold" style="color:#8A93A8;">Dapatkan penanganan
               yang tepat dari psikolog profesional untuk masalah Anda.</p>
 
             <a href="./konsultasi.html"
@@ -379,7 +374,7 @@
             style="background:rgba(26,33,56,0.6); border:1px solid rgba(255,255,255,0.12);">
             <!-- Orb 4 -->
             <div
-              class="absolute w-[200px] h-[200px] rounded-full blur-[50px] opacity-20 group-hover:opacity-40 group-hover:scale-125 transition-all duration-700 z-0 -bottom-12 -right-8"
+              class="absolute w-[200px] h-[200px] rounded-full blur-[90px] opacity-20 group-hover:opacity-40 group-hover:scale-125 transition-all duration-700 z-0 -bottom-12 -right-8"
               style="background-color:#fb923c;"></div>
 
             <div class="relative z-10 flex flex-col h-full">

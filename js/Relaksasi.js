@@ -73,14 +73,12 @@ function renderRelaksasiCard(step) {
       <div class="flex flex-col gap-2 text-xs text-[#D1D5DB]">
         ${step.manfaat ? `
           <div class="p-2.5 sm:p-3 rounded-xl border border-white/5 bg-[#0D1220]/60 flex items-start sm:items-center gap-2.5">
-            <span class="shrink-0 text-sm">💪</span>
             <span class="leading-normal"><strong>Manfaat:</strong> ${step.manfaat}</span>
           </div>
         ` : ''}
 
         ${step.tips ? `
           <div class="p-2.5 sm:p-3 rounded-xl border border-white/5 bg-[#0D1220]/60 flex items-start sm:items-center gap-2.5">
-            <span class="shrink-0 text-sm">💡</span>
             <span class="leading-normal"><strong>Tip:</strong> ${step.tips}</span>
           </div>
         ` : ''}

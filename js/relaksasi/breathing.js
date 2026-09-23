@@ -1,11 +1,10 @@
-// Durasi pernapasan total 20 detik dibagi 4 fase (5 detik / 5000 ms per fase)
-const PHASE_DURATION = 20000 / 4; // 5000 ms (5 detik)
+// Durasi pernapasan total 19 Detik, dibagi jadi sesi menarik napas, menahan, lalu membuang napas
+const PHASE_DURATION = 19000 / 3; // 6.333 ms (6.333 detik)
 
 const phases = [
   { label: 'Tarik Napas', duration: PHASE_DURATION, color: '#2DD4A8' },
   { label: 'Tahan', duration: PHASE_DURATION, color: '#38BDF8' },
   { label: 'Hembuskan', duration: PHASE_DURATION, color: '#FB923C' },
-  { label: 'Tahan / Jeda', duration: PHASE_DURATION, color: '#A78BFA' }
 ];
 
 const MAX_CYCLES = 4;
@@ -17,11 +16,12 @@ const UI = {
   phaseText: document.getElementById('breathe-phase-text'),
   countdown: document.getElementById('breathe-countdown'),
   cycleText: document.getElementById('breathe-cycle-text'),
+  hint: document.getElementById('breathe-hint'),
   btn: document.getElementById('btn-breathe-toggle'),
   btnStop: document.getElementById('btn-breathe-stop')
 };
 
-const CIRCLE_CIRCUMFERENCE = 565.48; // 2 * pi * r (r=90)
+const CIRCLE_CIRCUMFERENCE = 565.48;
 
 let isRunning = false;
 let startTime = null;
@@ -98,6 +98,10 @@ function resetVisuals(isNaturalFinish) {
   UI.phaseText.style.color = "#2DD4A8";
   UI.countdown.textContent = "--";
   UI.cycleText.textContent = isNaturalFinish ? `Siklus ${MAX_CYCLES} dari ${MAX_CYCLES}` : `Siklus 0 dari ${MAX_CYCLES}`;
+  if (UI.hint) {
+    UI.hint.textContent = isNaturalFinish ? "Sesi selesai! Tekan tombol di bawah untuk mengulangi latihan." : "Tekan tombol di bawah untuk memulai sesi 4 siklus pernapasan.";
+    UI.hint.classList.remove('hidden');
+  }
   
   UI.progress.style.stroke = "#2DD4A8";
   UI.progress.style.strokeDashoffset = CIRCLE_CIRCUMFERENCE;
@@ -130,6 +134,10 @@ function startSession() {
   isRunning = true;
   currentCycle = 0;
   startTime = null;
+
+  if (UI.hint) {
+    UI.hint.textContent = "Fokus pada ritme pernapasanmu...";
+  }
   
   UI.btn.textContent = "Sedang Berjalan...";
   UI.btn.disabled = true;

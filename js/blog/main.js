@@ -123,6 +123,34 @@
       filterEl.innerHTML = html;
     }
 
+    // -- Helper: Scalable Pagination Range with Ellipsis
+    function getPaginationRange(current, total) {
+      const delta = 1;
+      const range = [];
+      const rangeWithDots = [];
+      let l;
+
+      for (let i = 1; i <= total; i++) {
+        if (i === 1 || i === total || (i >= current - delta && i <= current + delta)) {
+          range.push(i);
+        }
+      }
+
+      for (let i of range) {
+        if (l) {
+          if (i - l === 2) {
+            rangeWithDots.push(l + 1);
+          } else if (i - l !== 1) {
+            rangeWithDots.push('...');
+          }
+        }
+        rangeWithDots.push(i);
+        l = i;
+      }
+
+      return rangeWithDots;
+    }
+
     // -- Render Pagination Controls
     function renderPagination(totalItems) {
       if (!paginationEl) return;
@@ -145,25 +173,31 @@
         </button>
       `);
 
-      // Page Numbers
-      for (var p = 1; p <= totalPages; p++) {
-        var isCurrent = p === currentPage;
-        if (isCurrent) {
-          html.push(`
-            <button class="page-num-btn w-9 h-9 sm:w-10 sm:h-10 rounded-full font-bold text-xs sm:text-sm shadow-lg transition"
-                    style="background:#2DD4A8; color:#0D1220; box-shadow:0 0 15px rgba(45,212,168,0.3);"
-                    data-page="${p}">
-              ${p}
-            </button>
-          `);
+      // Page Numbers with Ellipsis Support
+      var pageRange = getPaginationRange(currentPage, totalPages);
+      for (var item of pageRange) {
+        if (item === '...') {
+          html.push('<span class="px-2 py-1 text-xs text-[#8A93A8] font-semibold self-center">...</span>');
         } else {
-          html.push(`
-            <button class="page-num-btn w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-white/10 text-xs sm:text-sm font-medium transition hover:border-[#2DD4A8] hover:text-[#2DD4A8] backdrop-blur-md"
-                    style="background:rgba(21,27,46,0.7); color:#8A93A8;"
-                    data-page="${p}">
-              ${p}
-            </button>
-          `);
+          var p = item;
+          var isCurrent = p === currentPage;
+          if (isCurrent) {
+            html.push(`
+              <button class="page-num-btn w-9 h-9 sm:w-10 sm:h-10 rounded-full font-bold text-xs sm:text-sm shadow-lg transition"
+                      style="background:#2DD4A8; color:#0D1220; box-shadow:0 0 15px rgba(45,212,168,0.3);"
+                      data-page="${p}">
+                ${p}
+              </button>
+            `);
+          } else {
+            html.push(`
+              <button class="page-num-btn w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-white/10 text-xs sm:text-sm font-medium transition hover:border-[#2DD4A8] hover:text-[#2DD4A8] backdrop-blur-md"
+                      style="background:rgba(21,27,46,0.7); color:#8A93A8;"
+                      data-page="${p}">
+                ${p}
+              </button>
+            `);
+          }
         }
       }
 

@@ -113,7 +113,7 @@
     if (!grid) return;
 
     grid.innerHTML = konsultanList.map((k) => `
-      <div class="konsultan-card group relative rounded-[20px] overflow-hidden border border-white/10 hover:border-[#2DD4A8] transition-all duration-300 ease-out hover:scale-[1.025] hover:-translate-y-1.5 cursor-pointer aspect-[4/5] flex flex-col justify-end p-4 sm:p-5 shadow-lg hover:shadow-2xl hover:shadow-[#2DD4A8]/10"
+      <div class="konsultan-card group relative rounded-[20px] overflow-hidden border ${k.isFeatured ? 'border-[#2DD4A8] shadow-[0_0_20px_rgba(45,212,168,0.15)]' : 'border-white/10'} hover:border-[#2DD4A8] transition-all duration-300 ease-out hover:scale-[1.025] hover:-translate-y-1.5 cursor-pointer aspect-[4/5] flex flex-col justify-end p-4 sm:p-5 shadow-lg hover:shadow-2xl hover:shadow-[#2DD4A8]/10"
            data-id="${k.id}"
            style="background:#151B2E;">
         <!-- Background Image -->
@@ -124,12 +124,18 @@
         <!-- Gradient Overlay -->
         <div class="absolute inset-0 bg-gradient-to-t from-[#0D1220] via-[#0D1220]/65 to-transparent"></div>
 
-        <!-- Top Tag: Care Team Member -->
-        <div class="absolute top-3.5 left-3.5 z-10">
-          <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] sm:text-[11px] font-medium backdrop-blur-md bg-black/50 border border-white/20 text-white shadow-sm">
-            <span class="w-1.5 h-1.5 rounded-full bg-[#2DD4A8]"></span>
-            Care team member
-          </span>
+        <!-- Top Tag: Care Team Member / Featured Badge -->
+        <div class="absolute top-3.5 left-3.5 z-10 flex items-center gap-2 flex-wrap">
+          ${k.isFeatured ? `
+            <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] sm:text-[11px] font-semibold backdrop-blur-md bg-[#2DD4A8]/20 border border-[#2DD4A8]/40 text-[#2DD4A8] shadow-sm">
+              ⭐ ${k.badge || 'Rekomendasi'}
+            </span>
+          ` : `
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] sm:text-[11px] font-medium backdrop-blur-md bg-black/50 border border-white/20 text-white shadow-sm">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#2DD4A8]"></span>
+              Care team member
+            </span>
+          `}
         </div>
 
         <!-- Footer Card Details -->
@@ -184,19 +190,19 @@
           </div>
           <p class="text-xs sm:text-sm text-[#2DD4A8] font-medium mb-1">${k.gelar}</p>
           <p class="text-xs text-[#8A93A8] flex items-center gap-1.5">
-            <span>🏥</span> ${k.instansi}
+            <span>Asal:</span> ${k.instansi}
           </p>
         </div>
       <!-- Quick Stats Grid -->
       <div class="grid grid-cols-2 gap-3 mb-6">
         <div class="p-3.5 rounded-xl border border-white/10" style="background:rgba(255,255,255,0.03);">
           <p class="text-[11px] text-[#8A93A8] mb-1">Rating Pasien</p>
-          <p class="text-sm sm:text-base font-bold text-white">⭐ ${k.rating} <span class="text-xs font-normal text-[#8A93A8]">/ 5.0</span></p>
+          <p class="text-sm sm:text-base font-bold text-white"> ${k.rating} <span class="text-xs font-normal text-[#8A93A8]">/ 5.0</span></p>
           <p class="text-[10px] text-[#8A93A8]">${k.review_count} sesi konseling selesai</p>
         </div>
         <div class="p-3.5 rounded-xl border border-white/10" style="background:rgba(255,255,255,0.03);">
           <p class="text-[11px] text-[#8A93A8] mb-1">Pengalaman Praktik</p>
-          <p class="text-sm sm:text-base font-bold text-white">⏳ ${k.pengalaman}</p>
+          <p class="text-sm sm:text-base font-bold text-white"> ${k.pengalaman}</p>
           <p class="text-[10px] text-[#2DD4A8]">Aktif Berpraktik</p>
         </div>
       </div>

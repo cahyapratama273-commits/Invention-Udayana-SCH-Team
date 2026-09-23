@@ -269,7 +269,6 @@ function renderDetailPage(step) {
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm text-[#D1D5DB]">
         ${step.manfaat ? `
           <div class="p-3 sm:p-4 rounded-xl border border-white/5 bg-[#0D1220]/60 flex items-start gap-3">
-            <span class="shrink-0 text-base sm:text-lg">💪</span>
             <div>
               <strong class="text-white block mb-0.5">Manfaat:</strong>
               <span class="leading-relaxed text-[#8A93A8]">${step.manfaat}</span>
@@ -279,7 +278,6 @@ function renderDetailPage(step) {
 
         ${step.tips ? `
           <div class="p-3 sm:p-4 rounded-xl border border-white/5 bg-[#0D1220]/60 flex items-start gap-3">
-            <span class="shrink-0 text-base sm:text-lg">💡</span>
             <div>
               <strong class="text-white block mb-0.5">Tip:</strong>
               <span class="leading-relaxed text-[#8A93A8]">${step.tips}</span>
@@ -360,13 +358,11 @@ function renderOtherPoseCard(other) {
       <div class="flex flex-col gap-2 text-xs text-[#D1D5DB]">
         ${other.manfaat ? `
           <div class="p-2.5 rounded-xl border border-white/5 bg-[#0D1220]/60 flex items-start gap-2">
-            <span class="shrink-0 text-xs">💪</span>
             <span class="leading-normal"><strong>Manfaat:</strong> ${other.manfaat}</span>
           </div>
         ` : ''}
         ${other.tips ? `
           <div class="p-2.5 rounded-xl border border-white/5 bg-[#0D1220]/60 flex items-start gap-2">
-            <span class="shrink-0 text-xs">💡</span>
             <span class="leading-normal"><strong>Tip:</strong> ${other.tips}</span>
           </div>
         ` : ''}

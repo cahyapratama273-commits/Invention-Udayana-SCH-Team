@@ -1,4 +1,6 @@
-*,html, body {
+*,
+html,
+body {
     top: 0;
     right: 0;
     box-sizing: border-box;
@@ -6,17 +8,17 @@
 
 /* Tempalte Tema */
 :root {
-    --bg-base:        #0D1220;
-    --bg-card:        #151B2E;
-    --bg-card-alt:    #1A2138;
-    --border-subtle:  rgba(255,255,255,0.08);
-    --accent:         #2DD4A8;
-    --accent-hover:   #25b892;
-    --accent-bg:      rgba(45,212,168,0.12);
+    --bg-base: #0D1220;
+    --bg-card: #151B2E;
+    --bg-card-alt: #1A2138;
+    --border-subtle: rgba(255, 255, 255, 0.08);
+    --accent: #2DD4A8;
+    --accent-hover: #25b892;
+    --accent-bg: rgba(45, 212, 168, 0.12);
     --accent-secondary: #F472B6;
-    --text-heading:   #F5F5F5;
-    --text-body:      #8A93A8;
-    --text-muted:     #5A6478;
+    --text-heading: #F5F5F5;
+    --text-body: #8A93A8;
+    --text-muted: #5A6478;
 }
 
 body {
@@ -30,18 +32,161 @@ body {
 
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
 
-/* Contoh penerapan ikon setelah di-import */
-.icon-home {
-    /* Font Awesome tetap bisa dipanggil seperti biasa */
-}
 
-h1, h2, h3, .font-display {
+
+h1,
+h2,
+h3,
+.font-display {
     font-family: 'Playfair Display', Georgia, serif;
     color: var(--text-heading);
 }
 
-p, span, li, a {
+p,
+span,
+li,
+a {
     color: inherit;
+}
+
+/* ─── UNIFIED DESIGN SYSTEM UTILITIES ─── */
+.teduh-container {
+    max-width: 80rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+    .teduh-container {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .teduh-container {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+}
+
+.teduh-eyebrow {
+    font-size: 0.6875rem;
+    /* 11px */
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    display: inline-block;
+    margin-bottom: 0.5rem;
+}
+
+@media (min-width: 640px) {
+    .teduh-eyebrow {
+        font-size: 0.75rem;
+    }
+}
+
+.teduh-card {
+    background: rgba(26, 33, 56, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--border-subtle);
+    border-radius: 1rem;
+    /* 16px */
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.teduh-card:hover {
+    border-color: var(--accent);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+}
+
+/* ─── BUTTON VARIANTS ─── */
+.teduh-btn-primary {
+    background-color: var(--accent) !important;
+    color: #0D1220 !important;
+    font-weight: 700;
+    font-size: 0.875rem;
+    /* text-sm */
+    padding: 0.75rem 1.75rem;
+    border-radius: 9999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 4px 20px rgba(45, 212, 168, 0.25);
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+}
+
+.teduh-btn-primary:hover {
+    background-color: var(--accent-hover) !important;
+    transform: translateY(-2px) scale(1.02);
+}
+
+.teduh-btn-primary:active {
+    transform: translateY(0) scale(0.98);
+}
+
+.teduh-btn-secondary {
+    background: rgba(255, 255, 255, 0.08) !important;
+    color: var(--text-heading) !important;
+    font-weight: 600;
+    font-size: 0.875rem;
+    /* text-sm */
+    padding: 0.75rem 1.75rem;
+    border-radius: 9999px;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.teduh-btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.16) !important;
+    border-color: var(--accent) !important;
+    color: #FFFFFF !important;
+    transform: translateY(-2px);
+}
+
+.teduh-btn-secondary:active {
+    transform: translateY(0);
+}
+
+/* ─── LINE CLAMP & EQUAL HEIGHTS ─── */
+.teduh-line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.teduh-line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* ─── ALERT WARNING (SOOTHING AMBER) ─── */
+.teduh-alert-warning {
+    background: rgba(245, 158, 11, 0.12) !important;
+    border: 1px solid rgba(245, 158, 11, 0.3) !important;
+    color: #FBBF24 !important;
+    border-radius: 1rem;
 }
 
 /* ─── TILE CARD ─── */
@@ -51,30 +196,54 @@ p, span, li, a {
     -webkit-backdrop-filter: blur(12px);
     border: 1px solid var(--border-subtle);
     color: var(--text-heading);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
+
 .tile:hover {
-    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    border-color: var(--accent);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
 }
 
 /* ─── SCROLLBAR ─── */
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: var(--bg-base); }
-::-webkit-scrollbar-thumb { background: var(--bg-card-alt); border-radius: 3px; }
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-base);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--bg-card-alt);
+    border-radius: 3px;
+}
 
 /* ─── STARFIELD CANVAS ─── */
 #starfield-canvas {
     position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     pointer-events: none;
     z-index: 0;
     opacity: 0.35;
 }
 
-#app-content { position: relative; z-index: 10; }
-#navbar-slot { position: relative; z-index: 50; }
-#footer { position: relative; z-index: 10; }
+#app-content {
+    position: relative;
+    z-index: 10;
+}
+
+#navbar-slot {
+    position: relative;
+    z-index: 50;
+}
+
+#footer {
+    position: relative;
+    z-index: 10;
+}
 
 /* ─── BATEN QUIZ ─── */
 .option-btn {
@@ -82,6 +251,7 @@ p, span, li, a {
     border-color: var(--border-subtle) !important;
     color: var(--text-heading) !important;
 }
+
 .option-btn:hover {
     transform: scale(1.02);
     background: var(--accent-bg) !important;
@@ -110,7 +280,7 @@ p, span, li, a {
 .player-controls-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.1) 40%, rgba(0,0,0,0.1) 60%, rgba(0,0,0,0.85) 100%);
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.1) 40%, rgba(0, 0, 0, 0.1) 60%, rgba(0, 0, 0, 0.85) 100%);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -164,7 +334,8 @@ p, span, li, a {
     color: #2DD4A8;
 }
 
-.player-btn.disabled, .player-btn:disabled {
+.player-btn.disabled,
+.player-btn:disabled {
     opacity: 0.35;
     pointer-events: none;
     cursor: not-allowed;
@@ -239,7 +410,7 @@ input[type="range"].player-seekbar::-moz-range-thumb {
 }
 
 .vertical-slider-panel img {
-    filter: drop-shadow(0 2px 6px rgba(0,0,0,0.9));
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.9));
 }
 
 /* Vertical Slider Input Container */
@@ -411,8 +582,3 @@ input[type="range"].v-slider::-moz-range-thumb {
     color: #FFFFFF;
     font-weight: 700;
 }
-
-
-
-
-

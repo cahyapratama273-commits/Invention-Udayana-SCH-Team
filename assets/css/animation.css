@@ -1,0 +1,30 @@
+.slide-top {
+  -webkit-animation: slide-top 460ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: slide-top 460ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@-webkit-keyframes slide-top {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(16px);
+    transform: translateY(16px);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-top {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(16px);
+    transform: translateY(16px);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+}
