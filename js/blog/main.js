@@ -33,12 +33,20 @@
     }
     if (semuaArtikel.length === 0) throw new Error("Gagal memuat artikel dari data source");
 
+    // -- Elements
+    var untukKamuSection = document.getElementById("section-untuk-kamu");
+    var untukKamuGrid = document.getElementById("untuk-kamu-grid");
+    var untukKamuFallback = document.getElementById("untuk-kamu-fallback");
+    var paginationEl = document.getElementById("blog-pagination");
+
+    // -- Sort all articles by id ascending
+    semuaArtikel.sort((a, b) => a.id.localeCompare(b.id, undefined, { numeric: true, sensitivity: 'base' }));
+
     // -- State
     var currentFilter = "Semua";
     var searchQuery = "";
     var currentPage = 1;
-    var ITEMS_PER_PAGE = 8;
-    var paginationEl = document.getElementById("blog-pagination");
+    var ITEMS_PER_PAGE = 6;
     
     // -- Extract unique categories and sort
     var categories = [...new Set(semuaArtikel.map(a => a.kategori))].sort();
@@ -107,6 +115,55 @@
       </a>
       `;
       featuredEl.innerHTML = html;
+    }
+
+    // -- Render "Untuk Kamu" Section (Personalized by userMentalKondisi in localStorage)
+    function renderUntukKamu() {
+      if (!untukKamuGrid) return;
+
+      // Read user's last kondisi result from localStorage (same key used in Beranda.js)
+      var savedMood = localStorage.getItem("userMentalKondisi");
+      var validMoods = ["baik", "cemas", "berat"];
+
+      // If no quiz result exists in localStorage yet, show fallback message inviting user to take Cek-Emosi quiz
+      if (!savedMood || !validMoods.includes(savedMood)) {
+        if (untukKamuFallback) {
+          untukKamuGrid.innerHTML = "";
+          untukKamuGrid.classList.add("hidden");
+          untukKamuFallback.classList.remove("hidden");
+        } else if (untukKamuSection) {
+          untukKamuSection.classList.add("hidden");
+        }
+        return;
+      }
+
+      // Filter data/artikel.json by matching kondisi
+      var matchingArticles = semuaArtikel.filter(a => a.kondisi === savedMood);
+
+      if (matchingArticles.length === 0) {
+        if (untukKamuSection) untukKamuSection.classList.add("hidden");
+        return;
+      }
+
+      // Pick up to 4 articles (prioritize featured: true if more than 4 match, otherwise first 4 in array order)
+      var sortedMatching = [...matchingArticles].sort((a, b) => {
+        if (a.featured && !b.featured) return -1;
+        if (!a.featured && b.featured) return 1;
+        return 0; // preserve array order
+      });
+
+      var selectedArticles = sortedMatching.slice(0, 4);
+
+      // Render compact article cards into the 2x2 grid
+      if (typeof renderArtikelCardCompact === "function") {
+        untukKamuGrid.innerHTML = selectedArticles.map(renderArtikelCardCompact).join("");
+      } else if (typeof renderArtikelCard === "function") {
+        untukKamuGrid.innerHTML = selectedArticles.map(a => renderArtikelCard(a, { compact: true })).join("");
+      }
+
+      if (untukKamuFallback) untukKamuFallback.classList.add("hidden");
+      untukKamuGrid.classList.remove("hidden");
+      if (untukKamuSection) untukKamuSection.classList.remove("hidden");
     }
 
     // -- Render Filter Tabs (in a panel as pills)
@@ -254,7 +311,7 @@
       var totalPages = Math.max(1, Math.ceil(totalCount / ITEMS_PER_PAGE));
       if (currentPage > totalPages) currentPage = 1;
 
-      // Slice 8 items for the current page
+      // Slice 6 items for the current page
       var startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
       var pageItems = filtered.slice(startIndex, startIndex + ITEMS_PER_PAGE);
         
@@ -311,6 +368,7 @@
 
     // -- Initial render
     renderFeatured();
+    renderUntukKamu();
     renderFilters();
     renderArticles();
 

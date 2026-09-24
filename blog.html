@@ -47,6 +47,37 @@
       </div>
     </section>
 
+    <!-- "Untuk Kamu" Section (Personalized, condition-based) -->
+    <section id="section-untuk-kamu" class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 pb-12">
+      <div class="rounded-2xl p-6 sm:p-8 backdrop-blur-md" 
+           style="background:rgba(21,27,46,0.6); border:1px solid rgba(45,212,168,0.25);">
+        
+        <div class="mb-6">
+          <span class="text-[11px] sm:text-xs font-semibold tracking-widest uppercase mb-2 inline-block" style="color:#2DD4A8;">ARTIKEL POPULER</span>
+          <h2 class="text-2xl sm:text-3xl font-bold mb-2" style="font-family:'Playfair Display',serif; color:#F5F5F5;">
+            Untuk Kamu
+          </h2>
+          <p id="untuk-kamu-subheading" class="text-xs sm:text-sm leading-relaxed" style="color:#8A93A8;">
+            Artikel pilihan sesuai kondisimu saat ini
+          </p>
+        </div>
+
+        <!-- 2x2 Grid for 4 articles -->
+        <div id="untuk-kamu-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <!-- Compact article cards injected via JS -->
+        </div>
+
+        <!-- Fallback if no quiz result in localStorage -->
+        <div id="untuk-kamu-fallback" class="hidden text-center py-8 px-4 rounded-xl border border-dashed border-white/10" style="background:rgba(13,18,32,0.4);">
+          <p class="text-base font-semibold text-[#F5F5F5] mb-2">Ingin rekomendasi artikel yang sesuai kondisimu?</p>
+          <p class="text-xs sm:text-sm text-[#8A93A8] max-w-md mx-auto mb-5">Yuk ikuti kuis Cek Emosi singkat untuk memahami perasaanmu saat ini dan menemukan bacaan yang tepat.</p>
+          <a href="/index.html" class="inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-xs font-bold bg-[#2DD4A8] text-[#0D1220] hover:bg-[#25b892] transition-colors shadow-md">
+            Mulai Cek Emosi &rarr;
+          </a>
+        </div>
+      </div>
+    </section>
+
     <!-- Filter, Search, and Grid Section -->
     <section class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 pb-20 sm:pb-24">
       
@@ -94,6 +125,26 @@
 
       <!-- Pagination Container -->
       <div id="blog-pagination" class="flex items-center justify-center gap-2 mt-12 flex-wrap"></div>
+
+      <!-- Static Support Info Card -->
+      <div class="mt-14 sm:mt-16 w-full rounded-2xl p-6 sm:p-8 md:p-10 bg-white/10 backdrop-blur-md border border-white/20 shadow-xl transition-all duration-300">
+        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+          <div class="max-w-2xl">
+            <span class="text-[11px] sm:text-xs font-bold uppercase tracking-widest mb-2 inline-block" style="color:#2DD4A8;">Dukungan Untukmu</span>
+            <h3 class="text-xl sm:text-2xl font-bold mb-2 leading-snug" style="font-family:'Playfair Display',serif; color:#F5F5F5;">
+              Butuh teman bicara soal apa yang kamu baca?
+            </h3>
+            <p class="text-xs sm:text-sm md:text-base leading-relaxed" style="color:#8A93A8;">
+              Membaca artikel adalah langkah awal yang baik, namun kamu tidak harus memproses semuanya sendirian. Jika ada perasaan yang terasa mengganjal atau butuh ruang aman untuk bercerita, konsultan profesional kami selalu siap mendampingimu.
+            </p>
+          </div>
+          <div class="shrink-0 w-full sm:w-auto">
+            <a href="/konsultasi.html" class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full text-xs sm:text-sm font-bold bg-[#2DD4A8] text-[#0D1220] hover:bg-[#25b892] transition-all duration-300 w-full sm:w-auto shadow-lg hover:shadow-[0_0_20px_rgba(45,212,168,0.4)]">
+              Mulai Konsultasi &rarr;
+            </a>
+          </div>
+        </div>
+      </div>
     </section>
 
     <script src="/js/ArtikelCard.js"></script>

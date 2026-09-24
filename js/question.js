@@ -107,6 +107,48 @@
     }
   }
 
+  // --- Event Listener: Tombol Exit / Close (X) ---
+  $(document).off("click.firstCheck", "#quiz-close-btn");
+  $(document).on("click.firstCheck", "#quiz-close-btn", function () {
+    openExitModal();
+  });
+
+  $(document).off("click.firstCheck", "#cancel-exit-btn");
+  $(document).on("click.firstCheck", "#cancel-exit-btn", function () {
+    closeExitModal();
+  });
+
+  $(document).off("click.firstCheck", "#confirm-exit-btn");
+  $(document).on("click.firstCheck", "#confirm-exit-btn", function () {
+    window.location.href = "/beranda.html";
+  });
+
+  // Modal Backdrop click to cancel
+  $(document).off("click.firstCheck", "#exit-modal");
+  $(document).on("click.firstCheck", "#exit-modal", function (e) {
+    if (e.target === this) {
+      closeExitModal();
+    }
+  });
+
+  function openExitModal() {
+    const $modal = $("#exit-modal");
+    $modal.removeClass("hidden");
+    setTimeout(() => {
+      $modal.removeClass("opacity-0 pointer-events-none");
+      $modal.find("> div").removeClass("scale-95").addClass("scale-100");
+    }, 10);
+  }
+
+  function closeExitModal() {
+    const $modal = $("#exit-modal");
+    $modal.addClass("opacity-0 pointer-events-none");
+    $modal.find("> div").removeClass("scale-100").addClass("scale-95");
+    setTimeout(() => {
+      $modal.addClass("hidden");
+    }, 300);
+  }
+
   // --- Event Listener: Pilih Opsi Jawaban ---
   // `.off()` digunakan untuk mencegah multiple binding jika script ini dijalankan ulang
   $(document).off("click.firstCheck", ".option-btn");
@@ -116,6 +158,19 @@
     // Ambil data-score ("hijau", "kuning", "merah") dari atribut tombol
     const chosenScore = $(this).data("score");
     userScores[currentQuestionIndex] = chosenScore;
+    
+    // Lanjut ke pertanyaan berikutnya
+    currentQuestionIndex++;
+    loadQuestionComponent(currentQuestionIndex);
+  });
+
+  // --- Event Listener: Tombol Skip ---
+  $(document).off("click.firstCheck", "#quiz-skip-btn");
+  $(document).on("click.firstCheck", "#quiz-skip-btn", function () {
+    if (isLoading) return; // Cegah double click saat transisi
+    
+    // Set skor pertanyaan ini sebagai null (dilewati / tidak dijawab)
+    userScores[currentQuestionIndex] = null;
     
     // Lanjut ke pertanyaan berikutnya
     currentQuestionIndex++;
@@ -137,26 +192,33 @@
    * menyimpan data ke localStorage, dan mengarahkan ke halaman Beranda.
    */
   function hitungHasilEmosi() {
-    // 1. Hitung total skor angka (hijau=0, kuning=1, merah=2)
-    const totalScore = userScores.reduce((sum, kategori) => sum + (SCORE_VALUE[kategori] ?? 0), 0);
-    
-    // 2. Hitung berapa kali user memilih opsi merah
-    const merahCount = userScores.filter((s) => s === "merah").length;
+    // 1. Filter hanya jawaban yang valid (abaikan null/undefined/skipped)
+    const validScores = userScores.filter((s) => s && SCORE_VALUE[s] !== undefined);
 
-    // 3. Tentukan ambang batas (threshold) kondisi
-    const beratThreshold = MAX_SCORE * 0.55; // Ambang skor untuk kondisi 'berat'
-    const cemasThreshold = MAX_SCORE * 0.25; // Ambang skor untuk kondisi 'cemas'
-
-    let kondisi = "baik"; // Default kondisi jika skor rendah
+    // 2. Hitung total skor angka dari pertanyaan yang dijawab (hijau=0, kuning=1, merah=2)
+    const totalScore = validScores.reduce((sum, kategori) => sum + (SCORE_VALUE[kategori] ?? 0), 0);
     
-    // Rule kondisi (skor total melebih ambang batas OR opsi merah terpilih sejumlah batas)
-    if (totalScore >= beratThreshold || merahCount >= 3) {
-      kondisi = "berat";
-    } else if (totalScore >= cemasThreshold || merahCount >= 1) {
-      kondisi = "cemas";
+    // 3. Hitung berapa kali user memilih opsi merah
+    const merahCount = validScores.filter((s) => s === "merah").length;
+
+    // 4. Hitung ambang batas (threshold) proporsional berdasarkan jumlah pertanyaan yang dijawab
+    const answeredCount = validScores.length;
+    const effectiveMaxScore = answeredCount > 0 ? answeredCount * SCORE_VALUE.merah : MAX_SCORE;
+
+    const beratThreshold = effectiveMaxScore * 0.55; // Ambang skor untuk kondisi 'berat'
+    const cemasThreshold = effectiveMaxScore * 0.25; // Ambang skor untuk kondisi 'cemas'
+
+    let kondisi = "baik"; // Default kondisi jika skor rendah atau tidak ada pertanyaan yang dijawab
+    
+    if (answeredCount > 0) {
+      if (totalScore >= beratThreshold || merahCount >= 3) {
+        kondisi = "berat";
+      } else if (totalScore >= cemasThreshold || merahCount >= 1) {
+        kondisi = "cemas";
+      }
     }
 
-    // 4. Konfigurasi pesan Sapaan (Greeting Card) sesuai kondisi
+    // 5. Konfigurasi pesan Sapaan (Greeting Card) sesuai kondisi
     const KONDISI_COPY = {
       berat: {
         title: "Hei, kamu hebat sudah bertahan sejauh ini.",
@@ -174,14 +236,14 @@
 
     const copy = KONDISI_COPY[kondisi];
 
-    // 5. Simpan seluruh hasil dan status ke localStorage
+    // 6. Simpan seluruh hasil dan status ke localStorage
     // 'userMentalCheckedAt' berfungsi sebagai token otentikasi session-gate
     localStorage.setItem("userMentalKondisi", kondisi);
     localStorage.setItem("userMentalTitle", copy.title);
     localStorage.setItem("userMentalMessage", copy.message);
     localStorage.setItem("userMentalCheckedAt", new Date().toISOString());
 
-    // 6. Selesai -> Arahkan user masuk ke aplikasi utama (Beranda)
+    // 7. Selesai -> Arahkan user masuk ke aplikasi utama (Beranda)
     window.location.href = "/beranda.html";
   }
 
