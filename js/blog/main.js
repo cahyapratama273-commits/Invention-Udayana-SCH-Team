@@ -86,25 +86,25 @@
       var featuredUrl = `/artikel/?id=${featuredArticle.id}&kategori=${catSlug}&slug=${titleSlug}`;
 
       var html = `
-        <a href="${featuredUrl}" class="group block rounded-2xl overflow-hidden border border-[rgba(255,255,255,0.1)] hover:border-[#2DD4A8] backdrop-blur-md transition-all duration-300 shadow-xl hover:shadow-2xl" style="background:rgba(21,27,46,0.6); text-decoration:none;">
-          <div class="flex flex-col md:flex-row h-full">
-            <div class="w-full md:w-1/2 overflow-hidden aspect-[16/9] md:aspect-[4/3]" style="background:rgba(26,33,56,0.5);">
-              <div class="w-full h-full relative">
-                <img src="${featuredArticle.gambar}" alt="${featuredArticle.judul}" class="w-full h-full object-cover" onerror="this.src='/assets/Images/placeholder.svg';">
-              </div>
-            </div>
-            <div class="w-full md:w-1/2 p-5 sm:p-8 md:p-10 lg:p-12 flex flex-col justify-center">
-              <span class="text-[11px] sm:text-xs font-bold uppercase tracking-widest mb-2 sm:mb-3 md:mb-4" style="color:#2DD4A8;">${featuredArticle.kategori}</span>
-              <h3 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-2 sm:mb-3 md:mb-4 leading-snug md:leading-tight" style="font-family:'Playfair Display',serif; color:#F5F5F5;">
-                ${featuredArticle.judul}
-              </h3>
-              <p class="text-xs sm:text-sm md:text-base leading-relaxed mb-4 sm:mb-6 line-clamp-3 md:line-clamp-none" style="color:#8A93A8;">
-                ${featuredArticle.ringkasan}
-              </p>
-              <span class="text-xs sm:text-sm font-medium mt-auto" style="color:#2DD4A8;">Baca selengkapnya &rarr;</span>
+      <a href="${featuredUrl}" class="group block rounded-2xl overflow-hidden bg-white/10 border border-white/20 hover:border-[#2DD4A8] backdrop-blur-md transition-all duration-300 shadow-xl hover:shadow-2xl" style="text-decoration:none;">
+        <div class="flex flex-col md:flex-row h-full">
+          <div class="w-full md:w-1/2 overflow-hidden aspect-[16/9] md:aspect-[4/3] bg-white/5">
+            <div class="w-full h-full relative">
+              <img src="${featuredArticle.gambar}" alt="${featuredArticle.judul}" class="w-full h-full object-cover" onerror="this.src='/assets/Images/placeholder.svg';">
             </div>
           </div>
-        </a>
+          <div class="w-full md:w-1/2 p-5 sm:p-8 md:p-10 lg:p-12 flex flex-col justify-center">
+            <span class="text-[11px] sm:text-xs font-bold uppercase tracking-widest mb-2 sm:mb-3 md:mb-4" style="color:#2DD4A8;">${featuredArticle.kategori}</span>
+            <h3 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-2 sm:mb-3 md:mb-4 leading-snug md:leading-tight" style="font-family:'Playfair Display',serif; color:#F5F5F5;">
+              ${featuredArticle.judul}
+            </h3>
+            <p class="text-xs sm:text-sm md:text-base leading-relaxed mb-4 sm:mb-6 line-clamp-3 md:line-clamp-none" style="color:#8A93A8;">
+              ${featuredArticle.ringkasan}
+            </p>
+            <span class="text-xs sm:text-sm font-medium mt-auto" style="color:#2DD4A8;">Baca selengkapnya &rarr;</span>
+          </div>
+        </div>
+      </a>
       `;
       featuredEl.innerHTML = html;
     }

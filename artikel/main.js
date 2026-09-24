@@ -150,7 +150,7 @@ function renderDetailArtikel(artikel) {
         </div>
         <div>
           <p class="text-xs text-[#94A3B8] uppercase tracking-wider font-semibold">Ditinjau oleh</p>
-          <p class="text-sm font-bold text-white">Care Team BerTeduh</p>
+          <p class="text-sm font-bold text-white">By Team BerTeduh</p>
         </div>
       </div>
       <div class="flex items-center gap-3 w-full sm:w-auto justify-end">
