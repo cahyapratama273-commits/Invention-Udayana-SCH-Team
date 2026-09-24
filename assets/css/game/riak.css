@@ -1,0 +1,153 @@
+/* ==========================================================================
+   Riak Sensory Experience — Scoped Styles (/assets/css/game/riak.css)
+   ========================================================================== */
+
+#riak-experience-wrapper {
+  position: relative;
+  width: 100%;
+  min-height: calc(100vh - 64px);
+  overflow: hidden;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Background Transition Container */
+.riak-canvas-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  z-index: 10;
+  cursor: crosshair;
+}
+
+/* Interactive Canvas Themes */
+.riak-theme-air {
+  background: radial-gradient(circle at 50% 40%, #0d1a2d 0%, #080f1d 60%, #050a14 100%);
+  transition: background 0.8s ease;
+}
+
+.riak-theme-angkasa {
+  background: radial-gradient(circle at 50% 40%, #120d24 0%, #0a0817 60%, #04030a 100%);
+  transition: background 0.8s ease;
+}
+
+/* Floating Sensory Controls Bar */
+.riak-controls-bar {
+  position: relative;
+  z-index: 20;
+  pointer-events: auto;
+}
+
+/* Theme Switch Segment Pill */
+.riak-theme-btn {
+  padding: 6px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 9999px;
+  transition: all 0.25s ease;
+  color: #8A93A8;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: none;
+}
+
+.riak-theme-btn.active {
+  background: rgba(255, 255, 255, 0.15);
+  color: #F5F5F5;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+.riak-theme-btn:hover:not(.active) {
+  color: #F5F5F5;
+}
+
+/* Real Color Picker Control */
+.riak-color-picker-label {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 4px 10px 4px 5px;
+  border-radius: 9999px;
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.riak-color-picker-label:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.riak-color-preview {
+  width: 20px;
+  height: 20px;
+  border-radius: 9999px;
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  flex-shrink: 0;
+  pointer-events: none;
+}
+
+.riak-color-picker-label:hover .riak-color-preview {
+  transform: scale(1.12);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.riak-color-native-input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  border: none;
+}
+
+/* Interaction Hint Overlay */
+#riak-hint {
+  position: absolute;
+  bottom: 12%;
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+  z-index: 20;
+  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+#riak-hint.faded {
+  opacity: 0 !important;
+  transform: translate(-50%, 15px) !important;
+  pointer-events: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .riak-color-picker-label {
+    padding: 3px;
+  }
+}
+
+/* Motion Sensitivity Warning Banner */
+#riak-motion-warning {
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+#riak-motion-warning.opacity-0 {
+  opacity: 0;
+  transform: translateY(-8px);
+  pointer-events: none;
+}
+

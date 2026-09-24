@@ -130,8 +130,7 @@ function renderDetailArtikel(artikel) {
     </div>
 
     <!-- Quote / Ringkasan Highlight -->
-    <div class="p-6 sm:p-8 rounded-2xl mb-12 border-l-4 border-[#2DD4A8] backdrop-blur-md shadow-2xl"
-         style="background:rgba(13,18,32,0.6); border-top:1px solid rgba(255,255,255,0.1); border-right:1px solid rgba(255,255,255,0.1); border-bottom:1px solid rgba(255,255,255,0.1);">
+    <div class="p-6 sm:p-8 rounded-2xl mb-12 border-l-4 border-[#2DD4A8] bg-white/10 backdrop-blur-md border border-white/20 shadow-2xl">
       <p class="text-lg sm:text-xl text-[#F8FAFC] italic font-serif leading-relaxed">
         "${artikel.ringkasan}"
       </p>
@@ -169,7 +168,7 @@ function renderDetailArtikel(artikel) {
 
       <div class="grid gap-3">
         <!-- Kartu: Tanya AI -->
-        <div class="flex gap-4 items-start bg-[#151B2E] text-white rounded-t-2xl rounded-br-2xl rounded-bl-sm p-5 border border-white/10 shadow-lg">
+        <div class="flex gap-4 items-start bg-white/10 backdrop-blur-md text-white rounded-t-2xl rounded-br-2xl rounded-bl-sm p-5 border border-white/20 shadow-lg">
           <div class="shrink-0 w-[38px] h-[38px] rounded-full bg-white/10 flex items-center justify-center">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
               <path d="M4 5h16v11H8l-4 4V5Z" stroke="#2DD4A8" stroke-width="1.6" stroke-linejoin="round"/>
@@ -188,7 +187,7 @@ function renderDetailArtikel(artikel) {
         </div>
 
         <!-- Kartu: Cari Psikolog -->
-        <div class="flex gap-4 items-start bg-[#151B2E] border border-white/10 rounded-2xl p-5 shadow-lg">
+        <div class="flex gap-4 items-start bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-5 shadow-lg">
           <div class="shrink-0 w-[38px] h-[38px] rounded-[10px] flex items-center justify-center bg-[#38BDF8]/15">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
               <circle cx="12" cy="8" r="3.4" stroke="#38BDF8" stroke-width="1.6"/>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <script src="/js/session-gate.js"></script>
+  <meta name="author" content="SCH Team - Invention Udayana 2026">
+  <meta property="og:title" content="BerTeduh — Riak Sensorik">
+  <meta property="og:description" content="Ruang sensorik interaktif untuk meredakan ketegangan dan mengembalikan fokus batin.">
+  <meta property="og:image" content="/assets/Images/Image-Bertapa.webp">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Teduh — Riak Sensorik</title>
+  <link rel="icon" type="image/png" href="/assets/Images/for-icon.png">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" type="text/css"
+    href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css" />
+  <link rel="stylesheet" type="text/css"
+    href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css" />
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <link rel="stylesheet" href="/assets/css/main.css" />
+  <link rel="stylesheet" href="/assets/css/game/riak.css" />
+</head>
+
+<body data-page="riak" style="background:#0D1220; color:#F5F5F5;" class="overflow-x-hidden">
+
+  <!-- Navbar Slot -->
+  <div id="navbar-slot" class="relative z-50"></div>
+
+  <main id="app-content" data-page="riak" class="relative flex flex-col flex-1">
+
+    <!-- Experience Container -->
+    <div id="riak-experience-wrapper" class="riak-theme-air flex-1">
+
+      <!-- Interactive 2D Canvas Layer -->
+      <canvas id="riak-canvas" class="riak-canvas-layer"></canvas>
+
+      <!-- Top Overlay: Minimal Sensory Controls -->
+      <div class="riak-controls-bar w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 pt-24 sm:pt-28 pb-4 flex flex-col sm:flex-row items-center justify-between gap-4 pointer-events-none">
+        
+        <!-- Header Text -->
+        <div class="pointer-events-auto text-center sm:text-left select-none">
+          <span class="text-[11px] sm:text-xs font-semibold tracking-widest uppercase mb-1 inline-block" style="color:#2DD4A8;">Ruang Sensorik</span>
+          <h1 class="text-2xl sm:text-3xl font-bold text-white tracking-tight" style="font-family:'Playfair Display',serif;">
+            Riak Ketenangan
+          </h1>
+          <p class="text-xs sm:text-sm text-[#8A93A8] hidden sm:block">
+            Sentuh perlahan dan biarkan riak meredakan kepenatanmu.
+          </p>
+        </div>
+
+        <!-- Controls Pill Bar (Theme, Color Picker, Mute) -->
+        <div class="pointer-events-auto flex items-center gap-3 sm:gap-4 p-2 sm:p-2.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 shadow-xl">
+          
+          <!-- Theme Switcher: Air ⇄ Angkasa -->
+          <div class="flex items-center p-1 rounded-full bg-black/30 border border-white/10">
+            <button id="riak-theme-air-btn" type="button" class="riak-theme-btn active" title="Tema Air" aria-label="Tema Air">
+              <i class="ph ph-drop text-base"></i>
+              <span class="hidden md:inline">Air</span>
+            </button>
+            <button id="riak-theme-angkasa-btn" type="button" class="riak-theme-btn" title="Tema Angkasa" aria-label="Tema Angkasa">
+              <i class="ph ph-sparkle text-base"></i>
+              <span class="hidden md:inline">Angkasa</span>
+            </button>
+          </div>
+
+          <div class="w-[1px] h-5 bg-white/15"></div>
+
+          <!-- Color Picker -->
+          <label for="riak-color-input" class="riak-color-picker-label" title="Pilih Warna Riak" aria-label="Pilih Warna Riak">
+            <span id="riak-color-preview" class="riak-color-preview" style="background-color: #38BDF8;"></span>
+            <span class="text-[11px] text-[#CBD5E1] hidden lg:inline font-medium">Warna</span>
+            <input type="color" id="riak-color-input" value="#38BDF8" class="riak-color-native-input" aria-label="Pilih Warna Riak" />
+          </label>
+
+          <div class="w-[1px] h-5 bg-white/15"></div>
+
+          <!-- Mute Toggle Button -->
+          <button id="riak-mute-btn" type="button" class="w-8 h-8 rounded-full flex items-center justify-center text-[#8A93A8] hover:text-[#F5F5F5] hover:bg-white/10 transition cursor-pointer" title="Bisukan / Bunyikan Suara" aria-label="Bisukan suara">
+            <span id="riak-icon-sound-on">
+              <i class="ph ph-speaker-high text-lg"></i>
+            </span>
+            <span id="riak-icon-sound-off" class="hidden">
+              <i class="ph ph-speaker-slash text-lg"></i>
+            </span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Motion Sensitivity Notice Banner (Air theme only, dismissible) -->
+      <div id="riak-motion-warning" class="w-full max-w-2xl mx-auto px-4 sm:px-6 relative z-30 pointer-events-auto transition-all duration-300 hidden">
+        <div class="flex items-start sm:items-center justify-between gap-3 sm:gap-4 p-3.5 sm:p-4 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 border-l-4 border-l-amber-400/80 shadow-2xl text-left">
+          <div class="flex items-start gap-3">
+            <span class="w-7 h-7 rounded-full bg-amber-400/15 flex items-center justify-center text-amber-300 flex-shrink-0 mt-0.5 sm:mt-0">
+              <i class="ph ph-wave-sine text-base"></i>
+            </span>
+            <p class="text-xs sm:text-[13px] text-[#CBD5E1] leading-relaxed">
+              Efek riak gelombang di halaman ini mungkin terasa intens bagi sebagian orang. Kalau kamu sensitif terhadap gerakan, kamu bisa beralih ke tema <strong class="text-white font-medium">Angkasa</strong> atau menutup peringatan ini.
+            </p>
+          </div>
+          <button id="riak-warning-dismiss-btn" type="button" class="text-[#8A93A8] hover:text-white transition-colors p-1 rounded-lg hover:bg-white/10 flex-shrink-0" title="Tutup peringatan" aria-label="Tutup peringatan">
+            <i class="ph ph-x text-base"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Centered Gentle Hint Overlay -->
+      <div id="riak-hint" class="px-5 py-2.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-[#CBD5E1] text-xs sm:text-sm font-medium shadow-2xl flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-[#2DD4A8] animate-ping"></span>
+        <span>Ketuk atau seret perlahan</span>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Footer Component Slot -->
+  <div id="footer"></div>
+
+  <!-- Scripts -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="/js/NavRender.js"></script>
+  <script src="/js/Nav.js"></script>
+  <script src="/js/Footer.js"></script>
+
+  <!-- Riak Engine, Audio, and UI Scripts -->
+  <script src="/js/game/RiakAudio.js"></script>
+  <script src="/js/game/RiakEngine.js"></script>
+  <script src="/js/game/RiakUI.js"></script>
+</body>
+
+</html>

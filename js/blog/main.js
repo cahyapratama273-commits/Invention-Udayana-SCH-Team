@@ -166,6 +166,34 @@
       if (untukKamuSection) untukKamuSection.classList.remove("hidden");
     }
 
+    // -- Render "Yoga untuk Pikiranmu" Section (kategori === "Yoga")
+    function renderYogaSection() {
+      var yogaGrid = document.getElementById("yoga-artikel-grid");
+      if (!yogaGrid) return;
+
+      var yogaArticles = semuaArtikel.filter(a => a.kategori === "Yoga");
+      if (yogaArticles.length === 0) {
+        var yogaSec = document.getElementById("section-yoga");
+        if (yogaSec) yogaSec.classList.add("hidden");
+        return;
+      }
+
+      // Sort by featured first, then original order
+      var sortedYoga = [...yogaArticles].sort((a, b) => {
+        if (a.featured && !b.featured) return -1;
+        if (!a.featured && b.featured) return 1;
+        return 0;
+      });
+
+      var selectedYoga = sortedYoga.slice(0, 4);
+
+      if (typeof renderArtikelCardCompact === "function") {
+        yogaGrid.innerHTML = selectedYoga.map(renderArtikelCardCompact).join("");
+      } else if (typeof renderArtikelCard === "function") {
+        yogaGrid.innerHTML = selectedYoga.map(a => renderArtikelCard(a, { compact: true })).join("");
+      }
+    }
+
     // -- Render Filter Tabs (in a panel as pills)
     function renderFilters() {
       if (!filterEl) return;
@@ -358,10 +386,27 @@
         filterPanel.classList.toggle('hidden');
         if (filterPanel.classList.contains('hidden')) {
           toggleBtn.classList.remove('bg-white', 'text-black');
-          toggleBtn.classList.add('bg-[#151B2E]', 'text-[#8A93A8]');
+          toggleBtn.classList.add('bg-white/10', 'text-[#8A93A8]');
         } else {
           toggleBtn.classList.add('bg-white', 'text-black');
-          toggleBtn.classList.remove('bg-[#151B2E]', 'text-[#8A93A8]');
+          toggleBtn.classList.remove('bg-white/10', 'text-[#8A93A8]');
+        }
+      });
+    }
+
+    // View all Yoga button handler
+    var viewAllYogaBtn = document.getElementById("view-all-yoga-btn");
+    if (viewAllYogaBtn) {
+      viewAllYogaBtn.addEventListener('click', function() {
+        currentFilter = "Yoga";
+        currentPage = 1;
+        renderFilters();
+        renderArticles();
+        var scrollTarget = document.getElementById("blog-artikel-grid");
+        if (scrollTarget) {
+          const yOffset = -120;
+          const y = scrollTarget.getBoundingClientRect().top + window.pageYOffset + yOffset;
+          window.scrollTo({ top: y, behavior: 'smooth' });
         }
       });
     }
@@ -369,6 +414,7 @@
     // -- Initial render
     renderFeatured();
     renderUntukKamu();
+    renderYogaSection();
     renderFilters();
     renderArticles();
 

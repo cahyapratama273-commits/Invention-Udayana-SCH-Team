@@ -49,8 +49,7 @@
 
     <!-- "Untuk Kamu" Section (Personalized, condition-based) -->
     <section id="section-untuk-kamu" class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 pb-12">
-      <div class="rounded-2xl p-6 sm:p-8 backdrop-blur-md" 
-           style="background:rgba(21,27,46,0.6); border:1px solid rgba(45,212,168,0.25);">
+      <div class="rounded-2xl p-6 sm:p-8 bg-white/10 backdrop-blur-md border border-white/20 shadow-xl">
         
         <div class="mb-6">
           <span class="text-[11px] sm:text-xs font-semibold tracking-widest uppercase mb-2 inline-block" style="color:#2DD4A8;">ARTIKEL POPULER</span>
@@ -68,7 +67,7 @@
         </div>
 
         <!-- Fallback if no quiz result in localStorage -->
-        <div id="untuk-kamu-fallback" class="hidden text-center py-8 px-4 rounded-xl border border-dashed border-white/10" style="background:rgba(13,18,32,0.4);">
+        <div id="untuk-kamu-fallback" class="hidden text-center py-8 px-4 rounded-xl bg-white/5 border border-dashed border-white/20">
           <p class="text-base font-semibold text-[#F5F5F5] mb-2">Ingin rekomendasi artikel yang sesuai kondisimu?</p>
           <p class="text-xs sm:text-sm text-[#8A93A8] max-w-md mx-auto mb-5">Yuk ikuti kuis Cek Emosi singkat untuk memahami perasaanmu saat ini dan menemukan bacaan yang tepat.</p>
           <a href="/index.html" class="inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-xs font-bold bg-[#2DD4A8] text-[#0D1220] hover:bg-[#25b892] transition-colors shadow-md">
@@ -81,16 +80,17 @@
     <!-- Filter, Search, and Grid Section -->
     <section class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 pb-20 sm:pb-24">
       
-      <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-6">
+      <!-- Search & Category Filter Controls -->
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8">
         
-        <!-- Judul Section -->
-        <h2 class="text-2xl sm:text-3xl font-bold shrink-0" style="font-family:'Playfair Display',serif; color:#F5F5F5;">
-          Semua Artikel
-        </h2>
+        <div class="flex items-center gap-3">
+          <span class="text-[11px] sm:text-xs font-semibold tracking-widest uppercase" style="color:#2DD4A8;">Eksplorasi</span>
+          <span class="text-xs text-[#8A93A8]">• Cari bacaan yang kamu butuhkan</span>
+        </div>
 
         <div class="flex items-center gap-3 w-full md:w-auto">
           <!-- Button Toggle Filter -->
-          <button id="toggle-filter-btn" class="flex items-center justify-center gap-2 text-sm text-[#8A93A8] hover:text-[#F5F5F5] transition px-4 py-2.5 backdrop-blur-md rounded-full border border-[rgba(255,255,255,0.08)] whitespace-nowrap shrink-0" style="background:rgba(21,27,46,0.6);">
+          <button id="toggle-filter-btn" type="button" class="flex items-center justify-center gap-2 text-sm text-[#8A93A8] hover:text-[#F5F5F5] transition px-4 py-2.5 bg-white/10 backdrop-blur-md rounded-full border border-white/20 whitespace-nowrap shrink-0 hover:border-[#2DD4A8]">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/>
             </svg>
@@ -100,7 +100,7 @@
           <!-- Search Bar -->
           <div class="relative flex-1 md:w-64 lg:w-72">
             <input type="text" id="blog-search-input" placeholder="Cari artikel..." 
-                   class="w-full backdrop-blur-md border border-[rgba(255,255,255,0.08)] rounded-full py-2.5 pl-5 pr-12 text-sm text-[#F5F5F5] placeholder-[#8A93A8] focus:outline-none focus:border-[#2DD4A8] transition" style="background:rgba(21,27,46,0.6);">
+                   class="w-full bg-white/10 backdrop-blur-md border border-white/20 rounded-full py-2.5 pl-5 pr-12 text-sm text-[#F5F5F5] placeholder-[#8A93A8] focus:outline-none focus:border-[#2DD4A8] transition">
             <svg class="w-5 h-5 absolute right-4 top-1/2 -translate-y-1/2 text-[#8A93A8]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
@@ -109,18 +109,50 @@
       </div>
 
       <!-- Kategori Panel (Tersembunyi by default) -->
-      <div id="filter-panel" class="hidden mb-8 p-6 backdrop-blur-md rounded-2xl border border-[rgba(255,255,255,0.08)]" style="background:rgba(21,27,46,0.6);">
+      <div id="filter-panel" class="hidden mb-8 p-6 bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 shadow-xl">
         <p class="text-sm text-[#8A93A8] mb-4">Pilih Kategori:</p>
         <div id="blog-category-filter" class="flex flex-wrap gap-3">
           <!-- Kategori dinamis akan di-inject lewat JS -->
         </div>
       </div>
 
+      <!-- SECTION YOGA: GERAKAN & KETENANGAN -->
+      <div id="section-yoga" class="mb-14 sm:mb-16">
+        <div class="rounded-2xl p-6 sm:p-8 md:p-10 bg-white/10 backdrop-blur-md border border-white/20 shadow-xl">
+          <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
+            <div>
+              <span class="text-[11px] sm:text-xs font-semibold tracking-widest uppercase mb-2 inline-block" style="color:#2DD4A8;">GERAKAN & KETENANGAN</span>
+              <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2" style="font-family:'Playfair Display',serif;">
+                Yoga untuk Pikiranmu
+              </h2>
+              <p class="text-xs sm:text-sm text-[#8A93A8] max-w-xl leading-relaxed">
+                Gerakan fisik lembut dan olah napas terpandu untuk membantu merilis ketegangan batin dan menyelaraskan tubuh.
+              </p>
+            </div>
+            <button id="view-all-yoga-btn" type="button" class="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-[#2DD4A8] hover:text-[#25b892] transition-colors whitespace-nowrap self-start sm:self-auto cursor-pointer">
+              Lihat 20 Artikel Yoga &rarr;
+            </button>
+          </div>
+
+          <!-- Yoga 2x2 Grid -->
+          <div id="yoga-artikel-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- Injected via JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Section Title: Semua Artikel -->
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="text-2xl sm:text-3xl font-bold shrink-0" style="font-family:'Playfair Display',serif; color:#F5F5F5;">
+          Semua Artikel
+        </h2>
+      </div>
+
       <!-- Grid Artikel -->
       <div id="blog-artikel-grid" class="flex flex-col gap-4">
-        <div class="tile rounded-2xl h-72 animate-pulse backdrop-blur-md" style="background:rgba(21,27,46,0.6);"></div>
-        <div class="tile rounded-2xl h-72 animate-pulse backdrop-blur-md" style="background:rgba(21,27,46,0.6);"></div>
-        <div class="tile rounded-2xl h-72 animate-pulse backdrop-blur-md" style="background:rgba(21,27,46,0.6);"></div>
+        <div class="tile rounded-2xl h-72 animate-pulse bg-white/10 backdrop-blur-md border border-white/20"></div>
+        <div class="tile rounded-2xl h-72 animate-pulse bg-white/10 backdrop-blur-md border border-white/20"></div>
+        <div class="tile rounded-2xl h-72 animate-pulse bg-white/10 backdrop-blur-md border border-white/20"></div>
       </div>
 
       <!-- Pagination Container -->

@@ -1292,5 +1292,525 @@
         "url": "https://kesprimkom.kemkes.go.id"
       }
     ]
+  },
+  {
+    "id": "yoga-1",
+    "kondisi": "baik",
+    "featured": true,
+    "kategori": "Yoga",
+    "judul": "Mengenal Yoga: Cara Sederhana Memulai Gerakan Kebugaran dan Ketenangan Tubuh",
+    "ringkasan": "Yoga menawarkan perpaduan gerakan lembut, pernapasan, dan relaksasi yang dapat disesuaikan dengan kemampuan fisik siapa saja.",
+    "kutipan": "Yoga bukan tentang seberapa lentur tubuhmu, melainkan seberapa hadir kamu di dalam setiap napas.",
+    "waktu_baca": "5 menit baca",
+    "gambar": "/assets/Images/artikel/landscape_webp/landscape1_1_11zon.webp",
+    "konten": [
+      "Banyak orang mengira yoga membutuhkan kelenturan tubuh tingkat tinggi atau pengalaman bertahun-tahun. Padahal, inti dari latihan yoga adalah menyelaraskan gerakan fisik dengan pernapasan yang sadar. Harvard Health Publishing mencatat bahwa yoga merupakan bentuk aktivitas fisik berintensitas ringan hingga sedang yang aman dan sangat adaptif untuk berbagai tingkat kebugaran.",
+      "Latihan yoga yang dilakukan secara rutin dapat membantu melatih keseimbangan tubuh, fleksibilitas sendi, serta kekuatan otot inti. Menurut Mayo Clinic, perhatian yang diberikan pada pola napas saat bergerak membantu menenangkan respons saraf, sehingga tubuh merasa lebih segar dan rileks setelah latihan. Kamu bisa memulainya dari durasi singkat, seperti 5 hingga 10 menit setiap hari.",
+      "Tidak ada keharusan untuk menguasai posisi yang rumit saat baru pertama kali mencoba. Kamu cukup menyiapkan matras atau area lantai yang nyaman dan aman di rumah. Mulailah dengan sikap duduk yang nyaman, rasakan setiap tarikan dan hembusan napas, lalu gerakkan tubuh secara perlahan sesuai batas kenyamanan diri."
+    ],
+    "sumber": [
+      {
+        "nama": "Harvard Health Publishing",
+        "url": "https://www.health.harvard.edu"
+      },
+      {
+        "nama": "Mayo Clinic",
+        "url": "https://www.mayoclinic.org"
+      }
+    ]
+  },
+  {
+    "id": "yoga-2",
+    "kondisi": "cemas",
+    "featured": true,
+    "kategori": "Yoga",
+    "judul": "Rahasia Child's Pose (Balasana) dalam Meredakan Otot Tegang dan Pikiran Cemas",
+    "ringkasan": "Pose bertekuk lutut yang menunduk ini membantu memberi rasa aman dan melepas tekanan di area punggung.",
+    "kutipan": "Saat dunia terasa terlalu cepat, menunduk sejenak dalam Balasana memberi jeda yang menenangkan.",
+    "waktu_baca": "5 menit baca",
+    "gambar": "/assets/Images/artikel/landscape_webp/landscape2_2_11zon.webp",
+    "konten": [
+      "Child's Pose atau Balasana adalah salah satu posisi istirahat paling mendasar dalam praktik yoga. Dengan posisi melipat tubuh ke depan dan menempelkan dahi ke matras, pose ini secara alami menciptakan rasa perlindungan dan ketenangan. Cleveland Clinic menjelaskan bahwa posisi menunduk ini membantu mengurangi ketegangan di leher, bahu, dan punggung bawah yang sering kaku akibat kecemasan.",
+      "Secara fisiologis, menempelkan dahi ke permukaan yang stabil dapat memberikan stimulasi lembut pada refleks penenangan tubuh. Yoga Journal menambahkan bahwa bernapas dalam-dalam saat berada di posisi Balasana memberi ruang bagi paru-paru bagian belakang untuk mengembang, yang berdampak positif pada pelepasan dorongan stres.",
+      "Kamu dapat melakukan pose ini kapan saja di rumah saat merasa kewalahan oleh tumpukan pikiran. Duduklah di atas tumit, buka lutut perlahan, lalu bungkukkan badan ke depan hingga dada bersandar di antara paha. Tahan posisi ini selama 1 hingga 3 menit sambil bernapas perlahan melalui hidung."
+    ],
+    "sumber": [
+      {
+        "nama": "Cleveland Clinic",
+        "url": "https://health.clevelandclinic.org"
+      },
+      {
+        "nama": "Yoga Journal",
+        "url": "https://www.yogajournal.com"
+      }
+    ]
+  },
+  {
+    "id": "yoga-3",
+    "kondisi": "cemas",
+    "featured": false,
+    "kategori": "Yoga",
+    "judul": "Menyeimbangkan Sistem Saraf dengan Gerakan Cat-Cow Stretch (Marjaryasana-Bitilasana)",
+    "ringkasan": "Kombinasi melengkungkan dan membulatkan punggung selaras napas membantu melenturkan tulang belakang.",
+    "kutipan": "Alirkan napas bersama setiap lekuk tulang belakang untuk mengembalikan irama tenang di tubuhmu.",
+    "waktu_baca": "5 menit baca",
+    "gambar": "/assets/Images/artikel/landscape_webp/landscape3_3_11zon.webp",
+    "konten": [
+      "Gerakan Cat-Cow atau Marjaryasana-Bitilasana merupakan pasangan pose dinamis yang menghubungkan napas dengan ritme tulang belakang. Saat menarik napas, dada dibuka ke depan (Cow Pose), dan saat menghembuskan napas, punggung dibulatkan ke atas (Cat Pose). Mayo Clinic menyoroti bahwa mobilitas tulang belakang yang teratur dapat mencegah kekakuan otot akibat posisi duduk yang terlalu lama.",
+      "Pola gerakan yang sinkron dengan napas ini berfungsi mengalihkan perhatian dari pikiran berulang menuju sensasi fisik di saat ini. Menurut Yoga Journal, transisi halus antara Cat dan Cow menstimulasi saraf sepanjang tulang belakang dan membantu mengaktifkan cabang saraf parasimpatik yang menurunkan tingkat ketegangan.",
+      "Lakukan gerakan ini sebanyak 5 hingga 8 kali siklus di atas matras dengan posisi merangkak. Pastikan telapak tangan berada sejajar di bawah bahu dan lutut berada di bawah pinggul. Dengarkan tubuhmu dan jangan memaksakan lengkungan melebihi batas kenyamanan."
+    ],
+    "sumber": [
+      {
+        "nama": "Mayo Clinic",
+        "url": "https://www.mayoclinic.org"
+      },
+      {
+        "nama": "Yoga Journal",
+        "url": "https://www.yogajournal.com"
+      }
+    ]
+  },
+  {
+    "id": "yoga-4",
+    "kondisi": "berat",
+    "featured": false,
+    "kategori": "Yoga",
+    "judul": "Legs-Up-The-Wall (Viparita Karani): Pose Restoratif Saat Tubuh dan Emosi Terasa Lelah",
+    "ringkasan": "Menyandarkan kedua kaki tegak di dinding memberi kesempatan bagi sirkulasi darah dan pikiran untuk beristirahat.",
+    "kutipan": "Rebahkan tubuh dan biarkan dinding menopang bebanmu sejenak tanpa perlu menahan apa pun.",
+    "waktu_baca": "6 menit baca",
+    "gambar": "/assets/Images/artikel/landscape_webp/landscape4_4_11zon.webp",
+    "konten": [
+      "Saat keletihan fisik dan emosional terasa menumpuk, melakukan latihan yang menguras tenaga bisa jadi terasa terlalu berat. Pose Legs-Up-The-Wall atau Viparita Karani menawarkan alternatif restoratif yang sangat lembut. Harvard Health Publishing menjelaskan bahwa inversi pasif ini membantu melancarkan aliran balik darah dari kaki menuju jantung serta mengurangi pembengkakan di tungkai.",
+      "Dengan meletakkan kaki di atas dinding dan berbaring terlentang di lantai, tekanan pada tulang belakang berkurang secara signifikan. Cleveland Clinic menambahkan bahwa posisi ini membantu menurunkan detak jantung dan membawa tubuh ke mode pemulihan yang sangat dibutuhkan saat energi mental berada di titik terendah.",
+      "Kamu cukup berbaring rapat ke dinding dan membiarkan kedua lengan terbentang rileks di samping tubuh selama 5 hingga 10 menit. Jika beban emosional yang kamu rasakan berlanjut dan terasa sulit ditanggung sendiri, ingatlah bahwa berkonsultasi dengan profesional kesehatan mental tetap merupakan langkah pendamping yang sangat berharga di samping latihan mandiri ini."
+    ],
+    "sumber": [
+      {
+        "nama": "Harvard Health Publishing",
+        "url": "https://www.health.harvard.edu"
+      },
+      {
+        "nama": "Cleveland Clinic",
+        "url": "https://health.clevelandclinic.org"
+      }
+    ]
+  },
+  {
+    "id": "yoga-5",
+    "kondisi": "baik",
+    "featured": false,
+    "kategori": "Yoga",
+    "judul": "Menyegarkan Pagi Hari dengan Pose Mountain (Tadasana) dan Postur Tegak",
+    "ringkasan": "Berdiri tegak dengan pijakan mantap membantu meningkatkan kesadaran tubuh dan fokus sejak awal hari.",
+    "kutipan": "Postur tegak bukan cuma soal estetika fisik, tetapi sinyal kesiapan mental menghadapi hari.",
+    "waktu_baca": "4 menit baca",
+    "gambar": "/assets/Images/artikel/landscape_webp/landscape5_5_11zon.webp",
+    "konten": [
+      "Mountain Pose atau Tadasana tampak seperti posisi berdiri biasa, tetapi sejatinya merupakan pondasi utama dari seluruh pose yoga berdiri. Dengan menyebarkan beban tubuh secara merata di kedua telapak kaki dan meluruskan tulang belakang, pose ini melatih proprioception atau kesadaran posisi tubuh. Mayo Clinic mencatat bahwa postur tubuh yang baik berkontribusi pada efisiensi pernapasan dan keseimbangan energi.",
+      "Penelitian di bidang psikologi somatik yang dirangkum oleh American Psychological Association (APA) menunjukkan bahwa postur tubuh yang tegak dan terbuka dapat memengaruhi persepsi diri secara positif. Berdiri tegak dengan bahu rileks membantu membuka area dada sehingga napas pagi dapat mengalir lebih dalam dan stabil.",
+      "Untuk mempraktikkannya, berdirilah dengan kedua kaki dibuka sejajar pinggul. Rasakan pijakan empat titik telapak kaki di lantai, panjangkan tulang belakang ke atas, dan lepaskan ketegangan di wajah serta bahu. Tahan pose ini selama 5 napas dalam sebelum memulai aktivitas harianmu."
+    ],
+    "sumber": [
+      {
+        "nama": "Mayo Clinic",
+        "url": "https://www.mayoclinic.org"
+      },
+      {
+        "nama": "American Psychological Association (APA)",
+        "url": "https://www.apa.org"
+      }
+    ]
+  },
+  {
+    "id": "yoga-6",
+    "kondisi": "cemas",
+    "featured": false,
+    "kategori": "Yoga",
+    "judul": "Corpse Pose (Savasana): Seni Mengistirahatkan Pikiran di Akhir Sesi Gerak",
+    "ringkasan": "Berbaring pasrah tanpa mengontrol napas secara ketat membantu menyerap manfaat latihan fisik.",
+    "kutipan": "Dalam keheningan Savasana, tubuh menyerap ketenangan dan membiarkan kesibukan berlalu.",
+    "waktu_baca": "5 menit baca",
+    "gambar": "/assets/Images/artikel/landscape_webp/landscape6_6_11zon.webp",
+    "konten": [
+      "Savasana atau Corpse Pose sering kali disebut sebagai pose yang paling sederhana sekaligus paling menantang dalam yoga. Posisi berbaring terlentang tanpa gerakan ini menuntut kita untuk melepaskan segala bentuk kendali fisik dan mental. Yoga Journal menekankan bahwa Savasana berfungsi sebagai waktu integrasi di mana sistem saraf beradaptasi setelah bergerak.",
+      "Saat berada dalam Savasana, gelombang otak cenderung bertransisi menuju fase yang lebih lambat dan rileks. Harvard Health Publishing menjelaskan bahwa relaksasi total ini membantu menurunkan kadar hormon stres katisol dan memberi kesempatan bagi otot-otot yang tegang untuk mengendur secara menyeluruh.",
+      "Rebahkan tubuh di matras dengan kedua kaki terbuka santai dan telapak tangan menghadap ke atas di samping pinggul. Pejamkan mata perlahan dan biarkan napas mengalir tanpa perlu diatur lagi. Tetaplah di posisi ini selama 5 hingga 10 menit sebelum perlahan bangun kembali."
+    ],
+    "sumber": [
+      {
+        "nama": "Yoga Journal",
+        "url": "https://www.yogajournal.com"
+      },
+      {
+        "nama": "Harvard Health Publishing",
+        "url": "https://www.health.harvard.edu"
+      }
+    ]
+  },
+  {
+    "id": "yoga-7",
+    "kondisi": "cemas",
+    "featured": false,
+    "kategori": "Yoga",
+    "judul": "Kaitan Yoga dan Saraf Vagus: Mengapa Gerakan Pelan Membantu Meredakan Stres",
+    "ringkasan": "Stimulasi pada saraf vagus melalui napas lambat dan peregangan tubuh membantu mengaktifkan respons rileks alami.",
+    "kutipan": "Gerakan pelan dan napas dalam adalah bahasa yang dimengerti oleh saraf tubuh untuk merasa aman.",
+    "waktu_baca": "6 menit baca",
+    "gambar": "/assets/Images/artikel/landscape_webp/landscape7_7_11zon.webp",
+    "konten": [
+      "Saraf vagus merupakan bagian utama dari sistem saraf parasimpatik yang mengontrol fungsi istirahat dan pencernaan di dalam tubuh kita. Ketika kita mengalami ketegangan emosional, respons saraf simpatik (fight-or-flight) menjadi dominan. Harvard Health Publishing menjelaskan bahwa praktik yoga yang memadukan napas dalam dan peregangan dapat menstimulasi saraf vagus secara efektif.",
+      "Stimulasi saraf vagus ini bertindak seperti rem alami bagi detak jantung yang terpacu cepat dan tekanan darah yang meningkat saat cemas. American Psychological Association (APA) mencatat bahwa peningkatan tonus vagal berkaitan erat dengan regulasi emosi yang lebih baik dan ketahanan tubuh dalam mengolah kondisi stres harian.",
+      "Kamu tidak selalu membutuhkan latihan yang panjang untuk merasakan manfaat ini. Cukup luangkan waktu 5 menit untuk melakukan peregangan lambat yang disertai hembusan napas lebih panjang dibanding tarikan napas. Latihan konsisten ini secara bertahap melatih tubuh untuk lebih gampang kembali tenang."
+    ],
+    "sumber": [
+      {
+        "nama": "Harvard Health Publishing",
+        "url": "https://www.health.harvard.edu"
+      },
+      {
+        "nama": "American Psychological Association (APA)",
+        "url": "https://www.apa.org"
+      }
+    ]
+  },
+  {
+    "id": "yoga-8",
+    "kondisi": "baik",
+    "featured": false,
+    "kategori": "Yoga",
+    "judul": "Membuka Dada dan Pundak Kaku Lewat Pose Cobra (Bhujangasana)",
+    "ringkasan": "Peregangan melengkung ke belakang ini melatih mobilitas dada serta meringankan kekakuan akibat duduk lama.",
+    "kutipan": "Buka dada dan tarik napas segar untuk menyegarkan kembali tubuh yang lelah menunduk.",
+    "waktu_baca": "5 menit baca",
+    "gambar": "/assets/Images/artikel/kotak_webp/kotak1_1_11zon.webp",
+    "konten": [
+      "Kebiasaan menunduk menatap layar gawai atau bekerja di depan komputer sering kali membuat otot dada memendek dan pundak membungkuk ke depan. Pose Cobra atau Bhujangasana hadir sebagai gerakan backbend lembut yang memanjangkan otot-otot bagian depan tubuh. Cleveland Clinic mencatat bahwa gerakan melengkungkan tulang belakang ke belakang membantu memperbaiki postur dan meringankan tekanan dada.",
+      "Selain dampak fisik, membuka area dada juga memberikan stimulasi energi positif. Yoga Journal menjelaskan bahwa ekstensi tulang belakang yang terkontrol dapat meningkatkan kapasitas paru-paru dan memperbaiki aliran udara, sehingga tubuh merasa lebih bertenaga dan siap beraktivitas.",
+      "Untuk mencobanya, berbaringlah telungkup dengan kedua telapak tangan berada di bawah bahu. Tarik napas perlahan sambil menekan telapak tangan dan mengangkat dada sedikit dari matras tanpa memaksakan siku lurus penuh. Jagalah bahu tetap jauh dari telinga dan tahan selama 3 hingga 5 napas."
+    ],
+    "sumber": [
+      {
+        "nama": "Cleveland Clinic",
+        "url": "https://health.clevelandclinic.org"
+      },
+      {
+        "nama": "Yoga Journal",
+        "url": "https://www.yogajournal.com"
+      }
+    ]
+  },
+  {
+    "id": "yoga-9",
+    "kondisi": "berat",
+    "featured": false,
+    "kategori": "Yoga",
+    "judul": "Seated Forward Fold (Paschimottanasana) untuk Menenangkan Gelombang Pikiran",
+    "ringkasan": "Bungkukan badan ke depan yang lembut membantu merilekskan otot belakang dan mengarahkan perhatian ke dalam.",
+    "kutipan": "Membungkuk ke dalam adalah bentuk ajakan lembut untuk mengistirahatkan pikiran dari kebisingan luar.",
+    "waktu_baca": "5 menit baca",
+    "gambar": "/assets/Images/artikel/kotak_webp/kotak2_2_11zon.webp",
+    "konten": [
+      "Gerakan membungkuk ke depan atau Paschimottanasana merupakan pose introspektif yang mengarahkan pandangan dan perhatian kembali ke diri sendiri. Latihan ini secara lembut meregangkan seluruh bagian belakang tubuh, mulai dari betis, hamstring, hingga sepanjang tulang punggung. Yoga Journal menjelaskan bahwa lipatan ke depan memiliki efek alami yang menenangkan sistem saraf.",
+      "Organisasi Kesehatan Dunia (WHO) menggarisbawahi pentingnya latihan fisik mandiri yang mendukung kesehatan emosional harian. Saat badan dibungkukkan ke depan secara santai, napas perlahan diarahkan ke area punggung bawah, menciptakan rasa pelepasan ketegangan yang berangsur-angsur.",
+      "Duduklah dengan kedua kaki lurus ke depan, lalu bungkukkan badan dari pangkal pinggul tanpa perlu memaksakan tangan menyentuh jemari kaki. Bila beban berat yang kamu rasakan di dalam diri bertahan lama dan mengganggu fungsi harian, cobalah untuk membuka diri pada bantuan konselor atau psikolog profesional sebagai langkah pendamping yang bijak."
+    ],
+    "sumber": [
+      {
+        "nama": "Yoga Journal",
+        "url": "https://www.yogajournal.com"
+      },
+      {
+        "nama": "World Health Organization (WHO)",
+        "url": "https://www.who.int"
+      }
+    ]
+  },
+  {
+    "id": "yoga-10",
+    "kondisi": "cemas",
+    "featured": false,
+    "kategori": "Yoga",
+    "judul": "Panduan Pernapasan Pranayama Sederhana untuk Menstabilkan Emosi Harian",
+    "ringkasan": "Latihan mengontrol tarikan dan hembusan napas secara teratur dapat membantu menenangkan detak jantung yang terpacu.",
+    "kutipan": "Napas adalah jembatan paling dekat untuk menghubungkan pikiran yang cemas kembali ke ketenangan.",
+    "waktu_baca": "5 menit baca",
+    "gambar": "/assets/Images/artikel/kotak_webp/kotak3_3_11zon.webp",
+    "konten": [
+      "Pranayama adalah seni olah napas yang menjadi komponen inti dalam tradisi yoga. Saat cemas melanda, pola napas kita cenderung menjadi pendek, cepat, dan dangkal di area dada atas. Mayo Clinic menjelaskan bahwa beralih ke pernapasan diafragma yang lebih dalam dapat mengaktifkan sinyal rileks di otak dan menurunkan ritme napas.",
+      "Salah satu teknik Pranayama sederhana yang sangat efektif adalah Nadi Shodhana atau pernapasan bergantian lubang hidung. Menurut Harvard Health Publishing, fokus pada irama pernapasan membantu mengalihkan perhatian dari pikiran yang memicu rasa khawatir sekaligus membawa keseimbangan pada aktivitas otak.",
+      "Kamu bisa mempraktikkannya dengan duduk tegak di tempat yang tenang. Tutup lubang hidung kanan dengan jempol lalu tarik napas lewat lubang kiri, kemudian tutup lubang kiri dan hembuskan napas lewat lubang kanan. Lakukan bergantian selama 2 hingga 3 menit setiap kali kamu merasa butuh kestabilan emosi."
+    ],
+    "sumber": [
+      {
+        "nama": "Mayo Clinic",
+        "url": "https://www.mayoclinic.org"
+      },
+      {
+        "nama": "Harvard Health Publishing",
+        "url": "https://www.health.harvard.edu"
+      }
+    ]
+  },
+  {
+    "id": "yoga-11",
+    "kondisi": "baik",
+    "featured": false,
+    "kategori": "Yoga",
+    "judul": "Yoga Tanpa Matras: Latihan Ringan yang Bisa Dilakukan di Ruang Sempit",
+    "ringkasan": "Kamu tidak membutuhkan perlengkapan khusus untuk menikmati manfaat gerakan yoga di sela kesibukan.",
+    "kutipan": "Ketenangan tidak menuntut ruangan besar, hanya niat kecil untuk menggerakkan tubuh dengan sadar.",
+    "waktu_baca": "4 menit baca",
+    "gambar": "/assets/Images/artikel/kotak_webp/kotak4_4_11zon.webp",
+    "konten": [
+      "Banyak orang menunda mencoba yoga karena menganggap harus memiliki studio khusus atau peralatan yang lengkap. Padahal, inti dari gerakan yoga dapat dipraktikkan di mana saja, termasuk di kamar kost berukuran kecil atau di samping meja kerja. Cleveland Clinic menyatakan bahwa peregangan singkat saat jeda kerja dapat mengurangi kelelahan otot dan menjaga kesegaran tubuh.",
+      "Gerakan sederhana seperti peregangan lengan ke atas, putaran pinggul pelan, dan pembukaan dada dapat dilakukan sambil berdiri di lantai karpet biasa. Mayo Clinic menegaskan bahwa konsistensi bergerak dalam durasi pendek jauh lebih bermanfaat bagi mobilitas harian daripada menunggu waktu luang yang jarang ada.",
+      "Cobalah luangkan waktu 3 menit di sela aktivitasmu. Berdirilah santai, tarik napas dalam sambil meluruskan kedua tangan ke langit-langit, lalu hembuskan napas sambil memutar badan pelan ke kanan dan ke kiri. Latihan praktis ini terbukti efektif menyegarkan pikiran tanpa repot."
+    ],
+    "sumber": [
+      {
+        "nama": "Cleveland Clinic",
+        "url": "https://health.clevelandclinic.org"
+      },
+      {
+        "nama": "Mayo Clinic",
+        "url": "https://www.mayoclinic.org"
+      }
+    ]
+  },
+  {
+    "id": "yoga-12",
+    "kondisi": "cemas",
+    "featured": false,
+    "kategori": "Yoga",
+    "judul": "Melatih Fokus dan Keseimbangan Lewat Tree Pose (Vrksasana)",
+    "ringkasan": "Berdiri dengan satu kaki melatih konsentrasi penuh dan rasa berpijak yang stabil pada bumi.",
+    "kutipan": "Pohon yang kokoh bukan yang tidak pernah bergoyang, melainkan yang akarnya menancap dalam.",
+    "waktu_baca": "5 menit baca",
+    "gambar": "/assets/Images/artikel/kotak_webp/kotak5_5_11zon.webp",
+    "konten": [
+      "Tree Pose atau Vrksasana adalah latihan keseimbangan berdiri yang menuntut koordinasi tubuh dan pikiran secara utuh. Ketika kita berdiri hanya di atas satu kaki, pikiran dipaksa untuk fokus penuh pada titik tumpu agar tubuh tidak terjatuh. Yoga Journal mencatat bahwa pose ini memperkuat pergelangan kaki, paha, serta otot perut bagian bawah.",
+      "Fokus intens yang dibutuhkan dalam pose keseimbangan secara alami memotong alur pikiran yang sedang mengembara atau cemas. Menurut American Psychological Association (APA), memusatkan perhatian pada tugas sensori-motorik di saat ini merupakan salah satu strategi efektif untuk menurunkan kecemasan seketika.",
+      "Untuk mencobanya, berdirilah tegak lalu pindahkan beban tubuh ke kaki kiri. Tempelkan telapak kaki kanan di bagian dalam betis atau paha kiri (hindari area lutut). Satukan kedua telapak tangan di depan dada dan pandang satu titik tetap di dinding depanmu selama 5 napas."
+    ],
+    "sumber": [
+      {
+        "nama": "Yoga Journal",
+        "url": "https://www.yogajournal.com"
+      },
+      {
+        "nama": "American Psychological Association (APA)",
+        "url": "https://www.apa.org"
+      }
+    ]
+  },
+  {
+    "id": "yoga-13",
+    "kondisi": "berat",
+    "featured": false,
+    "kategori": "Yoga",
+    "judul": "Reclining Bound Angle Pose (Supta Baddha Konasana) Saat Butuh Perlindungan Diri",
+    "ringkasan": "Pose telentang dengan kaki terbuka santai memberikan ruang aman untuk melepas beban di otot pinggul.",
+    "kutipan": "Izinkan dirimu bersandar sepenuhnya dan menerima ketenangan tanpa perlu merasa bersalah.",
+    "waktu_baca": "5 menit baca",
+    "gambar": "/assets/Images/artikel/kotak_webp/kotak6_6_11zon.webp",
+    "konten": [
+      "Pinggul merupakan salah satu area tubuh tempat kita tanpa sadar menampung banyak ketegangan fisik akibat stres berlanjut. Reclining Bound Angle Pose atau Supta Baddha Konasana adalah posisi restoratif terlentang yang membuka area pinggul dan paha dalam secara lembut. Yoga Journal menjelaskan bahwa pose ini sangat cocok dilakukan saat merasa emosi lelah dan butuh pemulihan.",
+      "Dengan menyandarkan punggung di matras atau ditopang bantal empuk, dada terbuka secara alami tanpa piksaan. Organisasi Kesehatan Dunia (WHO) menggarisbawahi bahwa memberi ruang bagi relaksasi fisik merupakan bagian dari perlindungan kesejahteraan emosional harian.",
+      "Berbaringlah terlentang, pertemukan kedua telapak kaki, dan biarkan lutut terbuka ke samping kanan dan kiri. Letakkan satu tangan di dada dan satu tangan di perut untuk merasakan hembusan napasmu. Jika rasa berat di pikiran terasa berkepanjangan, ingatlah bahwa berkonsultasi dengan profesional kesehatan mental selalu menjadi pilihan pendamping yang aman."
+    ],
+    "sumber": [
+      {
+        "nama": "Yoga Journal",
+        "url": "https://www.yogajournal.com"
+      },
+      {
+        "nama": "World Health Organization (WHO)",
+        "url": "https://www.who.int"
+      }
+    ]
+  },
+  {
+    "id": "yoga-14",
+    "kondisi": "baik",
+    "featured": false,
+    "kategori": "Yoga",
+    "judul": "Mana yang Lebih Cocok untukmu: Yoga atau Meditasi Duduk?",
+    "ringkasan": "Kedua praktik ini saling melengkapi, di mana gerakan yoga dapat menjadi jembatan menuju meditasi yang lebih tenang.",
+    "kutipan": "Gerakan fisik melatih tubuh untuk diam, sementara meditasi melatih pikiran untuk tenang.",
+    "waktu_baca": "5 menit baca",
+    "gambar": "/assets/Images/artikel/potrait_webp/potrait1_8_11zon.webp",
+    "konten": [
+      "Banyak orang merasa sulit langsung duduk diam dalam meditasi karena pikiran yang masih riuh atau tubuh yang terasa kaku. Di sinilah yoga berperan sebagai peregangan persiapan. Harvard Health Publishing menjelaskan bahwa gabungan gerakan fisik dan napas dalam yoga melatih perhatian penuh (mindfulness) yang mempermudah seseorang untuk memasuki kondisi hening.",
+      "Sementara itu, meditasi duduk fokus murni pada pengamatan pikiran tanpa melibatkan gerakan tubuh. Mayo Clinic mencatat bahwa baik yoga maupun meditasi sama-sama bermanfaat untuk menurunkan respons stres dan meningkatkan kejernihan emosional, sehingga pilihan terbaik bergantung pada kebutuhanmu saat ini.",
+      "Jika tubuhmu terasa gelisah dan kaku, mulailah dengan 10 menit latihan yoga ringan terlebih dahulu. Setelah otot-otot terasa kendur dan napas mulai stabil, kamu bisa melanjutkan dengan 5 menit meditasi duduk. Kombinasi ini memberikan pengalaman relaksasi yang menyeluruh."
+    ],
+    "sumber": [
+      {
+        "nama": "Harvard Health Publishing",
+        "url": "https://www.health.harvard.edu"
+      },
+      {
+        "nama": "Mayo Clinic",
+        "url": "https://www.mayoclinic.org"
+      }
+    ]
+  },
+  {
+    "id": "yoga-15",
+    "kondisi": "cemas",
+    "featured": false,
+    "kategori": "Yoga",
+    "judul": "Menghilangkan Ketegangan Leher dan Bahu dengan Sit-and-Stretch Ringan",
+    "ringkasan": "Peregangan leher dan bahu sederhana di atas kursi dapat dilakukan kapan saja untuk melepas rasa kaku.",
+    "kutipan": "Lepaskan beban di bahumu dengan pergerakan lembut dan tarikan napas yang lega.",
+    "waktu_baca": "4 menit baca",
+    "gambar": "/assets/Images/artikel/potrait_webp/potrait2_9_11zon.webp",
+    "konten": [
+      "Otot leher dan otot trapezius di bahu adalah lokasi paling umum terjadinya penumpukan ketegangan akibat kecemasan dan posisi duduk yang buruk. Cleveland Clinic menjelaskan bahwa otot-otot di area ini sering kali berkontraksi tanpa sadar saat seseorang berada di bawah tekanan emosional.",
+      "Melakukan peregangan leher secara teratur membantu memulihkan aliran darah dan fleksibilitas jaringan otot. Mayo Clinic menyarankan agar peregangan dilakukan secara perlahan tanpa sentakan atau paksaan, sehingga serat otot mendapatkan kesempatan untuk memanjang secara alami.",
+      "Duduklah tegak di atas kursi, lalu miringkan telinga kanan perlahan ke arah bahu kanan hingga terasa peregangan lembut di leher kiri. Tahan selama 30 detik sambil menghembuskan napas pelan, kemudian ulangi pada sisi sebaliknya. Gerakan sepele ini langsung memberi sensasi enteng di kepala."
+    ],
+    "sumber": [
+      {
+        "nama": "Cleveland Clinic",
+        "url": "https://health.clevelandclinic.org"
+      },
+      {
+        "nama": "Mayo Clinic",
+        "url": "https://www.mayoclinic.org"
+      }
+    ]
+  },
+  {
+    "id": "yoga-16",
+    "kondisi": "cemas",
+    "featured": false,
+    "kategori": "Yoga",
+    "judul": "Teknik Box Breathing: Olah Napas 4 Detik untuk Menenangkan Ruang Pikiran",
+    "ringkasan": "Metode bernapas empat fase simetris ini efektif menetralkan rasa panik dan mengembalikan fokus.",
+    "kutipan": "Kendalikan napasmu dalam empat hitungan tenang untuk menguasai kembali ketenangan diri.",
+    "waktu_baca": "4 menit baca",
+    "gambar": "/assets/Images/artikel/potrait_webp/potrait3_10_11zon.webp",
+    "konten": [
+      "Box Breathing atau pernapasan empat kotak adalah latihan olah napas terstruktur yang sering terintegrasi dalam praktik yoga dan manajemen stres modern. Mayo Clinic menjelaskan bahwa teknik ini melibatkan empat langkah berdurasi sama: menarik napas, menahan napas, menghembuskan napas, dan menahan napas kembali.",
+      "Irama simetris 4 detik pada setiap fase membantu menstabilkan fungsi sistem saraf otonom. Menurut Cleveland Clinic, ketertiban dalam hitungan napas memfokuskan pusat perhatian otak, sehingga alur pikiran cemas yang meloncat-loncat dapat diredam dengan cepat.",
+      "Praktikkannya dengan menghirup napas selama 4 detik, tahan napas selama 4 detik, hembuskan napas lewat mulut selama 4 detik, dan tahan napas kembali selama 4 detik. Ulangi siklus ini 4 hingga 5 kali kapan saja kamu merasa membutuhkan penenang alami."
+    ],
+    "sumber": [
+      {
+        "nama": "Mayo Clinic",
+        "url": "https://www.mayoclinic.org"
+      },
+      {
+        "nama": "Cleveland Clinic",
+        "url": "https://health.clevelandclinic.org"
+      }
+    ]
+  },
+  {
+    "id": "yoga-17",
+    "kondisi": "baik",
+    "featured": false,
+    "kategori": "Yoga",
+    "judul": "Membangun Rutinitas Malam: Yoga Ringan untuk Tidur Lebih Nyenyak",
+    "ringkasan": "Rangkaian pose peregangan lembut sebelum tidur membantu mempermudah transisi tubuh menuju istirahat malam.",
+    "kutipan": "Tutup harimu dengan melepas gerakan tegang, dan biarkan tidur malam memulihkan energimu.",
+    "waktu_baca": "5 menit baca",
+    "gambar": "/assets/Images/artikel/potrait_webp/potrait4_11_11zon.webp",
+    "konten": [
+      "Kesulitan tidur di malam hari sering disebabkan oleh tubuh yang masih berada dalam mode siaga tinggi setelah seharian beraktivitas. Harvard Health Publishing mencatat bahwa melakukan yoga malam berintensitas rendah dapat meningkatkan kualitas tidur dengan memicu pelepasan melatonin dan menurunkan ketegangan fisik.",
+      "Rangkaian pose santai seperti lipatan tubuh lembut dan peregangan terlentang memberi sinyal biologis kepada otak bahwa saatnya beristirahat. Mayo Clinic menambahkan bahwa menghindari olahraga berat di malam hari dan menggantinya dengan gerak yoga halus merupakan bagian penting dari higienitas tidur yang baik.",
+      "Luangkan waktu 10 menit sebelum naik ke tempat tidur untuk melakukan peregangan santai di lantai yang redup cahaya. Jauhkan gawai, fokus pada hembusan napas yang panjang, dan biarkan tubuh bertransisi secara alami menuju tidur yang lelap."
+    ],
+    "sumber": [
+      {
+        "nama": "Harvard Health Publishing",
+        "url": "https://www.health.harvard.edu"
+      },
+      {
+        "nama": "Mayo Clinic",
+        "url": "https://www.mayoclinic.org"
+      }
+    ]
+  },
+  {
+    "id": "yoga-18",
+    "kondisi": "berat",
+    "featured": false,
+    "kategori": "Yoga",
+    "judul": "Gerakan Downward-Facing Dog (Adho Mukha Svanasana) untuk Melancarkan Aliran Energi",
+    "ringkasan": "Pose segitiga terbalik ini mengalirkan sirkulasi darah ke kepala serta memanjangkan seluruh tubuh belakang.",
+    "kutipan": "Temukan kekuatan tersembunyi di dalam dirimu saat menopang tubuh dengan lembut dan stabil.",
+    "waktu_baca": "5 menit baca",
+    "gambar": "/assets/Images/artikel/potrait_webp/potrait5_12_11zon.webp",
+    "konten": [
+      "Downward-Facing Dog atau Adho Mukha Svanasana adalah salah satu pose paling ikonik dalam yoga yang membentuk huruf V terbalik. Pose ini menggabungkan manfaat penguatan lengan dan tungkai dengan inversi lembut di mana posisi kepala berada lebih rendah dari jantung. Yoga Journal menjelaskan bahwa posisi ini menyegarkan sirkulasi darah ke otak.",
+      "Peregangan penuh pada betis, hamstring, dan punggung ini membantu menyebarkan ketegangan yang menumpuk di tubuh. Organisasi Kesehatan Dunia (WHO) menggarisbawahi bahwa latihan fisik seimbang yang aman mendukung pemulihan stamina fisik dan daya tahan emosional harian.",
+      "Dorong pinggul ke atas dan ke belakang dari posisi merangkak, sambil menekan telapak tangan dengan kuat ke matras. Lutut boleh sedikit ditekuk jika hamstring terasa kaku. Bila rasa berat di pikiranmu membutuhkan pendampingan lebih mendalam, menyapa konselor profesional adalah langkah pemulihan yang sangat disarankan."
+    ],
+    "sumber": [
+      {
+        "nama": "Yoga Journal",
+        "url": "https://www.yogajournal.com"
+      },
+      {
+        "nama": "World Health Organization (WHO)",
+        "url": "https://www.who.int"
+      }
+    ]
+  },
+  {
+    "id": "yoga-19",
+    "kondisi": "cemas",
+    "featured": false,
+    "kategori": "Yoga",
+    "judul": "Mengapa Kombinasi Napas dan Gerakan Membantu Mengurangi Sensasi Tegang",
+    "ringkasan": "Kesadaran somatik yang terbangun saat bergerak selaras napas membantu melepas pola ketegangan tubuh.",
+    "kutipan": "Saat napas dan tubuh bergerak dalam harmoni, kecemasan kehilangan ruang untuk bertumbuh.",
+    "waktu_baca": "5 menit baca",
+    "gambar": "/assets/Images/artikel/potrait_webp/potrait6_13_11zon.webp",
+    "konten": [
+      "Kecemasan sering kali manifested secara fisik dalam bentuk kepalan tangan tanpa sadar, napas tertahan, atau rahang yang mengatup rapat. American Psychological Association (APA) menjelaskan bahwa koneksi pikiran-tubuh (mind-body connection) berarti perubahan pada pola fisik dapat langsung memengaruhi kondisi emosional.",
+      "Dalam yoga, setiap gerakan dihubungkan secara sengaja dengan tarikan atau hembusan napas. Harvard Health Publishing menyoroti bahwa keterhubungan somatik ini membantu seseorang menyadari dan melepaskan konstriksi otot secara sadar sebelum menjadi ketegangan kronis.",
+      "Cobalah setiap kali bergerak dalam keseharianmu untuk menyertakan perhatian pada napas. Saat mengangkat barang atau melangkah, rasakan aliran udaranya. Kesadaran sederhana ini secara ampuh menjaga ketenangan di tengah rutinitas."
+    ],
+    "sumber": [
+      {
+        "nama": "American Psychological Association (APA)",
+        "url": "https://www.apa.org"
+      },
+      {
+        "nama": "Harvard Health Publishing",
+        "url": "https://www.health.harvard.edu"
+      }
+    ]
+  },
+  {
+    "id": "yoga-20",
+    "kondisi": "baik",
+    "featured": false,
+    "kategori": "Yoga",
+    "judul": "Menjaga Konsistensi Latihan Yoga Tanpa Perlu Target Tinggi",
+    "ringkasan": "Menikmati proses gerak singkat yang penuh belas kasih pada diri sendiri jauh lebih berharga daripada latihan berat yang jarang.",
+    "kutipan": "Kebaikan pada diri sendiri dimulai dari menerima kapasitas tubuhmu apa adanya hari ini.",
+    "waktu_baca": "4 menit baca",
+    "gambar": "/assets/Images/artikel/potrait_webp/potrait7_14_11zon.webp",
+    "konten": [
+      "Banyak orang berhenti berlatih yoga karena merasa tidak mampu memenuhi durasi yang panjang atau pose yang sempurna. Padahal, Mayo Clinic menekankan bahwa kunci utama dari aktivitas kebugaran untuk kesejahteraan mental adalah keteraturan dan rasa nyaman saat melakukannya.",
+      "Latihan yoga selama 5 menit yang dilakukan dengan penuh kesadaran setiap hari memberikan dampak akumulatif yang jauh lebih positif dibanding latihan 1 jam seminggu sekali yang melelahkan. Harvard Health Publishing menambahkan bahwa pendekatan yang fleksibel dan lembut pada diri sendiri justru memicu kebiasaan sehat yang bertahan lama.",
+      "Jadikan yoga sebagai hadiah kecil untuk dirimu di akhir atau awal hari, bukan sebagai beban tugas baru. Dengarkan apa yang dibutuhkan tubuhmu saat ini -- apakah peregangan lembut, pernapasan tenang, atau sekadar beristirahat di matras."
+    ],
+    "sumber": [
+      {
+        "nama": "Mayo Clinic",
+        "url": "https://www.mayoclinic.org"
+      },
+      {
+        "nama": "Harvard Health Publishing",
+        "url": "https://www.health.harvard.edu"
+      }
+    ]
   }
 ]
