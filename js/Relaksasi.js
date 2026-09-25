@@ -23,32 +23,56 @@ const TINGKAT_COLOR_MAP = {
   }
 };
 
-let allRelaksasiSteps = [];
+const VIDEO_MAP = {
+  1: '/assets/VideoYoga/Pernapasan-Perut-(Diaphragmatic Breathing).mp4',
+  2: '/assets/VideoYoga/Cat-Cow-(Pose-Kucing-Sapi).mp4',
+  3: null,
+  4: '/assets/VideoYoga/Seated-Forward-Fold-(Paschimottanasana).mp4',
+  5: '/assets/VideoYoga/Legs-Up-The-Wall-(Viparita-Karani).mp4',
+  6: '/assets/VideoYoga/Corpse-Pose-(Savasana).mp4',
+  7: '/assets/VideoYoga/Standing-Forward-Bend-(Uttanasana).mp4',
+  8: '/assets/VideoYoga/Easy-Pose-Breathing-(Sukhasana).mp4',
+  9: '/assets/VideoYoga/Cobr-Pose-(Bhujangasana).mp4',
+  10: '/assets/VideoYoga/Butterfly-Pose-(Baddha-Konasana).mp4',
+  11: '/assets/VideoYoga/Mountain-Pose-(Tadasana).mp4',
+  12: null
+};
 
 // Function to render HTML for a static pose card on the listing page
 function renderRelaksasiCard(step) {
   const tingkatKey = (step.tingkat || 'pemula').toLowerCase();
   const tingkatStyle = TINGKAT_COLOR_MAP[tingkatKey] || TINGKAT_COLOR_MAP.pemula;
   const detailUrl = `/relaksasi-detail.html?id=${step.id}`;
+  const videoSrc = VIDEO_MAP[step.id];
+  const videoTersedia = Boolean(videoSrc);
 
   return `
     <a href="${detailUrl}" id="card-relaksasi-${step.id}" class="group bg-white/10 backdrop-blur-md rounded-2xl p-5 sm:p-6 border border-white/20 hover:border-[#2DD4A8] transition-all duration-300 shadow-xl flex flex-col gap-4 block cursor-pointer">
       
-      <!-- Video Thumbnail Container with Centered Play Button (No live video / No numeric badge) -->
+      <!-- Video Thumbnail Container -->
       <div class="relative w-full aspect-video rounded-xl overflow-hidden border border-white/10 bg-black/50 shadow-md">
         <img src="${step.video_thumbnail}" alt="${step.judul}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" onerror="this.onerror=null; this.src='/assets/Images/artikel/hutan1.webp';" />
         
-        <div class="absolute inset-0 flex items-center justify-center bg-black/40 group-hover:bg-black/25 transition-all duration-300">
-          <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#0D1220]/75 backdrop-blur-md border border-white/20 flex items-center justify-center shadow-[0_4px_20px_rgba(0,0,0,0.5)] group-hover:scale-110 group-hover:border-[#2DD4A8] group-hover:shadow-[0_0_25px_rgba(45,212,168,0.5)] transition-all duration-300">
-            <img src="/assets/SVGForVideo/play.svg" alt="Play" class="w-7 h-7 sm:w-8 sm:h-8 translate-x-0.5" />
+        ${videoTersedia ? `
+          <div class="absolute inset-0 flex items-center justify-center bg-black/40 group-hover:bg-black/25 transition-all duration-300">
+            <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#0D1220]/75 backdrop-blur-md border border-white/20 flex items-center justify-center shadow-[0_4px_20px_rgba(0,0,0,0.5)] group-hover:scale-110 group-hover:border-[#2DD4A8] group-hover:shadow-[0_0_25px_rgba(45,212,168,0.5)] transition-all duration-300">
+              <img src="/assets/SVGForVideo/play.svg" alt="Play" class="w-7 h-7 sm:w-8 sm:h-8 translate-x-0.5" />
+            </div>
           </div>
-        </div>
+        ` : `
+          <div class="absolute inset-0 flex items-center justify-center bg-black/60 transition-all duration-300">
+            <span class="px-3.5 py-1.5 rounded-full text-xs font-semibold bg-[#FB923C]/20 text-[#FB923C] border border-[#FB923C]/40 backdrop-blur-md shadow-lg uppercase tracking-wider">
+              Segera Hadir
+            </span>
+          </div>
+        `}
       </div>
 
       <!-- Card Title -->
       <div class="flex flex-col gap-2">
-        <h3 class="text-lg sm:text-xl font-bold text-white leading-snug group-hover:text-[#2DD4A8] transition-colors" style="font-family:'Playfair Display',serif;">
-          ${step.judul}
+        <h3 class="text-lg sm:text-xl font-bold text-white leading-snug group-hover:text-[#2DD4A8] transition-colors flex items-center gap-2" style="font-family:'Playfair Display',serif;">
+          <span>${step.emoji || '🧘'}</span>
+          <span>${step.judul}</span>
         </h3>
 
         <!-- Tags Row: Durasi & Tingkat -->
@@ -61,6 +85,11 @@ function renderRelaksasiCard(step) {
           <span class="px-3 py-1 rounded-full font-semibold ${tingkatStyle.bg} ${tingkatStyle.text} border ${tingkatStyle.border}">
             ${step.tingkat ? step.tingkat.charAt(0).toUpperCase() + step.tingkat.slice(1) : tingkatStyle.label}
           </span>
+          ${!videoTersedia ? `
+            <span class="px-3 py-1 rounded-full font-semibold bg-[#FB923C]/10 text-[#FB923C] border border-[#FB923C]/30">
+              Coming Soon
+            </span>
+          ` : ''}
         </div>
       </div>
 
@@ -97,10 +126,10 @@ async function initRelaksasiSteps() {
   try {
     let response;
     try {
-      response = await fetch('/data/relaksasi-steps.json');
+      response = await fetch('/data/step-yoga.json');
       if (!response.ok) throw new Error('Root fetch failed');
     } catch (err) {
-      response = await fetch('./data/relaksasi-steps.json');
+      response = await fetch('./data/step-yoga.json');
     }
 
     if (!response.ok) {

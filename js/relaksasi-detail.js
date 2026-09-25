@@ -23,6 +23,21 @@ const TINGKAT_COLOR_MAP = {
   }
 };
 
+const VIDEO_MAP = {
+  1: '/assets/VideoYoga/Pernapasan-Perut-(Diaphragmatic Breathing).mp4',
+  2: '/assets/VideoYoga/Cat-Cow-(Pose-Kucing-Sapi).mp4',
+  3: null,
+  4: '/assets/VideoYoga/Seated-Forward-Fold-(Paschimottanasana).mp4',
+  5: '/assets/VideoYoga/Legs-Up-The-Wall-(Viparita-Karani).mp4',
+  6: '/assets/VideoYoga/Corpse-Pose-(Savasana).mp4',
+  7: '/assets/VideoYoga/Standing-Forward-Bend-(Uttanasana).mp4',
+  8: '/assets/VideoYoga/Easy-Pose-Breathing-(Sukhasana).mp4',
+  9: '/assets/VideoYoga/Cobr-Pose-(Bhujangasana).mp4',
+  10: '/assets/VideoYoga/Butterfly-Pose-(Baddha-Konasana).mp4',
+  11: '/assets/VideoYoga/Mountain-Pose-(Tadasana).mp4',
+  12: null
+};
+
 let allSteps = [];
 let currentStep = null;
 
@@ -40,10 +55,10 @@ async function loadRelaksasiDetail() {
   try {
     let response;
     try {
-      response = await fetch('/data/relaksasi-steps.json');
+      response = await fetch('/data/step-yoga.json');
       if (!response.ok) throw new Error('Root fetch failed');
     } catch (e) {
-      response = await fetch('./data/relaksasi-steps.json');
+      response = await fetch('./data/step-yoga.json');
     }
 
     if (!response.ok) {
@@ -54,6 +69,13 @@ async function loadRelaksasiDetail() {
     if (!Array.isArray(allSteps) || allSteps.length === 0) {
       throw new Error('Data alur relaksasi kosong');
     }
+
+    // Attach local video URL & availability
+    allSteps = allSteps.map(s => ({
+      ...s,
+      video_url: VIDEO_MAP[s.id] || null,
+      video_tersedia: Boolean(VIDEO_MAP[s.id])
+    }));
 
     // Sort by urutan for internal sequence & navigation logic
     allSteps.sort((a, b) => (a.urutan || 0) - (b.urutan || 0));
@@ -107,7 +129,7 @@ function renderDetailPage(step) {
   // Filter other steps for "Video Lainnya"
   const otherSteps = allSteps.filter(s => s.id !== step.id);
 
-  container.innerHTML = `
+  const playerHTML = step.video_tersedia ? `
     <!-- 1. FULL CUSTOM VIDEO PLAYER -->
     <div id="detail-player-wrapper" class="video-player-container relative w-full aspect-video rounded-2xl overflow-hidden border border-white/10 bg-black shadow-2xl mb-8">
       <video id="detail-video" src="${step.video_url}" playsinline preload="metadata" class="w-full h-full object-cover"></video>
@@ -244,8 +266,9 @@ function renderDetailPage(step) {
       
       <!-- Title & Tags Row -->
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4 pb-4 border-b border-white/10">
-        <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white leading-tight" style="font-family:'Playfair Display',serif;">
-          ${step.judul}
+        <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white leading-tight flex items-center gap-2" style="font-family:'Playfair Display',serif;">
+          <span>${step.emoji || '🧘'}</span>
+          <span>${step.judul}</span>
         </h1>
 
         <div class="flex items-center gap-2 shrink-0 text-xs">
@@ -257,6 +280,11 @@ function renderDetailPage(step) {
           <span class="px-3.5 py-1.5 rounded-full font-semibold ${tingkatStyle.bg} ${tingkatStyle.text} border ${tingkatStyle.border}">
             ${step.tingkat ? step.tingkat.charAt(0).toUpperCase() + step.tingkat.slice(1) : tingkatStyle.label}
           </span>
+          ${!step.video_tersedia ? `
+            <span class="px-3.5 py-1.5 rounded-full font-semibold bg-[#FB923C]/10 text-[#FB923C] border border-[#FB923C]/30">
+              Coming Soon
+            </span>
+          ` : ''}
         </div>
       </div>
 
@@ -291,11 +319,11 @@ function renderDetailPage(step) {
     <!-- 3. VIDEO LAINNYA SECTION -->
     <div class="pt-6 border-t border-white/10">
       <div class="mb-8">
-        <span class="text-xs font-bold uppercase tracking-widest text-[#2DD4A8] mb-1 block">EKSPLORASI POSE</span>
+        <span class="text-[11px] sm:text-xs font-semibold uppercase tracking-widest text-[#2DD4A8] mb-2 block">EKSPLORASI POSE</span>
         <h2 class="text-2xl sm:text-3xl font-bold text-white mb-2" style="font-family:'Playfair Display',serif;">
           Gerakan Relaksasi Lainnya
         </h2>
-        <p class="text-xs sm:text-sm text-[#8A93A8]">
+        <p class="text-xs sm:text-sm leading-relaxed text-[#8A93A8]">
           Lanjutkan sesi relaksasimu dengan pose-pose pemulihan tubuh lainnya di bawah ini.
         </p>
       </div>
@@ -307,8 +335,28 @@ function renderDetailPage(step) {
     </div>
   `;
 
-  // Attach full video player logic
-  initVideoPlayerControls(step, prevStep, nextStep);
+  const comingSoonPlayerHTML = `
+    <!-- COMING SOON VIDEO PLACEHOLDER -->
+    <div id="detail-player-wrapper" class="relative w-full aspect-video rounded-2xl overflow-hidden border border-white/10 bg-black/60 backdrop-blur-md shadow-2xl mb-8 flex flex-col items-center justify-center p-6 text-center">
+      <div class="w-16 h-16 rounded-full bg-[#2DD4A8]/10 border border-[#2DD4A8]/30 flex items-center justify-center mb-4">
+        <span class="text-3xl">${step.emoji || '🧘'}</span>
+      </div>
+      <span class="px-3.5 py-1 rounded-full text-xs font-semibold bg-[#FB923C]/20 text-[#FB923C] border border-[#FB923C]/40 mb-3 uppercase tracking-wider">
+        Video Segera Hadir
+      </span>
+      <h3 class="text-xl font-bold text-white mb-2" style="font-family:'Playfair Display',serif;">${step.judul}</h3>
+      <p class="text-xs sm:text-sm text-[#8A93A8] max-w-md">
+        Panduan video untuk gerakan ini sedang disiapkan. Kamu tetap dapat mempraktikkan pose ini dengan membaca langkah dan manfaat di bawah.
+      </p>
+    </div>
+  `;
+
+  container.innerHTML = (step.video_tersedia ? playerHTML : comingSoonPlayerHTML) + contentHTML;
+
+  // Attach full video player logic if video is available
+  if (step.video_tersedia) {
+    initVideoPlayerControls(step, prevStep, nextStep);
+  }
 }
 
 // Function to render static thumbnail cards for other poses (No numeric badges)
@@ -316,25 +364,35 @@ function renderOtherPoseCard(other) {
   const tingkatKey = (other.tingkat || 'pemula').toLowerCase();
   const tingkatStyle = TINGKAT_COLOR_MAP[tingkatKey] || TINGKAT_COLOR_MAP.pemula;
   const detailUrl = `/relaksasi-detail.html?id=${other.id}`;
+  const videoTersedia = other.video_tersedia !== false;
 
   return `
     <a href="${detailUrl}" class="group bg-white/10 backdrop-blur-md rounded-2xl p-5 border border-white/20 hover:border-[#2DD4A8] transition-all duration-300 shadow-xl flex flex-col gap-4 block cursor-pointer">
       
-      <!-- Thumbnail with Play Icon Overlay -->
+      <!-- Thumbnail with Play Icon Overlay / Coming Soon -->
       <div class="relative w-full aspect-video rounded-xl overflow-hidden border border-white/10 bg-black/50 shadow-md">
         <img src="${other.video_thumbnail}" alt="${other.judul}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" onerror="this.onerror=null; this.src='/assets/Images/artikel/hutan1.webp';" />
         
-        <div class="absolute inset-0 flex items-center justify-center bg-black/40 group-hover:bg-black/25 transition-all duration-300">
-          <div class="w-12 h-12 rounded-full bg-[#0D1220]/75 backdrop-blur-md border border-white/20 flex items-center justify-center shadow-[0_4px_20px_rgba(0,0,0,0.5)] group-hover:scale-110 group-hover:border-[#2DD4A8] group-hover:shadow-[0_0_25px_rgba(45,212,168,0.5)] transition-all duration-300">
-            <img src="/assets/SVGForVideo/play.svg" alt="Play" class="w-6 h-6 translate-x-0.5" />
+        ${videoTersedia ? `
+          <div class="absolute inset-0 flex items-center justify-center bg-black/40 group-hover:bg-black/25 transition-all duration-300">
+            <div class="w-12 h-12 rounded-full bg-[#0D1220]/75 backdrop-blur-md border border-white/20 flex items-center justify-center shadow-[0_4px_20px_rgba(0,0,0,0.5)] group-hover:scale-110 group-hover:border-[#2DD4A8] group-hover:shadow-[0_0_25px_rgba(45,212,168,0.5)] transition-all duration-300">
+              <img src="/assets/SVGForVideo/play.svg" alt="Play" class="w-6 h-6 translate-x-0.5" />
+            </div>
           </div>
-        </div>
+        ` : `
+          <div class="absolute inset-0 flex items-center justify-center bg-black/60 transition-all duration-300">
+            <span class="px-3 py-1 rounded-full text-xs font-semibold bg-[#FB923C]/20 text-[#FB923C] border border-[#FB923C]/40 backdrop-blur-md shadow-lg uppercase tracking-wider">
+              Segera Hadir
+            </span>
+          </div>
+        `}
       </div>
 
       <!-- Title & Tags -->
       <div class="flex flex-col gap-2">
-        <h3 class="text-base sm:text-lg font-bold text-white leading-snug group-hover:text-[#2DD4A8] transition-colors" style="font-family:'Playfair Display',serif;">
-          ${other.judul}
+        <h3 class="text-base sm:text-lg font-bold text-white leading-snug group-hover:text-[#2DD4A8] transition-colors flex items-center gap-1.5" style="font-family:'Playfair Display',serif;">
+          <span>${other.emoji || '🧘'}</span>
+          <span>${other.judul}</span>
         </h3>
 
         <div class="flex items-center gap-2 flex-wrap text-xs">

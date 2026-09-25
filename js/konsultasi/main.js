@@ -141,7 +141,7 @@
         <!-- Footer Card Details -->
         <div class="relative z-10 flex flex-col gap-1">
           <div class="flex items-center gap-1.5 flex-wrap">
-            <h4 class="text-base sm:text-lg font-bold text-white leading-snug group-hover:text-[#2DD4A8] transition-colors">${k.nama}</h4>
+            <h4 class="text-base sm:text-lg font-bold text-white leading-snug group-hover:text-[#2DD4A8] transition-colors" style="font-family:'Playfair Display',serif;">${k.nama}</h4>
             <span class="text-[#2DD4A8] text-xs font-bold" title="Terverifikasi">✓</span>
           </div>
           <p class="text-xs text-[#2DD4A8] font-medium line-clamp-1">${k.gelar}</p>
@@ -185,7 +185,7 @@
         </div>
         <div class="flex-1 pr-6">
           <div class="flex items-center gap-2 flex-wrap mb-1">
-            <h3 class="text-xl sm:text-2xl font-bold text-white font-display">${k.nama}</h3>
+            <h3 class="text-xl sm:text-2xl font-bold text-white" style="font-family:'Playfair Display',serif;">${k.nama}</h3>
             <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-[#2DD4A8]/15 text-[#2DD4A8] border border-[#2DD4A8]/30">✓ Verified</span>
           </div>
           <p class="text-xs sm:text-sm text-[#2DD4A8] font-medium mb-1">${k.gelar}</p>
