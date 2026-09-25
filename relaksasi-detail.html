@@ -2,6 +2,7 @@
 <html lang="id">
 <head>
   <script src="/js/session-gate.js"></script>
+  <script src="/js/bg-randomizer.js"></script>
   <meta name="author" content="SCH Team - Invention Udayana 2026">
   <meta property="og:title" content="Teduh — Detail Relaksasi">
   <meta property="og:description" content="Panduan pose dan alur relaksasi tubuh & pikiran bersama Teduh.">
@@ -18,7 +19,7 @@
 
   <!-- Dynamic Fixed Background Image -->
   <div class="fixed inset-0 w-full h-full pointer-events-none -z-10 overflow-hidden">
-    <img id="detail-bg-img" src="/assets/Images/artikel/hutan1.webp" class="w-full h-full object-cover transition-opacity duration-700 opacity-80 scale-105" alt="Background" onerror="this.onerror=null; this.src='/assets/Images/artikel/hutan1.webp';">
+    <img id="detail-bg-img" data-session-bg src="/assets/Images/artikel/hutan1.webp" class="w-full h-full object-cover transition-opacity duration-700 opacity-80 scale-105" alt="Background" onerror="this.onerror=null; this.src='/assets/Images/artikel/hutan1.webp';">
     <div class="absolute inset-0 bg-gradient-to-b from-[#0D1220]/80 via-[#0D1220]/70 to-[#0D1220]/95 backdrop-blur-sm"></div>
   </div>
 

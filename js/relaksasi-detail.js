@@ -24,7 +24,7 @@ const TINGKAT_COLOR_MAP = {
 };
 
 const VIDEO_MAP = {
-  1: '/assets/VideoYoga/Pernapasan-Perut-(Diaphragmatic Breathing).mp4',
+  1: '/assets/VideoYoga/Pernapasan-Perut-(Diaphragmatic-Breathing).mp4',
   2: '/assets/VideoYoga/Cat-Cow-(Pose-Kucing-Sapi).mp4',
   3: null,
   4: '/assets/VideoYoga/Seated-Forward-Fold-(Paschimottanasana).mp4',
@@ -71,11 +71,18 @@ async function loadRelaksasiDetail() {
     }
 
     // Attach local video URL & availability
-    allSteps = allSteps.map(s => ({
-      ...s,
-      video_url: VIDEO_MAP[s.id] || null,
-      video_tersedia: Boolean(VIDEO_MAP[s.id])
-    }));
+    allSteps = allSteps.map(s => {
+      let vUrl = s.video_url || VIDEO_MAP[s.id] || null;
+      if (vUrl && !vUrl.startsWith('/') && !vUrl.startsWith('http')) {
+        vUrl = '/' + vUrl;
+      }
+      const vTersedia = typeof s.video_tersedia === 'boolean' ? s.video_tersedia : Boolean(vUrl);
+      return {
+        ...s,
+        video_url: vTersedia ? vUrl : null,
+        video_tersedia: vTersedia
+      };
+    });
 
     // Sort by urutan for internal sequence & navigation logic
     allSteps.sort((a, b) => (a.urutan || 0) - (b.urutan || 0));
@@ -88,10 +95,16 @@ async function loadRelaksasiDetail() {
     // Find matching pose, or fallback to first pose
     currentStep = allSteps.find(s => s.id === stepId) || allSteps[0];
 
-    // Update dynamic background image if available
+    // Maintain session background or fallback to currentStep thumbnail
     const bgImg = document.getElementById('detail-bg-img');
-    if (bgImg && currentStep.video_thumbnail) {
-      bgImg.src = currentStep.video_thumbnail;
+    if (bgImg) {
+      if (window.__teduhSessionBg) {
+        bgImg.src = window.__teduhSessionBg;
+      } else if (currentStep.video_thumbnail) {
+        let thumb = currentStep.video_thumbnail;
+        if (!thumb.startsWith('/') && !thumb.startsWith('http')) thumb = '/' + thumb;
+        bgImg.src = thumb;
+      }
     }
 
     // Update page title
@@ -129,10 +142,10 @@ function renderDetailPage(step) {
   // Filter other steps for "Video Lainnya"
   const otherSteps = allSteps.filter(s => s.id !== step.id);
 
-  const playerHTML = step.video_tersedia ? `
+  const playerHTML = `
     <!-- 1. FULL CUSTOM VIDEO PLAYER -->
     <div id="detail-player-wrapper" class="video-player-container relative w-full aspect-video rounded-2xl overflow-hidden border border-white/10 bg-black shadow-2xl mb-8">
-      <video id="detail-video" src="${step.video_url}" playsinline preload="metadata" class="w-full h-full object-cover"></video>
+      <video id="detail-video" src="${encodeURI(step.video_url)}" playsinline preload="metadata" class="w-full h-full object-cover"></video>
 
       <!-- VLC Gestures HUD Elements (Mobile Left: Brightness, Right: Volume — Slim Vertical Pills) -->
       <!-- Left HUD: Brightness -->
@@ -153,9 +166,9 @@ function renderDetailPage(step) {
         <span id="vlc-volume-text" class="vlc-indicator-text">100%</span>
       </div>
 
-      <!-- VLC Double Tap Quick Seek Badge -->
-      <div id="vlc-seek-badge" class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-40 pointer-events-none opacity-0 scale-75 transition-all duration-200 bg-[#0D1220]/85 backdrop-blur-md px-4 py-2 rounded-full border border-white/15 text-white font-semibold text-xs flex items-center gap-2 shadow-2xl">
-        <span id="vlc-seek-badge-text">--</span>
+      <!-- Minimal Floating Quick Seek Badge (Text-Only, No Box) -->
+      <div id="vlc-seek-badge" class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-40 pointer-events-none opacity-0 scale-95 transition-all duration-200 text-[#2DD4A8] font-black text-4xl sm:text-5xl tracking-widest select-none flex items-center justify-center" style="text-shadow: 0 2px 12px rgba(0,0,0,0.95), 0 0 4px rgba(0,0,0,0.9);">
+        <span id="vlc-seek-badge-text"></span>
       </div>
 
       <!-- Player Controls Overlay -->
@@ -260,7 +273,9 @@ function renderDetailPage(step) {
 
       </div>
     </div>
+  `;
 
+  const contentHTML = `
     <!-- 2. POSE DETAILS CARD -->
     <div class="bg-white/10 backdrop-blur-md rounded-2xl p-6 sm:p-8 border border-white/20 shadow-xl mb-16">
       
@@ -364,14 +379,18 @@ function renderOtherPoseCard(other) {
   const tingkatKey = (other.tingkat || 'pemula').toLowerCase();
   const tingkatStyle = TINGKAT_COLOR_MAP[tingkatKey] || TINGKAT_COLOR_MAP.pemula;
   const detailUrl = `/relaksasi-detail.html?id=${other.id}`;
-  const videoTersedia = other.video_tersedia !== false;
+  const videoTersedia = typeof other.video_tersedia === 'boolean' ? other.video_tersedia : Boolean(other.video_url || VIDEO_MAP[other.id]);
+  let thumbnailSrc = other.video_thumbnail || '/assets/Images/artikel/hutan1.webp';
+  if (thumbnailSrc && !thumbnailSrc.startsWith('/') && !thumbnailSrc.startsWith('http')) {
+    thumbnailSrc = '/' + thumbnailSrc;
+  }
 
   return `
     <a href="${detailUrl}" class="group bg-white/10 backdrop-blur-md rounded-2xl p-5 border border-white/20 hover:border-[#2DD4A8] transition-all duration-300 shadow-xl flex flex-col gap-4 block cursor-pointer">
       
       <!-- Thumbnail with Play Icon Overlay / Coming Soon -->
       <div class="relative w-full aspect-video rounded-xl overflow-hidden border border-white/10 bg-black/50 shadow-md">
-        <img src="${other.video_thumbnail}" alt="${other.judul}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" onerror="this.onerror=null; this.src='/assets/Images/artikel/hutan1.webp';" />
+        <img src="${thumbnailSrc}" alt="${other.judul}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" onerror="this.onerror=null; this.src='/assets/Images/artikel/hutan1.webp';" />
         
         ${videoTersedia ? `
           <div class="absolute inset-0 flex items-center justify-center bg-black/40 group-hover:bg-black/25 transition-all duration-300">
@@ -554,31 +573,57 @@ function initVideoPlayerControls(step, prevStep, nextStep) {
     seekbar.style.background = `linear-gradient(to right, #2DD4A8 ${percent}%, rgba(255,255,255,0.2) ${percent}%)`;
   });
 
+  let seekBadgeTimer = null;
   function showSeekBadge(text) {
     if (!vlcSeekBadge || !vlcSeekBadgeText) return;
+    if (seekBadgeTimer) clearTimeout(seekBadgeTimer);
     vlcSeekBadgeText.textContent = text;
-    vlcSeekBadge.classList.remove('opacity-0', 'scale-75');
+    vlcSeekBadge.classList.remove('opacity-0', 'scale-95');
     vlcSeekBadge.classList.add('opacity-100', 'scale-100');
-    setTimeout(() => {
+    seekBadgeTimer = setTimeout(() => {
       vlcSeekBadge.classList.remove('opacity-100', 'scale-100');
-      vlcSeekBadge.classList.add('opacity-0', 'scale-75');
-    }, 700);
+      vlcSeekBadge.classList.add('opacity-0', 'scale-95');
+    }, 650);
   }
 
   // Rewind / Forward 5s buttons
   btnRewind.addEventListener('click', (e) => {
     e.stopPropagation();
     video.currentTime = Math.max(0, video.currentTime - 5);
-    showSeekBadge('-5 Detik ⏪');
+    showSeekBadge('-5');
     showControls();
   });
 
   btnForward.addEventListener('click', (e) => {
     e.stopPropagation();
     video.currentTime = Math.min(video.duration || 0, video.currentTime + 5);
-    showSeekBadge('+5 Detik ⏩');
+    showSeekBadge('+5');
     showControls();
   });
+
+  // Keyboard Arrow Key Seeking (ArrowRight = +5s, ArrowLeft = -5s)
+  function handleVideoKeydown(e) {
+    if (!video) return;
+
+    // Ignore if typing inside text inputs or textareas
+    const activeTag = document.activeElement ? document.activeElement.tagName.toLowerCase() : '';
+    if (activeTag === 'input' && document.activeElement.type === 'text') return;
+    if (activeTag === 'textarea') return;
+
+    if (e.key === 'ArrowRight') {
+      e.preventDefault();
+      video.currentTime = Math.min(video.duration || 0, video.currentTime + 5);
+      showSeekBadge('+5');
+      showControls();
+    } else if (e.key === 'ArrowLeft') {
+      e.preventDefault();
+      video.currentTime = Math.max(0, video.currentTime - 5);
+      showSeekBadge('-5');
+      showControls();
+    }
+  }
+
+  document.addEventListener('keydown', handleVideoKeydown);
 
   // Value update helpers for Brightness & Volume (syncs both sliders & VLC HUDs)
   function applyBrightness(val) {
@@ -830,10 +875,10 @@ function initVideoPlayerControls(step, prevStep, nextStep) {
         // Double Tap: Left = Rewind 5s, Right = Forward 5s
         if (side === 'left') {
           video.currentTime = Math.max(0, video.currentTime - 5);
-          showSeekBadge('-5 Detik ⏪');
+          showSeekBadge('-5');
         } else {
           video.currentTime = Math.min(video.duration || 0, video.currentTime + 5);
-          showSeekBadge('+5 Detik ⏩');
+          showSeekBadge('+5');
         }
         lastTapTime = 0;
       } else {

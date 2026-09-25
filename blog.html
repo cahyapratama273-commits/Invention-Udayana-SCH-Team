@@ -2,6 +2,7 @@
 <html lang="id">
 <head>
   <script src="/js/session-gate.js"></script>
+  <script src="/js/bg-randomizer.js"></script>
   <meta name="author" content="SCH Team - Invention Udayana 2026">
   <meta property="og:title" content="BerTeduh — Blog">
   <meta property="og:description" content="Kumpulan artikel kesehatan mental.">
@@ -18,7 +19,7 @@
   
   <!-- Fixed Background Image (Like Konsultasi) -->
   <div class="fixed inset-0 w-full h-full pointer-events-none -z-10 overflow-hidden">
-    <img src="/assets/Images/artikel/hutan1.webp" class="w-full h-full object-cover" alt="Background" onerror="this.onerror=null; this.src='/assets/Images/placeholder.svg';">
+    <img data-session-bg src="/assets/Images/artikel/hutan1.webp" class="w-full h-full object-cover" alt="Background" onerror="this.onerror=null; this.src='/assets/Images/placeholder.svg';">
     <div class="absolute inset-0 bg-gradient-to-b from-[#0D1220]/85 via-[#0D1220]/70 to-[#0D1220]"></div>
   </div>
 

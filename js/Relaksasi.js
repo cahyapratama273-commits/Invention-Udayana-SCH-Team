@@ -24,7 +24,7 @@ const TINGKAT_COLOR_MAP = {
 };
 
 const VIDEO_MAP = {
-  1: '/assets/VideoYoga/Pernapasan-Perut-(Diaphragmatic Breathing).mp4',
+  1: '/assets/VideoYoga/Pernapasan-Perut-(Diaphragmatic-Breathing).mp4',
   2: '/assets/VideoYoga/Cat-Cow-(Pose-Kucing-Sapi).mp4',
   3: null,
   4: '/assets/VideoYoga/Seated-Forward-Fold-(Paschimottanasana).mp4',
@@ -43,15 +43,19 @@ function renderRelaksasiCard(step) {
   const tingkatKey = (step.tingkat || 'pemula').toLowerCase();
   const tingkatStyle = TINGKAT_COLOR_MAP[tingkatKey] || TINGKAT_COLOR_MAP.pemula;
   const detailUrl = `/relaksasi-detail.html?id=${step.id}`;
-  const videoSrc = VIDEO_MAP[step.id];
-  const videoTersedia = Boolean(videoSrc);
+  const videoSrc = (step.video_url !== undefined && step.video_url !== null) ? step.video_url : VIDEO_MAP[step.id];
+  const videoTersedia = typeof step.video_tersedia === 'boolean' ? step.video_tersedia : Boolean(videoSrc);
+  let thumbnailSrc = step.video_thumbnail || '/assets/Images/artikel/hutan1.webp';
+  if (thumbnailSrc && !thumbnailSrc.startsWith('/') && !thumbnailSrc.startsWith('http')) {
+    thumbnailSrc = '/' + thumbnailSrc;
+  }
 
   return `
     <a href="${detailUrl}" id="card-relaksasi-${step.id}" class="group bg-white/10 backdrop-blur-md rounded-2xl p-5 sm:p-6 border border-white/20 hover:border-[#2DD4A8] transition-all duration-300 shadow-xl flex flex-col gap-4 block cursor-pointer">
       
       <!-- Video Thumbnail Container -->
       <div class="relative w-full aspect-video rounded-xl overflow-hidden border border-white/10 bg-black/50 shadow-md">
-        <img src="${step.video_thumbnail}" alt="${step.judul}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" onerror="this.onerror=null; this.src='/assets/Images/artikel/hutan1.webp';" />
+        <img src="${thumbnailSrc}" alt="${step.judul}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" onerror="this.onerror=null; this.src='/assets/Images/artikel/hutan1.webp';" />
         
         ${videoTersedia ? `
           <div class="absolute inset-0 flex items-center justify-center bg-black/40 group-hover:bg-black/25 transition-all duration-300">
