@@ -1,55 +1,76 @@
 /**
- * FAQ Horizontal Drawer & Vertical Mobile Accordion
- * Single-open interaction pattern with ARIA accessibility
+ * faq.js — Logika Interaksi Akordion FAQ (Tanya Jawab)
+ * 
+ * Script ini mengatur perilaku buka-tutup kartu pertanyaan FAQ.
+ * Menggunakan pola "Single-Open" di mana jika satu pertanyaan dibuka,
+ * pertanyaan lain yang sedang terbuka otomatis tertutup agar tampilan tetap rapi.
+ * 
+ * Ditulis dalam Vanilla JS modern berkecepatan tinggi tanpa dependensi eksternal.
  */
-$(document).ready(function () {
-  const $faqRows = $('.faq-row');
+(function () {
+  'use strict';
 
-  $faqRows.each(function () {
-    const $row = $(this);
-    const $btn = $row.find('.faq-card');
-    const $drawer = $row.find('.faq-drawer');
+  function initFaq() {
+    const faqRows = Array.from(document.querySelectorAll('.faq-row'));
+    if (!faqRows.length) return;
 
-    function closeFaq() {
-      $row.removeClass('is-open');
-      $btn.attr('aria-expanded', 'false');
-      $drawer.removeAttr('title');
-    }
+    faqRows.forEach((row) => {
+      const btn = row.querySelector('.faq-card');
+      const drawer = row.querySelector('.faq-drawer');
+      if (!btn) return;
 
-    function openFaq() {
-      // Single-open accordion: close all other open items
-      $faqRows.not($row).each(function () {
-        const $otherRow = $(this);
-        $otherRow.removeClass('is-open');
-        $otherRow.find('.faq-card').attr('aria-expanded', 'false');
-        $otherRow.find('.faq-drawer').removeAttr('title');
+      function closeFaq(targetRow) {
+        targetRow.classList.remove('is-open');
+        const targetBtn = targetRow.querySelector('.faq-card');
+        const targetDrawer = targetRow.querySelector('.faq-drawer');
+        if (targetBtn) targetBtn.setAttribute('aria-expanded', 'false');
+        if (targetDrawer) targetDrawer.removeAttribute('title');
+      }
+
+      function openFaq(targetRow) {
+        // Tutup semua FAQ lain yang sedang terbuka
+        faqRows.forEach((otherRow) => {
+          if (otherRow !== targetRow && otherRow.classList.contains('is-open')) {
+            closeFaq(otherRow);
+          }
+        });
+
+        targetRow.classList.add('is-open');
+        const targetBtn = targetRow.querySelector('.faq-card');
+        const targetDrawer = targetRow.querySelector('.faq-drawer');
+        if (targetBtn) targetBtn.setAttribute('aria-expanded', 'true');
+        if (targetDrawer) targetDrawer.setAttribute('title', 'Klik untuk menutup jawaban');
+      }
+
+      // Event saat tombol kartu pertanyaan diklik
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const isOpen = row.classList.contains('is-open');
+        if (isOpen) {
+          closeFaq(row);
+        } else {
+          openFaq(row);
+        }
       });
 
-      // Open this item
-      $row.addClass('is-open');
-      $btn.attr('aria-expanded', 'true');
-      $drawer.attr('title', 'Klik untuk menutup jawaban');
-    }
-
-    $btn.on('click', function (e) {
-      e.preventDefault();
-      const isOpen = $row.hasClass('is-open');
-      if (isOpen) {
-        closeFaq();
-      } else {
-        openFaq();
+      // Event saat kartu drawer jawaban diklik
+      if (drawer) {
+        drawer.addEventListener('click', (e) => {
+          // Jika yang diklik adalah link <a> di dalam jawaban, biarkan navigasi berjalan
+          if (e.target.closest('a')) {
+            return;
+          }
+          if (row.classList.contains('is-open')) {
+            closeFaq(row);
+          }
+        });
       }
     });
+  }
 
-    // Klik card jawaban untuk menutup
-    $drawer.on('click', function (e) {
-      // Jika yang diklik adalah link <a>, biarkan user berpindah halaman
-      if ($(e.target).closest('a').length) {
-        return;
-      }
-      if ($row.hasClass('is-open')) {
-        closeFaq();
-      }
-    });
-  });
-});
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initFaq);
+  } else {
+    initFaq();
+  }
+})();

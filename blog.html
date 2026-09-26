@@ -11,11 +11,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Teduh | Blog</title>
   <link rel="icon" type="image/png" href="/assets/Images/for-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css" />
-  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css" />
+  <link rel="stylesheet" href="/assets/css/tailwind.min.css" />
   <link rel="stylesheet" href="/assets/css/main.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css" />
 </head>
 <body data-page="blog" style="background:#0D1220; color:#F5F5F5;">
   
@@ -59,94 +60,85 @@
           <h2 id="untuk-kamu-heading" class="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4" style="font-family:'Playfair Display',serif; color:#F5F5F5;">
             Untuk Kamu
           </h2>
-          <p id="untuk-kamu-subheading" class="text-xs sm:text-sm md:text-base leading-relaxed text-[#8A93A8]">
-            Artikel pilihan sesuai kondisimu saat ini
+          <p id="untuk-kamu-desc" class="text-xs sm:text-sm text-[#8A93A8] leading-relaxed">
+            Rekomendasi bacaan yang dipilih khusus untuk menemani harimu.
           </p>
         </div>
 
-        <!-- 2x2 Grid for 4 articles -->
-        <div id="untuk-kamu-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <!-- Compact article cards injected via JS -->
+        <div id="untuk-kamu-grid" class="flex flex-col gap-6">
+          <!-- Placeholder skeletons -->
+          <div class="rounded-2xl h-64 animate-pulse bg-white/5 border border-white/10"></div>
+          <div class="rounded-2xl h-64 animate-pulse bg-white/5 border border-white/10"></div>
+          <div class="rounded-2xl h-64 animate-pulse bg-white/5 border border-white/10"></div>
         </div>
 
-        <!-- Fallback if no quiz result in localStorage -->
-        <div id="untuk-kamu-fallback" class="hidden text-center py-8 px-4 rounded-xl bg-[#1A2138] border border-dashed border-white/15">
-          <p class="text-base font-semibold text-[#F5F5F5] mb-2">Ingin rekomendasi artikel yang sesuai kondisimu?</p>
-          <p class="text-xs sm:text-sm text-[#8A93A8] max-w-md mx-auto mb-5">Yuk ikuti kuis Cek Emosi singkat untuk memahami perasaanmu saat ini dan menemukan bacaan yang tepat.</p>
-          <a href="/index.html" class="teduh-btn-primary">
-            Mulai Cek Emosi &#8599;
+        <div id="untuk-kamu-fallback" class="hidden text-center py-8">
+          <p class="text-sm text-[#8A93A8] mb-4">Ingin rekomendasi yang lebih pas dengan kondisimu?</p>
+          <a href="/index.html" class="inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-xs font-semibold text-[#0D1220] bg-[#2DD4A8] hover:bg-[#25b892] transition-colors shadow-lg">
+            Isi Kuesioner Emosi &rarr;
           </a>
         </div>
       </div>
     </section>
 
-    <!-- SECTION YOGA: GERAKAN & KETENANGAN (Rekomendasi Curated Preview) -->
-    <section id="section-yoga" class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 pb-12" data-aos="fade-up" aria-labelledby="yoga-heading">
-      <div class="rounded-2xl p-6 sm:p-8 md:p-10 bg-[#151B2E] border border-white/10 shadow-2xl">
-        <div class="text-center max-w-2xl mx-auto mb-8">
-          <span class="text-[11px] sm:text-xs font-semibold tracking-widest uppercase mb-2 sm:mb-3 inline-block text-[#2DD4A8]">GERAKAN & KETENANGAN</span>
-          <h2 id="yoga-heading" class="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2 sm:mb-3" style="font-family:'Playfair Display',serif;">
-            Yoga untuk Pikiranmu
-          </h2>
-          <p class="text-xs sm:text-sm md:text-base text-[#8A93A8] max-w-xl mx-auto leading-relaxed mb-4">
-            Gerakan fisik lembut dan olah napas terpandu untuk membantu merilis ketegangan batin dan menyelaraskan tubuh.
-          </p>
-          <button id="view-all-yoga-btn" type="button" class="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-[#2DD4A8] hover:text-[#25b892] transition-colors whitespace-nowrap cursor-pointer">
-            Lihat semua artikel Yoga &rarr;
-          </button>
+    <!-- Kategori Khusus: Yoga untuk Pikiranmu -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 pb-16" data-aos="fade-up" aria-labelledby="yoga-heading">
+      <div class="rounded-3xl p-6 sm:p-8 md:p-10 relative overflow-hidden bg-gradient-to-br from-[#151B2E] via-[#1A2138] to-[#151B2E] border border-white/10 shadow-2xl">
+        <div class="absolute -right-16 -top-16 w-64 h-64 rounded-full bg-[#2DD4A8]/10 blur-3xl pointer-events-none"></div>
+        <div class="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mb-8">
+          <div>
+            <span class="text-[11px] sm:text-xs font-bold uppercase tracking-widest mb-2 sm:mb-3 inline-block text-[#2DD4A8]">Spesial Relaksasi Tubuh & Pikiran</span>
+            <h2 id="yoga-heading" class="text-2xl sm:text-3xl md:text-4xl font-bold font-serif text-[#F5F5F5] mb-2">
+              Yoga untuk Pikiranmu
+            </h2>
+            <p class="text-xs sm:text-sm text-[#8A93A8] max-w-xl leading-relaxed">
+              Kumpulan gerakan, pose peregangan, dan teknik pernapasan sederhana untuk melepas ketegangan otot serta meredakan kecemasan fisik.
+            </p>
+          </div>
+          <a href="#blog-category-filter" onclick="document.querySelector('[data-category=\'Yoga\']')?.click()" class="shrink-0 text-xs sm:text-sm font-semibold text-[#2DD4A8] hover:underline flex items-center gap-1">
+            Lihat Semua Yoga &rarr;
+          </a>
         </div>
-
-        <!-- Yoga 2x2 Grid (Fixed 4 preview items) -->
-        <div id="yoga-artikel-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <!-- Injected via JS -->
+        
+        <div id="yoga-artikel-grid" class="flex flex-col gap-6 relative z-10">
+          <!-- Placeholder skeleton -->
+          <div class="rounded-2xl h-64 animate-pulse bg-white/5 border border-white/10"></div>
         </div>
       </div>
     </section>
 
-    <!-- SECTION SEMUA ARTIKEL: Filter, Search, Grid, and Pagination -->
-    <section id="section-semua-artikel" class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 pb-20 sm:pb-24" data-aos="fade-up" aria-labelledby="semua-artikel-heading">
-      
-      <!-- Section Title & Search/Filter Controls -->
-      <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8">
+    <!-- Main All Articles Section with Filter & Search -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 pb-16" data-aos="fade-up" aria-labelledby="semua-artikel-heading">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
         <div>
-          <span class="text-[11px] sm:text-xs font-semibold tracking-widest uppercase mb-1 sm:mb-2 inline-block text-[#2DD4A8]">Eksplorasi</span>
-          <h2 id="semua-artikel-heading" class="text-2xl sm:text-3xl md:text-4xl font-bold text-white" style="font-family:'Playfair Display',serif;">
-            Semua Artikel
-          </h2>
+          <span class="text-[11px] sm:text-xs font-semibold tracking-widest uppercase mb-2 inline-block text-[#2DD4A8]">Eksplorasi</span>
+          <h2 id="semua-artikel-heading" class="text-2xl sm:text-3xl font-bold font-serif text-[#F5F5F5]">Semua Artikel</h2>
         </div>
-
-        <div class="flex items-center gap-3 w-full md:w-auto">
-          <!-- Button Toggle Filter -->
-          <button id="toggle-filter-btn" type="button" aria-expanded="false" aria-controls="filter-panel" class="flex items-center justify-center gap-2 text-sm text-[#8A93A8] hover:text-[#F5F5F5] transition px-4 py-2.5 bg-[#151B2E] rounded-full border border-white/15 whitespace-nowrap shrink-0 hover:border-[#2DD4A8]">
-            <i class="ph ph-funnel text-base"></i>
-            <span class="hidden sm:inline">Kategori</span>
-          </button>
-
-          <!-- Search Bar -->
-          <div class="relative flex-1 md:w-64 lg:w-72">
-            <input type="search" id="blog-search-input" placeholder="Cari artikel..." aria-label="Cari artikel"
-                   class="w-full bg-[#151B2E] border border-white/15 rounded-full py-2.5 pl-5 pr-12 text-sm text-[#F5F5F5] placeholder-[#8A93A8] focus:outline-none focus:border-[#2DD4A8] transition">
-            <i class="ph ph-magnifying-glass text-lg absolute right-4 top-1/2 -translate-y-1/2 text-[#8A93A8]" aria-hidden="true"></i>
-          </div>
+        
+        <!-- Search bar -->
+        <div class="w-full md:w-80 relative">
+          <label for="blog-search-input" class="sr-only">Cari artikel...</label>
+          <input 
+            type="search" 
+            id="blog-search-input" 
+            placeholder="Cari artikel..." 
+            class="w-full pl-4 pr-11 py-2.5 rounded-full text-sm bg-[#151B2E] border border-white/15 text-[#F5F5F5] placeholder-[#8A93A8] focus:outline-none focus:border-[#2DD4A8] transition-colors"
+          />
+          <i class="ph ph-magnifying-glass text-lg absolute right-4 top-1/2 -translate-y-1/2 text-[#8A93A8]" aria-hidden="true"></i>
         </div>
       </div>
 
-      <!-- Kategori Panel (Tersembunyi by default, toggleable) -->
-      <div id="filter-panel" class="hidden mb-8 p-6 bg-[#151B2E] rounded-2xl border border-white/10 shadow-xl" role="region" aria-label="Filter Kategori">
-        <p class="text-sm text-[#8A93A8] mb-4">Pilih Kategori:</p>
-        <div id="blog-category-filter" class="flex flex-wrap gap-3">
-          <!-- Kategori dinamis akan di-inject lewat JS -->
-        </div>
+      <!-- Categories Pill Bar -->
+      <div id="blog-category-filter" class="flex items-center gap-2 overflow-x-auto pb-4 mb-8 no-scrollbar scroll-smooth" role="tablist" aria-label="Kategori Artikel">
+        <!-- Category pills generated via JS -->
       </div>
 
-      <!-- Grid Artikel -->
+      <!-- Articles Grid Slot -->
       <div id="blog-artikel-grid" class="flex flex-col gap-6" aria-live="polite">
-        <div class="tile rounded-2xl h-72 animate-pulse bg-[#151B2E] border border-white/10"></div>
-        <div class="tile rounded-2xl h-72 animate-pulse bg-[#151B2E] border border-white/10"></div>
-        <div class="tile rounded-2xl h-72 animate-pulse bg-[#151B2E] border border-white/10"></div>
+        <!-- Artikel cards rendered here -->
       </div>
 
-      <!-- Pagination Container -->
+      <!-- Pagination Navigation Slot -->
       <nav id="blog-pagination" aria-label="Navigasi Halaman Artikel" class="flex items-center justify-center gap-2 mt-12 flex-wrap"></nav>
 
       <!-- Static Support Info Card -->
@@ -169,16 +161,15 @@
         </div>
       </aside>
     </section>
-
-    <script src="/js/ArtikelCard.js"></script>
-    <script src="/js/NavRender.js"></script>
-    <script src="/js/blog/main.js"></script>
   </main>
 
   <div id="footer"></div>
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-  <script src="/js/Nav.js"></script>
-  <script src="/js/Footer.js"></script>
-  <script src="/js/main.js"></script>
+
+  <script defer src="/js/ArtikelCard.js"></script>
+  <script defer src="/js/NavRender.js"></script>
+  <script defer src="/js/blog/main.js"></script>
+  <script defer src="/js/Nav.js"></script>
+  <script defer src="/js/Footer.js"></script>
+  <script defer src="/js/main.js"></script>
 </body>
 </html>

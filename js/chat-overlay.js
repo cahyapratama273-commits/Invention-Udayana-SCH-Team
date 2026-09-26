@@ -1,35 +1,42 @@
 /**
- * js/chat-overlay.js — Floating Draggable AI Chat Overlay BerTeduh
- * Terhubung langsung dengan TeduhChatService dan riwayat bersama (bt_ai_chat_history)
+ * js/chat-overlay.js — Balon Chat Terapung Interaktif (Floating Draggable AI Chat Overlay)
+ * 
+ * Script ini mengendalikan floating widget AI yang dapat dipindahkan (draggable):
+ * 1. Menampilkan tombol bulat terapung di pojok layar yang bisa digeser (drag & drop) dengan halus.
+ * 2. Membedakan antara aksi ketukan (Tap untuk buka panel) dan geseran (Drag untuk memindahkan tombol).
+ * 3. Menyimpan posisi koordinat tombol di sessionStorage agar posisi tidak berpindah saat berganti halaman.
+ * 4. Menyediakan popover panel percakapan modern dengan efek backdrop blur dan chip topik instan.
+ * 5. Meredupkan tombol otomatis saat idle (2.5 detik) agar tidak mengganggu pandangan user.
  */
 
 (function () {
   'use strict';
 
-  const STORAGE_POS_KEY = 'bt_chat_bubble_pos';
-  const DRAG_THRESHOLD = 9; // piksel untuk membedakan TAP vs DRAG
-  const IDLE_OPACITY = '0.45'; // agak transparan saat tidak disentuh/digerakkan
-  const ACTIVE_OPACITY = '1.0';
-  const IDLE_DELAY_MS = 2500; // waktu tunggu sebelum meredup (2.5 detik)
+  // ─── KONFIGURASI DAN STATE OVERLAY ───
+  const STORAGE_POS_KEY = 'bt_chat_bubble_pos'; // Kunci penyimpanan posisi tombol di sessionStorage
+  const DRAG_THRESHOLD = 9;   // Batas pergerakan dalam piksel untuk membedakan antara KLIK dan GESER (DRAG)
+  const IDLE_OPACITY = '0.45'; // Tingkat transparansi saat tombol tidak disentuh (redup)
+  const ACTIVE_OPACITY = '1.0'; // Tingkat kecerahan tombol saat aktif
+  const IDLE_DELAY_MS = 2500;  // Waktu tunggu sebelum tombol meredup otomatis (2.5 detik)
 
-  let bubbleEl = null;
-  let panelEl = null;
-  let isPanelOpen = false;
-  let isDragging = false;
-  let hasPointerMoved = false;
-  let isHovered = false;
-  let isHiddenByPage = false;
-  let idleTimer = null;
-  let startPointerX = 0;
-  let startPointerY = 0;
-  let initialBtnX = 0;
-  let initialBtnY = 0;
-  let currentBtnX = 0;
-  let currentBtnY = 0;
-  let unsubscribeService = null;
+  let bubbleEl = null;          // Elemen tombol bulat terapung
+  let panelEl = null;           // Elemen popover panel chat
+  let isPanelOpen = false;      // Status buka/tutup panel chat
+  let isDragging = false;       // Penanda status user sedang menggeser tombol
+  let hasPointerMoved = false;  // Penanda apakah jarak pergerakan melebihi threshold drag
+  let isHovered = false;        // Penanda status kursor mouse berada di atas tombol
+  let isHiddenByPage = false;   // Penanda apakah widget disembunyikan paksa oleh halaman aktif
+  let idleTimer = null;         // Timer untuk mengatur peredupan tombol saat idle
+  let startPointerX = 0;        // Titik awal X sentuhan pointer
+  let startPointerY = 0;        // Titik awal Y sentuhan pointer
+  let initialBtnX = 0;          // Posisi awal X tombol saat drag dimulai
+  let initialBtnY = 0;          // Posisi awal Y tombol saat drag dimulai
+  let currentBtnX = 0;          // Posisi koordinat X tombol saat ini
+  let currentBtnY = 0;          // Posisi koordinat Y tombol saat ini
+  let unsubscribeService = null;// Fungsi untuk berhenti berlangganan data chat saat panel tertutup
 
   /**
-   * Mengatur opacity tombol menjadi aktif (1.0) dan memulai ulang timer redup
+   * Mengatur opacity tombol menjadi aktif (terang penuh) dan memulai ulang timer redup
    */
   function wakeBubble() {
     if (isHiddenByPage || !bubbleEl) return;
@@ -38,7 +45,7 @@
   }
 
   /**
-   * Mengatur opacity tombol menjadi agak transparan saat idle (0.45)
+   * Mengatur opacity tombol menjadi agak transparan saat tidak disentuh (idle)
    */
   function dimBubble() {
     if (isHiddenByPage || !bubbleEl || isPanelOpen || isDragging || isHovered) return;
@@ -46,7 +53,7 @@
   }
 
   /**
-   * Menjadwalkan peredupan tombol jika tidak ada interaksi selama 2.5 detik
+   * Menjadwalkan peredupan tombol jika tidak ada aktivitas selama 2.5 detik
    */
   function scheduleIdleDim() {
     if (idleTimer) clearTimeout(idleTimer);
@@ -57,7 +64,7 @@
   }
 
   /**
-   * Sembunyikan overlay chat (misal saat berada di section AI halaman Konsultasi)
+   * Menyembunyikan seluruh widget overlay chat (misalnya saat di section AI halaman Konsultasi)
    */
   function hideBubble() {
     isHiddenByPage = true;
@@ -72,7 +79,7 @@
   }
 
   /**
-   * Tampilkan kembali overlay chat
+   * Menampilkan kembali widget overlay chat di layar
    */
   function showBubble() {
     isHiddenByPage = false;
@@ -84,7 +91,7 @@
   }
 
   /**
-   * Helper: Escape HTML
+   * Sanitasi teks untuk mencegah injeksi HTML jahat (XSS)
    */
   function escapeHtml(text) {
     if (!text) return "";
@@ -97,7 +104,7 @@
   }
 
   /**
-   * Format jam percakapan (HH:MM)
+   * Format jam percakapan (format Jam:Menit, misal: 14:05)
    */
   function formatTime(timestamp) {
     if (!timestamp) return "";
@@ -110,7 +117,7 @@
   }
 
   /**
-   * Injeksi markup HTML untuk Floating Button & Panel Chat ke DOM
+   * Menyuntikkan struktur HTML tombol terapung dan panel chat ke dalam elemen <body>
    */
   function injectOverlayDOM() {
     if (document.getElementById('bt-chat-overlay-root')) return;
@@ -118,7 +125,7 @@
     const root = document.createElement('div');
     root.id = 'bt-chat-overlay-root';
     root.innerHTML = `
-      <!-- FLOATING DRAGGABLE CHAT BUTTON -->
+      <!-- TOMBOL BULAT TERAPUNG (FLOATING BUBBLE) -->
       <div id="bt-chat-bubble"
            role="button"
            tabindex="0"
@@ -126,25 +133,25 @@
            title="Buka Chat AI BerTeduh"
            style="position:fixed; z-index:9990; width:54px; height:54px; border-radius:9999px; background:#2DD4A8; color:#0D1220; display:flex; align-items:center; justify-content:center; box-shadow:0 10px 25px rgba(45,212,168,0.4), 0 4px 12px rgba(0,0,0,0.5); cursor:grab; user-select:none; touch-action:none; opacity:1; transition:box-shadow 0.2s ease, transform 0.15s ease, opacity 0.4s ease;">
         
-        <!-- Speech Bubble Icon -->
+        <!-- Ikon Balon Obrolan -->
         <svg class="w-6 h-6 shrink-0" viewBox="0 0 24 24" fill="none" stroke="#0D1220" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="pointer-events:none;">
           <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
         </svg>
 
-        <!-- Pulsing online notification badge -->
+        <!-- Titik Hijau Penanda AI Selalu Aktif (Online Indicator) -->
         <span style="position:absolute; top:-2px; right:-2px; width:14px; height:14px; border-radius:9999px; background:#10B981; border:2px solid #0D1220; box-shadow:0 0 8px #10B981; pointer-events:none;"></span>
       </div>
 
-      <!-- COMPACT OVERLAY CHAT PANEL -->
+      <!-- PANEL POPOVER CHAT COMPACT -->
       <div id="bt-chat-panel"
            role="dialog"
            aria-label="Chat AI BerTeduh"
            class="hidden"
            style="position:fixed; z-index:9995; width:380px; max-width:calc(100vw - 28px); height:520px; max-height:calc(100vh - 110px); background:rgba(20,26,44,0.96); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); border:1px solid rgba(255,255,255,0.15); border-radius:24px; box-shadow:0 24px 60px rgba(0,0,0,0.65), 0 0 30px rgba(45,212,168,0.12); display:none; flex-direction:column; overflow:hidden; font-family:Inter,sans-serif; opacity:0; transform:scale(0.96); transition:opacity 220ms cubic-bezier(0.25, 0.1, 0.25, 1), transform 220ms cubic-bezier(0.25, 0.1, 0.25, 1);">
         
-        <!-- Panel Header -->
+        <!-- Header Panel Chat -->
         <div style="padding:14px 18px; border-bottom:1px solid rgba(255,255,255,0.1); background:rgba(26,33,56,0.8); display:flex; align-items:center; justify-content:space-between; gap:12px;">
-          <!-- Left: Identity -->
+          <!-- Kiri: Identitas Teman AI -->
           <div style="display:flex; align-items:center; gap:12px; min-width:0; flex:1;">
             <div style="width:38px; height:38px; border-radius:12px; background:rgba(45,212,168,0.15); border:1px solid rgba(45,212,168,0.3); color:#2DD4A8; display:flex; align-items:center; justify-content:center; font-size:19px; flex-shrink:0;">
               🤖
@@ -158,9 +165,9 @@
             </div>
           </div>
 
-          <!-- Right: Action Buttons (Right-aligned) -->
+          <!-- Kanan: Tombol Buka Layar Penuh dan Tombol Tutup -->
           <div style="display:flex; align-items:center; gap:8px; flex-shrink:0; margin-left:auto;">
-            <!-- Buka di Halaman Penuh Link -->
+            <!-- Tombol Buka di Halaman Konsultasi Penuh -->
             <a href="/konsultasi.html#tab-ai"
                title="Buka di halaman konsultasi"
                aria-label="Buka di halaman konsultasi"
@@ -174,7 +181,7 @@
               </svg>
             </a>
 
-            <!-- Minimize / Close Button -->
+            <!-- Tombol Tutup Panel -->
             <button id="bt-chat-close-btn"
                     type="button"
                     title="Tutup Obrolan"
@@ -190,13 +197,13 @@
           </div>
         </div>
 
-        <!-- Messages Container (Scrollable) -->
+        <!-- Wadah Daftar Pesan (Scrollable) -->
         <div id="bt-overlay-messages"
              style="flex:1; overflow-y:auto; padding:14px 16px; display:flex; flex-direction:column; gap:12px; scroll-behavior:smooth;">
-          <!-- Dynamically populated from TeduhChatService -->
+          <!-- Pesan diisi secara dinamis dari TeduhChatService -->
         </div>
 
-        <!-- Quick Topic Chips -->
+        <!-- Tombol Saran Topik Cepat (Quick Topics) -->
         <div style="padding:4px 14px 8px 14px; background:rgba(20,26,44,0.7); border-top:1px solid rgba(255,255,255,0.05);">
           <div style="display:flex; gap:6px; overflow-x:auto; padding-bottom:4px; scrollbar-width:none;" class="no-scrollbar">
             <button class="bt-quick-chip" data-topic="Aku merasa agak susah tidur akhir-akhir ini..." style="white-space:nowrap; font-size:11px; padding:4px 10px; border-radius:9999px; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); color:#8A93A8; cursor:pointer; transition:all 0.2s;">Susah Tidur</button>
@@ -206,7 +213,7 @@
           </div>
         </div>
 
-        <!-- Input Area -->
+        <!-- Kolom Input Teks & Tombol Kirim -->
         <div style="padding:10px 14px 12px 14px; background:rgba(26,33,56,0.9); border-top:1px solid rgba(255,255,255,0.08); display:flex; flex-direction:column; gap:8px;">
           <form id="bt-overlay-form" style="display:flex; align-items:center; gap:8px; margin:0; position:relative;">
             <input id="bt-overlay-input"
@@ -228,7 +235,7 @@
             </button>
           </form>
 
-          <!-- Disclaimer Text (Small, Persistent) -->
+          <!-- Catatan Etika / Disclaimer Kecil -->
           <div style="display:flex; align-items:center; gap:6px; font-size:10.5px; color:#FBBF24; opacity:0.85; line-height:1.2; padding:0 4px;">
             <span style="font-size:11px;">💡</span>
             <span style="color:#CBD5E1;">AI ini teman cerita, bukan pengganti psikolog profesional.</span>
@@ -244,7 +251,7 @@
   }
 
   /**
-   * Mengatur batasan koordinat tombol (Clamping) sesuai breakpoint
+   * Menghitung batasan wilayah pergerakan tombol (Clamping) agar tidak keluar layar atau menutupi navbar
    */
   function clampCoordinates(x, y) {
     const W = window.innerWidth;
@@ -257,12 +264,10 @@
     let clampedY = y;
 
     if (isDesktop) {
-      // Desktop / Tablet (>= 768px):
-      // - Margin tepi minimal 24px
-      // - Dijaga di area tepi (hovering near the edges), tidak bebas ke 35% tengah layar
+      // Pada Desktop / Laptop: jaga tombol tetap berada di zona pinggir (tepi kiri/kanan)
       const minX = 24;
       const maxX = W - btnW - 24;
-      const minY = 80; // hindari navbar fixed
+      const minY = 80; // Jaga jarak aman dari navbar tetap di bagian atas
       const maxY = H - btnH - 24;
 
       clampedY = Math.max(minY, Math.min(maxY, y));
@@ -271,18 +276,15 @@
       const rightZoneStart = W * 0.68 - btnW;
 
       if (x < W / 2) {
-        // Area kiri
         clampedX = Math.max(minX, Math.min(leftZoneEnd, x));
       } else {
-        // Area kanan
         clampedX = Math.max(rightZoneStart, Math.min(maxX, x));
       }
     } else {
-      // Mobile (< 768px):
-      // Kebebasan drag lebih tinggi termasuk area tengah layar agar nyaman diatur ibu jari
+      // Pada Perangkat Mobile (HP): beri kebebasan gerak penuh agar mudah diatur jempol
       const minX = 12;
       const maxX = W - btnW - 12;
-      const minY = 70; // hindari navbar mobile
+      const minY = 70;
       const maxY = H - btnH - 16;
 
       clampedX = Math.max(minX, Math.min(maxX, x));
@@ -293,7 +295,7 @@
   }
 
   /**
-   * Menghitung posisi default tombol (Bottom-Right)
+   * Menghitung posisi awal standar tombol (Pojok Kanan Bawah)
    */
   function getDefaultPosition() {
     const W = window.innerWidth;
@@ -306,7 +308,7 @@
   }
 
   /**
-   * Memulihkan posisi dari sessionStorage atau default
+   * Memulihkan koordinat tombol dari sessionStorage atau mengatur ke posisi default
    */
   function restorePosition() {
     if (!bubbleEl) return;
@@ -330,6 +332,9 @@
     applyBubblePosition(def.x, def.y);
   }
 
+  /**
+   * Menerapkan posisi pixel ke style left dan top tombol
+   */
   function applyBubblePosition(x, y) {
     if (!bubbleEl) return;
     bubbleEl.style.left = `${x}px`;
@@ -337,7 +342,7 @@
   }
 
   /**
-   * Menyesuaikan posisi popover chat panel agar menempel rapi pada tombol dan tidak overflow layar
+   * Menyesuaikan penempatan panel popover secara adaptif agar menempel pada tombol tanpa terpotong layar
    */
   function updatePanelPosition() {
     if (!panelEl || !bubbleEl) return;
@@ -349,7 +354,7 @@
     const isRightSide = currentBtnX > W / 2;
     const isLowerSide = currentBtnY > H / 2;
 
-    // Horizontal placement
+    // Posisi Horizontal (Kiri / Kanan)
     if (isRightSide) {
       const rightDist = Math.max(14, W - (currentBtnX + btnW));
       panelEl.style.right = `${rightDist}px`;
@@ -360,14 +365,14 @@
       panelEl.style.right = 'auto';
     }
 
-    // Vertical placement
+    // Posisi Vertikal (Atas / Bawah)
     if (isLowerSide) {
-      // Buka ke arah atas
+      // Buka panel ke arah atas tombol
       const bottomDist = Math.max(14, H - currentBtnY + 8);
       panelEl.style.bottom = `${bottomDist}px`;
       panelEl.style.top = 'auto';
     } else {
-      // Buka ke arah bawah
+      // Buka panel ke arah bawah tombol
       const topDist = Math.max(76, currentBtnY + btnH + 8);
       panelEl.style.top = `${topDist}px`;
       panelEl.style.bottom = 'auto';
@@ -375,7 +380,7 @@
   }
 
   /**
-   * Render seluruh riwayat pesan ke dalam container panel overlay
+   * Merender seluruh gelembung obrolan ke dalam kontainer panel overlay
    */
   function renderOverlayMessages(history) {
     const container = document.getElementById('bt-overlay-messages');
@@ -412,12 +417,12 @@
       container.appendChild(bubble);
     });
 
-    // Auto scroll ke bawah
+    // Otomatis scroll ke pesan paling baru
     container.scrollTop = container.scrollHeight;
   }
 
   /**
-   * Menampilkan indikator mengetik
+   * Menampilkan animasi gelembung "AI sedang mengetik..."
    */
   function showOverlayTyping() {
     hideOverlayTyping();
@@ -451,13 +456,16 @@
     container.scrollTop = container.scrollHeight;
   }
 
+  /**
+   * Menghilangkan animasi mengetik setelah jawaban diterima
+   */
   function hideOverlayTyping() {
     const el = document.getElementById('bt-overlay-typing');
     if (el) el.remove();
   }
 
   /**
-   * Buka panel chat
+   * Membuka panel popover chat dengan animasi scale dan opacity
    */
   function openPanel() {
     if (!panelEl) return;
@@ -468,13 +476,12 @@
 
     panelEl.classList.remove('hidden');
     panelEl.style.display = 'flex';
-    // Gunakan requestAnimationFrame agar browser me-render display:flex sebelum transisi opacity
     requestAnimationFrame(() => {
       panelEl.style.opacity = '1';
       panelEl.style.transform = 'scale(1)';
     });
 
-    // Berlangganan data history dari service
+    // Berlangganan data riwayat chat ke TeduhChatService
     if (window.TeduhChatService) {
       if (unsubscribeService) unsubscribeService();
       unsubscribeService = window.TeduhChatService.subscribe(renderOverlayMessages);
@@ -487,7 +494,7 @@
   }
 
   /**
-   * Tutup panel chat
+   * Menutup panel popover chat dengan animasi halus
    */
   function closePanel() {
     if (!panelEl) return;
@@ -511,7 +518,7 @@
   }
 
   /**
-   * Toggle panel
+   * Toggle buka atau tutup panel popover chat
    */
   function togglePanel() {
     if (isPanelOpen) {
@@ -522,12 +529,12 @@
   }
 
   /**
-   * Pasang Drag & Tap Handler dengan Pointer Events
+   * Memasang penanganan gesture geser (Drag) dan ketuk (Tap) dengan Pointer Events
    */
   function initDragHandlers() {
     if (!bubbleEl) return;
 
-    // Hover (mouse enter / leave)
+    // Hover mouse
     bubbleEl.addEventListener('mouseenter', () => {
       isHovered = true;
       if (bubbleEl) bubbleEl.style.opacity = ACTIVE_OPACITY;
@@ -546,6 +553,7 @@
       const dy = e.clientY - startPointerY;
       const dist = Math.hypot(dx, dy);
 
+      // Jika jarak geser melebihi batas (DRAG_THRESHOLD), aktifkan mode drag
       if (dist > DRAG_THRESHOLD) {
         hasPointerMoved = true;
         wakeBubble();
@@ -585,7 +593,7 @@
       scheduleIdleDim();
 
       if (hasPointerMoved) {
-        // Gerakan DRAG: simpan posisi baru ke sessionStorage
+        // Gerakan adalah DRAG: Simpan koordinat baru ke sessionStorage
         try {
           sessionStorage.setItem(STORAGE_POS_KEY, JSON.stringify({
             x: currentBtnX,
@@ -593,14 +601,13 @@
           }));
         } catch (err) {}
       } else {
-        // Gerakan TAP (dibawah threshold): toggle buka/tutup chat panel
+        // Gerakan adalah TAP (ketukan): Buka / tutup popover panel
         togglePanel();
       }
     }
 
     bubbleEl.addEventListener('pointerdown', (e) => {
-      // Hanya terima primary click / tap
-      if (e.button !== 0) return;
+      if (e.button !== 0) return; // Hanya tangani primary click / tap
 
       isDragging = true;
       hasPointerMoved = false;
@@ -616,7 +623,7 @@
         }
       } catch (err) {}
       bubbleEl.style.cursor = 'grabbing';
-      bubbleEl.style.transition = 'none'; // hapus transisi saat dragging agar instan 60fps
+      bubbleEl.style.transition = 'none'; // Matikan transisi CSS agar geseran instan 60fps
 
       window.addEventListener('pointermove', onPointerMove);
       window.addEventListener('pointerup', onPointerUp);
@@ -625,7 +632,7 @@
       bubbleEl.addEventListener('pointercancel', onPointerUp);
     });
 
-    // Keyboard accessibility (Space / Enter)
+    // Aksesibilitas keyboard (Space / Enter)
     bubbleEl.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
@@ -635,7 +642,7 @@
   }
 
   /**
-   * Pasang Form Kirim Pesan & Event Panel
+   * Mengatur pengiriman formulir obrolan dan tombol cepat
    */
   function initPanelEvents() {
     const form = document.getElementById('bt-overlay-form');
@@ -665,7 +672,7 @@
             await window.TeduhChatService.sendMessage(text);
           }
         } catch (err) {
-          console.error('[TeduhOverlay] Send error:', err);
+          console.error('[TeduhOverlay] Gagal mengirim pesan:', err);
         } finally {
           hideOverlayTyping();
           if (sendBtn) {
@@ -677,7 +684,7 @@
       });
     }
 
-    // Quick chips click handler
+    // Event listener untuk tombol cepat saran topik (Quick Chips)
     document.addEventListener('click', (e) => {
       const chip = e.target.closest('.bt-quick-chip');
       if (chip && input && form) {
@@ -687,7 +694,7 @@
       }
     });
 
-    // Resize event: jaga posisi selalu dalam batas layar
+    // Event resize window: sesuaikan posisi tombol agar selalu berada dalam batas layar yang aman
     window.addEventListener('resize', () => {
       const clamped = clampCoordinates(currentBtnX, currentBtnY);
       currentBtnX = clamped.x;
@@ -718,7 +725,7 @@
     }
   }
 
-  // Tangani event ganti tab dari halaman konsultasi
+  // Tangani event pergantian tab dari halaman Konsultasi
   window.addEventListener('bt-konsultasi-tab', (e) => {
     if (e.detail && e.detail.tab === 'ai') {
       hideBubble();
@@ -730,7 +737,7 @@
   window.addEventListener('hashchange', checkKonsultasiPageStatus);
 
   /**
-   * Inisialisasi Utama
+   * Inisialisasi Utama Seluruh Komponen Overlay
    */
   function init() {
     injectOverlayDOM();
@@ -742,7 +749,7 @@
     setTimeout(checkKonsultasiPageStatus, 250);
   }
 
-  // Jalankan ketika DOM siap
+  // Jalankan ketika struktur HTML siap
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {

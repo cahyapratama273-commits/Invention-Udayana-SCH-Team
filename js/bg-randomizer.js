@@ -1,11 +1,16 @@
 /**
- * bg-randomizer.js — Session-persistent random background image manager
+ * bg-randomizer.js — Pengatur Gambar Latar Belakang Alam Acak (Session Persistent)
  * 
- * Selects a random forest/nature background image per browsing session (sessionStorage)
- * and applies it cohesively across all pages that use the hero/fixed background pattern.
- * Maintains consistent image across navigations within the same session.
+ * Modul ini memilih satu gambar latar belakang pemandangan hutan/alam secara acak
+ * untuk setiap sesi penjelajahan (menggunakan sessionStorage), lalu menerapkannya secara konsisten
+ * ke seluruh halaman web yang menggunakan latar belakang hero.
+ * 
+ * Ditulis secara sangat ringan (zero-overhead) tanpa MutationObserver blocking untuk performa maksimal.
  */
 (function () {
+  'use strict';
+
+  // Daftar koleksi 50 gambar latar belakang pemandangan hutan yang menenangkan
   const FOREST_BACKGROUNDS = [
     '/assets/Images/artikel/hutan1.webp',
     '/assets/Images/artikel/hutan2.webp',
@@ -60,6 +65,9 @@
 
   const STORAGE_KEY = 'teduh_session_bg';
 
+  /**
+   * Mengambil gambar background sesi yang sudah tersimpan, atau mengacak gambar baru jika belum ada
+   */
   function getSessionBg() {
     try {
       let bg = sessionStorage.getItem(STORAGE_KEY);
@@ -70,7 +78,6 @@
       }
       return bg;
     } catch (e) {
-      // If sessionStorage is restricted or disabled
       return FOREST_BACKGROUNDS[0];
     }
   }
@@ -78,8 +85,10 @@
   const sessionBg = getSessionBg();
   window.__teduhSessionBg = sessionBg;
 
+  /**
+   * Menerapkan path gambar ke elemen background
+   */
   function applySessionBg() {
-    // 1. Update <img> background elements
     const bgImgs = document.querySelectorAll('img[data-session-bg], img.session-bg');
     bgImgs.forEach((img) => {
       if (!img.src.endsWith(sessionBg)) {
@@ -87,30 +96,16 @@
       }
     });
 
-    // 2. Update inline background-image containers (e.g. hero in konsultasi.html)
     const bgContainers = document.querySelectorAll('[data-session-bg-style], #konsultasi-hero-bg');
     bgContainers.forEach((el) => {
       el.style.backgroundImage = `url('${sessionBg}')`;
     });
   }
 
-  // Pre-apply as DOM nodes stream in (zero flicker)
-  if (typeof MutationObserver !== 'undefined' && document.documentElement) {
-    const observer = new MutationObserver(() => {
-      applySessionBg();
-    });
-    observer.observe(document.documentElement, { childList: true, subtree: true });
-
-    document.addEventListener('DOMContentLoaded', () => {
-      applySessionBg();
-      observer.disconnect();
-    });
-  } else {
+  // Terapkan saat DOM siap
+  if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', applySessionBg);
-  }
-
-  // Also apply immediately if body is already ready
-  if (document.body) {
+  } else {
     applySessionBg();
   }
 })();

@@ -1,25 +1,31 @@
 /**
- * main.js (Blog) — Entry point halaman Blog
+ * main.js (Halaman Blog) — Logika Katalog Artikel BerTeduh
  *
- * Menggunakan fetch() karena jQuery CDN dimuat setelah </main>,
- * sedangkan script ini dieksekusi di dalam <main>.
+ * Script ini bertanggung jawab untuk:
+ * 1. Memuat navbar secara dinamis melalui fungsi loadNavigasi().
+ * 2. Mengambil data seluruh artikel dari file JSON (data/artikel.json) dengan proteksi fallback path.
+ * 3. Menampilkan "Artikel Unggulan" (Featured Card) yang dipersonalisasi berdasarkan kondisi emosi user.
+ * 4. Merender section "Untuk Kamu" (rekomendasi artikel yang cocok dengan hasil kuis cek emosi).
+ * 5. Merender section kurasi khusus "Yoga untuk Pikiranmu".
+ * 6. Mengelola filter kategori dinamis, kolom pencarian teks (search), dan sistem penomoran halaman (pagination).
  */
 (async function initBlog() {
-  // 1. Muat komponen Navigasi
+  // 1. Muat komponen Navigasi atas
   if (typeof loadNavigasi === "function") {
     await loadNavigasi();
   }
 
-  // 2. Element containers
-  var gridEl = document.getElementById("blog-artikel-grid");
-  var featuredEl = document.getElementById("featured-artikel-slot");
-  var filterEl = document.getElementById("blog-category-filter");
-  var searchInput = document.getElementById("blog-search-input");
+  // 2. Tangkap elemen-elemen penampung HTML di DOM
+  var gridEl = document.getElementById("blog-artikel-grid");           // Grid untuk menampilkan semua artikel
+  var featuredEl = document.getElementById("featured-artikel-slot");   // Slot kartu artikel utama di bagian atas
+  var filterEl = document.getElementById("blog-category-filter");       // Daftar tab pill kategori filter
+  var searchInput = document.getElementById("blog-search-input");       // Input pencarian artikel berdasarkan judul/kata kunci
   
+  // Jika kontainer grid utama tidak ada di halaman ini, hentikan eksekusi
   if (!gridEl) return;
 
   try {
-    // Coba fetch dengan berbagai path fallback
+    // 3. Mengambil file data/artikel.json dengan mencoba beberapa opsi path relatif
     var semuaArtikel = [];
     var paths = ["/data/artikel.json", "../../data/artikel.json", "../data/artikel.json", "data/artikel.json"];
     for (var p of paths) {
@@ -27,73 +33,78 @@
         var r = await fetch(p);
         if (r.ok) {
           semuaArtikel = await r.json();
-          break;
+          break; // Berhenti looping jika fetch berhasil
         }
       } catch (e) {}
     }
     if (semuaArtikel.length === 0) throw new Error("Gagal memuat artikel dari data source");
 
-    // -- Elements
+    // Tangkap elemen untuk section personalisasi dan navigasi halaman
     var untukKamuSection = document.getElementById("section-untuk-kamu");
     var untukKamuGrid = document.getElementById("untuk-kamu-grid");
     var untukKamuFallback = document.getElementById("untuk-kamu-fallback");
     var paginationEl = document.getElementById("blog-pagination");
 
-    // -- Sort all articles by id ascending
+    // Urutkan seluruh artikel berdasarkan ID secara ascending (id: '1', '2', ..., '10')
     semuaArtikel.sort((a, b) => a.id.localeCompare(b.id, undefined, { numeric: true, sensitivity: 'base' }));
 
-    // -- State
-    var currentFilter = "Semua";
-    var searchQuery = "";
-    var currentPage = 1;
-    var ITEMS_PER_PAGE = 6;
+    // ─── STATE HALAMAN BLOG ───
+    var currentFilter = "Semua"; // Kategori yang sedang aktif dipilih (default: "Semua")
+    var searchQuery = "";        // Kata kunci yang sedang diketik di input pencarian
+    var currentPage = 1;         // Nomor halaman pagination aktif saat ini
+    var ITEMS_PER_PAGE = 6;      // Batas jumlah artikel yang tampil per halaman (6 kartu per page)
     
-    // -- Extract unique categories dynamically from artikel.json
+    // Ekstrak daftar kategori unik langsung dari data JSON artikel secara otomatis
     var categories = [...new Set(semuaArtikel.map(a => a.kategori))].filter(Boolean).sort();
-    categories.unshift("Semua");
+    categories.unshift("Semua"); // Tambahkan tab "Semua" di urutan paling awal
 
-    // -- Read initial category filter from URL query param if present (?kategori=Yoga)
+    // Periksa apakah ada parameter kategori dari URL (misalnya dari klik tombol di halaman lain: ?kategori=Yoga)
     var urlParams = new URLSearchParams(window.location.search);
     var paramCat = urlParams.get("kategori");
     if (paramCat) {
       var matchedCat = categories.find(c => c.toLowerCase() === paramCat.trim().toLowerCase());
       if (matchedCat) {
-        currentFilter = matchedCat;
+        currentFilter = matchedCat; // Pasang filter sesuai parameter URL
       }
     }
 
-    // -- Helper: Get user mood from localStorage
+    /**
+     * Memilih satu artikel unggulan (featured) berdasarkan kondisi emosi user dari kuis
+     */
     function getFeaturedArtikel() {
       var savedMood = localStorage.getItem("userMentalKondisi");
       var candidates = [];
 
-      // Validasi mood
+      // Saring artikel yang sesuai dengan mood user (baik / cemas / berat)
       if (savedMood === "baik" || savedMood === "cemas" || savedMood === "berat") {
         candidates = semuaArtikel.filter(a => a.kondisi === savedMood);
       }
 
-      // Fallback: Jika tidak ada mood tersimpan / corrupt data / atau tidak ada artikel yg cocok
+      // Jika belum ada kuis atau tidak ada artikel yang cocok, gunakan fallback artikel featured
       if (candidates.length === 0) {
-        // Coba cari artikel dengan flag featured: true
         candidates = semuaArtikel.filter(a => a.featured);
         
-        // Fallback terakhir: seluruh artikel
+        // Fallback terakhir jika tidak ada satupun artikel ber-flag featured
         if (candidates.length === 0) {
           candidates = semuaArtikel;
         }
       }
 
-      // Pilih secara random dari kandidat (untuk variasi tiap kali reload)
+      // Ambil secara acak dari daftar kandidat agar tampilan selalu segar tiap kali halaman dibuka
       var randomIndex = Math.floor(Math.random() * candidates.length);
       return candidates[randomIndex] || semuaArtikel[0];
     }
 
-    // -- Helper: Slug generator
+    /**
+     * Membuat slug URL yang rapi dan aman untuk SEO (misal: "Mengatasi Cemas" -> "mengatasi-cemas")
+     */
     function createSlug(text) {
       return text ? text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') : '';
     }
 
-    // -- Render Featured Card
+    /**
+     * Merender kartu besar "Artikel Unggulan" di slot paling atas halaman
+     */
     function renderFeatured() {
       if (!featuredEl) return;
       var featuredArticle = getFeaturedArtikel();
@@ -127,15 +138,17 @@
       featuredEl.innerHTML = html;
     }
 
-    // -- Render "Untuk Kamu" Section (Personalized by userMentalKondisi in localStorage)
+    /**
+     * Merender section "Untuk Kamu" (4 artikel rekomendasi hasil kuis mental user)
+     */
     function renderUntukKamu() {
       if (!untukKamuGrid) return;
 
-      // Read user's last kondisi result from localStorage (same key used in Beranda.js)
+      // Baca status kondisi emosi user dari localStorage
       var savedMood = localStorage.getItem("userMentalKondisi");
       var validMoods = ["baik", "cemas", "berat"];
 
-      // If no quiz result exists in localStorage yet, show fallback message inviting user to take Cek-Emosi quiz
+      // Jika belum pernah mengisi kuis, tampilkan kartu ajakan mengisi kuis cek emosi
       if (!savedMood || !validMoods.includes(savedMood)) {
         if (untukKamuFallback) {
           untukKamuGrid.innerHTML = "";
@@ -147,7 +160,7 @@
         return;
       }
 
-      // Filter data/artikel.json by matching kondisi
+      // Filter artikel yang memiliki field "kondisi" yang sama persis dengan mood user
       var matchingArticles = semuaArtikel.filter(a => a.kondisi === savedMood);
 
       if (matchingArticles.length === 0) {
@@ -155,16 +168,16 @@
         return;
       }
 
-      // Pick up to 4 articles (prioritize featured: true if more than 4 match, otherwise first 4 in array order)
+      // Prioritaskan artikel unggulan (featured: true), ambil maksimal 4 artikel
       var sortedMatching = [...matchingArticles].sort((a, b) => {
         if (a.featured && !b.featured) return -1;
         if (!a.featured && b.featured) return 1;
-        return 0; // preserve array order
+        return 0;
       });
 
       var selectedArticles = sortedMatching.slice(0, 4);
 
-      // Render compact article cards into the 2x2 grid
+      // Render 4 kartu artikel ke dalam grid 2x2
       if (typeof renderArtikelCardCompact === "function") {
         untukKamuGrid.innerHTML = selectedArticles.map(renderArtikelCardCompact).join("");
       } else if (typeof renderArtikelCard === "function") {
@@ -176,7 +189,9 @@
       if (untukKamuSection) untukKamuSection.classList.remove("hidden");
     }
 
-    // -- Render "Yoga untuk Pikiranmu" Section (Fixed curated preview of 4 Yoga articles)
+    /**
+     * Merender section kurasi "Yoga untuk Pikiranmu" (preview 4 artikel pose yoga)
+     */
     function renderYogaSection() {
       var yogaGrid = document.getElementById("yoga-artikel-grid");
       if (!yogaGrid) return;
@@ -188,7 +203,7 @@
         return;
       }
 
-      // Sort by featured first, then original order
+      // Urutkan pose unggulan di depan, ambil maksimal 4 artikel
       var sortedYoga = [...yogaArticles].sort((a, b) => {
         if (a.featured && !b.featured) return -1;
         if (!a.featured && b.featured) return 1;
@@ -204,7 +219,9 @@
       }
     }
 
-    // -- Render Filter Tabs (in a panel as pills)
+    /**
+     * Merender tombol-tombol pilihan filter kategori berupa pill buttons
+     */
     function renderFilters() {
       if (!filterEl) return;
       var html = categories.map(cat => {
@@ -218,7 +235,9 @@
       filterEl.innerHTML = html;
     }
 
-    // -- Helper: Scalable Pagination Range with Ellipsis
+    /**
+     * Menghitung jangkauan nomor halaman untuk pagination dengan dukungan titik-titik (...)
+     */
     function getPaginationRange(current, total) {
       const delta = 1;
       const range = [];
@@ -246,11 +265,14 @@
       return rangeWithDots;
     }
 
-    // -- Render Pagination Controls
+    /**
+     * Merender kontrol tombol navigasi halaman (Sebelumnya, Nomor Halaman, Selanjutnya)
+     */
     function renderPagination(totalItems) {
       if (!paginationEl) return;
       var totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
 
+      // Jika hanya ada 1 halaman atau kurang, jangan tampilkan pagination
       if (totalPages <= 1) {
         paginationEl.innerHTML = "";
         return;
@@ -258,7 +280,7 @@
 
       var html = [];
 
-      // Prev Button
+      // Tombol "Sebelumnya" (Prev)
       var prevDisabled = currentPage === 1 ? 'opacity-40 cursor-not-allowed pointer-events-none' : 'hover:border-[#2DD4A8] hover:text-[#2DD4A8]';
       html.push(`
         <button class="page-nav-btn px-4 py-2 rounded-full border border-white/10 text-xs sm:text-sm font-semibold transition backdrop-blur-md ${prevDisabled}"
@@ -268,7 +290,7 @@
         </button>
       `);
 
-      // Page Numbers with Ellipsis Support
+      // Daftar Tombol Nomor Halaman
       var pageRange = getPaginationRange(currentPage, totalPages);
       for (var item of pageRange) {
         if (item === '...') {
@@ -296,7 +318,7 @@
         }
       }
 
-      // Next Button
+      // Tombol "Selanjutnya" (Next)
       var nextDisabled = currentPage === totalPages ? 'opacity-40 cursor-not-allowed pointer-events-none' : 'hover:border-[#2DD4A8] hover:text-[#2DD4A8]';
       html.push(`
         <button class="page-nav-btn px-4 py-2 rounded-full border border-white/10 text-xs sm:text-sm font-semibold transition backdrop-blur-md ${nextDisabled}"
@@ -308,14 +330,14 @@
 
       paginationEl.innerHTML = html.join("");
 
-      // Bind events to pagination buttons
+      // Pasang event listener klik pada seluruh tombol pagination
       paginationEl.querySelectorAll("button[data-page]").forEach(btn => {
         btn.addEventListener("click", function () {
           var targetPage = parseInt(this.getAttribute("data-page"), 10);
           if (targetPage >= 1 && targetPage <= totalPages && targetPage !== currentPage) {
             currentPage = targetPage;
             renderArticles();
-            // Scroll ke atas grid Semua Artikel dengan mulus
+            // Scroll ke atas bagian grid artikel dengan animasi halus
             var scrollTarget = document.getElementById("section-semua-artikel") || document.getElementById("blog-artikel-grid");
             if (scrollTarget) {
               const yOffset = -90;
@@ -327,16 +349,18 @@
       });
     }
 
-    // -- Render Grid Articles based on Filter, Search, and Pagination (6 per page)
+    /**
+     * Merender kartu-kartu artikel di grid utama berdasarkan filter, pencarian, dan pagination
+     */
     function renderArticles() {
       if (!gridEl) return;
       
-      // Filter by category
+      // 1. Saring berdasarkan kategori aktif
       var filtered = currentFilter === "Semua" 
         ? semuaArtikel 
         : semuaArtikel.filter(a => a.kategori === currentFilter);
         
-      // Filter by search query (title, summary, or category name)
+      // 2. Saring berdasarkan kata kunci pencarian (judul, ringkasan, atau kategori)
       if (searchQuery.trim() !== "") {
         var q = searchQuery.toLowerCase().trim();
         filtered = filtered.filter(a => 
@@ -350,10 +374,11 @@
       var totalPages = Math.max(1, Math.ceil(totalCount / ITEMS_PER_PAGE));
       if (currentPage > totalPages) currentPage = 1;
 
-      // Slice 6 items for the current page
+      // 3. Potong data untuk 6 kartu pada halaman yang sedang aktif
       var startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
       var pageItems = filtered.slice(startIndex, startIndex + ITEMS_PER_PAGE);
         
+      // 4. Render ke dalam grid
       if (typeof renderArtikelCard === "function") {
         if (pageItems.length > 0) {
           gridEl.innerHTML = pageItems.map(renderArtikelCard).join("");
@@ -364,19 +389,21 @@
         console.error("Fungsi renderArtikelCard tidak ditemukan.");
       }
 
-      // Render pagination
+      // Perbarui tombol pagination dan refresh animasi AOS
       renderPagination(totalCount);
       if (window.AOS) window.AOS.refresh();
     }
 
-    // -- Programmatic Category Filter Setter
+    /**
+     * Mengatur filter kategori secara terprogram (misal via klik tombol atau link)
+     */
     function setCategoryFilter(categoryName, shouldScroll) {
       currentFilter = categoryName;
-      currentPage = 1;
-      searchQuery = "";
+      currentPage = 1;      // Kembalikan ke halaman pertama
+      searchQuery = "";     // Reset kata kunci pencarian
       if (searchInput) searchInput.value = "";
 
-      // Open filter panel if filtering by a specific category
+      // Buka panel filter jika kategori yang dipilih bukan "Semua"
       if (filterPanel && categoryName !== "Semua") {
         filterPanel.classList.remove('hidden');
         if (toggleBtn) {
@@ -385,7 +412,7 @@
         }
       }
 
-      // Update URL search params
+      // Perbarui query parameter di URL browser tanpa me-reload halaman
       try {
         var newUrl = new URL(window.location);
         if (categoryName === "Semua") {
@@ -409,7 +436,8 @@
       }
     }
 
-    // -- Events bindings
+    // ─── EVENT LISTENERS ───
+    // Event klik pada tab kategori
     if (filterEl) {
       filterEl.addEventListener('click', function(e) {
         var tab = e.target.closest('.category-tab');
@@ -420,15 +448,16 @@
       });
     }
 
+    // Event input pencarian artikel
     if (searchInput) {
       searchInput.addEventListener('input', function(e) {
         searchQuery = e.target.value;
-        currentPage = 1; // Reset ke page 1
+        currentPage = 1; // Reset ke halaman 1 saat mulai mencari
         renderArticles();
       });
     }
 
-    // Toggle panel
+    // Toggle buka/tutup panel filter kategori
     var toggleBtn = document.getElementById("toggle-filter-btn");
     var filterPanel = document.getElementById("filter-panel");
     if (toggleBtn && filterPanel) {
@@ -444,7 +473,7 @@
         }
       });
 
-      // If query param set a filter on load, open the filter panel
+      // Jika ada query param kategori saat halaman pertama kali dibuka, buka otomatis filternya
       if (currentFilter !== "Semua") {
         filterPanel.classList.remove('hidden');
         toggleBtn.setAttribute('aria-expanded', 'true');
@@ -453,7 +482,7 @@
       }
     }
 
-    // View all Yoga button handler
+    // Tombol "Lihat Semua Pose Yoga"
     var viewAllYogaBtn = document.getElementById("view-all-yoga-btn");
     if (viewAllYogaBtn) {
       viewAllYogaBtn.addEventListener('click', function() {
@@ -461,7 +490,7 @@
       });
     }
 
-    // -- Initial render
+    // ─── INITIAL RENDERING ───
     renderFeatured();
     renderUntukKamu();
     renderYogaSection();

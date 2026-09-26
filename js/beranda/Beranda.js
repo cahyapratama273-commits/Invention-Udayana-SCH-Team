@@ -1,95 +1,96 @@
 /**
  * Beranda.js — Logika Halaman Beranda
  * 
- * Script ini bertanggung jawab untuk mengatur tampilan halaman Beranda secara dinamis.
- * Hal utama yang dilakukan:
- * 1. Menampilkan animasi starfield (bintang-bintang) di latar belakang.
+ * Script ini bertanggung jawab untuk mengatur tampilan halaman Beranda secara dinamis:
+ * 1. Menampilkan animasi starfield (bintang-bintang) di latar belakang secara hemat CPU.
  * 2. Mengambil hasil kuis (kondisi mental) dari localStorage.
- * 3. Menampilkan pesan sapaan yang sesuai dengan kondisi user.
- * 4. Memuat data artikel dari JSON dan menampilkan artikel yang relevan dengan kondisi user.
+ * 3. Menampilkan pesan sapaan yang sesuai dengan kondisi user seketika (instant render).
+ * 4. Memuat data artikel dari JSON dan menampilkan artikel yang relevan secara asinkron tanpa memblokir thread utama.
  */
 (function () {
+  'use strict';
+
   // ─── STARFIELD ANIMATION ───────────────────────────────────────────
-  // Membuat efek bintang berkedip di background menggunakan elemen <canvas>
   (function initStarfield() {
     const canvas = document.getElementById("starfield-canvas");
-    if (!canvas) return; // Jika tidak ada canvas, hentikan proses
+    if (!canvas) return;
     const ctx = canvas.getContext("2d");
     let stars = [];
+    let animId = null;
 
-    // Menyesuaikan ukuran canvas dengan ukuran layar (window)
     function resize() {
       canvas.width  = window.innerWidth;
       canvas.height = window.innerHeight;
     }
 
-    // Membuat array data bintang secara acak
     function createStars(count) {
       stars = [];
+      const w = canvas.width;
+      const h = canvas.height;
       for (let i = 0; i < count; i++) {
         stars.push({
-          x: Math.random() * canvas.width,                // Posisi X acak
-          y: Math.random() * canvas.height,               // Posisi Y acak
-          r: Math.random() * 1.2 + 0.2,                   // Radius / ukuran bintang
-          alpha: Math.random() * 0.5 + 0.1,               // Transparansi awal
-          speed: Math.random() * 0.015 + 0.005,           // Kecepatan kedip
-          dir: Math.random() > 0.5 ? 1 : -1,              // Arah kedip (terang/redup)
+          x: Math.random() * w,
+          y: Math.random() * h,
+          r: Math.random() * 1.2 + 0.2,
+          alpha: Math.random() * 0.5 + 0.1,
+          speed: Math.random() * 0.015 + 0.005,
+          dir: Math.random() > 0.5 ? 1 : -1,
         });
       }
     }
 
-    // Fungsi loop untuk menggambar frame animasi
     function draw() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height); // Bersihkan frame sebelumnya
-      stars.forEach((s) => {
-        s.alpha += s.speed * s.dir; // Ubah transparansi (kedip)
-        if (s.alpha > 0.6 || s.alpha < 0.05) s.dir *= -1; // Balikkan arah jika melewati batas
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const len = stars.length;
+      for (let i = 0; i < len; i++) {
+        const s = stars[i];
+        s.alpha += s.speed * s.dir;
+        if (s.alpha > 0.6 || s.alpha < 0.05) s.dir *= -1;
         ctx.beginPath();
         ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255,255,255,${s.alpha})`; // Gambar bintang dengan warna putih transparan
+        ctx.fillStyle = `rgba(255,255,255,${s.alpha})`;
         ctx.fill();
-      });
-      requestAnimationFrame(draw); // Ulangi fungsi draw di frame berikutnya (looping 60fps)
+      }
+      animId = requestAnimationFrame(draw);
     }
 
     resize();
-    createStars(160); // Buat 160 bintang
+    createStars(120);
     draw();
     
-    // Pastikan ukuran canvas diperbarui jika user me-resize browser
-    window.addEventListener("resize", () => { resize(); createStars(160); });
+    window.addEventListener("resize", () => { 
+      resize(); 
+      createStars(120); 
+    }, { passive: true });
   })();
 
   // ─── KONDISI CONFIG ────────────────────────────────────────────────
-  // Konfigurasi visual dan teks default untuk masing-masing kondisi hasil kuis
   const KONDISI_CONFIG = {
     baik: {
       label: "Untukmu yang lagi baik",
       title: "Rekomendasi buat jaga mood baikmu tetap nyala",
-      aksenWarna: "#2DD4A8",   // emerald mint
+      aksenWarna: "#2DD4A8",
       judulDefault: "Senang melihatmu baik-baik saja! 🌤️",
       pesanDefault: "Yuk jaga ritme baik ini biar terus menyala hari ini.",
     },
     cemas: {
       label: "Untukmu yang lagi cemas / lelah",
       title: "Bacaan buat bantu redain pikiranmu pelan-pelan",
-      aksenWarna: "#818CF8",   // indigo muted
+      aksenWarna: "#818CF8",
       judulDefault: "Pelan-pelan aja, kita bantu redain 🌊",
       pesanDefault: "Pikiran boleh rame, tapi kita coba tenangin dulu.",
     },
     berat: {
       label: "Untukmu yang lagi merasa berat",
       title: "Mulai dari sini dulu, satu langkah kecil",
-      aksenWarna: "#F472B6",   // pink/magenta aksen sekunder
+      aksenWarna: "#F472B6",
       judulDefault: "Kamu nggak sendirian ngadepin ini 🤍",
       pesanDefault: "Kita jalanin pelan-pelan, satu langkah dalam satu waktu.",
     },
   };
 
-
   /**
-   * Mengambil kondisi (baik/cemas/berat) dari localStorage.
-   * Jika kosong atau tidak valid, default ke "baik".
+   * Mengambil kondisi mental dari localStorage.
    */
   function getKondisiUser() {
     const kondisi = localStorage.getItem("userMentalKondisi");
@@ -99,10 +100,7 @@
   let hasAnimatedSapaan = false;
 
   /**
-   * Memicu animasi slide-in dari kiri untuk Kartu Sapaan setelah teks dinamis disuntikkan.
-   * Menggunakan requestAnimationFrame + setTimeout singkat (40ms) untuk menjamin browser
-   * merender frame awal (opacity-0, -translate-x-10) terlebih dahulu sebelum mengaktifkan
-   * kelas transisi ke state akhir (opacity-100, translate-x-0).
+   * Animasi slide-in halus untuk Kartu Sapaan tanpa memicu forced layout reflow.
    */
   function triggerSapaanAnimation() {
     if (hasAnimatedSapaan) return;
@@ -111,31 +109,14 @@
 
     hasAnimatedSapaan = true;
 
-    // Pastikan state awal terpasang
-    wrapper.classList.add("fade-left", "opacity-0", "-translate-x-10");
-    wrapper.classList.remove("opacity-100", "translate-x-0");
-
-    // Force style reflow agar browser mendaftarkan frame awal
-    void wrapper.offsetWidth;
-
-    const playTransition = () => {
-      console.log("[Kartu Sapaan] Animating card slide-in from left");
+    requestAnimationFrame(() => {
       wrapper.classList.remove("opacity-0", "-translate-x-10");
       wrapper.classList.add("opacity-100", "translate-x-0");
-    };
-
-    if (window.requestAnimationFrame) {
-      requestAnimationFrame(() => {
-        setTimeout(playTransition, 40);
-      });
-    } else {
-      setTimeout(playTransition, 40);
-    }
+    });
   }
 
   /**
-   * Mengubah tampilan sapaan (Greeting Card) sesuai hasil kuis dan status penyelesaian
-   * (full, partial, atau abandoned).
+   * Menampilkan pesan sapaan sesuai hasil asesmen emosi pengguna.
    */
   function renderSapaan() {
     const completionPath = localStorage.getItem("userMentalCompletionPath") || "full";
@@ -161,21 +142,19 @@
       return;
     }
 
-    // Suntikkan teks ke HTML (baik untuk full maupun partial)
     if (judulEl) judulEl.textContent = savedTitle   || cfg.judulDefault;
     if (pesanEl) pesanEl.textContent = savedMessage || cfg.pesanDefault;
-    // Sesuaikan warna garis batas (border-left) sesuai kondisi
     if (cardEl) {
       cardEl.style.borderLeft = `4px solid ${cfg.aksenWarna}`;
     }
 
-    // Picu animasi slide-in setelah teks dan border selesai disuntikkan
     triggerSapaanAnimation();
   }
 
+  let __cachedArtikelData = null;
+
   /**
-   * Mengambil data dari `artikel.json` dan menyaring (filter) artikel
-   * yang relevan dengan kondisi pengguna saat ini.
+   * Mengambil data dari `artikel.json` dan menyaring artikel yang relevan secara cepat.
    */
   async function renderArtikelRekomendasi() {
     const kondisi = getKondisiUser();
@@ -185,57 +164,50 @@
     const titleEl = document.getElementById("rekomendasi-title");
     const gridEl  = document.getElementById("artikel-grid");
     
-    // Update teks judul rekomendasi sesuai kondisi
     if (labelEl) labelEl.textContent = cfg.label;
     if (titleEl) titleEl.textContent = cfg.title;
     if (!gridEl) return;
 
     try {
-      // Fetch file JSON dengan fallback path
-      let semuaArtikel = [];
-      const paths = ["/data/artikel.json", "../../data/artikel.json", "data/artikel.json"];
-      for (const p of paths) {
-        try {
-          const res = await fetch(p);
-          if (res.ok) {
-            semuaArtikel = await res.json();
-            break;
-          }
-        } catch (e) {}
+      if (!__cachedArtikelData) {
+        const res = await fetch("/data/artikel.json");
+        if (res.ok) {
+          __cachedArtikelData = await res.json();
+        } else {
+          throw new Error("Gagal load artikel.json");
+        }
       }
 
-      // Saring artikel: Hanya ambil artikel yang field "kondisi"-nya cocok
-      const artikelRelevan = semuaArtikel.filter((a) => a.kondisi === kondisi);
-      
-      // Batasi maksimal 5 card yang dirender di beranda
+      const artikelRelevan = __cachedArtikelData.filter((a) => a.kondisi === kondisi);
       const artikelDitampilkan = artikelRelevan.slice(0, 5);
       
-      // Render artikel ke dalam grid HTML menggunakan map() dan string template
-      gridEl.innerHTML = artikelDitampilkan.map(renderArtikelCard).join("");
-      if (window.AOS) window.AOS.refresh();
+      if (typeof renderArtikelCard === 'function') {
+        gridEl.innerHTML = artikelDitampilkan.map(renderArtikelCard).join("");
+      }
+      
+      if (window.AOS && typeof window.AOS.refresh === 'function') {
+        window.AOS.refresh();
+      }
     } catch (err) {
-      console.error("Gagal memuat artikel:", err);
-      // Fallback pesan jika gagal fetch data
+      console.warn("Gagal memuat rekomendasi artikel:", err);
       gridEl.innerHTML = `<p style="color:#8A93A8;" class="text-sm col-span-full">Belum bisa memuat rekomendasi artikel. Coba refresh halaman ya.</p>`;
     }
   }
 
-  
-  // ─── INITIALIZATION BOOTSTRAP ───────────────────────────────────────────
-  // Jalankan renderSapaan secara sinkron secepat mungkin agar teks kartu sapaan
-  // langsung terisi sebelum animasi AOS dimulai dan tanpa menunggu network fetch navigasi
+  // Eksekusi render sapaan seketika
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", renderSapaan);
+    document.addEventListener("DOMContentLoaded", () => {
+      renderSapaan();
+      Promise.all([
+        typeof loadNavigasi === 'function' ? loadNavigasi() : Promise.resolve(),
+        renderArtikelRekomendasi()
+      ]);
+    });
   } else {
     renderSapaan();
+    Promise.all([
+      typeof loadNavigasi === 'function' ? loadNavigasi() : Promise.resolve(),
+      renderArtikelRekomendasi()
+    ]);
   }
-
-  // Menjalankan semua fungsi secara berurutan saat script di-load
-  (async function initBeranda() {
-    renderSapaan();
-    // 1. Muat komponen navigasi (dari NavRender.js)
-    await loadNavigasi();
-    // 2. Fetch dan render artikel
-    await renderArtikelRekomendasi();
-  })();
 })();

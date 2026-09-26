@@ -1,18 +1,27 @@
 /**
- * js/chat-ai.js — View Pengontrol Chat AI pada Halaman Konsultasi
- * Terintegrasi penuh dengan TeduhChatService dan localStorage 'bt_ai_chat_history'
+ * js/chat-ai.js — Logika View Chat AI pada Tab Layanan Konsultasi
+ * 
+ * Script ini mengendalikan antarmuka percakapan AI di halaman Konsultasi:
+ * 1. Merender gelembung pesan user dan model secara interaktif.
+ * 2. Menyediakan efek visual indikator mengetik (typing animation).
+ * 3. Menghubungkan input keyboard (Enter) dan tombol kirim ke TeduhChatService.
+ * 4. Mendukung tombol cepat (Quick-Select Topics) untuk memulai percakapan instan.
  */
 
 (function () {
   'use strict';
 
   function initKonsultasiChat() {
+    // Tangkap elemen antarmuka chat di DOM
     const $chatContainer = $("#chat-container");
     const $chatInput = $("#chat-input");
     const $sendBtn = $("#chat-send-btn");
 
     if (!$chatContainer.length) return;
 
+    /**
+     * Menggulir (scroll) area pesan otomatis ke posisi paling bawah
+     */
     function scrollToBottom() {
       if ($chatContainer.length && $chatContainer[0]) {
         $chatContainer.scrollTop($chatContainer[0].scrollHeight);
@@ -20,13 +29,14 @@
     }
 
     /**
-     * Render seluruh percakapan dari riwayat terpadu
+     * Merender seluruh gelembung chat dari riwayat percakapan bersama
      */
     function renderHistory(history) {
       $chatContainer.empty();
       (history || []).forEach(msg => {
         let bubbleHtml = "";
         if (msg.role === "user") {
+          // Gelembung pesan user (warna hijau emerald, rata kanan)
           bubbleHtml = `
             <div class="flex items-start gap-3 w-[90%] md:w-5/6 self-end flex-row-reverse">
               <div class="w-8 h-8 rounded-full shrink-0 flex items-center justify-center text-xs font-bold bg-gray-600 text-white">KM</div>
@@ -36,6 +46,7 @@
             </div>
           `;
         } else {
+          // Gelembung pesan AI (warna gelap semi-transparan, rata kiri)
           bubbleHtml = `
             <div class="flex items-start gap-3 w-[90%] md:w-5/6">
               <div class="w-8 h-8 rounded-full shrink-0 flex items-center justify-center text-xs font-bold shadow-md" style="background:#2DD4A8; color:#0D1220;">AI</div>
@@ -50,6 +61,9 @@
       scrollToBottom();
     }
 
+    /**
+     * Menampilkan animasi indikator "AI sedang mengetik..."
+     */
     function addTypingIndicator() {
       removeTypingIndicator();
       const typingHtml = `
@@ -69,10 +83,16 @@
       scrollToBottom();
     }
 
+    /**
+     * Menghapus animasi indikator mengetik setelah balasan tiba
+     */
     function removeTypingIndicator() {
       $("#typing-indicator").remove();
     }
 
+    /**
+     * Sanitasi teks untuk mencegah injeksi kode HTML (XSS Protection)
+     */
     function escapeHtml(text) {
       if (!text) return "";
       return String(text)
@@ -83,18 +103,18 @@
         .replace(/'/g, "&#039;");
     }
 
-    // Pastikan service tersedia
+    // Pastikan service chat utama sudah tersedia di window
     if (!window.TeduhChatService) {
-      console.warn('[TeduhChat] TeduhChatService belum terload. Menunggu...');
+      console.warn('[TeduhChat] TeduhChatService belum terload. Menunggu event ready...');
       window.addEventListener('bt-chat-service-ready', initKonsultasiChat, { once: true });
       return;
     }
 
-    // Berlangganan perubahan riwayat (sinkronisasi dua arah otomatis)
+    // Berlangganan (subscribe) ke service agar pesan tersinkronisasi otomatis
     window.TeduhChatService.subscribe(renderHistory);
 
     /**
-     * Handler pengiriman pesan
+     * Mengirim pesan user ke AI dan mengunci tombol sementara waktu
      */
     async function handleSend() {
       const text = $chatInput.val().trim();
@@ -107,7 +127,7 @@
       try {
         await window.TeduhChatService.sendMessage(text);
       } catch (err) {
-        console.error('[TeduhChat] Send error:', err);
+        console.error('[TeduhChat] Gagal mengirim pesan:', err);
       } finally {
         removeTypingIndicator();
         $sendBtn.prop("disabled", false).css("opacity", "1");
@@ -115,7 +135,7 @@
       }
     }
 
-    // Event Listeners
+    // Event listener untuk tombol kirim dan tombol Enter di keyboard
     $sendBtn.off("click").on("click", handleSend);
     $chatInput.off("keypress").on("keypress", function (e) {
       if (e.which === 13) {
@@ -123,7 +143,7 @@
       }
     });
 
-    // Handler untuk Quick-Select Topics (Chip buttons)
+    // Event listener untuk tombol saran topik instan (Quick-Select Topics)
     $(document).off("click", ".quick-chip").on("click", ".quick-chip", function () {
       const topicText = $(this).attr("data-topic") || $(this).text().trim();
       $chatInput.val(topicText);
@@ -131,7 +151,7 @@
     });
   }
 
-  // Inisialisasi saat DOM dan jQuery siap
+  // Jalankan inisialisasi ketika dokumen HTML siap
   if (typeof jQuery !== 'undefined') {
     $(document).ready(initKonsultasiChat);
   } else {

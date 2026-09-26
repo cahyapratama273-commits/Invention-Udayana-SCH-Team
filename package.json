@@ -1,0 +1,21 @@
+{
+  "name": "invention-udayana-sch-team",
+  "version": "1.0.0",
+  "description": "BerTeduh Web Application",
+  "main": "env.js",
+  "scripts": {
+    "build": "tailwindcss -i ./assets/css/tailwind-input.css -o ./assets/css/tailwind.min.css --minify",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cahyapratama273-commits/Invention-Udayana-SCH-Team.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "tailwindcss": "^3.4.17"
+  }
+}

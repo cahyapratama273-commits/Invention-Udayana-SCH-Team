@@ -1,35 +1,39 @@
 /**
- * RiakUI.js — UI Controller for Ruang Sensorik (Sensory Experience)
+ * RiakUI.js — Pengontrol Antarmuka (UI Controller) untuk Ruang Sensorik BerTeduh
  * 
- * Manages:
- * 1. Mode Switching: Air (Water Ripple) | Angkasa (Stardust Field) | Menulis (Sand Writing)
- * 2. Color Picker: Dual desktop and mobile synchronized controls
- * 3. Audio Mute: Ambient sound / pencil SFX mute toggle
- * 4. Mobile Draggable Floating Menu Button (FAB):
- *    - Touch-draggable anywhere within viewport bounds
- *    - Distinguishes clean TAP (toggles popover) vs DRAG (repositions button)
- *    - Persists session position across interactions via sessionStorage
- *    - Clamps to safe screen boundaries (never off-screen or behind nav)
- * 5. Interaction Hint: Subtle first-touch overlay
+ * Modul ini mengatur:
+ * 1. Pengalih Tema: Air (Riak Gelombang Air) | Angkasa (Debu Bintang Galaksi) | Menulis (Goresan Kertas & Pensil).
+ * 2. Pemilih Warna (Color Picker): Sinkronisasi warna real-time pada kontrol desktop dan mobile.
+ * 3. Kontrol Audio & Bisu (Mute Toggle): Pengaturan efek suara riak air dan gesekan pensil.
+ * 4. Tombol Menu Terapung Mobile (Draggable FAB):
+ *    - Tombol terapung di perangkat mobile yang dapat digeser (drag) dengan bebas.
+ *    - Membedakan antara ketukan bersih (Tap untuk toggle popover) dan geseran (Drag memindahkan tombol).
+ *    - Menyimpan posisi tombol di sessionStorage agar posisinya tetap sama saat navigasi.
+ *    - Menjaga koordinat tombol selalu berada di dalam batas layar yang aman (clamping).
+ * 5. Fitur Zoom (Zoom In / Zoom Out):
+ *    - Mendukung Ctrl+Scroll di desktop dan gestur Pinch-to-Zoom di perangkat sentuh (skala 25% hingga 100%).
+ *    - Menyediakan tombol reset zoom saat tampilan diperkecil (< 100%).
+ * 6. Sembunyi Otomatis Navbar (Auto-hide Navbar) saat user sedang fokus berinteraksi di kanvas.
  */
 (function (window) {
   'use strict';
 
-  // Default color fallbacks per theme (used when user hasn't chosen a custom color)
+  // Daftar warna standar default untuk masing-masing tema
   const THEME_DEFAULTS = {
-    air: '#38BDF8',     // Bright water blue
-    angkasa: '#C084FC', // Deep cosmic purple
-    menulis: '#1C1917'  // Graphite pencil black
+    air: '#38BDF8',     // Biru air segar
+    angkasa: '#C084FC', // Ungu kosmik galaksi
+    menulis: '#1C1917'  // Hitam grafit pensil sketsa
   };
 
   class RiakUIController {
     constructor() {
-      // Stored or default preferences
+      // ─── STATE DAN PREFERENSI TERSIMPAN ───
       this.currentTheme = localStorage.getItem('riak_tema') || 'air';
 
       const savedColor = localStorage.getItem('riak_warna');
       this.hasCustomColor = savedColor !== null;
       
+      // Tentukan warna aktif berdasarkan tema
       if (this.currentTheme === 'menulis') {
         const savedMenulisColor = localStorage.getItem('riak_warna_menulis');
         this.currentColor = savedMenulisColor || '#1C1917';
@@ -40,24 +44,28 @@
       this.isMuted = localStorage.getItem('riak_muted') === 'true';
       this.hintDismissed = localStorage.getItem('riak_hint_dismissed') === 'true';
 
-      // Mobile FAB state
+      // State tombol terapung (FAB) mobile
       this.fabEl = null;
       this.fabContainer = null;
       this.popoverEl = null;
       this.isPopoverOpen = false;
 
-      // Menulis active tool: 'pencil' | 'eraser'
+      // Alat aktif pada mode menulis ('pencil' | 'eraser')
       this.currentMenulisTool = 'pencil';
 
-      // Zoom level state (0.25 to 1.00)
+      // Level skala zoom kanvas (0.25 sampai 1.00)
       const savedZoom = sessionStorage.getItem('riak_zoom_level');
       this.zoomLevel = savedZoom ? Math.min(1.0, Math.max(0.25, parseFloat(savedZoom))) : 1.0;
     }
 
+    /**
+     * Inisialisasi awal UI dan komponen mesin sensorik
+     */
     async init() {
+      // Muat navbar secara dinamis jika tersedia
       if (typeof loadNavigasi === 'function') {
         try { await loadNavigasi(); } catch(e) {
-          console.error('Failed to load navbar:', e);
+          console.error('Gagal memuat navbar:', e);
         }
       }
 
@@ -66,12 +74,13 @@
 
       if (!canvasEl || !wrapperEl) return;
 
-      // Initialize Engines & Audio
+      // Inisialisasi Mesin Simulasi Visual (RiakEngine) dan Audio (RiakAudio)
       if (window.RiakEngine) {
         window.RiakEngine.init(canvasEl);
         window.RiakEngine.setTheme(this.currentTheme);
         window.RiakEngine.setColor(this.currentColor);
 
+        // Hapus teks petunjuk interaksi saat user pertama kali menyentuh kanvas
         window.RiakEngine.onFirstInteraction = () => {
           this.dismissHint();
         };
@@ -82,10 +91,10 @@
         window.RiakAudio.setMuted(this.isMuted);
       }
 
-      // Apply initial theme background class
+      // Terapkan tema visual awal pada wrapper
       this.updateThemeBackground();
 
-      // Render desktop and mobile controls
+      // Pasang seluruh kontrol interaksi
       this.bindThemeToggle();
       this.bindMenulisTools();
       this.bindColorPicker();
@@ -98,6 +107,9 @@
       this.applyZoom(this.zoomLevel, false);
     }
 
+    /**
+     * Memperbarui kelas CSS latar belakang sesuai tema yang aktif
+     */
     updateThemeBackground() {
       const wrapper = document.getElementById('riak-experience-wrapper');
       if (!wrapper) return;
@@ -112,13 +124,16 @@
       }
     }
 
+    /**
+     * Menghubungkan tombol pilihan tema (Air, Angkasa, Menulis) di desktop dan mobile
+     */
     bindThemeToggle() {
-      // Desktop theme buttons
+      // Tombol desktop
       const btnAir = document.getElementById('riak-theme-air-btn');
       const btnAngkasa = document.getElementById('riak-theme-angkasa-btn');
       const btnMenulis = document.getElementById('riak-theme-menulis-btn');
 
-      // Mobile popover theme buttons
+      // Tombol popover mobile
       const mBtnAir = document.getElementById('riak-mobile-theme-air-btn');
       const mBtnAngkasa = document.getElementById('riak-mobile-theme-angkasa-btn');
       const mBtnMenulis = document.getElementById('riak-mobile-theme-menulis-btn');
@@ -157,11 +172,14 @@
       updateButtons();
     }
 
+    /**
+     * Mengatur tema baru dan memperbarui preferensi di localStorage
+     */
     setTheme(theme) {
       this.currentTheme = theme;
       localStorage.setItem('riak_tema', theme);
 
-      // When switching to menulis, ensure graphite pencil black is selected by default
+      // Jika berpindah ke mode menulis, gunakan warna pensil grafit default
       const defaultColor = THEME_DEFAULTS[theme] || '#38BDF8';
       if (theme === 'menulis') {
         const savedMenulisColor = localStorage.getItem('riak_warna_menulis');
@@ -184,6 +202,9 @@
       }
     }
 
+    /**
+     * Menghubungkan tombol alat menulis (Pensil, Penghapus, dan Bersihkan Kanvas)
+     */
     bindMenulisTools() {
       const pBtn = document.getElementById('riak-tool-pencil-btn');
       const eBtn = document.getElementById('riak-tool-eraser-btn');
@@ -200,12 +221,18 @@
       if (mcBtn) mcBtn.addEventListener('click', () => this.clearMenulisCanvas());
     }
 
+    /**
+     * Membersihkan seluruh tulisan di kanvas
+     */
     clearMenulisCanvas() {
       if (window.RiakEngine && typeof window.RiakEngine.clearMenulisCanvas === 'function') {
         window.RiakEngine.clearMenulisCanvas();
       }
     }
 
+    /**
+     * Mengatur alat aktif pada mode menulis (Pensil atau Penghapus)
+     */
     setMenulisTool(tool) {
       this.currentMenulisTool = tool === 'eraser' ? 'eraser' : 'pencil';
 
@@ -231,6 +258,9 @@
       }
     }
 
+    /**
+     * Mengatur visibilitas toolbar menulis (hanya muncul saat tema Menulis aktif)
+     */
     updateMenulisToolsVisibility() {
       const toolsWrapper = document.getElementById('riak-menulis-tools-wrapper');
       const mobileTools = document.getElementById('riak-mobile-menulis-tools');
@@ -265,12 +295,16 @@
       }
     }
 
+    /**
+     * Menghubungkan input pemilihan warna (Color Picker)
+     */
     bindColorPicker() {
       const desktopInput = document.getElementById('riak-color-input');
       const desktopPreview = document.getElementById('riak-color-preview');
       const mobileInput = document.getElementById('riak-mobile-color-input');
       const mobilePreview = document.getElementById('riak-mobile-color-preview');
 
+      // Sinkronisasi nilai warna ke elemen input dan preview
       const syncInputs = (hex) => {
         if (desktopInput && desktopInput.value.toLowerCase() !== hex.toLowerCase()) desktopInput.value = hex;
         if (desktopPreview) desktopPreview.style.backgroundColor = hex;
@@ -297,6 +331,9 @@
       }
     }
 
+    /**
+     * Mengatur warna simulasi dan menyimpannya di localStorage
+     */
     setColor(colorHex, isExplicitUserAction = true) {
       this.currentColor = colorHex;
 
@@ -327,6 +364,9 @@
       }
     }
 
+    /**
+     * Menghubungkan tombol bisukan audio (Mute Sound)
+     */
     bindMuteButton() {
       const desktopMuteBtn = document.getElementById('riak-mute-btn');
       const mobileMuteBtn = document.getElementById('riak-mobile-mute-btn');
@@ -375,13 +415,16 @@
       updateMuteUI();
     }
 
+    /**
+     * Menghubungkan kontrol Zoom (Perbesar, Perkecil, Reset Zoom, Ctrl+Scroll, dan Pinch Gesture)
+     */
     bindZoomControls() {
-      // Desktop buttons
+      // Tombol desktop
       const btnOut = document.getElementById('riak-zoom-out-btn');
       const btnIn = document.getElementById('riak-zoom-in-btn');
       const btnReset = document.getElementById('riak-zoom-reset-btn');
 
-      // Mobile popover buttons
+      // Tombol popover mobile
       const mBtnOut = document.getElementById('riak-mobile-zoom-out-btn');
       const mBtnIn = document.getElementById('riak-mobile-zoom-in-btn');
       const mBtnReset = document.getElementById('riak-mobile-zoom-reset-btn');
@@ -400,7 +443,7 @@
 
       const wrapper = document.getElementById('riak-experience-wrapper');
       if (wrapper) {
-        // Desktop mouse wheel zoom (Requires Ctrl / Cmd key)
+        // Zoom via scroll wheel mouse desktop (hanya aktif jika tombol Ctrl / Cmd ditekan)
         wrapper.addEventListener('wheel', (e) => {
           const controlsPill = document.getElementById('riak-desktop-controls');
           const fabContainer = document.getElementById('riak-mobile-fab-container');
@@ -410,7 +453,6 @@
             return;
           }
 
-          // Lock wheel zoom to Ctrl + Scroll (or Cmd + Scroll on macOS)
           if (e.ctrlKey || e.metaKey) {
             e.preventDefault();
             const delta = -e.deltaY * 0.0015;
@@ -418,7 +460,7 @@
           }
         }, { passive: false });
 
-        // Mobile pinch-to-zoom
+        // Gestur cubit zoom pada layar sentuh (Pinch-to-Zoom 2 jari)
         let initialPinchDist = 0;
         let initialZoom = 1.0;
 
@@ -453,6 +495,9 @@
       }
     }
 
+    /**
+     * Mengatur nilai zoom dengan pembatasan batas minimal (0.25) dan maksimal (1.00)
+     */
     setZoom(targetZoom, animate = true) {
       const clamped = Math.min(1.0, Math.max(0.25, targetZoom));
       const rounded = Math.round(clamped * 100) / 100;
@@ -462,6 +507,9 @@
       this.applyZoom(rounded, animate);
     }
 
+    /**
+     * Menerapkan transformasi CSS Scale pada kanvas dan memperbarui label persen
+     */
     applyZoom(zoom, animate = true) {
       const canvasEl = document.getElementById('riak-canvas');
       if (canvasEl) {
@@ -480,7 +528,7 @@
       if (desktopLabel) desktopLabel.textContent = percentageStr;
       if (mobileLabel) mobileLabel.textContent = percentageStr;
 
-      // Reset button visibility (shown when zoom < 0.99)
+      // Tampilkan tombol Reset hanya jika sedang di-zoom out (< 100%)
       const desktopReset = document.getElementById('riak-zoom-reset-btn');
       const mobileReset = document.getElementById('riak-mobile-zoom-reset-btn');
       const isZoomedOut = zoom < 0.99;
@@ -494,14 +542,14 @@
         else mobileReset.classList.add('hidden');
       }
 
-      // Zoom In button state (disabled at 1.0 / 100%)
+      // Redupkan tombol Zoom In jika sudah mencapai batas maksimal (100%)
       const desktopIn = document.getElementById('riak-zoom-in-btn');
       const mobileIn = document.getElementById('riak-mobile-zoom-in-btn');
       const atMax = zoom >= 0.99;
       if (desktopIn) desktopIn.classList.toggle('opacity-40', atMax);
       if (mobileIn) mobileIn.classList.toggle('opacity-40', atMax);
 
-      // Zoom Out button state (disabled at 0.25 / 25%)
+      // Redupkan tombol Zoom Out jika sudah mencapai batas minimal (25%)
       const desktopOut = document.getElementById('riak-zoom-out-btn');
       const mobileOut = document.getElementById('riak-mobile-zoom-out-btn');
       const atMin = zoom <= 0.26;
@@ -510,7 +558,7 @@
     }
 
     /**
-     * Initializes Draggable Floating Action Button (FAB) + Popover for Mobile
+     * Menginisialisasi Tombol Terapung (FAB) dan Popover Menu untuk Mobile
      */
     initMobileFab() {
       this.fabContainer = document.getElementById('riak-mobile-fab-container');
@@ -520,14 +568,14 @@
 
       if (!this.fabContainer || !this.fabEl || !this.popoverEl) return;
 
-      // Safe viewport boundary clamps
+      // Batasan area aman gerak tombol di layar
       const getBounds = () => {
         const fabWidth = this.fabEl.offsetWidth || 50;
         const fabHeight = this.fabEl.offsetHeight || 50;
         return {
           minX: 12,
           maxX: Math.max(12, window.innerWidth - fabWidth - 12),
-          minY: 70, // Safe padding below fixed navbar
+          minY: 70, // Jarak aman dari navbar atas
           maxY: Math.max(70, window.innerHeight - fabHeight - 16)
         };
       };
@@ -540,7 +588,7 @@
         };
       };
 
-      // Restore session position or set default bottom-right
+      // Pulihkan posisi terakhir tombol dari sessionStorage
       const restorePosition = () => {
         const saved = sessionStorage.getItem('riak_fab_pos');
         if (saved) {
@@ -554,7 +602,7 @@
             return;
           } catch (e) {}
         }
-        // Default placement (bottom-right)
+        // Posisi default: pojok kanan bawah
         const defX = window.innerWidth - 66;
         const defY = window.innerHeight - 130;
         const clamped = clampPosition(defX, defY);
@@ -576,14 +624,14 @@
         }
       });
 
-      // Pointer Dragging & Tap Distinction
+      // Penanganan gesture sentuh: membedakan KLIK vs DRAG
       let isPointerDown = false;
       let isDragging = false;
       let startX = 0;
       let startY = 0;
       let initLeft = 0;
       let initTop = 0;
-      const DRAG_THRESHOLD = 9; // pixels moved before qualifying as drag
+      const DRAG_THRESHOLD = 9; // Batas minimal pergerakan pixel untuk dianggap sebagai drag
 
       this.fabEl.addEventListener('pointerdown', (e) => {
         isPointerDown = true;
@@ -607,7 +655,7 @@
 
         if (dist > DRAG_THRESHOLD) {
           isDragging = true;
-          // Hide popover while dragging
+          // Sembunyikan popover jika user mulai menggeser tombol
           if (this.isPopoverOpen) {
             this.closePopover();
           }
@@ -630,12 +678,12 @@
         } catch (err) {}
 
         if (isDragging) {
-          // Persist dragged position for session
+          // Gerakan adalah DRAG: Simpan koordinat baru ke sessionStorage
           const currX = parseFloat(this.fabContainer.style.left) || initLeft;
           const currY = parseFloat(this.fabContainer.style.top) || initTop;
           sessionStorage.setItem('riak_fab_pos', JSON.stringify({ x: currX, y: currY }));
         } else {
-          // Clean TAP -> Toggle Popover Menu
+          // Gerakan adalah TAP: Buka / tutup popover menu
           this.togglePopover();
         }
       };
@@ -650,7 +698,7 @@
         });
       }
 
-      // Close popover when tapping outside
+      // Tutup popover jika mengklik di luar area menu
       document.addEventListener('pointerdown', (e) => {
         if (this.isPopoverOpen && !this.fabContainer.contains(e.target)) {
           this.closePopover();
@@ -658,6 +706,9 @@
       });
     }
 
+    /**
+     * Menyesuaikan posisi kemunculan popover menu mobile agar selalu terlihat rapi
+     */
     positionPopover() {
       if (!this.popoverEl || !this.fabContainer) return;
 
@@ -665,7 +716,7 @@
       const popoverWidth = 260;
       const popoverHeight = 220;
 
-      // Vertical placement: above button if on bottom half of viewport, else below
+      // Penempatan Vertikal: buka ke atas jika tombol berada di bagian bawah layar
       const spaceBelow = window.innerHeight - rect.bottom;
       if (spaceBelow < popoverHeight + 20 && rect.top > popoverHeight + 20) {
         this.popoverEl.style.bottom = '58px';
@@ -675,7 +726,7 @@
         this.popoverEl.style.bottom = 'auto';
       }
 
-      // Horizontal placement: align right edge if near right screen boundary
+      // Penempatan Horizontal: ratakan ke kanan jika berada di dekat tepi kanan layar
       if (rect.left + popoverWidth > window.innerWidth - 16) {
         this.popoverEl.style.right = '0px';
         this.popoverEl.style.left = 'auto';
@@ -685,6 +736,9 @@
       }
     }
 
+    /**
+     * Toggle buka/tutup popover mobile
+     */
     togglePopover() {
       if (this.isPopoverOpen) {
         this.closePopover();
@@ -708,6 +762,9 @@
       this.popoverEl.classList.remove('flex');
     }
 
+    /**
+     * Logika Auto-Hide Navbar agar pengalaman sensorik lebih imersif
+     */
     initNavbarAutoHide() {
       const getNavEl = () => {
         const slot = document.getElementById('navbar-slot');
@@ -736,28 +793,28 @@
         if (nav) nav.classList.remove('nav-hidden');
       };
 
-      // Expose globally so RiakEngine can invoke hide/show seamlessly
+      // Ekspor helper navbar ke objek global window
       window.RiakNavbar = {
         hide: hideNavbar,
         show: showNavbar,
         isHidden: () => isNavHidden
       };
 
-      // Reappear when mouse bumped to the top edge (clientY <= 50)
+      // Munculkan kembali navbar jika mouse digerakkan ke tepi paling atas (clientY <= 50)
       window.addEventListener('mousemove', (e) => {
         if (e.clientY <= 50) {
           showNavbar();
         }
       }, { passive: true });
 
-      // Reappear on scroll up (wheel deltaY < -4)
+      // Munculkan kembali navbar saat user scroll ke atas (wheel deltaY < -4)
       window.addEventListener('wheel', (e) => {
         if (e.deltaY < -4) {
           showNavbar();
         }
       }, { passive: true });
 
-      // Reappear on touch near top edge
+      // Munculkan kembali navbar saat sentuhan terdeteksi di dekat tepi atas
       window.addEventListener('touchstart', (e) => {
         if (e.touches && e.touches[0] && e.touches[0].clientY <= 50) {
           showNavbar();
@@ -765,6 +822,9 @@
       }, { passive: true });
     }
 
+    /**
+     * Mengatur teks petunjuk interaksi awal (Hint Overlay)
+     */
     initHint() {
       const hintEl = document.getElementById('riak-hint');
       if (!hintEl) return;
@@ -785,7 +845,7 @@
     }
   }
 
-  // Initialize when DOM is ready
+  // Inisialisasi controller saat dokumen HTML siap
   document.addEventListener('DOMContentLoaded', () => {
     window.RiakUI = new RiakUIController();
     window.RiakUI.init();

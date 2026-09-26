@@ -1,62 +1,68 @@
 /**
- * RiakEngine.js — Pure 2D Canvas Sensory Simulation Engine
+ * RiakEngine.js — Mesin Simulasi Sensorik Interaktif 2D Canvas
  * 
- * Features:
- * 1. Air Theme: Fine, crisp CPU 2D height-field wave simulation.
- *    - Higher-density simulation grid (~280 base resolution) for crisp, localized micro-ripples.
- *    - Clamped displacement (35 max) and subtle injection strength so ripples stay calm.
- *    - Tuned damping (0.935) so ripples settle quickly in ~1.0-1.2s and peak span <= 15-20% width.
- *    - Pure surface normal slope shading with smooth quadratic alpha falloff (no phantom blob).
- * 2. Angkasa Theme: Anchored stardust grid with Hooke's-law spring physics,
- *    cursor repulsion impulses, dynamic glow feedback, and drifting sparkle bursts.
- * 3. Sensory Audio & Controls: Speed-scaled sound triggers, color switching,
- *    and responsive pointer interactions.
+ * Modul ini menyediakan 3 simulasi sensorik visual & fisika:
+ * 1. Mode Air (Tema Riak Air):
+ *    - Simulasi gelombang 2D Height-Field berbasis CPU beresolusi tinggi (~280 - 320 grid).
+ *    - Pembatasan nilai perpindahan (displacement clamping) agar riak tetap tenang dan menyejukkan.
+ *    - Peredaman fisika (damping 0.992) sehingga riak menyebar secara alami hingga 25-35% lebar layar lalu mereda.
+ *    - Shading normal permukaan air dengan gradien kuadratik yang jernih tanpa bayangan buram.
+ * 2. Mode Angkasa (Tema Debu Bintang & Galaksi):
+ *    - Fisika partikel berpegas (Hukum Hooke / Spring Physics) dengan titik jangkar asli.
+ *    - Gaya tolak pointer (Cursor Repulsion) yang membubarkan bintang saat kursor melintas.
+ *    - Partikel berkilau dinamis (Twinkle & Glow) dan percikan komet melayang.
+ * 3. Integrasi Suara & Skala Koordinat:
+ *    - Konversi skala koordinat yang akurat terhadap level zoom kanvas (Zoom In / Zoom Out).
+ *    - Pemicu efek suara air, gemerlap bintang, dan gesekan pensil yang sinkron dengan kecepatan kursor.
  */
 (function (window) {
   'use strict';
 
   class RiakCanvasEngine {
     constructor() {
-      this.canvas = null;
-      this.ctx = null;
-      this.width = 0;
-      this.height = 0;
-      this.dpr = Math.min(window.devicePixelRatio || 1, 2);
+      this.canvas = null;               // Elemen kanvas utama
+      this.ctx = null;                  // 2D Rendering Context
+      this.width = 0;                   // Lebar kanvas aktif
+      this.height = 0;                  // Tinggi kanvas aktif
+      this.dpr = Math.min(window.devicePixelRatio || 1, 2); // Device pixel ratio untuk resolusi tinggi
 
-      this.theme = 'air'; // 'air' | 'angkasa'
-      this.primaryColor = '#38BDF8';
+      this.theme = 'air';               // Tema aktif: 'air' | 'angkasa' | 'menulis'
+      this.primaryColor = '#38BDF8';    // Warna aksen riak / bintang
       this.primaryRgb = { r: 56, g: 189, b: 248 };
 
-      // Water Simulation (Air Theme)
-      this.simCols = 280;
-      this.simRows = 160;
-      this.buffer1 = null;
-      this.buffer2 = null;
-      this.currentBuffer = null;
-      this.previousBuffer = null;
-      this.damping = 0.992; // Settles over ~2-3s, expands to ~25-35% of canvas width naturally
-      this.offscreenCanvas = null;
+      // ─── PARAMETER SIMULASI AIR (TEMA AIR) ───
+      this.simCols = 280;               // Jumlah kolom grid simulasi gelombang
+      this.simRows = 160;               // Jumlah baris grid simulasi gelombang
+      this.buffer1 = null;              // Double buffer array 1 untuk ketinggian air
+      this.buffer2 = null;              // Double buffer array 2 untuk ketinggian air
+      this.currentBuffer = null;        // Penunjuk buffer frame saat ini
+      this.previousBuffer = null;       // Penunjuk buffer frame sebelumnya
+      this.damping = 0.992;             // Faktor peredaman gelombang (air mereda secara bertahap dalam ~2-3 detik)
+      this.offscreenCanvas = null;      // Kanvas offscreen untuk rendering pixel heightfield
       this.offscreenCtx = null;
       this.offscreenImgData = null;
-      this.droplets = []; // Subtle micro-droplets on click/tap
+      this.droplets = [];               // Tetesan air mikro saat klik/tap
 
-      // Stardust Physics Field (Angkasa Theme)
-      this.stars = [];
-      this.burstSparks = [];
+      // ─── PARAMETER MEDAN BINTANG (TEMA ANGKASA) ───
+      this.stars = [];                  // Array partikel debu bintang dengan pegas jangkar
+      this.burstSparks = [];            // Percikan kilau komet yang melayang saat interaksi
 
-      // Pointer tracking
-      this.isPointerDown = false;
-      this.lastX = 0;
-      this.lastY = 0;
-      this.lastPointerTime = 0;
-      this.lastAudioTime = 0;
+      // Pelacakan kursor / pointer
+      this.isPointerDown = false;       // Status tombol mouse / layar sedang ditekan
+      this.lastX = 0;                   // Posisi koordinat X terakhir
+      this.lastY = 0;                   // Posisi koordinat Y terakhir
+      this.lastPointerTime = 0;         // Timestamp sentuhan terakhir
+      this.lastAudioTime = 0;           // Pengatur jeda pemutaran efek suara (Audio Throttling)
 
       this.lastInteractionTime = performance.now();
-      this.isRunning = false;
-      this.onFirstInteraction = null;
+      this.isRunning = false;           // Status loop animasi canvas
+      this.onFirstInteraction = null;   // Callback ketika interaksi pertama kali terdeteksi
       this.hasInteracted = false;
     }
 
+    /**
+     * Menginisialisasi kanvas, listener resize, dan memulai render loop
+     */
     init(canvasElement) {
       this.canvas = canvasElement;
       this.ctx = this.canvas.getContext('2d', { alpha: true });
@@ -75,6 +81,9 @@
       requestAnimationFrame((t) => this.render(t));
     }
 
+    /**
+     * Konversi kode warna Hex (#38BDF8) ke objek RGB {r, g, b}
+     */
     hexToRgb(hex) {
       if (!hex || typeof hex !== 'string') return { r: 45, g: 212, b: 168 };
       let c = hex.replace('#', '').trim();
@@ -90,6 +99,9 @@
       };
     }
 
+    /**
+     * Mengubah warna tema aktif pada simulasi air, bintang, dan menulis
+     */
     setColor(colorHex) {
       this.primaryColor = colorHex;
       this.primaryRgb = this.hexToRgb(colorHex);
@@ -98,6 +110,9 @@
       }
     }
 
+    /**
+     * Mengosongkan seluruh gelombang air yang sedang aktif
+     */
     clearWaterSimulation() {
       if (this.buffer1) this.buffer1.fill(0);
       if (this.buffer2) this.buffer2.fill(0);
@@ -115,6 +130,9 @@
       }
     }
 
+    /**
+     * Mengganti tema simulasi ('air' | 'angkasa' | 'menulis')
+     */
     setTheme(theme) {
       this.theme = theme;
       this.clearWaterSimulation();
@@ -133,12 +151,18 @@
       }
     }
 
+    /**
+     * Mengatur alat aktif pada mode Menulis (pensil / penghapus)
+     */
     setMenulisTool(tool) {
       if (window.MenulisEngine && typeof window.MenulisEngine.setTool === 'function') {
         window.MenulisEngine.setTool(tool);
       }
     }
 
+    /**
+     * Membersihkan goresan tulisan pada mode Menulis
+     */
     clearMenulisCanvas() {
       if (window.MenulisEngine && typeof window.MenulisEngine.clearCanvas === 'function') {
         window.MenulisEngine.clearCanvas();
@@ -148,10 +172,12 @@
       }
     }
 
+    /**
+     * Menyesuaikan ukuran kanvas tak terbatas (400vw x 400vh) dan buffer simulasi
+     */
     handleResize() {
       if (!this.canvas) return;
 
-      // Calculate unscaled 400vw x 400vh layout width & height
       const unscaledW = (this.canvas.offsetWidth > 0) ? this.canvas.offsetWidth : Math.floor(window.innerWidth * 4);
       const unscaledH = (this.canvas.offsetHeight > 0) ? this.canvas.offsetHeight : Math.floor(window.innerHeight * 4);
 
@@ -178,17 +204,15 @@
     }
 
     /**
-     * Initializes higher-resolution simulation grid and double buffers for height-field water
+     * Menginisialisasi grid resolusi simulasi gelombang air dan double-buffer Float32Array
      */
     initWaterSimulation() {
-      // Sets fine grid resolution based on 4x expanded canvas aspect ratio:
       const baseCols = 320;
       if (this.width > 0 && this.height > 0) {
         if (this.width >= this.height) {
           this.simCols = baseCols;
           this.simRows = Math.max(80, Math.round(baseCols * (this.height / this.width)));
         } else {
-          // Portrait (mobile devices): maintain high horizontal cell density
           this.simCols = 280;
           this.simRows = Math.max(120, Math.round(280 * (this.height / this.width)));
         }
@@ -213,7 +237,7 @@
     }
 
     /**
-     * Initializes stardust grid with spring anchors for Angkasa theme
+     * Menginisialisasi sebaran partikel debu bintang dengan jangkar pegas untuk tema Angkasa
      */
     initAngkasaField() {
       this.stars = [];
@@ -245,13 +269,17 @@
       }
     }
 
+    /**
+     * Menghubungkan event pointer mouse dan touch gesture ke mesin simulasi
+     */
     bindEvents() {
+      // Fungsi untuk mengonversi posisi kursor layar ke koordinat internal kanvas
+      // Memperhitungkan efek transform scale (Zoom) agar titik sentuh selalu 100% presisi
       const getPos = (e) => {
         const rect = this.canvas.getBoundingClientRect();
         const clientX = (e.touches && e.touches.length > 0) ? e.touches[0].clientX : e.clientX;
         const clientY = (e.touches && e.touches.length > 0) ? e.touches[0].clientY : e.clientY;
 
-        // Exact normalized scale factor between canvas internal coordinate space and client rect
         const scaleX = (rect.width > 0) ? (this.width / rect.width) : 1;
         const scaleY = (rect.height > 0) ? (this.height / rect.height) : 1;
 
@@ -305,12 +333,12 @@
 
         this.lastInteractionTime = now;
 
-        // Auto-hide navbar while dragging across canvas
+        // Sembunyikan navbar otomatis saat user sedang fokus berinteraksi di kanvas
         if (dist > 3 && window.RiakNavbar && typeof window.RiakNavbar.hide === 'function') {
           window.RiakNavbar.hide();
         }
 
-        // Auto-show navbar if pointer moves near top edge (clientY <= 50)
+        // Tampilkan kembali navbar jika kursor diarahkan ke tepi paling atas layar (clientY <= 50)
         const rawClientY = (e.touches && e.touches.length > 0) ? e.touches[0].clientY : e.clientY;
         if (rawClientY <= 50 && window.RiakNavbar && typeof window.RiakNavbar.show === 'function') {
           window.RiakNavbar.show();
@@ -330,7 +358,7 @@
         } else {
           this.handlePointerDrag(pos.x, pos.y, dx, dy, dist, speed);
 
-          // Sound throttling during drag (gentle flowing ripple wake)
+          // Batasi frekuensi efek suara saat kursor digeser agar suara air mengalir tetap menenangkan
           if (now - this.lastAudioTime >= 95 && dist >= 8) {
             if (window.RiakAudio) {
               window.RiakAudio.playDrag(speed);
@@ -356,12 +384,12 @@
         }
       };
 
-      // Mouse events
+      // Pasang event mouse pada kanvas dan window
       this.canvas.addEventListener('mousedown', handleStart);
       window.addEventListener('mousemove', handleMove);
       window.addEventListener('mouseup', handleEnd);
 
-      // Touch events (passive: false to prevent scrolling)
+      // Pasang event touch gesture pada perangkat sentuh (passive: false untuk mencegah scroll browser)
       this.canvas.addEventListener('touchstart', (e) => {
         e.preventDefault();
         handleStart(e);
@@ -378,6 +406,9 @@
       window.addEventListener('touchcancel', handleEnd);
     }
 
+    /**
+     * Memicu callback saat pertama kali user menyentuh kanvas (misal untuk menutup instruksi)
+     */
     triggerFirstInteraction() {
       if (!this.hasInteracted) {
         this.hasInteracted = true;
@@ -388,7 +419,7 @@
     }
 
     /**
-     * Injects displacement into height-field grid with smooth cosine falloff and value clamping
+     * Menyuntikkan energi dorongan (impuls) gelombang air dengan gradasi cosine halus dan pembatasan nilai
      */
     injectWaterDisplacement(canvasX, canvasY, strength, radius = 3.6) {
       if (!this.currentBuffer || this.width <= 0 || this.height <= 0) return;
@@ -399,7 +430,7 @@
 
       const r = Math.ceil(radius);
       const rSq = radius * radius;
-      const MAX_VAL = 35; // Maximum displacement clamp to ensure ripples stay localized
+      const MAX_VAL = 35; // Pembatasan maksimal agar riak air tetap stabil dan tenang
 
       for (let dy = -r; dy <= r; dy++) {
         const y = gy + dy;
@@ -421,7 +452,7 @@
     }
 
     /**
-     * Repels stardust particles away from pointer in Angkasa theme
+     * Mendorong partikel debu bintang menjauh dari titik sentuhan kursor (Tema Angkasa)
      */
     repelStars(px, py, force = 5.5, radius = 110) {
       const rSq = radius * radius;
@@ -444,14 +475,14 @@
     }
 
     /**
-     * Click / Tap interaction handler — natural expanding ripples
+     * Menangani aksi klik / ketukan tunggal di kanvas
      */
     handlePointerClick(x, y) {
       if (this.theme === 'air') {
-        // Natural downward displacement impulse for single click/tap (~25-35% width spread)
+        // Suntikkan dorongan riak gelombang air
         this.injectWaterDisplacement(x, y, -28, 3.6);
 
-        // Gentle surface micro-droplets
+        // Buat beberapa butiran tetesan air mikro
         const dropCount = 4;
         for (let i = 0; i < dropCount; i++) {
           const angle = Math.random() * Math.PI * 2;
@@ -467,10 +498,10 @@
           });
         }
       } else {
-        // Angkasa: Repel nearby stars with strong impulse
+        // Angkasa: Dorong bintang di sekitar titik klik dengan impuls kuat
         this.repelStars(x, y, 9.0, 130);
 
-        // Spawn drifting sparkle burst
+        // Munculkan percikan bintang berkilau
         const count = 12;
         for (let i = 0; i < count; i++) {
           const angle = (Math.PI * 2 * i) / count + (Math.random() - 0.5) * 0.4;
@@ -490,11 +521,11 @@
     }
 
     /**
-     * Drag interaction handler — natural wake along pointer path
+     * Menangani aksi seretan (Drag) kursor di kanvas
      */
     handlePointerDrag(x, y, dx, dy, dist, speed) {
       if (this.theme === 'air') {
-        // Controlled, natural wake interpolation along drag path
+        // Bentuk jejak alur riak di sepanjang garis geser kursor
         const normSpeed = Math.min(speed, 2.0);
         const dragImpulse = -(10 + normSpeed * 6);
         const stepSize = 14;
@@ -507,12 +538,12 @@
           this.injectWaterDisplacement(ix, iy, dragImpulse / Math.sqrt(steps), 2.5);
         }
       } else {
-        // Angkasa: Continuous push / repulsion along pointer path
+        // Angkasa: Dorong bintang secara berkesinambungan di sepanjang lintasan kursor
         const pushRadius = 80 + Math.min(speed * 25, 45);
         const pushForce = 3.0 + Math.min(speed * 3.5, 6);
         this.repelStars(x, y, pushForce, pushRadius);
 
-        // Light cosmic dust sparks along trail
+        // Percikan debu kosmik ringan
         if (Math.random() < 0.5) {
           const angle = Math.random() * Math.PI * 2;
           const spd = 0.4 + Math.random() * 0.9;
@@ -531,8 +562,8 @@
     }
 
     /**
-     * Classic 2D Wave Propagation Simulation Step with Height Clamping
-     * Formula: newHeight[i] = ((sum 4 neighbors) / 2 - previous[i]) * damping
+     * Algoritma Perambatan Gelombang 2D (Wave Equation Simulation Step)
+     * Rumus: tinggiBaru[i] = ((jumlah 4 tetangga) / 2 - tinggiLama[i]) * faktorPeredaman
      */
     updateWaterSimulation() {
       if (!this.currentBuffer || !this.previousBuffer) return;
@@ -541,7 +572,7 @@
       const current = this.currentBuffer;
       const previous = this.previousBuffer;
       const damping = this.damping;
-      const MAX_VAL = 35; // Maximum displacement clamp
+      const MAX_VAL = 35;
 
       for (let y = 1; y < rows - 1; y++) {
         const rowOffset = y * cols;
@@ -555,14 +586,14 @@
         }
       }
 
-      // Ping-pong buffer swap
+      // Tukar peran kedua buffer (Ping-Pong Buffer Swap)
       const temp = this.currentBuffer;
       this.currentBuffer = this.previousBuffer;
       this.previousBuffer = temp;
     }
 
     /**
-     * Renders height-field onto offscreen canvas ImageData and scales up with crisp detail
+     * Merender data ketinggian air menjadi piksel visual bergradasi cahaya dan bayangan jernih
      */
     renderWater() {
       const data = this.offscreenImgData.data;
@@ -577,7 +608,7 @@
         for (let x = 0; x < cols; x++) {
           const idx = rowOffset + x;
 
-          // Border absorbing boundary
+          // Batas tepi kanvas menyerap gelombang
           if (x === 0 || x === cols - 1 || y === 0 || y === rows - 1) {
             data[pIdx] = 0;
             data[pIdx + 1] = 0;
@@ -587,15 +618,15 @@
             continue;
           }
 
-          // Surface slope gradient (normal derivatives)
+          // Turunan kemiringan permukaan air (Surface Normal Derivatives)
           const dx = current[idx + 1] - current[idx - 1];
           const dy = current[idx + cols] - current[idx - cols];
 
-          // Directional surface slope (top-left light reflection)
+          // Kemiringan pencahayaan arah kiri-atas
           const shade = (-dx - dy) * 2.4;
 
           if (shade > 1.0) {
-            // Crisp, fine crest highlight with smooth quadratic alpha falloff
+            // Puncak puncak gelombang yang memantulkan cahaya putih terang
             const intensity = Math.min((shade - 1.0) / 20, 1.0);
             const whiteBlend = intensity * 0.75;
             data[pIdx]     = Math.min(255, Math.floor(cr + (255 - cr) * whiteBlend));
@@ -603,14 +634,14 @@
             data[pIdx + 2] = Math.min(255, Math.floor(cb + (255 - cb) * whiteBlend));
             data[pIdx + 3] = Math.floor(intensity * intensity * 190);
           } else if (shade < -1.0) {
-            // Subtle, localized trough shadow
+            // Lembah gelombang dengan bayangan lembut
             const intensity = Math.min((-shade - 1.0) / 24, 1.0);
             data[pIdx]     = Math.floor(cr * 0.15);
             data[pIdx + 1] = Math.floor(cg * 0.20);
             data[pIdx + 2] = Math.floor(cb * 0.35);
             data[pIdx + 3] = Math.floor(intensity * intensity * 125);
           } else {
-            // Calm water: 100% transparent (no haze/blur)
+            // Air tenang: 100% transparan sempurna
             data[pIdx] = 0;
             data[pIdx + 1] = 0;
             data[pIdx + 2] = 0;
@@ -623,12 +654,12 @@
 
       this.offscreenCtx.putImageData(this.offscreenImgData, 0, 0);
 
-      // Scaled up rendering — medium smoothing keeps fine ripple lines crisp without muddy blur
+      // Gambar buffer offscreen ke kanvas utama
       this.ctx.imageSmoothingEnabled = true;
       this.ctx.imageSmoothingQuality = 'medium';
       this.ctx.drawImage(this.offscreenCanvas, 0, 0, this.width, this.height);
 
-      // Render micro-droplets
+      // Render butiran tetesan air mikro
       for (let i = this.droplets.length - 1; i >= 0; i--) {
         const d = this.droplets[i];
         d.x += d.vx;
@@ -650,18 +681,18 @@
     }
 
     /**
-     * Updates and renders the Angkasa theme stardust spring physics
+     * Memperbarui kalkulasi fisika pegas partikel bintang dan merendernya ke kanvas
      */
     updateAndRenderAngkasa(time) {
-      const springK = 0.038;
-      const damping = 0.89;
+      const springK = 0.038; // Konstanta pegas pemulih
+      const damping = 0.89;  // Gesekan peredam kecepatan bintang
       const { r: cr, g: cg, b: cb } = this.primaryRgb;
 
-      // 1. Update and render anchored stardust
+      // 1. Perbarui posisi partikel bintang berpegas
       for (let i = 0; i < this.stars.length; i++) {
         const s = this.stars[i];
 
-        // Hooke's Law spring back to anchor
+        // Hukum Hooke: gaya tarik kembali ke titik asal jangkar
         const ax = (s.originX - s.x) * springK;
         const ay = (s.originY - s.y) * springK;
 
@@ -677,7 +708,7 @@
           s.glow = 0;
         }
 
-        // Twinkle calculation
+        // Efek kedip alami (Twinkle)
         const tw = Math.sin(time * s.twinkleSpeed + s.twinklePhase) * 0.16;
         const alpha = Math.min(1.0, Math.max(0.06, s.baseAlpha + tw + s.glow * 0.65));
 
@@ -705,7 +736,7 @@
         }
       }
 
-      // 2. Update and render drifting burst sparks
+      // 2. Perbarui dan render percikan bintang melayang
       for (let i = this.burstSparks.length - 1; i >= 0; i--) {
         const sp = this.burstSparks[i];
         sp.x += sp.vx;
@@ -732,7 +763,7 @@
     }
 
     /**
-     * Draws a crisp 2D four-pointed sparkle star
+     * Menggambar bentuk bintang 4 sudut yang tajam dan berkilau
      */
     drawStar(ctx, cx, cy, spikes, outerRadius, innerRadius) {
       let rot = (Math.PI / 2) * 3;
@@ -758,6 +789,9 @@
       ctx.fill();
     }
 
+    /**
+     * Loop Utama Render Frame Animasi (60fps)
+     */
     render(time) {
       if (!this.isRunning) return;
 
@@ -778,6 +812,6 @@
     }
   }
 
-  // Export to global window
+  // Ekspor instance ke objek global window
   window.RiakEngine = new RiakCanvasEngine();
 })(window);

@@ -1,28 +1,32 @@
 /**
- * main.js (Konsultasi) — Logika Halaman Konsultasi & Layanan
+ * main.js (Halaman Konsultasi) — Logika Layanan Konsultasi & Chat AI BerTeduh
  * 
- * Menangani:
- * 1. Pemuatan Navbar dinamis (loadNavigasi)
- * 2. Toggle Tab Layanan (Psikologi Klinis vs Chat AI)
- * 3. Fetch dan Render Kartu Konsultan dari data/konsultan.json
- * 4. Modal Overlay Detail Profil Konsultan
+ * Script ini mengatur:
+ * 1. Pemuatan Navbar dinamis melalui fungsi loadNavigasi().
+ * 2. Sistem perpindahan Tab Layanan (Psikologi Klinis vs Teman Cerita AI).
+ * 3. Pengambilan data profil konsultan dari file JSON (data/konsultan.json) dan merendernya ke grid.
+ * 4. Modal Popup Detail Konsultan lengkap dengan spesialisasi, rating, dan tombol WhatsApp.
+ * 5. Pengendalian otomatis balon chat overlay (disembunyikan saat tab AI aktif agar tidak tumpang tindih).
  */
 
 (function () {
+  // Variabel penampung daftar konsultan yang dimuat dari file JSON
   let listKonsultan = [];
 
-  // ─── INITIALIZATION ──────────────────────────────────────────
+  // ─── INISIALISASI SAAT HALAMAN SELESAI DIMUAT ───
   document.addEventListener("DOMContentLoaded", async () => {
+    // 1. Muat komponen navbar
     if (typeof loadNavigasi === "function") {
       await loadNavigasi();
     }
     
+    // 2. Inisialisasi logika tab, modal, dan data konsultan
     initTabs();
     initModalEvents();
     await loadKonsultan();
   });
 
-  // ─── 1. TAB TOGGLE (Psikologi Klinis vs Chat AI) ─────────────
+  // ─── 1. PENGALIH TAB LAYANAN (Psikologi Klinis vs Chat AI) ───
   function initTabs() {
     const btnKlinis = document.getElementById("tab-klinis-btn");
     const btnAi = document.getElementById("tab-ai-btn");
@@ -33,52 +37,55 @@
 
     if (!btnKlinis || !btnAi) return;
 
+    /**
+     * Mengaktifkan tampilan tab yang dipilih dan menyesuaikan styling visual
+     */
     function activateTab(tab) {
       if (tab === "klinis") {
-        // Style Tab Klinis Aktif
+        // Style Tab Klinis (Sedang Aktif)
         btnKlinis.style.background = "#1A2138";
         btnKlinis.style.borderColor = "#2DD4A8";
         btnKlinis.style.boxShadow = "0 0 25px rgba(45,212,168,0.15)";
         btnKlinis.setAttribute("aria-selected", "true");
         if (badgeKlinis) badgeKlinis.classList.remove("hidden");
 
-        // Style Tab AI Inaktif
+        // Style Tab AI (Tidak Aktif)
         btnAi.style.background = "#151B2E";
         btnAi.style.borderColor = "rgba(255,255,255,0.08)";
         btnAi.style.boxShadow = "none";
         btnAi.setAttribute("aria-selected", "false");
         if (badgeAi) badgeAi.classList.add("hidden");
 
-        // View Toggles
+        // Tampilkan view konsultan, sembunyikan view chat AI
         if (viewKonsultan) viewKonsultan.classList.remove("hidden");
         if (viewAi) viewAi.classList.add("hidden");
 
-        // Tampilkan floating chat bubble saat tab konsultan aktif
+        // Munculkan kembali tombol floating chat bubble di pojok layar
         if (window.TeduhChatOverlay && typeof window.TeduhChatOverlay.show === 'function') {
           window.TeduhChatOverlay.show();
         }
         window.dispatchEvent(new CustomEvent('bt-konsultasi-tab', { detail: { tab: 'klinis' } }));
 
       } else if (tab === "ai") {
-        // Style Tab AI Aktif
+        // Style Tab AI (Sedang Aktif)
         btnAi.style.background = "#1A2138";
         btnAi.style.borderColor = "#2DD4A8";
         btnAi.style.boxShadow = "0 0 25px rgba(45,212,168,0.15)";
         btnAi.setAttribute("aria-selected", "true");
         if (badgeAi) badgeAi.classList.remove("hidden");
 
-        // Style Tab Klinis Inaktif
+        // Style Tab Klinis (Tidak Aktif)
         btnKlinis.style.background = "#151B2E";
         btnKlinis.style.borderColor = "rgba(255,255,255,0.08)";
         btnKlinis.style.boxShadow = "none";
         btnKlinis.setAttribute("aria-selected", "false");
         if (badgeKlinis) badgeKlinis.classList.add("hidden");
 
-        // View Toggles
+        // Tampilkan view chat AI, sembunyikan view konsultan
         if (viewKonsultan) viewKonsultan.classList.add("hidden");
         if (viewAi) viewAi.classList.remove("hidden");
 
-        // Sembunyikan floating chat bubble saat berada di section AI
+        // Sembunyikan floating chat bubble karena user sudah berada di layar penuh Chat AI
         if (window.TeduhChatOverlay && typeof window.TeduhChatOverlay.hide === 'function') {
           window.TeduhChatOverlay.hide();
         }
@@ -86,9 +93,11 @@
       }
     }
 
+    // Event listener klik tab
     btnKlinis.addEventListener("click", () => activateTab("klinis"));
     btnAi.addEventListener("click", () => activateTab("ai"));
 
+    // Aksesibilitas keyboard (Space dan Enter)
     [btnKlinis, btnAi].forEach(btn => {
       btn.addEventListener("keydown", (e) => {
         if (e.key === "Enter" || e.key === " ") {
@@ -98,7 +107,10 @@
       });
     });
 
-    // Check hash URL (e.g. #chat-ai-view, #konsultan-view, #section-ai)
+    /**
+     * Memeriksa apakah URL memiliki anchor hash (misal: #chat-ai-view atau #tab-ai)
+     * agar saat user membuka link tertentu dari halaman lain langsung menuju tab yang tepat
+     */
     function handleHashRouting() {
       const hash = window.location.hash.toLowerCase();
       if (hash.includes("ai")) {
@@ -130,19 +142,20 @@
     window.addEventListener("hashchange", handleHashRouting);
   }
 
-  // ─── 2. FETCH & RENDER KONSULTAN ─────────────────────────────
+  // ─── 2. MENGAMBIL DAN MERENDER DAFTAR KONSULTAN ───
   async function loadKonsultan() {
     const grid = document.getElementById("konsultan-grid");
     if (!grid) return;
 
     try {
+      // Ambil data konsultan dari file JSON lokal
       const res = await fetch("/data/konsultan.json");
       if (!res.ok) throw new Error("Gagal mengambil data konsultan (Status " + res.status + ")");
       listKonsultan = await res.json();
 
       renderKonsultanGrid(listKonsultan);
     } catch (err) {
-      console.error("Error loading konsultan:", err);
+      console.error("Error saat memuat daftar konsultan:", err);
       grid.innerHTML = `
         <div class="col-span-full text-center py-12 text-[#8A93A8]">
           <p class="mb-2">Belum dapat memuat daftar konsultan saat ini.</p>
@@ -152,6 +165,9 @@
     }
   }
 
+  /**
+   * Merender daftar konsultan menjadi kartu-kartu interaktif di dalam grid
+   */
   function renderKonsultanGrid(konsultanList) {
     const grid = document.getElementById("konsultan-grid");
     if (!grid) return;
@@ -163,15 +179,15 @@
                role="button"
                aria-label="Lihat profil ${k.nama}"
                style="background:#151B2E;">
-        <!-- Background Image -->
+        <!-- Foto Profil Konsultan -->
         <img src="${k.gambar}" alt="${k.nama}" loading="lazy"
              class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
              onerror="this.onerror=null; this.src='${k.fallback_gambar || "/assets/Images/artikel/hutan21.webp"}';" />
         
-        <!-- Gradient Overlay -->
+        <!-- Lapisan Gradasi Gelap agar Teks Selalu Terbaca Jelas -->
         <div class="absolute inset-0 bg-gradient-to-t from-[#0D1220] via-[#0D1220]/65 to-transparent"></div>
 
-        <!-- Top Tag: Tim BerTeduh Badge -->
+        <!-- Tag Lencana Terverifikasi Tim BerTeduh -->
         <div class="absolute top-3 left-3 z-10 flex items-center gap-1.5 flex-wrap">
           <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-medium backdrop-blur-md bg-black/60 border border-white/20 text-white shadow-sm">
             <span class="w-1.5 h-1.5 rounded-full bg-[#2DD4A8]"></span>
@@ -179,7 +195,7 @@
           </span>
         </div>
 
-        <!-- Footer Card Details -->
+        <!-- Detail Informasi Konsultan -->
         <div class="relative z-10 flex flex-col gap-0.5">
           <div class="flex items-center gap-1.5 flex-wrap">
             <h4 class="text-sm sm:text-base font-bold text-white leading-snug group-hover:text-[#2DD4A8] transition-colors" style="font-family:'Playfair Display',serif;">${k.nama}</h4>
@@ -200,7 +216,7 @@
       </article>
     `).join("");
 
-    // Event listener untuk klik card konsultan
+    // Pasang event listener pada setiap kartu konsultan untuk membuka popup modal
     grid.querySelectorAll(".konsultan-card").forEach((card) => {
       const handleOpen = () => {
         const id = card.getAttribute("data-id");
@@ -223,14 +239,14 @@
     }
   }
 
-  //  3. OVERLAY MODAL DETAIL KONSULTAN 
+  // ─── 3. OVERLAY MODAL DETAIL PROFIL KONSULTAN ───
   function openKonsultanModal(k) {
     const modal = document.getElementById("konsultan-modal");
     const slot = document.getElementById("modal-content-slot");
     if (!modal || !slot) return;
 
     slot.innerHTML = `
-      <!-- Header Profil -->
+      <!-- Header Profil Konsultan -->
       <div class="flex items-start gap-4 mb-6 pt-1 pr-8">
         <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl overflow-hidden shrink-0 border border-white/20 shadow-md">
           <img src="${k.gambar}" alt="${k.nama}" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='${k.fallback_gambar || "/assets/Images/artikel/hutan21.webp"}';">
@@ -247,7 +263,7 @@
         </div>
       </div>
 
-      <!-- Quick Stats Grid -->
+      <!-- Ringkasan Statistik Singkat -->
       <div class="grid grid-cols-2 gap-3 mb-6">
         <div class="p-3.5 rounded-xl border border-white/10" style="background:rgba(255,255,255,0.03);">
           <p class="text-[11px] text-[#8A93A8] mb-1">Rating Pasien</p>
@@ -265,7 +281,7 @@
         </div>
       </div>
 
-      <!-- Bidang Psychology Focus -->
+      <!-- Bidang Spesialisasi Psikologi -->
       <div class="mb-6">
         <p class="text-xs font-bold text-[#8A93A8] uppercase tracking-wider mb-2.5">Bidang Psychology &amp; Spesialisasi</p>
         <div class="flex flex-wrap gap-2">
@@ -273,13 +289,13 @@
         </div>
       </div>
 
-      <!-- Deskripsi Singkat -->
+      <!-- Deskripsi Pendek Konsultan -->
       <div class="mb-8">
         <p class="text-xs font-bold text-[#8A93A8] uppercase tracking-wider mb-2">Tentang Konsultan</p>
         <p class="text-sm leading-relaxed text-[#8A93A8]">${k.deskripsi}</p>
       </div>
 
-      <!-- Action Button -->
+      <!-- Tombol Aksi Langsung ke WhatsApp -->
       <div class="pt-4 border-t border-white/10">
         <a href="${k.kontak_wa}" target="_blank" rel="noopener noreferrer"
            class="w-full py-3.5 px-6 rounded-full text-center text-sm font-bold transition hover:bg-[#25b892] shadow-lg flex items-center justify-center gap-2 hover:scale-[1.01]"
@@ -291,16 +307,22 @@
     `;
 
     modal.classList.remove("hidden");
-    document.body.style.overflow = "hidden"; // Cegah scrolling latar belakang
+    document.body.style.overflow = "hidden"; // Kunci scroll latar belakang saat modal aktif
   }
 
+  /**
+   * Menutup modal profil konsultan dan mengembalikan scroll layar
+   */
   function closeKonsultanModal() {
     const modal = document.getElementById("konsultan-modal");
     if (!modal) return;
     modal.classList.add("hidden");
-    document.body.style.overflow = ""; // Kembalikan scroll
+    document.body.style.overflow = ""; // Aktifkan kembali scroll layar
   }
 
+  /**
+   * Mengatur event penutup modal (klik tombol X, klik backdrop gelap, atau tekan tombol Escape)
+   */
   function initModalEvents() {
     const modal = document.getElementById("konsultan-modal");
     const closeBtn = document.getElementById("modal-close-btn");

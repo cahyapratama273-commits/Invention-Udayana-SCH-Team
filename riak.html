@@ -12,17 +12,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>BerTeduh — Riak</title>
   <link rel="icon" type="image/png" href="/assets/Images/for-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
     href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
     rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" type="text/css"
-    href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css" />
-  <link rel="stylesheet" type="text/css"
-    href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css" />
-  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <link rel="stylesheet" href="/assets/css/tailwind.min.css" />
   <link rel="stylesheet" href="/assets/css/main.css" />
   <link rel="stylesheet" href="/assets/css/game/riak.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css" />
 </head>
 
 <body data-page="riak" style="background:#0D1220; color:#F5F5F5;" class="overflow-x-hidden min-h-screen flex flex-col">
@@ -59,171 +57,173 @@
           <div role="group" aria-label="Pilihan Mode Sensorik" class="flex items-center p-1 rounded-full bg-black/30 border border-white/10 gap-0.5 shrink-0">
             <button id="riak-theme-air-btn" type="button" class="riak-theme-btn active" title="Tema Air (Riak Gelombang)" aria-label="Tema Air">
               <i class="ph ph-drop text-base" aria-hidden="true"></i>
-              <span class="hidden lg:inline">Air</span>
+              <span>Air</span>
             </button>
-            <button id="riak-theme-angkasa-btn" type="button" class="riak-theme-btn" title="Tema Angkasa (Partikel Bintang)" aria-label="Tema Angkasa">
+            <button id="riak-theme-space-btn" type="button" class="riak-theme-btn" title="Tema Angkasa (Partikel Bintang)" aria-label="Tema Angkasa">
               <i class="ph ph-sparkle text-base" aria-hidden="true"></i>
-              <span class="hidden lg:inline">Angkasa</span>
+              <span>Angkasa</span>
             </button>
-            <button id="riak-theme-menulis-btn" type="button" class="riak-theme-btn" title="Tema Menulis (Kertas & Pensil)" aria-label="Tema Menulis">
+            <button id="riak-theme-write-btn" type="button" class="riak-theme-btn" title="Tema Menulis (Pasir Halus & Tinta)" aria-label="Tema Menulis">
               <i class="ph ph-pencil-simple text-base" aria-hidden="true"></i>
-              <span class="hidden lg:inline">Menulis</span>
+              <span>Menulis</span>
             </button>
           </div>
 
-          <!-- Menulis Tool Switcher: Pensil ⇄ Penghapus ⇄ Bersihkan (Smooth expandable wrapper when Menulis theme is active) -->
-          <div id="riak-menulis-tools-wrapper" class="flex items-center shrink-0">
-            <div id="riak-menulis-tools" role="group" aria-label="Peralatan Menulis" class="flex items-center p-1 rounded-full bg-black/30 border border-white/10 gap-0.5 shrink-0">
-              <button id="riak-tool-pencil-btn" type="button" class="riak-tool-btn active" title="Pensil (Menggambar)" aria-label="Pensil">
-                <i class="ph ph-pencil-simple text-base" aria-hidden="true"></i>
-                <span class="hidden lg:inline">Pensil</span>
-              </button>
-              <button id="riak-tool-eraser-btn" type="button" class="riak-tool-btn" title="Penghapus" aria-label="Penghapus">
-                <i class="ph ph-eraser text-base" aria-hidden="true"></i>
-                <span class="hidden lg:inline">Penghapus</span>
-              </button>
-              <button id="riak-tool-clear-btn" type="button" class="riak-tool-btn hover:text-rose-400" title="Bersihkan Semua Goresan" aria-label="Bersihkan semua goresan">
-                <i class="ph ph-trash text-base" aria-hidden="true"></i>
-                <span class="hidden lg:inline">Bersihkan</span>
-              </button>
-            </div>
-            <div id="riak-menulis-tool-divider" class="w-[1px] h-5 bg-white/15 ml-3 shrink-0"></div>
+          <!-- Divider -->
+          <div class="w-px h-5 bg-white/20"></div>
+
+          <!-- Mode Menulis Tools (Hidden by default, visible only in Menulis mode) -->
+          <div id="riak-write-tools" role="group" aria-label="Alat Menulis Pasir" class="hidden items-center p-1 rounded-full bg-black/30 border border-white/10 gap-0.5 shrink-0 transition-all duration-200">
+            <button id="riak-tool-draw-btn" type="button" class="riak-theme-btn active" title="Mode Tulis / Coret Pasir" aria-label="Mode Coret Pasir">
+              <i class="ph ph-pencil-simple text-base" aria-hidden="true"></i>
+              <span>Tulis</span>
+            </button>
+            <button id="riak-tool-erase-btn" type="button" class="riak-theme-btn" title="Mode Hapus (Penghapus)" aria-label="Mode Hapus">
+              <i class="ph ph-eraser text-base" aria-hidden="true"></i>
+              <span>Hapus</span>
+            </button>
+            <button id="riak-tool-clear-btn" type="button" class="riak-theme-btn hover:text-rose-400" title="Bersihkan Seluruh Pasir" aria-label="Bersihkan Seluruh Pasir">
+              <i class="ph ph-trash text-base" aria-hidden="true"></i>
+              <span>Sapu</span>
+            </button>
           </div>
 
-          <div class="w-[1px] h-5 bg-white/15 shrink-0"></div>
+          <!-- Divider for Menulis tools -->
+          <div id="riak-write-tools-divider" class="hidden w-px h-5 bg-white/20"></div>
 
-          <!-- Color Picker -->
-          <label for="riak-color-input" class="riak-color-picker-label shrink-0" title="Pilih Warna Sentuhan" aria-label="Pilih Warna Sentuhan">
-            <span id="riak-color-preview" class="riak-color-preview" style="background-color: #38BDF8;"></span>
-            <span class="text-[11px] text-[#CBD5E1] hidden lg:inline font-medium">Warna</span>
-            <input type="color" id="riak-color-input" value="#38BDF8" class="riak-color-native-input" aria-label="Pilih Warna Sentuhan" />
-          </label>
+          <!-- Ink Color Palette Picker (Always visible or customizable) -->
+          <div id="riak-color-palette" role="group" aria-label="Pilihan Warna Tinta" class="flex items-center gap-1.5 shrink-0 px-1">
+            <button type="button" data-color="#2DD4A8" class="riak-color-dot active bg-[#2DD4A8]" title="Emerald Mint" aria-label="Warna Hijau Mint"></button>
+            <button type="button" data-color="#38BDF8" class="riak-color-dot bg-[#38BDF8]" title="Sky Blue" aria-label="Warna Biru Langit"></button>
+            <button type="button" data-color="#F472B6" class="riak-color-dot bg-[#F472B6]" title="Rose Pink" aria-label="Warna Merah Muda"></button>
+            <button type="button" data-color="#FBBF24" class="riak-color-dot bg-[#FBBF24]" title="Warm Amber" aria-label="Warna Kuning Hangat"></button>
+            <button type="button" data-color="#A78BFA" class="riak-color-dot bg-[#A78BFA]" title="Soft Purple" aria-label="Warna Ungu Lembut"></button>
+          </div>
 
-          <div class="w-[1px] h-5 bg-white/15 shrink-0"></div>
+          <!-- Divider -->
+          <div class="w-px h-5 bg-white/20"></div>
 
-          <!-- Zoom Controls: (-) 100% (+) [Reset] -->
-          <div id="riak-zoom-controls" role="group" aria-label="Kontrol Perbesaran Kanvas" class="flex items-center gap-1 shrink-0 p-0.5 rounded-full bg-black/30 border border-white/10">
-            <button id="riak-zoom-out-btn" type="button" class="w-6 h-6 rounded-full flex items-center justify-center text-[#8A93A8] hover:text-[#F5F5F5] hover:bg-white/10 transition cursor-pointer" title="Zoom Out (Ctrl + Scroll / 25%-100%)" aria-label="Zoom Out">
+          <!-- Zoom Controls (Extend Canvas Field) -->
+          <div id="riak-zoom-controls" role="group" aria-label="Kontrol Perbesaran Kanvas" class="flex items-center p-1 rounded-full bg-black/30 border border-white/10 gap-0.5 shrink-0">
+            <button id="riak-zoom-out-btn" type="button" class="riak-icon-btn text-xs px-2 py-1 hover:text-[#2DD4A8]" title="Perkecil Ruang (Zoom Out)" aria-label="Perkecil Ruang">
               <i class="ph ph-minus text-xs" aria-hidden="true"></i>
             </button>
-            <span id="riak-zoom-label" class="text-[10px] font-mono text-[#CBD5E1] w-8 text-center font-medium select-none">100%</span>
-            <button id="riak-zoom-in-btn" type="button" class="w-6 h-6 rounded-full flex items-center justify-center text-[#8A93A8] hover:text-[#F5F5F5] hover:bg-white/10 transition cursor-pointer opacity-40" title="Zoom In (Ctrl + Scroll / Maksimal 100%)" aria-label="Zoom In">
+            <span id="riak-zoom-level-text" class="text-[10px] font-mono font-semibold px-1 text-[#CBD5E1] select-none min-w-[32px] text-center">100%</span>
+            <button id="riak-zoom-in-btn" type="button" class="riak-icon-btn text-xs px-2 py-1 hover:text-[#2DD4A8]" title="Perbesar Ruang (Zoom In)" aria-label="Perbesar Ruang">
               <i class="ph ph-plus text-xs" aria-hidden="true"></i>
             </button>
-            <button id="riak-zoom-reset-btn" type="button" class="hidden w-6 h-6 rounded-full flex items-center justify-center text-[#2DD4A8] hover:bg-[#2DD4A8]/20 transition cursor-pointer" title="Reset Zoom (100%)" aria-label="Reset Zoom">
+            <button id="riak-zoom-reset-btn" type="button" class="riak-icon-btn text-xs px-1.5 py-1 hover:text-[#2DD4A8] border-l border-white/10 ml-0.5" title="Reset Zoom ke 100%" aria-label="Reset Zoom">
               <i class="ph ph-arrows-in text-xs" aria-hidden="true"></i>
             </button>
           </div>
 
-          <div class="w-[1px] h-5 bg-white/15 shrink-0"></div>
+          <!-- Divider -->
+          <div class="w-px h-5 bg-white/20"></div>
 
-          <!-- Mute Toggle Button -->
-          <button id="riak-mute-btn" type="button" class="w-8 h-8 rounded-full flex items-center justify-center text-[#8A93A8] hover:text-[#F5F5F5] hover:bg-white/10 transition cursor-pointer shrink-0" title="Bisukan / Bunyikan Suara" aria-label="Bisukan suara">
-            <span id="riak-icon-sound-on">
-              <i class="ph ph-speaker-high text-lg" aria-hidden="true"></i>
-            </span>
-            <span id="riak-icon-sound-off" class="hidden">
-              <i class="ph ph-speaker-slash text-lg" aria-hidden="true"></i>
-            </span>
+          <!-- Ambient Audio Mute / Unmute Button -->
+          <button id="riak-audio-toggle-btn" type="button" class="riak-icon-btn" title="Audio Suasana Tenang (Mute/Unmute)" aria-label="Nyalakan atau Matikan Audio Sensorik">
+            <i id="riak-audio-icon-on" class="ph ph-speaker-high text-lg" aria-hidden="true"></i>
+            <i id="riak-audio-icon-off" class="ph ph-speaker-slash text-lg hidden" aria-hidden="true"></i>
           </button>
+
         </div>
+
       </div>
 
       <!-- Mobile Draggable FAB Menu Button & Popover (Mobile-only: md:hidden) -->
-      <div id="riak-mobile-fab-container" class="md:hidden fixed z-40 pointer-events-auto select-none" style="right: 18px; bottom: 85px;">
-        <button id="riak-mobile-fab-btn" type="button" class="w-12 h-12 rounded-full flex items-center justify-center text-white bg-[#151D30]/85 backdrop-blur-xl border border-white/25 shadow-2xl transition-transform active:scale-95 cursor-grab active:cursor-grabbing" aria-label="Pengaturan Ruang Sensorik" title="Buka Menu Pengaturan">
+      <div id="riak-mobile-fab-container" class="md:hidden fixed bottom-6 right-6 z-40">
+        <!-- Floating Trigger Button -->
+        <button id="riak-mobile-fab-btn" type="button" class="w-14 h-14 rounded-full bg-[#151B2E] border border-white/20 shadow-2xl flex items-center justify-center text-white active:scale-95 transition-transform cursor-pointer" aria-label="Buka Menu Kontrol Riak" aria-expanded="false" aria-controls="riak-mobile-menu">
           <i class="ph ph-sliders-horizontal text-xl text-[#2DD4A8]"></i>
         </button>
 
-        <!-- Mobile Popover Menu -->
-        <div id="riak-mobile-popover" class="hidden absolute flex-col gap-3.5 p-4 rounded-2xl bg-[#0F1626]/95 backdrop-blur-2xl border border-white/20 shadow-2xl w-64 max-w-[calc(100vw-32px)] z-50 text-white">
-          <div class="flex items-center justify-between border-b border-white/10 pb-2.5">
-            <span class="text-xs font-semibold tracking-wider text-[#CBD5E1] uppercase">Pengaturan Sensorik</span>
-            <button id="riak-mobile-popover-close" type="button" class="w-6 h-6 rounded-full flex items-center justify-center text-[#8A93A8] hover:text-white hover:bg-white/10 transition" aria-label="Tutup Menu">
+        <!-- Mobile Floating Popover Menu -->
+        <div id="riak-mobile-menu" class="hidden absolute bottom-16 right-0 w-72 p-4 rounded-2xl bg-[#151B2E]/95 backdrop-blur-xl border border-white/20 shadow-2xl flex flex-col gap-3 text-white transition-all duration-300 transform scale-95 opacity-0 pointer-events-none">
+          
+          <div class="flex items-center justify-between pb-2 border-b border-white/10">
+            <span class="text-xs font-semibold uppercase tracking-wider text-[#2DD4A8]">Pengaturan Sensorik</span>
+            <button id="riak-mobile-menu-close-btn" type="button" class="text-[#8A93A8] hover:text-white p-1" aria-label="Tutup Menu Sensorik">
               <i class="ph ph-x text-sm"></i>
             </button>
           </div>
 
-          <!-- Mode Switcher -->
-          <div>
-            <span class="text-[11px] text-[#8A93A8] mb-1.5 block font-medium">Pilih Mode</span>
-            <div class="flex items-center gap-1.5 w-full">
-              <button id="riak-mobile-theme-air-btn" type="button" class="riak-mobile-theme-btn active">
+          <!-- Mobile Theme Switcher -->
+          <div class="flex flex-col gap-1.5">
+            <span class="text-[11px] text-[#8A93A8]">Pilih Tema:</span>
+            <div class="grid grid-cols-3 gap-1 bg-black/40 p-1 rounded-xl border border-white/10">
+              <button id="riak-m-theme-air" type="button" class="riak-theme-btn active text-xs py-1.5 justify-center">
                 <i class="ph ph-drop text-base"></i>
                 <span>Air</span>
               </button>
-              <button id="riak-mobile-theme-angkasa-btn" type="button" class="riak-mobile-theme-btn">
+              <button id="riak-m-theme-space" type="button" class="riak-theme-btn text-xs py-1.5 justify-center">
                 <i class="ph ph-sparkle text-base"></i>
                 <span>Angkasa</span>
               </button>
-              <button id="riak-mobile-theme-menulis-btn" type="button" class="riak-mobile-theme-btn">
+              <button id="riak-m-theme-write" type="button" class="riak-theme-btn text-xs py-1.5 justify-center">
                 <i class="ph ph-pencil-simple text-base"></i>
                 <span>Menulis</span>
               </button>
             </div>
           </div>
 
-          <!-- Mobile Menulis Tool Switcher: Pensil ⇄ Penghapus ⇄ Bersihkan (Visible when Menulis theme is active) -->
-          <div id="riak-mobile-menulis-tools" class="hidden flex-col gap-1.5 pt-2 border-t border-white/10">
-            <span class="text-[11px] text-[#8A93A8] block font-medium">Alat Menulis</span>
-            <div class="flex items-center gap-1.5 w-full">
-              <button id="riak-mobile-tool-pencil-btn" type="button" class="riak-mobile-tool-btn active flex-1">
+          <!-- Mobile Menulis Tools (Visible only in Menulis mode) -->
+          <div id="riak-m-write-tools" class="hidden flex-col gap-1.5 pt-1 border-t border-white/10">
+            <span class="text-[11px] text-[#8A93A8]">Alat Pasir:</span>
+            <div class="grid grid-cols-3 gap-1 bg-black/40 p-1 rounded-xl border border-white/10">
+              <button id="riak-m-tool-draw" type="button" class="riak-theme-btn active text-xs py-1.5 justify-center">
                 <i class="ph ph-pencil-simple text-base"></i>
-                <span>Pensil</span>
+                <span>Tulis</span>
               </button>
-              <button id="riak-mobile-tool-eraser-btn" type="button" class="riak-mobile-tool-btn flex-1">
+              <button id="riak-m-tool-erase" type="button" class="riak-theme-btn text-xs py-1.5 justify-center">
                 <i class="ph ph-eraser text-base"></i>
-                <span>Penghapus</span>
+                <span>Hapus</span>
               </button>
-              <button id="riak-mobile-tool-clear-btn" type="button" class="riak-mobile-tool-btn flex-1 hover:text-rose-400">
+              <button id="riak-m-tool-clear" type="button" class="riak-theme-btn text-xs py-1.5 justify-center hover:text-rose-400">
                 <i class="ph ph-trash text-base"></i>
-                <span>Clear</span>
+                <span>Sapu</span>
               </button>
             </div>
           </div>
 
           <!-- Mobile Zoom Controls -->
-          <div class="flex flex-col gap-1.5 pt-2 border-t border-white/10">
-            <div class="flex items-center justify-between">
-              <span class="text-[11px] text-[#8A93A8] block font-medium">Ukuran Tampilan (Zoom)</span>
-              <span id="riak-mobile-zoom-label" class="text-[11px] font-mono text-[#CBD5E1] font-medium">100%</span>
-            </div>
-            <div class="flex items-center gap-1.5 w-full">
-              <button id="riak-mobile-zoom-out-btn" type="button" class="riak-mobile-theme-btn flex-1 py-1.5 flex-row justify-center gap-1">
+          <div class="flex items-center justify-between pt-1 border-t border-white/10">
+            <span class="text-[11px] text-[#8A93A8]">Zoom Lapangan:</span>
+            <div class="flex items-center gap-1 bg-black/40 p-1 rounded-xl border border-white/10">
+              <button id="riak-m-zoom-out-btn" type="button" class="p-1 px-2 text-[#CBD5E1] hover:text-[#2DD4A8]" aria-label="Perkecil Zoom">
                 <i class="ph ph-minus text-xs"></i>
-                <span>Out</span>
               </button>
-              <button id="riak-mobile-zoom-in-btn" type="button" class="riak-mobile-theme-btn flex-1 py-1.5 flex-row justify-center gap-1 opacity-40">
+              <span id="riak-m-zoom-level-text" class="text-[10px] font-mono font-semibold px-1 text-center min-w-[28px]">100%</span>
+              <button id="riak-m-zoom-in-btn" type="button" class="p-1 px-2 text-[#CBD5E1] hover:text-[#2DD4A8]" aria-label="Perbesar Zoom">
                 <i class="ph ph-plus text-xs"></i>
-                <span>In</span>
               </button>
-              <button id="riak-mobile-zoom-reset-btn" type="button" class="hidden riak-mobile-theme-btn flex-1 py-1.5 flex-row justify-center gap-1 text-[#2DD4A8] border-[#2DD4A8]/40">
+              <button id="riak-m-zoom-reset-btn" type="button" class="p-1 px-1.5 text-[#CBD5E1] hover:text-[#2DD4A8] border-l border-white/10" aria-label="Reset Zoom">
                 <i class="ph ph-arrows-in text-xs"></i>
-                <span>Reset</span>
               </button>
             </div>
           </div>
 
-          <!-- Color Picker & Mute Controls -->
+          <!-- Mobile Color Palette Picker -->
           <div class="flex items-center justify-between pt-1 border-t border-white/10">
-            <!-- Mobile Color Picker -->
-            <label for="riak-mobile-color-input" class="flex items-center gap-2 cursor-pointer py-1 px-2 rounded-xl hover:bg-white/5 transition">
-              <span id="riak-mobile-color-preview" class="w-5 h-5 rounded-full border border-white/80 shadow-md flex-shrink-0" style="background-color: #38BDF8;"></span>
-              <span class="text-xs text-[#CBD5E1] font-medium">Warna</span>
-              <input type="color" id="riak-mobile-color-input" value="#38BDF8" class="sr-only" aria-label="Pilih Warna Sentuhan" />
-            </label>
+            <span class="text-[11px] text-[#8A93A8]">Warna:</span>
+            <div id="riak-m-color-palette" class="flex items-center gap-2">
+              <button type="button" data-color="#2DD4A8" class="riak-color-dot active bg-[#2DD4A8]" aria-label="Warna Hijau"></button>
+              <button type="button" data-color="#38BDF8" class="riak-color-dot bg-[#38BDF8]" aria-label="Warna Biru"></button>
+              <button type="button" data-color="#F472B6" class="riak-color-dot bg-[#F472B6]" aria-label="Warna Pink"></button>
+              <button type="button" data-color="#FBBF24" class="riak-color-dot bg-[#FBBF24]" aria-label="Warna Kuning"></button>
+              <button type="button" data-color="#A78BFA" class="riak-color-dot bg-[#A78BFA]" aria-label="Warna Ungu"></button>
+            </div>
+          </div>
 
-            <!-- Mobile Mute Button -->
-            <button id="riak-mobile-mute-btn" type="button" class="flex items-center gap-1.5 text-xs text-[#CBD5E1] py-1 px-2.5 rounded-xl hover:bg-white/10 transition cursor-pointer">
-              <span id="riak-mobile-icon-sound-on">
-                <i class="ph ph-speaker-high text-base text-[#2DD4A8]"></i>
-              </span>
-              <span id="riak-mobile-icon-sound-off" class="hidden">
-                <i class="ph ph-speaker-slash text-base text-[#8A93A8]"></i>
-              </span>
-              <span id="riak-mobile-mute-label">Bunyi</span>
+          <!-- Mobile Audio Toggle -->
+          <div class="flex items-center justify-between pt-1 border-t border-white/10">
+            <span class="text-[11px] text-[#8A93A8]">Audio Suasana:</span>
+            <button id="riak-m-audio-toggle" type="button" class="p-2 rounded-xl bg-white/10 flex items-center gap-1.5 text-xs font-medium cursor-pointer">
+              <i id="riak-m-audio-icon-on" class="ph ph-speaker-high text-base text-[#2DD4A8]"></i>
+              <i id="riak-m-audio-icon-off" class="ph ph-speaker-slash text-base text-[#8A93A8] hidden"></i>
+              <span id="riak-m-audio-label">Suara Nyala</span>
             </button>
           </div>
+
         </div>
       </div>
 
@@ -241,17 +241,16 @@
   <div id="footer"></div>
 
   <!-- Scripts -->
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-  <script src="/js/NavRender.js"></script>
-  <script src="/js/Nav.js"></script>
-  <script src="/js/Footer.js"></script>
+  <script defer src="/js/NavRender.js"></script>
+  <script defer src="/js/Nav.js"></script>
+  <script defer src="/js/Footer.js"></script>
 
   <!-- Sensory Engines, Audio, and UI Scripts -->
-  <script src="/js/game/RiakAudio.js"></script>
-  <script src="/js/game/MenulisEngine.js"></script>
-  <script src="/js/game/RiakEngine.js"></script>
-  <script src="/js/game/RiakUI.js"></script>
-  <script src="/js/main.js"></script>
+  <script defer src="/js/game/RiakAudio.js"></script>
+  <script defer src="/js/game/MenulisEngine.js"></script>
+  <script defer src="/js/game/RiakEngine.js"></script>
+  <script defer src="/js/game/RiakUI.js"></script>
+  <script defer src="/js/main.js"></script>
 </body>
 
 </html>

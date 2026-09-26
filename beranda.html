@@ -11,19 +11,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Teduh - Beranda</title>
-  <link rel="icon" type="image/png" href="/assets/Images/for-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="image" href="/assets/Images/artikel/hutan1.webp" fetchpriority="high">
   <link
     href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
     rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" type="text/css"
-    href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css" />
-  <link rel="stylesheet" type="text/css"
-    href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css" />
-  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <link rel="stylesheet" href="/assets/css/tailwind.min.css" />
   <link rel="stylesheet" href="/assets/css/main.css" />
   <link rel="stylesheet" href="/assets/css/faqs.css" />
-  <link rel="stylesheet" href="/assets/css/animation.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css" />
 </head>
 
 <body data-page="beranda" style="background:#0D1220; color:#F5F5F5;">
@@ -429,10 +426,6 @@
       </section>
     </section>
 
-    <script src="/js/ArtikelCard.js"></script>
-    <script src="/js/NavRender.js"></script>
-    <script src="/js/beranda/Beranda.js"></script>
-
     <!-- Header FAQs -->
     <section class="w-full relative pt-12 sm:pt-16 pb-6 text-center" data-aos="fade-up">
       <div class="max-w-2xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
@@ -598,12 +591,14 @@
 
   <div id="footer"></div>
 
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-  <script src="/js/Nav.js"></script>
-  <script src="/js/Footer.js"></script>
-  <script src="/js/main.js"></script>
-  <script src="/js/beranda/Count.js"></script>
-  <script src="/js/faqs/faq.js"></script>
+  <script defer src="/js/ArtikelCard.js"></script>
+  <script defer src="/js/NavRender.js"></script>
+  <script defer src="/js/beranda/Beranda.js"></script>
+  <script defer src="/js/Nav.js"></script>
+  <script defer src="/js/Footer.js"></script>
+  <script defer src="/js/main.js"></script>
+  <script defer src="/js/beranda/Count.js"></script>
+  <script defer src="/js/faqs/faq.js"></script>
 </body>
 
 </html>

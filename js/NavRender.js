@@ -3,64 +3,62 @@
  * 
  * Script ini bertanggung jawab untuk mengambil (fetch) file HTML komponen navbar 
  * (`component/Nav.html`) dan menyuntikkannya ke dalam elemen khusus di setiap halaman 
- * yang memiliki id `navbar-slot`. 
+ * yang memiliki id `navbar-slot`.
  * 
- * Ini adalah cara "Component-Based" versi vanilla JS, sehingga jika ada perubahan
- * pada menu navbar, kita hanya perlu mengubah 1 file (Nav.html) saja.
+ * Menggunakan in-memory caching agar pemanggilan berulang atau navigasi cepat tidak melakukan request ganda.
  */
+let __cachedNavHtml = null;
+
 async function loadNavigasi(navPath = "/component/Nav.html", slotId = "navbar-slot") {
   // 1. Cari elemen penampung (container) di halaman aktif
   const slot = document.getElementById(slotId); 
   
-  // Jika tidak ada elemen penampung, batalkan proses
-  if (!slot) {
-    console.warn(`loadNavigasi: elemen #${slotId} tidak ditemukan di halaman ini.`);
+  // Jika tidak ada elemen penampung atau sudah terisi konten, tidak perlu duplikasi
+  if (!slot || slot.children.length > 0) {
     return;
   }
 
   try {
-    // 2. Fetch isi dari file komponen Nav.html
-    const res = await fetch(navPath);
-    if (!res.ok) throw new Error(`Gagal memuat komponen ${navPath} (HTTP Status: ${res.status})`);
+    // 2. Fetch isi dari file komponen Nav.html (dengan memory cache)
+    if (!__cachedNavHtml) {
+      const res = await fetch(navPath);
+      if (!res.ok) throw new Error(`Gagal memuat komponen ${navPath} (HTTP Status: ${res.status})`);
+      __cachedNavHtml = await res.text();
+    }
 
     // 3. Masukkan kode HTML yang didapat ke dalam elemen penampung
-    slot.innerHTML = await res.text();
+    slot.innerHTML = __cachedNavHtml;
 
-    // 4. MENGAKALI KETERBATASAN BROWSER:
-    // Secara default, browser TIDAK akan mengeksekusi tag <script> yang dimasukkan 
-    // secara dinamis menggunakan .innerHTML (demi keamanan / XSS protection).
-    // Oleh karena itu, kita harus mengekstrak tag <script> dari komponen Nav.html,
-    // lalu membuat ulang tag <script> tersebut via document.createElement agar bisa jalan.
+    // 4. Jalankan script inline di dalam komponen Nav.html jika ada
     slot.querySelectorAll("script").forEach((oldScript) => {
       const newScript = document.createElement("script");
-      
       const rawSrc = oldScript.getAttribute("src"); 
       if (rawSrc) {
-        // Jika tag script memanggil file eksternal (memiliki atribut src)
-        // Kita resolve URL-nya berdasarkan lokasi file komponen (navPath)
         newScript.src = new URL(rawSrc, window.location.origin + navPath.replace("../", "/")).href;
-        newScript.async = false; // Memaksa script dimuat sesuai urutannya (synchronous order)
+        newScript.async = false;
       } else {
-        // Jika tag script berisi kode inline, langsung copy isi kodenya
         newScript.textContent = oldScript.textContent;
       }
-      
-      // Gantikan tag script mati (lama) dengan tag script hidup (baru)
       oldScript.replaceWith(newScript);
     });
+
+    // 5. Picu highlight navigasi aktif jika fungsi tersedia
+    if (typeof window.__highlightActiveNav === 'function') {
+      window.__highlightActiveNav();
+    }
   } catch (err) {
-    // Tangani error jika file Nav.html gagal dimuat (misal: jaringan putus)
     console.error("Gagal memuat navigasi:", err);
     slot.innerHTML = `<p class="text-xs text-rose-500 text-center py-2">Navbar gagal dimuat.</p>`;
   }
 }
 
-// Fallback otomatis jika script halaman belum/lupa memanggil loadNavigasi
+// Fallback otomatis jika dipanggil saat DOM siap
 if (typeof document !== 'undefined') {
-  document.addEventListener("DOMContentLoaded", () => {
-    const slot = document.getElementById("navbar-slot");
-    if (slot && slot.children.length === 0) {
+  if (document.readyState === 'loading') {
+    document.addEventListener("DOMContentLoaded", () => {
       loadNavigasi();
-    }
-  });
+    });
+  } else {
+    loadNavigasi();
+  }
 }
