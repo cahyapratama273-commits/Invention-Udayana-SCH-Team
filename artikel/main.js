@@ -102,9 +102,57 @@ function renderDetailArtikel(artikel) {
     ? artikel.konten.map(p => `<p class="text-[#E2E8F0] text-base sm:text-lg lg:text-xl leading-relaxed sm:leading-loose mb-6 font-normal">${p}</p>`).join('')
     : `<p class="text-[#E2E8F0] text-base sm:text-lg lg:text-xl leading-relaxed sm:leading-loose mb-6">${artikel.konten || artikel.ringkasan}</p>`;
 
-  // 4. Data langsung menempel di depan background (tanpa kartu penutup tebal)
+  // 4. Render Sumber / Referensi jika tersedia
+  let referensiHtml = '';
+  if (Array.isArray(artikel.sumber) && artikel.sumber.length > 0) {
+    const listItems = artikel.sumber.map(s => {
+      const nama = s.nama || s.url || 'Referensi';
+      const url = s.url || '#';
+      return `
+        <li class="flex items-start gap-2.5 text-xs sm:text-sm text-[#8A93A8]">
+          <span class="text-[#2DD4A8] select-none leading-relaxed">•</span>
+          <a href="${url}" target="_blank" rel="noopener" 
+             class="text-[#8A93A8] hover:text-[#2DD4A8] transition-colors underline underline-offset-4 decoration-white/20 hover:decoration-[#2DD4A8] inline-flex items-center gap-1.5 leading-relaxed group">
+            <span>${nama}</span>
+            <svg class="w-3.5 h-3.5 opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all shrink-0 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
+          </a>
+        </li>
+      `;
+    }).join('');
+
+    referensiHtml = `
+      <!-- Referensi Section -->
+      <section class="mt-12 pt-8 border-t border-white/10" aria-label="Referensi Artikel">
+        <h2 class="text-xs font-semibold uppercase tracking-widest text-[#8A93A8] mb-3">Referensi</h2>
+        <ul class="space-y-2.5 list-none p-0 m-0">
+          ${listItems}
+        </ul>
+      </section>
+    `;
+  }
+
+  // 5. Data langsung menempel di depan background (tanpa kartu penutup tebal)
   container.innerHTML = `
-    <!-- Top Navigation Breadcrumb -->
+    <!-- Breadcrumb Navigation -->
+    <nav aria-label="Breadcrumb" class="mb-4">
+      <ol class="flex items-center flex-wrap gap-2 text-xs sm:text-sm text-[#8A93A8]">
+        <li>
+          <a href="/beranda.html" class="hover:text-[#2DD4A8] transition-colors">Beranda</a>
+        </li>
+        <li class="select-none text-white/30">/</li>
+        <li>
+          <a href="/blog.html" class="hover:text-[#2DD4A8] transition-colors">Blog</a>
+        </li>
+        <li class="select-none text-white/30">/</li>
+        <li class="text-[#F5F5F5] font-medium truncate max-w-[200px] sm:max-w-xs md:max-w-md" aria-current="page">
+          ${artikel.judul}
+        </li>
+      </ol>
+    </nav>
+
+    <!-- Top Navigation Actions -->
     <div class="flex items-center justify-between gap-4 mb-8 pb-4 border-b border-white/15">
       <a href="/blog.html" class="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-[#2DD4A8] hover:text-[#25b892] transition-colors group">
         <span class="group-hover:-translate-x-1 transition-transform">&larr;</span> Kembali ke Semua Artikel
@@ -130,21 +178,23 @@ function renderDetailArtikel(artikel) {
     </div>
 
     <!-- Quote / Ringkasan Highlight -->
-    <div class="p-6 sm:p-8 rounded-2xl mb-12 border-l-4 border-[#2DD4A8] bg-white/10 backdrop-blur-md border border-white/20 shadow-2xl">
+    <blockquote class="p-6 sm:p-8 rounded-2xl mb-12 border-l-4 border-[#2DD4A8] bg-white/10 backdrop-blur-md border border-white/20 shadow-2xl m-0">
       <p class="text-lg sm:text-xl text-[#F8FAFC] italic font-serif leading-relaxed">
         "${artikel.ringkasan}"
       </p>
-    </div>
+    </blockquote>
 
     <!-- Main Content Paragraphs -->
     <div class="article-body max-w-none text-[#E2E8F0] space-y-6">
       ${kontenHtml}
     </div>
 
+    ${referensiHtml}
+
     <!-- Author & Footer Call to Action -->
-    <div class="mt-16 pt-8 border-t border-white/15 flex flex-col sm:flex-row items-center justify-between gap-6">
+    <div class="${referensiHtml ? 'mt-10' : 'mt-16'} pt-8 border-t border-white/15 flex flex-col sm:flex-row items-center justify-between gap-6">
       <div class="flex items-center gap-3.5 w-full sm:w-auto">
-        <div class="w-12 h-12 rounded-2xl bg-[#2DD4A8]/20 border border-[#2DD4A8]/40 text-[#2DD4A8] flex items-center justify-center font-bold text-xl shrink-0 shadow-md">
+        <div class="w-12 h-12 rounded-2xl bg-[#2DD4A8]/20 border border-[#2DD4A8]/40 text-[#2DD4A8] flex items-center justify-center font-bold text-xl shrink-0 shadow-md" aria-hidden="true">
           🌿
         </div>
         <div>
@@ -153,15 +203,15 @@ function renderDetailArtikel(artikel) {
         </div>
       </div>
       <div class="flex items-center gap-3 w-full sm:w-auto justify-end">
-        <a href="/blog.html" class="w-full sm:w-auto text-center px-7 py-3 rounded-full text-xs font-bold text-[#0D1220] bg-[#2DD4A8] hover:bg-[#25b892] hover:scale-105 transition shadow-xl">
-          Jelajahi Artikel Lainnya &rarr;
+        <a href="/blog.html" class="teduh-btn-primary w-full sm:w-auto">
+          Jelajahi Artikel Lainnya &#8599;
         </a>
       </div>
     </div>
 
     <!-- Section: Butuh teman untuk memprosesnya? -->
-    <section class="mt-12 pt-8 border-t border-white/15">
-      <h2 class="font-semibold text-xl mb-1.5 text-white" style="font-family:'Playfair Display',serif;">Butuh teman untuk memprosesnya?</h2>
+    <section class="mt-12 pt-8 border-t border-white/15" aria-labelledby="cta-support-title">
+      <h2 id="cta-support-title" class="font-semibold text-xl mb-1.5 text-white" style="font-family:'Playfair Display',serif;">Butuh teman untuk memprosesnya?</h2>
       <p class="text-sm text-[#8A93A8] mb-5 max-w-[46ch]">
         Kamu bisa lanjut ngobrol soal artikel ini, atau bicara langsung dengan orang yang lebih paham.
       </p>
@@ -208,6 +258,7 @@ function renderDetailArtikel(artikel) {
       </div>
     </section>
   `;
+  if (window.AOS) window.AOS.refresh();
 }
 
 // Global Actions

@@ -3,14 +3,14 @@
  * 
  * Features:
  * 1. Air Theme: Fine, crisp CPU 2D height-field wave simulation.
- *    - Higher-density simulation grid (~240x135) for crisp, localized micro-ripples.
- *    - Clamped displacement and subtle injection strength so ripples stay calm.
- *    - Tuned damping (~0.972) so ripples settle quickly without full-screen compounding.
- *    - Sharp surface gradient shading with calm-water alpha thresholding to prevent blur.
+ *    - Higher-density simulation grid (~280 base resolution) for crisp, localized micro-ripples.
+ *    - Clamped displacement (35 max) and subtle injection strength so ripples stay calm.
+ *    - Tuned damping (0.935) so ripples settle quickly in ~1.0-1.2s and peak span <= 15-20% width.
+ *    - Pure surface normal slope shading with smooth quadratic alpha falloff (no phantom blob).
  * 2. Angkasa Theme: Anchored stardust grid with Hooke's-law spring physics,
  *    cursor repulsion impulses, dynamic glow feedback, and drifting sparkle bursts.
  * 3. Sensory Audio & Controls: Speed-scaled sound triggers, color switching,
- *    and calm ambient idle ripples.
+ *    and responsive pointer interactions.
  */
 (function (window) {
   'use strict';
@@ -21,20 +21,20 @@
       this.ctx = null;
       this.width = 0;
       this.height = 0;
-      this.dpr = window.devicePixelRatio || 1;
+      this.dpr = Math.min(window.devicePixelRatio || 1, 2);
 
       this.theme = 'air'; // 'air' | 'angkasa'
       this.primaryColor = '#38BDF8';
       this.primaryRgb = { r: 56, g: 189, b: 248 };
 
       // Water Simulation (Air Theme)
-      this.simCols = 240;
-      this.simRows = 135;
+      this.simCols = 280;
+      this.simRows = 160;
       this.buffer1 = null;
       this.buffer2 = null;
       this.currentBuffer = null;
       this.previousBuffer = null;
-      this.damping = 0.972; // Settles in ~1.2s, localized around pointer
+      this.damping = 0.992; // Settles over ~2-3s, expands to ~25-35% of canvas width naturally
       this.offscreenCanvas = null;
       this.offscreenCtx = null;
       this.offscreenImgData = null;
@@ -51,11 +51,7 @@
       this.lastPointerTime = 0;
       this.lastAudioTime = 0;
 
-      // Ambient idle timer
       this.lastInteractionTime = performance.now();
-      this.idleInterval = 4200;
-      this.lastIdleTrigger = performance.now();
-
       this.isRunning = false;
       this.onFirstInteraction = null;
       this.hasInteracted = false;
@@ -67,6 +63,11 @@
 
       this.handleResize();
       window.addEventListener('resize', () => this.handleResize());
+
+      if (window.ResizeObserver && this.canvas) {
+        this.resizeObserver = new ResizeObserver(() => this.handleResize());
+        this.resizeObserver.observe(this.canvas);
+      }
 
       this.bindEvents();
 
@@ -92,26 +93,75 @@
     setColor(colorHex) {
       this.primaryColor = colorHex;
       this.primaryRgb = this.hexToRgb(colorHex);
+      if (window.MenulisEngine) {
+        window.MenulisEngine.setColor(colorHex);
+      }
+    }
+
+    clearWaterSimulation() {
+      if (this.buffer1) this.buffer1.fill(0);
+      if (this.buffer2) this.buffer2.fill(0);
+      if (this.currentBuffer) this.currentBuffer.fill(0);
+      if (this.previousBuffer) this.previousBuffer.fill(0);
+      this.droplets = [];
+      if (this.offscreenImgData) {
+        this.offscreenImgData.data.fill(0);
+        if (this.offscreenCtx) {
+          this.offscreenCtx.putImageData(this.offscreenImgData, 0, 0);
+        }
+      }
+      if (this.ctx && this.canvas) {
+        this.ctx.clearRect(0, 0, this.width, this.height);
+      }
     }
 
     setTheme(theme) {
       this.theme = theme;
-      if (theme === 'air') {
-        if (this.currentBuffer) this.currentBuffer.fill(0);
-        if (this.previousBuffer) this.previousBuffer.fill(0);
-        this.droplets = [];
-      } else {
+      this.clearWaterSimulation();
+      if (theme === 'angkasa') {
         this.initAngkasaField();
         this.burstSparks = [];
+      } else if (theme === 'menulis') {
+        if (window.MenulisEngine) {
+          window.MenulisEngine.setColor(this.primaryColor);
+          window.MenulisEngine.activate(this.canvas, this.ctx, this.width, this.height, this.dpr);
+        }
+      }
+
+      if (theme !== 'menulis' && window.MenulisEngine) {
+        window.MenulisEngine.deactivate();
+      }
+    }
+
+    setMenulisTool(tool) {
+      if (window.MenulisEngine && typeof window.MenulisEngine.setTool === 'function') {
+        window.MenulisEngine.setTool(tool);
+      }
+    }
+
+    clearMenulisCanvas() {
+      if (window.MenulisEngine && typeof window.MenulisEngine.clearCanvas === 'function') {
+        window.MenulisEngine.clearCanvas();
+      }
+      if (window.RiakAudio && typeof window.RiakAudio.stopPencilSound === 'function') {
+        window.RiakAudio.stopPencilSound();
       }
     }
 
     handleResize() {
       if (!this.canvas) return;
-      const rect = this.canvas.getBoundingClientRect();
-      this.width = rect.width;
-      this.height = rect.height;
-      this.dpr = window.devicePixelRatio || 1;
+
+      // Calculate unscaled 400vw x 400vh layout width & height
+      const unscaledW = (this.canvas.offsetWidth > 0) ? this.canvas.offsetWidth : Math.floor(window.innerWidth * 4);
+      const unscaledH = (this.canvas.offsetHeight > 0) ? this.canvas.offsetHeight : Math.floor(window.innerHeight * 4);
+
+      if (this.width === unscaledW && this.height === unscaledH && this.canvas.width > 0) {
+        return;
+      }
+
+      this.width = unscaledW;
+      this.height = unscaledH;
+      this.dpr = Math.min(window.devicePixelRatio || 1, 2);
 
       this.canvas.width = Math.floor(this.width * this.dpr);
       this.canvas.height = Math.floor(this.height * this.dpr);
@@ -121,20 +171,30 @@
 
       this.initWaterSimulation();
       this.initAngkasaField();
+
+      if (window.MenulisEngine) {
+        window.MenulisEngine.handleResize(this.width, this.height, this.dpr);
+      }
     }
 
     /**
      * Initializes higher-resolution simulation grid and double buffers for height-field water
      */
     initWaterSimulation() {
-      // 240 base resolution produces fine, detailed ripples instead of oversized blobs
-      const baseRes = 240;
-      if (this.width >= this.height) {
-        this.simCols = baseRes;
-        this.simRows = Math.max(40, Math.round(baseRes * (this.height / this.width)));
+      // Sets fine grid resolution based on 4x expanded canvas aspect ratio:
+      const baseCols = 320;
+      if (this.width > 0 && this.height > 0) {
+        if (this.width >= this.height) {
+          this.simCols = baseCols;
+          this.simRows = Math.max(80, Math.round(baseCols * (this.height / this.width)));
+        } else {
+          // Portrait (mobile devices): maintain high horizontal cell density
+          this.simCols = 280;
+          this.simRows = Math.max(120, Math.round(280 * (this.height / this.width)));
+        }
       } else {
-        this.simRows = baseRes;
-        this.simCols = Math.max(40, Math.round(baseRes * (this.width / this.height)));
+        this.simCols = 320;
+        this.simRows = 180;
       }
 
       const size = this.simCols * this.simRows;
@@ -148,6 +208,8 @@
       this.offscreenCanvas.height = this.simRows;
       this.offscreenCtx = this.offscreenCanvas.getContext('2d');
       this.offscreenImgData = this.offscreenCtx.createImageData(this.simCols, this.simRows);
+
+      this.clearWaterSimulation();
     }
 
     /**
@@ -186,11 +248,16 @@
     bindEvents() {
       const getPos = (e) => {
         const rect = this.canvas.getBoundingClientRect();
-        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+        const clientX = (e.touches && e.touches.length > 0) ? e.touches[0].clientX : e.clientX;
+        const clientY = (e.touches && e.touches.length > 0) ? e.touches[0].clientY : e.clientY;
+
+        // Exact normalized scale factor between canvas internal coordinate space and client rect
+        const scaleX = (rect.width > 0) ? (this.width / rect.width) : 1;
+        const scaleY = (rect.height > 0) ? (this.height / rect.height) : 1;
+
         return {
-          x: clientX - rect.left,
-          y: clientY - rect.top
+          x: (clientX - rect.left) * scaleX,
+          y: (clientY - rect.top) * scaleY
         };
       };
 
@@ -204,11 +271,25 @@
         this.lastInteractionTime = now;
 
         this.triggerFirstInteraction();
-        this.handlePointerClick(pos.x, pos.y);
 
-        if (window.RiakAudio) {
-          window.RiakAudio.play(0.5);
-          this.lastAudioTime = now;
+        if (this.theme === 'menulis') {
+          if (window.MenulisEngine) {
+            window.MenulisEngine.handlePointerDown(pos.x, pos.y);
+          }
+          if (window.RiakAudio) {
+            if (window.MenulisEngine && window.MenulisEngine.currentTool === 'eraser') {
+              window.RiakAudio.startEraserSound(0.5);
+            } else {
+              window.RiakAudio.startPencilSound(0.5);
+            }
+          }
+        } else {
+          this.handlePointerClick(pos.x, pos.y);
+
+          if (window.RiakAudio) {
+            window.RiakAudio.playClick(0.5);
+            this.lastAudioTime = now;
+          }
         }
       };
 
@@ -224,14 +305,38 @@
 
         this.lastInteractionTime = now;
 
-        this.handlePointerDrag(pos.x, pos.y, dx, dy, dist, speed);
+        // Auto-hide navbar while dragging across canvas
+        if (dist > 3 && window.RiakNavbar && typeof window.RiakNavbar.hide === 'function') {
+          window.RiakNavbar.hide();
+        }
 
-        // Sound throttling during drag
-        if (now - this.lastAudioTime >= 65 && dist >= 8) {
-          if (window.RiakAudio) {
-            window.RiakAudio.play(speed);
+        // Auto-show navbar if pointer moves near top edge (clientY <= 50)
+        const rawClientY = (e.touches && e.touches.length > 0) ? e.touches[0].clientY : e.clientY;
+        if (rawClientY <= 50 && window.RiakNavbar && typeof window.RiakNavbar.show === 'function') {
+          window.RiakNavbar.show();
+        }
+
+        if (this.theme === 'menulis') {
+          if (window.MenulisEngine) {
+            window.MenulisEngine.handlePointerMove(pos.x, pos.y, dx, dy, dist, speed);
           }
-          this.lastAudioTime = now;
+          if (window.RiakAudio) {
+            if (window.MenulisEngine && window.MenulisEngine.currentTool === 'eraser') {
+              window.RiakAudio.updateEraserSound(speed);
+            } else {
+              window.RiakAudio.updatePencilSound(speed);
+            }
+          }
+        } else {
+          this.handlePointerDrag(pos.x, pos.y, dx, dy, dist, speed);
+
+          // Sound throttling during drag (gentle flowing ripple wake)
+          if (now - this.lastAudioTime >= 95 && dist >= 8) {
+            if (window.RiakAudio) {
+              window.RiakAudio.playDrag(speed);
+            }
+            this.lastAudioTime = now;
+          }
         }
 
         this.lastX = pos.x;
@@ -241,6 +346,14 @@
 
       const handleEnd = () => {
         this.isPointerDown = false;
+        if (this.theme === 'menulis') {
+          if (window.MenulisEngine) {
+            window.MenulisEngine.handlePointerUp();
+          }
+          if (window.RiakAudio) {
+            window.RiakAudio.stopPencilSound();
+          }
+        }
       };
 
       // Mouse events
@@ -277,8 +390,8 @@
     /**
      * Injects displacement into height-field grid with smooth cosine falloff and value clamping
      */
-    injectWaterDisplacement(canvasX, canvasY, strength, radius = 1.8) {
-      if (!this.currentBuffer) return;
+    injectWaterDisplacement(canvasX, canvasY, strength, radius = 3.6) {
+      if (!this.currentBuffer || this.width <= 0 || this.height <= 0) return;
       const gx = Math.round((canvasX / this.width) * this.simCols);
       const gy = Math.round((canvasY / this.height) * this.simRows);
       const cols = this.simCols;
@@ -286,7 +399,7 @@
 
       const r = Math.ceil(radius);
       const rSq = radius * radius;
-      const MAX_VAL = 75; // Cap maximum displacement to prevent oversized waves
+      const MAX_VAL = 35; // Maximum displacement clamp to ensure ripples stay localized
 
       for (let dy = -r; dy <= r; dy++) {
         const y = gy + dy;
@@ -331,26 +444,26 @@
     }
 
     /**
-     * Click / Tap interaction handler — fine, localized ripples
+     * Click / Tap interaction handler — natural expanding ripples
      */
     handlePointerClick(x, y) {
       if (this.theme === 'air') {
-        // Subtle downward displacement impulse for single click
-        this.injectWaterDisplacement(x, y, -75, 1.8);
+        // Natural downward displacement impulse for single click/tap (~25-35% width spread)
+        this.injectWaterDisplacement(x, y, -28, 3.6);
 
         // Gentle surface micro-droplets
-        const dropCount = 3;
+        const dropCount = 4;
         for (let i = 0; i < dropCount; i++) {
           const angle = Math.random() * Math.PI * 2;
-          const spd = 0.6 + Math.random() * 1.2;
+          const spd = 0.5 + Math.random() * 1.0;
           this.droplets.push({
             x,
             y,
             vx: Math.cos(angle) * spd,
             vy: Math.sin(angle) * spd,
-            radius: 1.0 + Math.random() * 0.8,
-            alpha: 0.85,
-            decay: 0.03
+            radius: 0.9 + Math.random() * 0.7,
+            alpha: 0.8,
+            decay: 0.035
           });
         }
       } else {
@@ -377,21 +490,21 @@
     }
 
     /**
-     * Drag interaction handler — gentle localized wake along pointer path
+     * Drag interaction handler — natural wake along pointer path
      */
     handlePointerDrag(x, y, dx, dy, dist, speed) {
       if (this.theme === 'air') {
-        // Controlled, subtle wake interpolation
+        // Controlled, natural wake interpolation along drag path
         const normSpeed = Math.min(speed, 2.0);
-        const dragImpulse = -(18 + normSpeed * 14); // Light fingertip disturbance
-        const stepSize = 8;
-        const steps = Math.max(1, Math.min(8, Math.ceil(dist / stepSize)));
+        const dragImpulse = -(10 + normSpeed * 6);
+        const stepSize = 14;
+        const steps = Math.max(1, Math.min(6, Math.ceil(dist / stepSize)));
 
         for (let s = 1; s <= steps; s++) {
           const t = s / steps;
           const ix = this.lastX + dx * t;
           const iy = this.lastY + dy * t;
-          this.injectWaterDisplacement(ix, iy, dragImpulse / Math.sqrt(steps), 1.5);
+          this.injectWaterDisplacement(ix, iy, dragImpulse / Math.sqrt(steps), 2.5);
         }
       } else {
         // Angkasa: Continuous push / repulsion along pointer path
@@ -428,7 +541,7 @@
       const current = this.currentBuffer;
       const previous = this.previousBuffer;
       const damping = this.damping;
-      const MAX_VAL = 70; // Hard clamp against wave buildup
+      const MAX_VAL = 35; // Maximum displacement clamp
 
       for (let y = 1; y < rows - 1; y++) {
         const rowOffset = y * cols;
@@ -474,28 +587,28 @@
             continue;
           }
 
-          // Surface slope gradient
+          // Surface slope gradient (normal derivatives)
           const dx = current[idx + 1] - current[idx - 1];
           const dy = current[idx + cols] - current[idx - cols];
-          const h = current[idx];
 
-          // Top-left light reflection calculation (crisp normal shading)
-          const shade = (-dx - dy) * 2.2 + h * 0.7;
+          // Directional surface slope (top-left light reflection)
+          const shade = (-dx - dy) * 2.4;
 
-          if (shade > 2.0) {
-            // Fine, crisp crest highlight
-            const intensity = Math.min((shade - 2.0) / 38, 1.0);
-            data[pIdx]     = Math.min(255, cr + (255 - cr) * (intensity * 0.85));
-            data[pIdx + 1] = Math.min(255, cg + (255 - cg) * (intensity * 0.85));
-            data[pIdx + 2] = Math.min(255, cb + (255 - cb) * (intensity * 0.85));
-            data[pIdx + 3] = Math.min(225, Math.floor(intensity * 185 + 20));
-          } else if (shade < -2.0) {
+          if (shade > 1.0) {
+            // Crisp, fine crest highlight with smooth quadratic alpha falloff
+            const intensity = Math.min((shade - 1.0) / 20, 1.0);
+            const whiteBlend = intensity * 0.75;
+            data[pIdx]     = Math.min(255, Math.floor(cr + (255 - cr) * whiteBlend));
+            data[pIdx + 1] = Math.min(255, Math.floor(cg + (255 - cg) * whiteBlend));
+            data[pIdx + 2] = Math.min(255, Math.floor(cb + (255 - cb) * whiteBlend));
+            data[pIdx + 3] = Math.floor(intensity * intensity * 190);
+          } else if (shade < -1.0) {
             // Subtle, localized trough shadow
-            const intensity = Math.min((-shade - 2.0) / 42, 1.0);
-            data[pIdx]     = Math.floor(cr * 0.12);
-            data[pIdx + 1] = Math.floor(cg * 0.18);
-            data[pIdx + 2] = Math.floor(cb * 0.30);
-            data[pIdx + 3] = Math.min(145, Math.floor(intensity * 120));
+            const intensity = Math.min((-shade - 1.0) / 24, 1.0);
+            data[pIdx]     = Math.floor(cr * 0.15);
+            data[pIdx + 1] = Math.floor(cg * 0.20);
+            data[pIdx + 2] = Math.floor(cb * 0.35);
+            data[pIdx + 3] = Math.floor(intensity * intensity * 125);
           } else {
             // Calm water: 100% transparent (no haze/blur)
             data[pIdx] = 0;
@@ -510,7 +623,7 @@
 
       this.offscreenCtx.putImageData(this.offscreenImgData, 0, 0);
 
-      // Scaled up rendering — 'medium' smoothing keeps fine ripple lines crisp without muddy blur
+      // Scaled up rendering — medium smoothing keeps fine ripple lines crisp without muddy blur
       this.ctx.imageSmoothingEnabled = true;
       this.ctx.imageSmoothingQuality = 'medium';
       this.ctx.drawImage(this.offscreenCanvas, 0, 0, this.width, this.height);
@@ -650,28 +763,15 @@
 
       this.ctx.clearRect(0, 0, this.width, this.height);
 
-      // Ambient Idle Ripple / Pulse
-      if (time - this.lastInteractionTime > 3200 && time - this.lastIdleTrigger > this.idleInterval) {
-        this.lastIdleTrigger = time;
-        const randX = this.width * (0.25 + Math.random() * 0.5);
-        const randY = this.height * (0.25 + Math.random() * 0.5);
-
-        if (this.theme === 'air') {
-          this.injectWaterDisplacement(randX, randY, -60, 1.8);
-        } else {
-          this.repelStars(randX, randY, 6.0, 110);
-        }
-
-        if (window.RiakAudio) {
-          window.RiakAudio.play(0.3);
-        }
-      }
-
       if (this.theme === 'air') {
         this.updateWaterSimulation();
         this.renderWater();
-      } else {
+      } else if (this.theme === 'angkasa') {
         this.updateAndRenderAngkasa(time);
+      } else if (this.theme === 'menulis') {
+        if (window.MenulisEngine && window.MenulisEngine.isActive) {
+          window.MenulisEngine.render(time);
+        }
       }
 
       requestAnimationFrame((t) => this.render(t));

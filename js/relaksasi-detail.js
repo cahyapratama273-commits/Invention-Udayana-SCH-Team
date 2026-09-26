@@ -49,6 +49,14 @@ function formatTime(seconds) {
 }
 
 async function loadRelaksasiDetail() {
+  if (typeof loadNavigasi === 'function') {
+    try {
+      await loadNavigasi();
+    } catch (e) {
+      console.warn('Gagal memuat navbar di relaksasi-detail:', e);
+    }
+  }
+
   const container = document.getElementById('relaksasi-detail-container');
   if (!container) return;
 
@@ -130,6 +138,12 @@ async function loadRelaksasiDetail() {
 function renderDetailPage(step) {
   const container = document.getElementById('relaksasi-detail-container');
   if (!container) return;
+
+  // Update Breadcrumb trail current pose label
+  const bcPose = document.getElementById('breadcrumb-current-pose');
+  if (bcPose && (step.judul || step.nama)) {
+    bcPose.textContent = step.judul || step.nama;
+  }
 
   const tingkatKey = (step.tingkat || 'pemula').toLowerCase();
   const tingkatStyle = TINGKAT_COLOR_MAP[tingkatKey] || TINGKAT_COLOR_MAP.pemula;
@@ -281,9 +295,8 @@ function renderDetailPage(step) {
       
       <!-- Title & Tags Row -->
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4 pb-4 border-b border-white/10">
-        <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white leading-tight flex items-center gap-2" style="font-family:'Playfair Display',serif;">
-          <span>${step.emoji || '🧘'}</span>
-          <span>${step.judul}</span>
+        <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white leading-tight" style="font-family:'Playfair Display',serif;">
+          ${step.judul}
         </h1>
 
         <div class="flex items-center gap-2 shrink-0 text-xs">
@@ -344,7 +357,7 @@ function renderDetailPage(step) {
       </div>
 
       <!-- Other Poses Grid (Static Cards without Numeric Badges) -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         ${otherSteps.map(renderOtherPoseCard).join('')}
       </div>
     </div>
@@ -354,7 +367,10 @@ function renderDetailPage(step) {
     <!-- COMING SOON VIDEO PLACEHOLDER -->
     <div id="detail-player-wrapper" class="relative w-full aspect-video rounded-2xl overflow-hidden border border-white/10 bg-black/60 backdrop-blur-md shadow-2xl mb-8 flex flex-col items-center justify-center p-6 text-center">
       <div class="w-16 h-16 rounded-full bg-[#2DD4A8]/10 border border-[#2DD4A8]/30 flex items-center justify-center mb-4">
-        <span class="text-3xl">${step.emoji || '🧘'}</span>
+        <svg class="w-8 h-8 text-[#2DD4A8]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/>
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
       </div>
       <span class="px-3.5 py-1 rounded-full text-xs font-semibold bg-[#FB923C]/20 text-[#FB923C] border border-[#FB923C]/40 mb-3 uppercase tracking-wider">
         Video Segera Hadir
@@ -379,27 +395,33 @@ function renderOtherPoseCard(other) {
   const tingkatKey = (other.tingkat || 'pemula').toLowerCase();
   const tingkatStyle = TINGKAT_COLOR_MAP[tingkatKey] || TINGKAT_COLOR_MAP.pemula;
   const detailUrl = `/relaksasi-detail.html?id=${other.id}`;
-  const videoTersedia = typeof other.video_tersedia === 'boolean' ? other.video_tersedia : Boolean(other.video_url || VIDEO_MAP[other.id]);
+  let otherVideoSrc = other.video_url || VIDEO_MAP[other.id];
+  if (otherVideoSrc && !otherVideoSrc.startsWith('/') && !otherVideoSrc.startsWith('http')) {
+    otherVideoSrc = '/' + otherVideoSrc;
+  }
+  const videoTersedia = typeof other.video_tersedia === 'boolean' ? other.video_tersedia : Boolean(otherVideoSrc);
   let thumbnailSrc = other.video_thumbnail || '/assets/Images/artikel/hutan1.webp';
   if (thumbnailSrc && !thumbnailSrc.startsWith('/') && !thumbnailSrc.startsWith('http')) {
     thumbnailSrc = '/' + thumbnailSrc;
   }
 
   return `
-    <a href="${detailUrl}" class="group bg-white/10 backdrop-blur-md rounded-2xl p-5 border border-white/20 hover:border-[#2DD4A8] transition-all duration-300 shadow-xl flex flex-col gap-4 block cursor-pointer">
+    <a href="${detailUrl}" class="group bg-white/10 backdrop-blur-md rounded-2xl p-5 border border-white/20 hover:border-[#2DD4A8] transition-all duration-300 shadow-xl flex flex-col gap-4 block cursor-pointer"
+       onmouseenter="const v=this.querySelector('video'); if(v) v.play().catch(()=>{})"
+       onmouseleave="const v=this.querySelector('video'); if(v){ v.pause(); v.currentTime=1; }">
       
-      <!-- Thumbnail with Play Icon Overlay / Coming Soon -->
-      <div class="relative w-full aspect-video rounded-xl overflow-hidden border border-white/10 bg-black/50 shadow-md">
-        <img src="${thumbnailSrc}" alt="${other.judul}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" onerror="this.onerror=null; this.src='/assets/Images/artikel/hutan1.webp';" />
-        
-        ${videoTersedia ? `
-          <div class="absolute inset-0 flex items-center justify-center bg-black/40 group-hover:bg-black/25 transition-all duration-300">
+      <!-- Thumbnail with Direct Video Frame / Coming Soon -->
+      <div class="relative w-full aspect-video rounded-xl overflow-hidden border border-white/10 bg-black/60 shadow-md">
+        ${(videoTersedia && otherVideoSrc) ? `
+          <video src="${otherVideoSrc}#t=1" preload="metadata" muted playsinline class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 pointer-events-none" onloadedmetadata="this.currentTime=1"></video>
+          <div class="absolute inset-0 flex items-center justify-center bg-black/35 group-hover:bg-black/15 transition-all duration-300 pointer-events-none">
             <div class="w-12 h-12 rounded-full bg-[#0D1220]/75 backdrop-blur-md border border-white/20 flex items-center justify-center shadow-[0_4px_20px_rgba(0,0,0,0.5)] group-hover:scale-110 group-hover:border-[#2DD4A8] group-hover:shadow-[0_0_25px_rgba(45,212,168,0.5)] transition-all duration-300">
               <img src="/assets/SVGForVideo/play.svg" alt="Play" class="w-6 h-6 translate-x-0.5" />
             </div>
           </div>
         ` : `
-          <div class="absolute inset-0 flex items-center justify-center bg-black/60 transition-all duration-300">
+          <img src="${thumbnailSrc}" alt="${other.judul}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" onerror="this.onerror=null; this.src='/assets/Images/placeholder.svg';" />
+          <div class="absolute inset-0 flex items-center justify-center bg-black/60 transition-all duration-300 pointer-events-none">
             <span class="px-3 py-1 rounded-full text-xs font-semibold bg-[#FB923C]/20 text-[#FB923C] border border-[#FB923C]/40 backdrop-blur-md shadow-lg uppercase tracking-wider">
               Segera Hadir
             </span>
@@ -407,11 +429,10 @@ function renderOtherPoseCard(other) {
         `}
       </div>
 
-      <!-- Title & Tags -->
+      <!-- Title & Tags (Emoji Removed) -->
       <div class="flex flex-col gap-2">
-        <h3 class="text-base sm:text-lg font-bold text-white leading-snug group-hover:text-[#2DD4A8] transition-colors flex items-center gap-1.5" style="font-family:'Playfair Display',serif;">
-          <span>${other.emoji || '🧘'}</span>
-          <span>${other.judul}</span>
+        <h3 class="text-base sm:text-lg font-bold text-white leading-snug group-hover:text-[#2DD4A8] transition-colors" style="font-family:'Playfair Display',serif;">
+          ${other.judul}
         </h3>
 
         <div class="flex items-center gap-2 flex-wrap text-xs">
@@ -526,11 +547,20 @@ function initVideoPlayerControls(step, prevStep, nextStep) {
   // Play / Pause toggle
   function togglePlayPause() {
     if (video.paused) {
-      video.play().catch(err => console.log('Playback error:', err));
+      const playPromise = video.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(err => {
+          console.warn('Playback error:', err);
+        });
+      }
     } else {
       video.pause();
     }
   }
+
+  video.addEventListener('error', () => {
+    console.warn('Video failed to load:', video.currentSrc, video.error);
+  });
 
   video.addEventListener('play', () => {
     imgBottomPlay.src = '/assets/SVGForVideo/pause.svg';

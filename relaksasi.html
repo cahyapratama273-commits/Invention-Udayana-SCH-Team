@@ -17,6 +17,8 @@
     href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
     rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css" />
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css" />
   <link rel="stylesheet" href="/assets/css/main.css" />
 </head>
 
@@ -24,22 +26,22 @@
 
   <!-- Fixed Background Image -->
   <div class="fixed inset-0 w-full h-full pointer-events-none -z-10 overflow-hidden">
-    <img data-session-bg src="/assets/Images/artikel/hutan1.webp" class="w-full h-full object-cover" alt="Background"
+    <img data-session-bg src="/assets/Images/artikel/hutan1.webp" class="w-full h-full object-cover object-center" alt="Background"
       onerror="this.onerror=null; this.src='/assets/Images/placeholder.svg';">
     <div class="absolute inset-0 bg-gradient-to-b from-[#0D1220]/75 via-[#0D1220]/60 to-[#0D1220]/90"></div>
   </div>
 
-  <div id="navbar-slot" class="relative z-50"></div>
+  <header id="navbar-slot" class="relative z-50"></header>
 
   <main id="app-content" data-page="relaksasi">
 
     <!-- Header Ruang Relaksasi -->
-    <section class="w-full relative pt-28 sm:pt-36 pb-10 sm:pb-12 px-4 sm:px-6 md:px-8 lg:px-12 flex justify-center text-center">
+    <section class="w-full relative pt-28 sm:pt-36 pb-10 sm:pb-12 px-4 sm:px-6 md:px-8 lg:px-12 flex justify-center text-center" data-aos="fade-up" aria-labelledby="relaksasi-hero-title">
       <div class="max-w-3xl w-full">
         <span
-          class="text-[11px] sm:text-xs font-semibold uppercase tracking-widest mb-2 inline-block text-[#2DD4A8]">Ruang
+          class="text-[11px] sm:text-xs font-semibold uppercase tracking-widest mb-3 sm:mb-4 inline-block text-[#2DD4A8]">Ruang
           Pemulihan Diri</span>
-        <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-3 sm:mb-4 text-white"
+        <h1 id="relaksasi-hero-title" class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-3 sm:mb-4 text-white"
           style="font-family:'Playfair Display',serif;">
           Ruang Relaksasi
         </h1>
@@ -51,11 +53,12 @@
     </section>
 
     <!-- SECTION 2: PERNAPASAN RITMIS -->
-    <section class="max-w-4xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 mb-16 sm:mb-20 text-center">
+    <section class="max-w-4xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 mb-16 sm:mb-20 text-center" data-aos="fade-up" aria-labelledby="pernapasan-title">
       <div class="w-full">
 
         <div class="mb-6 sm:mb-8">
-          <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2"
+          <span class="text-[11px] sm:text-xs font-semibold tracking-widest uppercase mb-2 inline-block" style="color:#2DD4A8;">Latihan Interaktif</span>
+          <h2 id="pernapasan-title" class="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2 sm:mb-3"
             style="font-family:'Playfair Display',serif; text-shadow: 0 2px 10px rgba(0,0,0,0.85);">
             Pernapasan Ritmis
           </h2>
@@ -69,13 +72,15 @@
           <p id="breathe-focus-text" class="text-xs sm:text-sm text-[#8A93A8] leading-relaxed text-center"></p>
         </div>
 
-        <!-- 3. Breathing Circular Track -->
-        <div class="relative w-64 h-64 sm:w-72 sm:h-72 mx-auto mb-8 flex items-center justify-center">
-          <!-- Subtle Backdrop Disc for High-Contrast Legibility against bright backgrounds -->
-          <div class="absolute inset-4 rounded-full bg-[#0D1220]/45 backdrop-blur-[2px] pointer-events-none -z-0"></div>
+        <!-- 3. Breathing Circular Track (Interactive Center Trigger) -->
+        <div id="breathe-circle-trigger"
+          class="relative w-64 h-64 sm:w-72 sm:h-72 mx-auto flex items-center justify-center cursor-pointer select-none group transition-transform duration-200 active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2DD4A8] rounded-full"
+          role="button" tabindex="0" aria-label="Kontrol Latihan Pernapasan" style="touch-action: manipulation;">
+          <!-- Subtle Backdrop Disc for High-Contrast Legibility -->
+          <div class="absolute inset-4 rounded-full bg-[#0D1220]/60 backdrop-blur-[4px] border border-white/10 group-hover:border-[#2DD4A8]/40 transition-colors pointer-events-none -z-0"></div>
 
           <!-- SVG Track -->
-          <svg class="absolute inset-0 w-full h-full transform -rotate-90 z-10 pointer-events-none" viewBox="0 0 200 200">
+          <svg class="absolute inset-0 w-full h-full transform -rotate-90 z-10 pointer-events-none" viewBox="0 0 200 200" aria-hidden="true">
             <circle cx="100" cy="100" r="90" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="4"></circle>
             <circle id="breathe-progress" cx="100" cy="100" r="90" fill="none" stroke="#2DD4A8" stroke-width="6"
               stroke-linecap="round" stroke-dasharray="565.48" stroke-dashoffset="565.48"
@@ -85,66 +90,69 @@
           <!-- Glowing Dot -->
           <div id="breathe-dot"
             class="absolute w-4 h-4 rounded-full bg-[#2DD4A8] shadow-[0_0_15px_#2DD4A8] transition-colors duration-200 z-20 pointer-events-none"
-            style="left: 50%; top: 5%; transform: translate(-50%, -50%);"></div>
+            style="left: 50%; top: 5%; transform: translate(-50%, -50%);" aria-hidden="true"></div>
 
           <!-- Central Text Info -->
-          <div class="flex flex-col items-center justify-center relative z-20 px-4 select-none">
-            <div id="breathe-phase-text" class="text-xl sm:text-2xl font-bold mb-1 transition-colors duration-200"
-              style="color:#2DD4A8; text-shadow: 0 2px 8px rgba(0,0,0,0.95), 0 0 3px rgba(0,0,0,0.9);">Siap</div>
-            <div id="breathe-countdown" class="text-3xl sm:text-4xl font-light text-white font-mono"
+          <div class="flex flex-col items-center justify-center relative z-20 px-4 text-center pointer-events-none">
+            <div id="breathe-phase-text" class="text-2xl sm:text-3xl font-bold mb-1 transition-colors duration-200"
+              style="color:#2DD4A8; text-shadow: 0 2px 8px rgba(0,0,0,0.95), 0 0 3px rgba(0,0,0,0.9);">Mulai</div>
+            <div id="breathe-countdown" class="text-3xl sm:text-4xl font-light text-white font-mono hidden"
               style="text-shadow: 0 2px 8px rgba(0,0,0,0.95), 0 0 3px rgba(0,0,0,0.9);">--</div>
+            <div id="breathe-hint" class="text-xs text-[#8A93A8] transition-opacity duration-200">Ketuk untuk mulai</div>
           </div>
         </div>
 
-        <!-- 4. Interactive Phase Emojis Container -->
-        <div id="breathe-phases-container" class="flex items-center justify-center gap-2.5 sm:gap-4 mb-8 flex-wrap"></div>
+        <!-- Helper Text Under Circle -->
+        <p id="breathe-helper-text" class="text-[11px] sm:text-xs text-[#8A93A8]/80 text-center tracking-wide mt-3 mb-6 select-none font-normal">
+          Ketuk untuk mulai &amp; lanjut, tahan untuk jeda atau berhenti
+        </p>
 
-        <!-- 5. Action Buttons -->
-        <div class="flex justify-center items-center gap-3 sm:gap-4 flex-wrap">
-          <button id="btn-breathe-toggle" class="teduh-btn-primary">
-            Mulai Latihan
-          </button>
-          <button id="btn-breathe-stop" class="hidden teduh-btn-secondary">
-            Berhenti
-          </button>
-        </div>
+        <!-- 4. Interactive Phase Emojis Container -->
+        <div id="breathe-phases-container" class="flex items-center justify-center gap-2.5 sm:gap-4 mb-4 flex-wrap" aria-label="Fase Pernapasan"></div>
       </div>
     </section>
 
     <!-- SECTION 3: ALUR LANGKAH RELAKSASI TUBUH & PIKIRAN (CARD GRID) -->
-    <section class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 pb-20 sm:pb-24">
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 pb-20 sm:pb-24" data-aos="fade-up" aria-labelledby="alur-relaksasi-title">
 
       <!-- Section Header -->
       <div class="text-center max-w-2xl mx-auto mb-10">
-        <span class="text-[11px] sm:text-xs font-semibold uppercase tracking-widest text-[#2DD4A8] mb-2 block">PANDUAN
+        <span class="text-[11px] sm:text-xs font-semibold uppercase tracking-widest text-[#2DD4A8] mb-2 sm:mb-3 inline-block">PANDUAN
           YOGA</span>
-        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3"
+        <h2 id="alur-relaksasi-title" class="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3 sm:mb-4"
           style="font-family:'Playfair Display',serif;">
           Alur Relaksasi Tubuh & Pikiran
         </h2>
-        <p class="text-sm text-[#8A93A8] mb-4">
+        <p class="text-sm sm:text-base text-[#8A93A8]">
           Ikuti alur gerakan bertahap di bawah ini untuk melepaskan ketegangan otot leher, bahu, dan punggung secara
           optimal.
         </p>
-
-        <!-- Progress Label (Computed dynamically in JS) -->
-        <div
-          class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#2DD4A8]/10 border border-[#2DD4A8]/20 text-[#2DD4A8] text-xs font-semibold uppercase tracking-wider">
-          <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-          </svg>
-          <span id="relaksasi-progress-label">Memuat alur...</span>
-        </div>
       </div>
 
       <!-- Card Grid Container (2 cols desktop, 1 col mobile) -->
-      <div id="relaksasi-grid-container" class="grid grid-cols-1 md:grid-cols-2 gap-5">
+      <div id="relaksasi-grid-container" class="grid grid-cols-1 md:grid-cols-2 gap-6" aria-live="polite">
         <!-- Skeleton Loaders -->
         <div class="rounded-2xl h-96 animate-pulse backdrop-blur-md bg-white/5 border border-white/10"></div>
         <div class="rounded-2xl h-96 animate-pulse backdrop-blur-md bg-white/5 border border-white/10"></div>
       </div>
 
     </section>
+
+    <!-- OVERLAY MODAL DETAIL & VIDEO RELAKSASI -->
+    <div id="relaksasi-modal" role="dialog" aria-modal="true" aria-label="Detail Video Relaksasi" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 md:p-6 bg-black/85 backdrop-blur-md hidden transition-opacity duration-300">
+      <div id="relaksasi-modal-card" class="w-full max-w-4xl rounded-[24px] overflow-hidden border border-white/15 bg-[#151B2E] p-4 sm:p-6 md:p-8 text-white relative shadow-2xl max-h-[92vh] overflow-y-auto custom-scrollbar">
+        <!-- Close Button -->
+        <button id="relaksasi-modal-close-btn"
+                type="button"
+                aria-label="Tutup Detail Video"
+                class="absolute top-4 right-4 sm:top-5 sm:right-5 w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center bg-white/10 hover:bg-white/20 text-[#8A93A8] hover:text-white transition z-30 cursor-pointer">
+          <i class="ph ph-x text-base sm:text-lg"></i>
+        </button>
+
+        <!-- Dynamic Content Slot -->
+        <div id="relaksasi-modal-slot"></div>
+      </div>
+    </div>
 
     <script src="/js/NavRender.js"></script>
     <script src="/js/relaksasi/main.js"></script>
@@ -156,6 +164,7 @@
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <script src="/js/Nav.js"></script>
   <script src="/js/Footer.js"></script>
+  <script src="/js/main.js"></script>
 </body>
 
 </html>

@@ -96,14 +96,52 @@
     return KONDISI_CONFIG[kondisi] ? kondisi : "baik";
   }
 
+  let hasAnimatedSapaan = false;
+
   /**
-   * Mengubah tampilan sapaan (Greeting Card) sesuai hasil kuis
+   * Memicu animasi slide-in dari kiri untuk Kartu Sapaan setelah teks dinamis disuntikkan.
+   * Menggunakan requestAnimationFrame + setTimeout singkat (40ms) untuk menjamin browser
+   * merender frame awal (opacity-0, -translate-x-10) terlebih dahulu sebelum mengaktifkan
+   * kelas transisi ke state akhir (opacity-100, translate-x-0).
+   */
+  function triggerSapaanAnimation() {
+    if (hasAnimatedSapaan) return;
+    const wrapper = document.getElementById("sapaan-wrapper");
+    if (!wrapper) return;
+
+    hasAnimatedSapaan = true;
+
+    // Pastikan state awal terpasang
+    wrapper.classList.add("fade-left", "opacity-0", "-translate-x-10");
+    wrapper.classList.remove("opacity-100", "translate-x-0");
+
+    // Force style reflow agar browser mendaftarkan frame awal
+    void wrapper.offsetWidth;
+
+    const playTransition = () => {
+      console.log("[Kartu Sapaan] Animating card slide-in from left");
+      wrapper.classList.remove("opacity-0", "-translate-x-10");
+      wrapper.classList.add("opacity-100", "translate-x-0");
+    };
+
+    if (window.requestAnimationFrame) {
+      requestAnimationFrame(() => {
+        setTimeout(playTransition, 40);
+      });
+    } else {
+      setTimeout(playTransition, 40);
+    }
+  }
+
+  /**
+   * Mengubah tampilan sapaan (Greeting Card) sesuai hasil kuis dan status penyelesaian
+   * (full, partial, atau abandoned).
    */
   function renderSapaan() {
+    const completionPath = localStorage.getItem("userMentalCompletionPath") || "full";
     const kondisi = getKondisiUser();
     const cfg = KONDISI_CONFIG[kondisi];
 
-    // Ambil teks yang sudah diset oleh kuesioner, fallback ke default dari KONDISI_CONFIG
     const savedTitle   = localStorage.getItem("userMentalTitle");
     const savedMessage = localStorage.getItem("userMentalMessage");
 
@@ -111,11 +149,28 @@
     const pesanEl = document.getElementById("element-pesan-beranda");
     const cardEl  = document.getElementById("sapaan-card");
 
-    // Suntikkan teks ke HTML
+    if (completionPath === "abandoned") {
+      const fallbackTitle = "Pintu BerTeduh Selalu Terbuka Untukmu 🌿";
+      const fallbackMessage = "Kamu belum sempat menyelesaikan cek emosi — nggak apa-apa, kamu bisa coba lagi kapan pun. Luangkan waktumu sejenak di sini.";
+      if (judulEl) judulEl.textContent = savedTitle || fallbackTitle;
+      if (pesanEl) pesanEl.textContent = savedMessage || fallbackMessage;
+      if (cardEl) {
+        cardEl.style.borderLeft = "4px solid #2DD4A8";
+      }
+      triggerSapaanAnimation();
+      return;
+    }
+
+    // Suntikkan teks ke HTML (baik untuk full maupun partial)
     if (judulEl) judulEl.textContent = savedTitle   || cfg.judulDefault;
     if (pesanEl) pesanEl.textContent = savedMessage || cfg.pesanDefault;
     // Sesuaikan warna garis batas (border-left) sesuai kondisi
-    if (cardEl)  cardEl.style.borderLeftColor = cfg.aksenWarna;
+    if (cardEl) {
+      cardEl.style.borderLeft = `4px solid ${cfg.aksenWarna}`;
+    }
+
+    // Picu animasi slide-in setelah teks dan border selesai disuntikkan
+    triggerSapaanAnimation();
   }
 
   /**
@@ -157,6 +212,7 @@
       
       // Render artikel ke dalam grid HTML menggunakan map() dan string template
       gridEl.innerHTML = artikelDitampilkan.map(renderArtikelCard).join("");
+      if (window.AOS) window.AOS.refresh();
     } catch (err) {
       console.error("Gagal memuat artikel:", err);
       // Fallback pesan jika gagal fetch data
@@ -166,13 +222,20 @@
 
   
   // ─── INITIALIZATION BOOTSTRAP ───────────────────────────────────────────
+  // Jalankan renderSapaan secara sinkron secepat mungkin agar teks kartu sapaan
+  // langsung terisi sebelum animasi AOS dimulai dan tanpa menunggu network fetch navigasi
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", renderSapaan);
+  } else {
+    renderSapaan();
+  }
+
   // Menjalankan semua fungsi secara berurutan saat script di-load
   (async function initBeranda() {
+    renderSapaan();
     // 1. Muat komponen navigasi (dari NavRender.js)
     await loadNavigasi();
-    // 2. Render teks sapaan beranda
-    renderSapaan();
-    // 3. Fetch dan render artikel
+    // 2. Fetch dan render artikel
     await renderArtikelRekomendasi();
   })();
 })();

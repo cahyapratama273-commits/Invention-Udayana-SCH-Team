@@ -5,7 +5,8 @@
 #riak-experience-wrapper {
   position: relative;
   width: 100%;
-  min-height: calc(100vh - 64px);
+  height: 100vh;
+  min-height: 100vh;
   overflow: hidden;
   touch-action: none;
   user-select: none;
@@ -14,33 +15,184 @@
   flex-direction: column;
 }
 
+@media (min-width: 768px) {
+  #riak-experience-wrapper {
+    height: 100vh;
+    min-height: 100vh;
+    flex-grow: 1;
+  }
+}
+
+/* Auto-hiding navbar for Ruang Sensorik */
+#navbar-slot nav {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  will-change: transform;
+}
+
+body.riak-nav-hidden #navbar-slot nav,
+#navbar-slot.nav-hidden nav,
+#navbar-slot nav.nav-hidden {
+  transform: translateY(-100%) !important;
+}
+
 /* Background Transition Container */
 .riak-canvas-layer {
   position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
+  top: -150%;
+  left: -150%;
+  width: 400%;
+  height: 400%;
   display: block;
   z-index: 10;
+  cursor: crosshair;
+  transform-origin: center center;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.riak-theme-menulis .riak-canvas-layer {
   cursor: crosshair;
 }
 
 /* Interactive Canvas Themes */
 .riak-theme-air {
-  background: radial-gradient(circle at 50% 40%, #0d1a2d 0%, #080f1d 60%, #050a14 100%);
-  transition: background 0.8s ease;
+  background: radial-gradient(circle at 50% 50%, #0c1626 0%, #070d18 70%, #040810 100%);
+  transition: background 1.2s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
 .riak-theme-angkasa {
-  background: radial-gradient(circle at 50% 40%, #120d24 0%, #0a0817 60%, #04030a 100%);
-  transition: background 0.8s ease;
+  background: radial-gradient(circle at 50% 50%, #120d24 0%, #0a0817 70%, #04030a 100%);
+  transition: background 1.2s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
-/* Floating Sensory Controls Bar */
+.riak-theme-menulis {
+  background: radial-gradient(circle at 50% 50%, #FAF8F4 0%, #F3EFE7 70%, #E9E3D6 100%);
+  transition: background 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+/* ==========================================================================
+   Adaptive Styles for Menulis (Kertas & Pensil) Light Theme
+   ========================================================================== */
+.riak-theme-menulis .riak-controls-bar h1 {
+  color: #1E293B !important;
+  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.7);
+}
+
+.riak-theme-menulis .riak-controls-bar span:first-child {
+  color: #0D9488 !important; /* Deep calming teal */
+}
+
+.riak-theme-menulis .riak-controls-bar p {
+  color: #475569 !important;
+}
+
+/* Desktop Controls Bar adaptation on white paper */
+.riak-theme-menulis #riak-desktop-controls {
+  background: rgba(255, 255, 255, 0.85) !important;
+  border-color: rgba(0, 0, 0, 0.1) !important;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08), 0 2px 6px rgba(0, 0, 0, 0.04) !important;
+}
+
+.riak-theme-menulis #riak-desktop-controls .bg-black\/30 {
+  background: rgba(0, 0, 0, 0.06) !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+.riak-theme-menulis .riak-theme-btn {
+  color: #64748B !important;
+}
+
+.riak-theme-menulis .riak-theme-btn:hover:not(.active) {
+  color: #0F172A !important;
+}
+
+.riak-theme-menulis .riak-theme-btn.active {
+  background: #FFFFFF !important;
+  color: #0F172A !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12) !important;
+}
+
+.riak-theme-menulis .riak-color-picker-label {
+  background: rgba(0, 0, 0, 0.05) !important;
+  border-color: rgba(0, 0, 0, 0.12) !important;
+}
+
+.riak-theme-menulis .riak-color-picker-label span {
+  color: #334155 !important;
+}
+
+.riak-theme-menulis #riak-mute-btn {
+  color: #64748B !important;
+}
+
+.riak-theme-menulis #riak-mute-btn:hover {
+  color: #0F172A !important;
+  background: rgba(0, 0, 0, 0.06) !important;
+}
+
+.riak-theme-menulis #riak-zoom-controls {
+  background: rgba(0, 0, 0, 0.06) !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+.riak-theme-menulis #riak-zoom-controls button {
+  color: #64748B !important;
+}
+
+.riak-theme-menulis #riak-zoom-controls button:hover {
+  color: #0F172A !important;
+  background: rgba(0, 0, 0, 0.08) !important;
+}
+
+.riak-theme-menulis #riak-zoom-label {
+  color: #334155 !important;
+}
+
+.riak-theme-menulis #riak-desktop-controls .bg-white\/15 {
+  background: rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Mobile FAB button adaptation on white paper */
+.riak-theme-menulis #riak-mobile-fab-btn {
+  background: rgba(255, 255, 255, 0.92) !important;
+  border-color: rgba(0, 0, 0, 0.12) !important;
+  color: #0F172A !important;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Floating Sensory Controls Bar (Animates UP in sync with navbar auto-hide) */
 .riak-controls-bar {
   position: relative;
   z-index: 20;
   pointer-events: auto;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  will-change: transform;
+}
+
+body.riak-nav-hidden .riak-controls-bar,
+#navbar-slot.nav-hidden ~ #app-content .riak-controls-bar {
+  transform: translateY(-64px) !important;
+}
+
+@media (max-width: 640px) {
+  body.riak-nav-hidden .riak-controls-bar,
+  #navbar-slot.nav-hidden ~ #app-content .riak-controls-bar {
+    transform: translateY(-56px) !important;
+  }
+}
+
+.riak-header-subheading {
+  transition: opacity 0.3s ease, max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1), margin 0.35s ease;
+  max-height: 40px;
+  opacity: 1;
+  overflow: hidden;
+}
+
+body.riak-nav-hidden .riak-header-subheading {
+  opacity: 0;
+  max-height: 0px;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
 }
 
 /* Theme Switch Segment Pill */
@@ -119,12 +271,26 @@
 /* Interaction Hint Overlay */
 #riak-hint {
   position: absolute;
+  top: auto !important;
   bottom: 12%;
   left: 50%;
   transform: translateX(-50%);
+  width: auto;
+  height: auto !important;
+  max-width: max-content;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   pointer-events: none;
   z-index: 20;
   transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.riak-theme-menulis #riak-hint {
+  background: rgba(0, 0, 0, 0.08) !important;
+  border-color: rgba(0, 0, 0, 0.12) !important;
+  color: #334155 !important;
 }
 
 #riak-hint.faded {
@@ -140,14 +306,168 @@
   }
 }
 
-/* Motion Sensitivity Warning Banner */
-#riak-motion-warning {
-  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+/* ==========================================================================
+   Mobile Draggable Floating Action Button (FAB) & Popover Menu
+   ========================================================================== */
+
+#riak-mobile-fab-container {
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
-#riak-motion-warning.opacity-0 {
-  opacity: 0;
-  transform: translateY(-8px);
-  pointer-events: none;
+#riak-mobile-fab-btn {
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.15) inset;
+  transition: transform 0.2s cubic-bezier(0.25, 0.1, 0.25, 1), box-shadow 0.2s ease;
 }
+
+#riak-mobile-fab-btn:active {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(45, 212, 168, 0.4) inset;
+}
+
+#riak-mobile-popover {
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(255, 255, 255, 0.12) inset;
+  animation: popoverFadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes popoverFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Mobile Popover Theme Button Group */
+.riak-mobile-theme-btn {
+  flex: 1;
+  padding: 8px 10px;
+  font-size: 11px;
+  font-weight: 600;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+  color: #8A93A8;
+  cursor: pointer;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.riak-mobile-theme-btn.active {
+  background: rgba(45, 212, 168, 0.18);
+  border-color: rgba(45, 212, 168, 0.5);
+  color: #2DD4A8;
+  box-shadow: 0 2px 10px rgba(45, 212, 168, 0.15);
+}
+
+.riak-mobile-theme-btn:hover:not(.active) {
+  color: #F5F5F5;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* ==========================================================================
+   Menulis Tool Switcher (Pensil ⇄ Penghapus) Styles
+   ========================================================================== */
+#riak-menulis-tools-wrapper {
+  max-width: 0px;
+  opacity: 0;
+  overflow: hidden;
+  pointer-events: none;
+  transition: max-width 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
+  will-change: max-width, opacity;
+}
+
+#riak-menulis-tools-wrapper.active {
+  max-width: 320px;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.riak-tool-btn {
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 9999px;
+  transition: all 0.25s ease;
+  color: #8A93A8;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: transparent;
+  border: none;
+}
+
+.riak-tool-btn.active {
+  background: rgba(255, 255, 255, 0.15);
+  color: #F5F5F5;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+.riak-tool-btn:hover:not(.active) {
+  color: #F5F5F5;
+}
+
+/* Adaptation in Menulis (white paper) mode */
+.riak-theme-menulis .riak-tool-btn {
+  color: #64748B !important;
+}
+
+.riak-theme-menulis .riak-tool-btn:hover:not(.active) {
+  color: #0F172A !important;
+}
+
+.riak-theme-menulis .riak-tool-btn.active {
+  background: #FFFFFF !important;
+  color: #0F172A !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12) !important;
+}
+
+/* Mobile Menulis Tool Buttons */
+.riak-mobile-tool-btn {
+  padding: 8px 10px;
+  font-size: 11px;
+  font-weight: 600;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+  color: #8A93A8;
+  cursor: pointer;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.riak-mobile-tool-btn.active {
+  background: rgba(45, 212, 168, 0.18);
+  border-color: rgba(45, 212, 168, 0.5);
+  color: #2DD4A8;
+  box-shadow: 0 2px 10px rgba(45, 212, 168, 0.15);
+}
+
+.riak-mobile-tool-btn:hover:not(.active) {
+  color: #F5F5F5;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.riak-theme-menulis .riak-mobile-tool-btn.active {
+  background: rgba(0, 0, 0, 0.08) !important;
+  border-color: rgba(0, 0, 0, 0.2) !important;
+  color: #0F172A !important;
+}
+
+/* Eraser mode circular outline cursor */
+.riak-theme-menulis.tool-eraser .riak-canvas-layer {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'%3E%3Ccircle cx='14' cy='14' r='10' fill='rgba(255,255,255,0.7)' stroke='%23475569' stroke-width='1.5' stroke-dasharray='3 2'/%3E%3Ccircle cx='14' cy='14' r='1.5' fill='%230F172A'/%3E%3C/svg%3E") 14 14, crosshair;
+}
+
+
 

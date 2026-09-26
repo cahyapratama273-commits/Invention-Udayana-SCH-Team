@@ -13,129 +13,139 @@
   <link rel="icon" type="image/png" href="/assets/Images/for-icon.png">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css" />
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css" />
   <link rel="stylesheet" href="/assets/css/main.css" />
 </head>
 <body data-page="konsultasi" style="background:#0D1220; color:#F5F5F5;">
 
-  <div id="navbar-slot" class="relative z-50"></div>
+  <!-- Fixed Background Image -->
+  <div class="fixed inset-0 w-full h-full pointer-events-none -z-10 overflow-hidden">
+    <img data-session-bg src="/assets/Images/artikel/hutan1.webp" class="w-full h-full object-cover object-center" alt="Background"
+      onerror="this.onerror=null; this.src='/assets/Images/placeholder.svg';">
+    <div class="absolute inset-0 bg-gradient-to-b from-[#0D1220]/75 via-[#0D1220]/60 to-[#0D1220]/90"></div>
+  </div>
+
+  <header id="navbar-slot" class="relative z-50"></header>
 
   <main id="app-content" data-page="konsultasi">
-    <!-- HERO + QUOTES SECTION (Fixed Background) -->
-    <div data-session-bg-style id="konsultasi-hero-bg" class="relative w-full overflow-hidden" style="background-image: url('/assets/Images/artikel/hutan1.webp'); background-size: cover; background-position: center; background-attachment: fixed;">
-      <!-- Overlay Gradient -->
-      <div class="absolute inset-0 bg-gradient-to-b from-[#0D1220]/75 via-[#0D1220]/50 to-[#0D1220] pointer-events-none"></div>
+    <div id="konsultasi-hero-container" class="relative w-full">
 
       <!-- Hero Section -->
-      <section class="relative z-10 max-w-7xl mx-auto w-full flex flex-col justify-end px-4 sm:px-6 md:px-8 lg:px-12 pt-28 sm:pt-36 lg:pt-44 text-white" style="min-height: 70vh;">
-        <div class="max-w-3xl mb-8">
-          <span class="text-[11px] sm:text-xs font-semibold tracking-widest uppercase mb-2 inline-block" style="color:#2DD4A8;">Ruang Konsultasi</span>
-          <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-4" style="font-family:'Playfair Display',serif;">
-            Ruang Aman untuk Pulih & Bertumbuh
-          </h1>
-        </div>
+      <section class="relative z-10 max-w-7xl mx-auto w-full px-4 sm:px-6 md:px-8 lg:px-12 pt-28 sm:pt-36 text-white" aria-labelledby="konsultasi-hero-title">
+        <div class="max-w-3xl">
+          <div class="flex items-center gap-2 mb-3 sm:mb-4" data-aos="fade-down">
+            <span class="text-[11px] sm:text-xs font-semibold tracking-widest uppercase" style="color:#2DD4A8;">Ruang Konsultasi</span>
+          </div>
 
-        <div class="flex flex-col lg:flex-row items-end justify-between gap-8 mt-auto">
-          <div class="max-w-lg">
-            <p class="text-sm sm:text-base leading-relaxed mb-6 font-light text-white/90">
-              Ruang yang didedikasikan untuk kesejahteraan emosionalmu, membantu mengurai beban pikiran, dan mendampingi proses pemulihan batinmu.
-            </p>
+          <h1 id="konsultasi-hero-title" class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-4 sm:mb-6" style="font-family:'Playfair Display',serif; color:#F5F5F5;" data-aos="fade-up" data-aos-delay="100">
+            Ruang Aman untuk Pulih &amp; Bertumbuh
+          </h1>
+
+          <p class="text-sm sm:text-base leading-relaxed mb-6 sm:mb-8 max-w-xl" style="color:#8A93A8;" data-aos="fade-up" data-aos-delay="200">
+            Ruang yang didedikasikan untuk kesejahteraan emosionalmu, membantu mengurai beban pikiran, dan mendampingi proses pemulihan batinmu.
+          </p>
+
+          <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 mt-6 sm:mt-8 mb-14 sm:mb-16" data-aos="fade-up" data-aos-delay="300">
             <a href="#layanan-section" class="teduh-btn-primary">
-              Mulai Sekarang &rarr;
+              MULAI SEKARANG &#8599;
             </a>
           </div>
         </div>
       </section>
 
       <!-- Separate Wide 3-Pillar Card Below Hero -->
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 w-full pt-4 pb-8 relative z-10">
-        <div class="bg-white/10 backdrop-blur-md rounded-2xl p-6 sm:p-8 grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 w-full border border-white/20 shadow-xl">
+      <section class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 w-full pb-14 sm:pb-16 relative z-10" data-aos="fade-up" data-aos-delay="150" aria-label="Keunggulan Layanan">
+        <div class="bg-[#151B2E] rounded-2xl p-6 sm:p-8 grid grid-cols-1 md:grid-cols-3 gap-6 w-full border border-white/10 shadow-2xl">
           <div class="flex items-start gap-3.5">
-            <span class="text-2xl mt-0.5 opacity-90 shrink-0">✨</span>
+            <span class="text-2xl mt-0.5 opacity-90 shrink-0" aria-hidden="true">✨</span>
             <p class="text-xs sm:text-sm font-light text-white/90 leading-relaxed">
               Panduan <span class="font-bold text-white">personal</span> untuk perjalanan unikmu
             </p>
           </div>
           <div class="flex items-start gap-3.5">
-            <span class="text-2xl mt-0.5 opacity-90 shrink-0">🌱</span>
+            <span class="text-2xl mt-0.5 opacity-90 shrink-0" aria-hidden="true">🌱</span>
             <p class="text-xs sm:text-sm font-light text-white/90 leading-relaxed">
               Rekomendasi sesuai kondisi <span class="font-bold text-white">emosimu</span> saat ini
             </p>
           </div>
           <div class="flex items-start gap-3.5">
-            <span class="text-2xl mt-0.5 opacity-90 shrink-0">🔒</span>
+            <span class="text-2xl mt-0.5 opacity-90 shrink-0" aria-hidden="true">🔒</span>
             <p class="text-xs sm:text-sm font-light text-white/90 leading-relaxed">
-              <span class="font-bold text-white">Privat & Aman</span>,<br class="hidden sm:inline"> cuma kamu yang tahu
+              <span class="font-bold text-white">Privat &amp; Aman</span>,<br class="hidden sm:inline"> cuma kamu yang tahu
             </p>
           </div>
         </div>
-      </div>
+      </section>
       <!-- Quotes Section (Within Fixed BG) -->
-      <section class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 pt-4 pb-14 sm:pb-16 md:pb-20">
+      <section class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 pb-14 sm:pb-16 md:pb-20" data-aos="fade-up" aria-label="Pesan Penyemangat">
         <!-- Card quotes by We're  -->
-        <div class="flex flex-col md:flex-row gap-8 md:gap-16 items-center rounded-3xl p-6 sm:p-10 md:p-12 bg-white/10 backdrop-blur-md border border-white/20 shadow-2xl">
+        <blockquote class="flex flex-col md:flex-row gap-8 md:gap-12 items-center rounded-2xl p-6 sm:p-8 md:p-10 bg-[#151B2E] border border-white/10 shadow-2xl m-0">
           <div class="w-full md:w-1/3 flex justify-center">
-            <div class="rounded-[2rem] overflow-hidden aspect-square w-full max-w-xs shadow-lg border border-white/20">
-              <img src="/assets/Images/artikel/hutan21.webp" alt="Testimonial User" class="w-full h-full object-cover">
+            <div class="rounded-2xl overflow-hidden aspect-square w-full max-w-xs shadow-lg border border-white/20">
+              <img src="/assets/Images/artikel/hutan21.webp" alt="Foto Suasana Hutan Teduh" class="w-full h-full object-cover">
             </div>
           </div>
           <div class="w-full md:w-2/3 flex flex-col">
-            <h2 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-medium leading-relaxed mb-6" style="font-family:'Playfair Display',serif; color:#F5F5F5;">
+            <p class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-medium leading-relaxed mb-6" style="font-family:'Playfair Display',serif; color:#F5F5F5;">
                 "Kamu nggak harus <span class="text-[#2DD4A8]">menyelesaikan semuanya</span> hari ini. Cukup fokus ke satu langkah kecil yang bisa kamu ambil sekarang."
-            </h2>
+            </p>
             <div class="flex items-center justify-between mt-auto pt-4 border-t border-white/10">
               <div>
-                <p class="font-semibold text-sm sm:text-base" style="color:#F5F5F5;">Tim BerTeduh</p>
+                <cite class="font-semibold text-sm sm:text-base not-italic" style="color:#F5F5F5;">Tim BerTeduh</cite>
                 <p class="text-xs text-[#8A93A8]">Jawa Barat, Indonesia</p>
               </div>
             </div>
           </div>
-        </div>
+        </blockquote>
       </section>
     </div>
 
     <!-- LAYANAN & DUKUNGAN SECTION (Solid Background) -->
-    <section id="layanan-section" class="bg-[#0D1220] text-[#F5F5F5] py-14 sm:py-16 md:py-20 relative z-20">
+    <section id="layanan-section" class="bg-[#0D1220] text-[#F5F5F5] py-14 sm:py-16 md:py-20 relative z-20" aria-labelledby="layanan-heading">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
         
         <!-- Header Layanan -->
-        <div class="text-center max-w-2xl mx-auto mb-10 sm:mb-12">
-          <span class="text-[11px] sm:text-xs font-semibold uppercase tracking-widest mb-2 inline-block" style="color:#2DD4A8;">Ragam Dukungan</span>
-          <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3" style="font-family:'Playfair Display',serif;">Layanan Dari Kami</h2>
-          <p class="text-xs sm:text-sm text-[#8A93A8]">Pilih metode yang paling nyaman untukmu: konsultasi langsung bersama konsultan psikologi berlisensi, atau bercerita secara santai bersama asisten AI BerTeduh.</p>
+        <div class="text-center max-w-2xl mx-auto mb-8 sm:mb-10" data-aos="fade-up">
+          <span class="text-[11px] sm:text-xs font-semibold uppercase tracking-widest mb-2 sm:mb-3 inline-block" style="color:#2DD4A8;">Ragam Dukungan</span>
+          <h2 id="layanan-heading" class="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3 sm:mb-4" style="font-family:'Playfair Display',serif;">Layanan Dari Kami</h2>
+          <p class="text-sm md:text-base leading-relaxed text-[#8A93A8]">Pilih metode yang paling nyaman untukmu: konsultasi langsung bersama konsultan psikologi berlisensi, atau bercerita secara santai bersama asisten AI BerTeduh.</p>
         </div>
 
         <!-- 2 Centered Option Cards -->
-        <div class="max-w-3xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-6 lg:gap-8 items-stretch mb-16">
+        <div class="max-w-3xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-6 items-stretch mb-14 sm:mb-16" role="tablist" aria-label="Pilihan Layanan Konsultasi">
           
           <!-- Option 1 Psikologi Klinis -->
-          <div id="tab-klinis-btn" class="service-tab-btn group cursor-pointer rounded-2xl p-6 lg:p-8 flex flex-col justify-between h-full border transition-all duration-300 backdrop-blur-md"
-               data-tab="klinis"
+          <div id="tab-klinis-btn" role="tab" aria-selected="true" aria-controls="konsultan-view" tabindex="0"
+               class="service-tab-btn group cursor-pointer rounded-2xl p-6 sm:p-7 flex flex-col justify-between h-full border transition-all duration-300 backdrop-blur-md"
+               data-tab="klinis" data-aos="fade-up" data-aos-delay="100"
                style="background:#1A2138; border-color:#2DD4A8; box-shadow:0 0 25px rgba(45,212,168,0.15);">
             <div>
               <div class="flex items-center justify-between mb-6">
-                <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl" style="background:rgba(45,212,168,0.1); color:#2DD4A8;">
+                <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl" style="background:rgba(45,212,168,0.1); color:#2DD4A8;" aria-hidden="true">
                   🧠
                 </div>
               </div>
-              <h3 class="text-lg sm:text-xl font-bold mb-3 text-white group-hover:text-[#2DD4A8] transition-colors" style="font-family:'Playfair Display',serif;">Psikologi Klinis</h3>
-              <p class="text-sm leading-relaxed text-[#8A93A8]">
-                Konsultasi langsung bersama psikolog & psikiater terbaik dari kami untuk memahami kecemasan, suasana hati, dan pola pikir sehari-hari.
+              <h3 class="text-lg sm:text-xl font-bold mb-2 sm:mb-3 text-white group-hover:text-[#2DD4A8] transition-colors" style="font-family:'Playfair Display',serif;">Psikologi Klinis</h3>
+              <p class="text-xs sm:text-sm leading-relaxed text-[#8A93A8]">
+                Konsultasi langsung bersama psikolog &amp; psikiater terbaik dari kami untuk memahami kecemasan, suasana hati, dan pola pikir sehari-hari.
               </p>
             </div>
           </div>
 
           <!-- Option 2 Konsultasi AI -->
-          <div id="tab-ai-btn" class="service-tab-btn group cursor-pointer rounded-2xl p-6 lg:p-8 flex flex-col justify-between h-full border transition-all duration-300 backdrop-blur-md"
-               data-tab="ai"
+          <div id="tab-ai-btn" role="tab" aria-selected="false" aria-controls="chat-ai-view" tabindex="0"
+               class="service-tab-btn group cursor-pointer rounded-2xl p-6 sm:p-7 flex flex-col justify-between h-full border transition-all duration-300 backdrop-blur-md"
+               data-tab="ai" data-aos="fade-up" data-aos-delay="200"
                style="background:#151B2E; border-color:rgba(255,255,255,0.08);">
             <div>
               <div class="flex items-center justify-between mb-6">
-                <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl" style="background:rgba(45,212,168,0.1); color:#2DD4A8;">
+                <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl" style="background:rgba(45,212,168,0.1); color:#2DD4A8;" aria-hidden="true">
                   🤝
                 </div>
               </div>
-              <h3 class="text-lg sm:text-xl font-bold mb-3 text-white group-hover:text-[#2DD4A8] transition-colors" style="font-family:'Playfair Display',serif;">Konsultasi AI</h3>
-              <p class="text-sm leading-relaxed text-[#8A93A8]">
+              <h3 class="text-lg sm:text-xl font-bold mb-2 sm:mb-3 text-white group-hover:text-[#2DD4A8] transition-colors" style="font-family:'Playfair Display',serif;">Konsultasi AI</h3>
+              <p class="text-xs sm:text-sm leading-relaxed text-[#8A93A8]">
                 Cerita dulu ke AI kapan saja, tanpa perlu janjian. Cocok buat kamu yang butuh ruang buat ngobrol duluan sebelum siap ketemu profesional.
               </p>
             </div>
@@ -144,33 +154,35 @@
         </div>
 
         <!-- VIEW 1: DAFTAR KONSULTAN KLINIS (Grid Cards) -->
-        <div id="konsultan-view" class="transition-all duration-500">
-          <div class="mb-8 text-center sm:text-left">
-            <span class="text-[11px] sm:text-xs font-semibold uppercase tracking-widest text-[#2DD4A8] mb-2 block">Tim Ahli Berlisensi</span>
-            <h3 class="text-xl sm:text-2xl font-bold text-white" style="font-family:'Playfair Display',serif;">Konsultan & Psikolog Ternama</h3>
+        <div id="konsultan-view" role="tabpanel" aria-labelledby="tab-klinis-btn" class="transition-all duration-500 scroll-mt-24">
+          <div class="mb-8 text-center sm:text-left" data-aos="fade-up">
+            <span class="text-[11px] sm:text-xs font-semibold uppercase tracking-widest text-[#2DD4A8] mb-2 block">Rekan Konsultan Kami</span>
+            <h3 class="text-xl sm:text-2xl font-bold text-white" style="font-family:'Playfair Display',serif;">Konsultan &amp; Psikolog Ternama</h3>
           </div>
 
           <!-- Grid Kontainer Konsultan (Di-inject lewat JS dari konsultan.json) -->
-          <div id="konsultan-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6 items-stretch">
+          <div id="konsultan-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 items-stretch" data-aos="fade-up" data-aos-delay="150">
             <!-- Skeleton Loading Placeholders -->
-            <div class="rounded-[20px] h-80 animate-pulse" style="background:#151B2E; border:1px solid rgba(255,255,255,0.08);"></div>
-            <div class="rounded-[20px] h-80 animate-pulse" style="background:#151B2E; border:1px solid rgba(255,255,255,0.08);"></div>
-            <div class="rounded-[20px] h-80 animate-pulse" style="background:#151B2E; border:1px solid rgba(255,255,255,0.08);"></div>
+            <div class="rounded-2xl h-72 animate-pulse" style="background:#151B2E; border:1px solid rgba(255,255,255,0.08);"></div>
+            <div class="rounded-2xl h-72 animate-pulse" style="background:#151B2E; border:1px solid rgba(255,255,255,0.08);"></div>
+            <div class="rounded-2xl h-72 animate-pulse" style="background:#151B2E; border:1px solid rgba(255,255,255,0.08);"></div>
+            <div class="rounded-2xl h-72 animate-pulse" style="background:#151B2E; border:1px solid rgba(255,255,255,0.08);"></div>
           </div>
         </div>
 
         <!-- VIEW 2: CHAT AI VIEW -->
-        <div id="chat-ai-view" id="section-ai" class="hidden transition-all duration-500">
-          <div class="rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden flex flex-col shadow-2xl border border-white/10" style="background:#1A2138;">
+        <div id="chat-ai-view" role="tabpanel" aria-labelledby="tab-ai-btn" class="hidden transition-all duration-500 scroll-mt-24">
+          <div class="rounded-2xl overflow-hidden flex flex-col shadow-2xl border border-white/10" style="background:#1A2138;">
             
             <!-- Main Card Flex -->
             <div class="flex flex-col md:flex-row">
               <!-- Sidebar / Info AI -->
               <div class="w-full md:w-1/3 p-5 sm:p-8 lg:p-10 flex flex-col justify-center border-b md:border-b-0 md:border-r border-white/10" style="background:#151B2E;">
-                <div class="w-12 h-12 rounded-full mb-6 flex items-center justify-center text-xl" style="background:rgba(45,212,168,0.15); color:#2DD4A8;">
+                <div class="w-12 h-12 rounded-full mb-6 flex items-center justify-center text-xl" style="background:rgba(45,212,168,0.15); color:#2DD4A8;" aria-hidden="true">
                   🤖
                 </div>
-                <h2 class="text-2xl sm:text-3xl font-bold mb-4 text-white" style="font-family:'Playfair Display',serif;">Ngobrol Dulu Aja</h2>
+                <span class="text-[11px] sm:text-xs font-semibold tracking-widest uppercase mb-1.5 inline-block" style="color:#2DD4A8;">Asisten Virtual</span>
+                <h3 class="text-2xl sm:text-3xl font-bold mb-4 text-white" style="font-family:'Playfair Display',serif;">Ngobrol Dulu Aja</h3>
                 <p class="text-sm leading-relaxed mb-6" style="color:#8A93A8;">
                   Teman ngobrol virtual yang siap dengerin keluh kesahmu kapan saja, tanpa penghakiman.
                 </p>
@@ -184,7 +196,7 @@
               <!-- Chat UI -->
               <div class="w-full md:w-2/3 p-5 sm:p-8 flex flex-col min-h-[480px]">
                 <!-- History Chat -->
-                <div id="chat-container" class="flex-1 overflow-y-auto pr-2 mb-4 flex flex-col gap-4 custom-scrollbar" style="max-height:300px;">
+                <div id="chat-container" class="flex-1 overflow-y-auto pr-2 mb-4 flex flex-col gap-4 custom-scrollbar" style="max-height:300px;" aria-live="polite" aria-label="Riwayat Percakapan AI">
                   <!-- Bot Bubble -->
                   <div class="flex items-start gap-3 w-[90%] md:w-5/6">
                     <div class="w-8 h-8 rounded-full shrink-0 flex items-center justify-center text-xs font-bold" style="background:#2DD4A8; color:#0D1220;">AI</div>
@@ -198,19 +210,19 @@
                 <div class="pt-2 pb-3">
                   <p class="text-xs mb-2.5 font-medium" style="color:#8A93A8;">Pilih topik di bawah, atau ceritakan langsung apa yang kamu rasakan:</p>
                   <div class="flex flex-wrap gap-2">
-                    <button class="quick-chip px-3.5 py-1.5 rounded-full text-xs transition border border-[rgba(255,255,255,0.1)] text-[#8A93A8] hover:border-[#2DD4A8] hover:text-[#2DD4A8] hover:bg-[rgba(45,212,168,0.05)]" data-topic="Aku merasa agak susah tidur akhir-akhir ini...">Susah Tidur</button>
-                    <button class="quick-chip px-3.5 py-1.5 rounded-full text-xs transition border border-[rgba(255,255,255,0.1)] text-[#8A93A8] hover:border-[#2DD4A8] hover:text-[#2DD4A8] hover:bg-[rgba(45,212,168,0.05)]" data-topic="Pikiranku rasanya cemas berlebih dan terus berputar...">Cemas Berlebih</button>
-                    <button class="quick-chip px-3.5 py-1.5 rounded-full text-xs transition border border-[rgba(255,255,255,0.1)] text-[#8A93A8] hover:border-[#2DD4A8] hover:text-[#2DD4A8] hover:bg-[rgba(45,212,168,0.05)]" data-topic="Aku lagi merasa sangat kewalahan dengan keadaan ini...">Merasa Kewalahan</button>
-                    <button class="quick-chip px-3.5 py-1.5 rounded-full text-xs transition border border-[rgba(255,255,255,0.1)] text-[#8A93A8] hover:border-[#2DD4A8] hover:text-[#2DD4A8] hover:bg-[rgba(45,212,168,0.05)]" data-topic="Aku sulit fokus dan pikiranku mudah terdistraksi...">Sulit Fokus</button>
-                    <button class="quick-chip px-3.5 py-1.5 rounded-full text-xs transition border border-[rgba(255,255,255,0.1)] text-[#8A93A8] hover:border-[#2DD4A8] hover:text-[#2DD4A8] hover:bg-[rgba(45,212,168,0.05)]" data-topic="Aku merasa sendirian dan butuh teman cerita...">Merasa Sendirian</button>
-                    <button class="quick-chip px-3.5 py-1.5 rounded-full text-xs transition border border-[rgba(255,255,255,0.1)] text-[#8A93A8] hover:border-[#2DD4A8] hover:text-[#2DD4A8] hover:bg-[rgba(45,212,168,0.05)]" data-topic="Aku lagi butuh motivasi dan semangat baru...">Butuh Motivasi</button>
+                    <button type="button" class="quick-chip px-3.5 py-1.5 rounded-full text-xs transition border border-[rgba(255,255,255,0.1)] text-[#8A93A8] hover:border-[#2DD4A8] hover:text-[#2DD4A8] hover:bg-[rgba(45,212,168,0.05)]" data-topic="Aku merasa agak susah tidur akhir-akhir ini...">Susah Tidur</button>
+                    <button type="button" class="quick-chip px-3.5 py-1.5 rounded-full text-xs transition border border-[rgba(255,255,255,0.1)] text-[#8A93A8] hover:border-[#2DD4A8] hover:text-[#2DD4A8] hover:bg-[rgba(45,212,168,0.05)]" data-topic="Pikiranku rasanya cemas berlebih dan terus berputar...">Cemas Berlebih</button>
+                    <button type="button" class="quick-chip px-3.5 py-1.5 rounded-full text-xs transition border border-[rgba(255,255,255,0.1)] text-[#8A93A8] hover:border-[#2DD4A8] hover:text-[#2DD4A8] hover:bg-[rgba(45,212,168,0.05)]" data-topic="Aku lagi merasa sangat kewalahan dengan keadaan ini...">Merasa Kewalahan</button>
+                    <button type="button" class="quick-chip px-3.5 py-1.5 rounded-full text-xs transition border border-[rgba(255,255,255,0.1)] text-[#8A93A8] hover:border-[#2DD4A8] hover:text-[#2DD4A8] hover:bg-[rgba(45,212,168,0.05)]" data-topic="Aku sulit fokus dan pikiranku mudah terdistraksi...">Sulit Fokus</button>
+                    <button type="button" class="quick-chip px-3.5 py-1.5 rounded-full text-xs transition border border-[rgba(255,255,255,0.1)] text-[#8A93A8] hover:border-[#2DD4A8] hover:text-[#2DD4A8] hover:bg-[rgba(45,212,168,0.05)]" data-topic="Aku merasa sendirian dan butuh teman cerita...">Merasa Sendirian</button>
+                    <button type="button" class="quick-chip px-3.5 py-1.5 rounded-full text-xs transition border border-[rgba(255,255,255,0.1)] text-[#8A93A8] hover:border-[#2DD4A8] hover:text-[#2DD4A8] hover:bg-[rgba(45,212,168,0.05)]" data-topic="Aku lagi butuh motivasi dan semangat baru...">Butuh Motivasi</button>
                   </div>
                 </div>
 
                 <!-- Chat Input -->
                 <div class="mt-auto relative">
-                  <input id="chat-input" type="text" placeholder="Ketik pesanmu di sini..." class="w-full bg-black/20 border border-white/10 rounded-full py-3.5 pl-6 pr-14 text-sm text-white focus:outline-none focus:border-[#2DD4A8] transition">
-                  <button id="chat-send-btn" class="absolute right-2 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full flex items-center justify-center hover:scale-105 transition font-bold" style="background:#2DD4A8; color:#0D1220;">
+                  <input id="chat-input" type="text" placeholder="Ketik pesanmu di sini..." aria-label="Pesan obrolan AI" class="w-full bg-black/20 border border-white/10 rounded-full py-3.5 pl-6 pr-14 text-sm text-white focus:outline-none focus:border-[#2DD4A8] transition">
+                  <button id="chat-send-btn" type="button" aria-label="Kirim pesan" class="absolute right-2 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full flex items-center justify-center hover:scale-105 transition font-bold" style="background:#2DD4A8; color:#0D1220;">
                     &#10148;
                   </button>
                 </div>
@@ -219,8 +231,8 @@
 
             <!-- Disclaimer Box Footer -->
             <div class="w-full px-5 py-4 sm:px-8 sm:py-4 flex items-start sm:items-center gap-3 text-xs leading-relaxed rounded-b-[1.5rem] sm:rounded-b-[2rem]" style="background:rgba(245,158,11,0.12); border-top:1px solid rgba(245,158,11,0.3); color:#FBBF24;">
-              <span class="text-base shrink-0">💡</span>
-              <span style="color:#F5F5F5;">Ngobrol dengan AI ini bisa membantu kamu dalam memahami masalah kamu sendiri, tapi bukan pengganti untuk bantuan profesional. Kalau kondisimu terasa berat atau mendesak, segera hubungi profesional atau layanan darurat terdekat.</span>
+              <span class="text-base shrink-0" aria-hidden="true">💡</span>
+              <span style="color:#F5F5F5;">Ngobrol di sini dapat digunakan untuk membantu mengurai pikiranmu, memberikan wadah untuk menumpahkan isi kepala, dan menata kembali emosi yang menumpuk agar kamu merasa lebih lega.</span>
             </div>
 
           </div>
@@ -230,11 +242,14 @@
     </section>
 
     <!-- OVERLAY MODAL DETAIL KONSULTAN -->
-    <div id="konsultan-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md hidden transition-opacity duration-300">
+    <div id="konsultan-modal" role="dialog" aria-modal="true" aria-label="Detail Profil Konsultan" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md hidden transition-opacity duration-300">
       <div id="modal-card" class="w-full max-w-xl rounded-[24px] overflow-hidden border border-white/15 bg-[#151B2E] p-6 sm:p-8 text-white relative shadow-2xl max-h-[90vh] overflow-y-auto custom-scrollbar">
         <!-- Close Button -->
-        <button id="modal-close-btn" class="absolute top-5 right-5 w-9 h-9 rounded-full flex items-center justify-center bg-white/10 hover:bg-white/20 text-[#8A93A8] hover:text-white transition font-bold text-base z-10">
-          &#x2715;
+        <button id="modal-close-btn"
+                type="button"
+                aria-label="Tutup Detail Konsultan"
+                class="absolute top-5 right-5 w-9 h-9 rounded-full flex items-center justify-center bg-white/10 hover:bg-white/20 text-[#8A93A8] hover:text-white transition z-10 cursor-pointer">
+          <i class="ph ph-x text-base"></i>
         </button>
 
         <!-- Dynamic Content Slot -->
@@ -242,8 +257,14 @@
       </div>
     </div>
 
+    <script>
+      if (window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost') {
+        document.write('<script src="/env.js"><\/script>');
+      }
+    </script>
     <script src="/js/NavRender.js"></script>
     <script src="/js/konsultasi/main.js"></script>
+    <script src="/js/chat-service.js"></script>
     <script src="/js/chat-ai.js"></script>
   </main>
 
@@ -251,5 +272,6 @@
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <script src="/js/Nav.js"></script>
   <script src="/js/Footer.js"></script>
+  <script src="/js/main.js"></script>
 </body>
 </html>

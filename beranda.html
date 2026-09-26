@@ -28,50 +28,49 @@
 
 <body data-page="beranda" style="background:#0D1220; color:#F5F5F5;">
 
+  <!-- Fixed Background Image -->
+  <div class="fixed inset-0 w-full h-full pointer-events-none -z-10 overflow-hidden">
+    <img data-session-bg src="/assets/Images/artikel/hutan1.webp" class="w-full h-full object-cover object-center" alt="Background"
+      onerror="this.onerror=null; this.src='/assets/Images/placeholder.svg';">
+    <div class="absolute inset-0 bg-gradient-to-b from-[#0D1220]/75 via-[#0D1220]/60 to-[#0D1220]/90"></div>
+  </div>
+
   <canvas id="starfield-canvas" aria-hidden="true"></canvas>
 
-  <div id="navbar-slot" class="relative z-50"></div>
+  <header id="navbar-slot" class="relative z-50"></header>
 
   <main id="app-content" data-page="beranda">
 
     <!-- HERO SECTION -->
-    <section class="relative w-full text-white overflow-hidden pt-28 sm:pt-36 pb-12 mb-12 sm:mb-16"
-      style="min-height: 100vh; flex-direction: column; justify-content: space-between; display: flex;">
-
-      <!-- Hero Background Image (contained within hero only) -->
-      <div class="absolute inset-0 w-full h-full pointer-events-none overflow-hidden -z-10">
-        <img data-session-bg src="/assets/Images/artikel/hutan1.webp" class="w-full h-full object-cover" alt="Background"
-          onerror="this.onerror=null; this.src='/assets/Images/placeholder.svg';">
-        <div class="absolute inset-0 bg-gradient-to-b from-[#0D1220]/70 via-[#0D1220]/55 to-[#0D1220]"></div>
-      </div>
+    <section class="relative w-full text-white overflow-hidden pt-28 sm:pt-36 pb-12 sm:pb-16 mb-12 sm:mb-16">
       <!-- Main Content Container -->
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 w-full my-auto">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 w-full">
         <div class="max-w-2xl">
-          <div class="flex items-center gap-2 mb-4 sm:mb-6">
-            <span class="text-[11px] sm:text-xs font-semibold tracking-widest uppercase" style="color:#2DD4A8;">Ruang
+          <div class="flex items-center gap-2 mb-3 sm:mb-4" data-aos="fade-down">
+            <span class="text-[11px] sm:text-xs font-semibold tracking-widest uppercase text-[#2DD4A8]">Ruang
               aman untukmu</span>
           </div>
 
-          <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-4 sm:mb-6"
-            style="font-family:'Playfair Display',serif; color:#F5F5F5;">
+          <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-4 sm:mb-6 font-serif text-[#F5F5F5]" data-aos="fade-up" data-aos-delay="100">
             Dunia Terlalu Terik. <br>
-            <span style="color:#2DD4A8; font-style: italic;">Mari Berteduh</span> Sejenak.
+            <span class="text-[#2DD4A8] italic">Mari Berteduh</span> Sejenak.
           </h1>
 
-          <p class="text-sm sm:text-base leading-relaxed mb-6 sm:mb-8 lg:mb-10 max-w-lg" style="color:#8A93A8;">
+          <p class="text-sm sm:text-base leading-relaxed mb-6 sm:mb-8 lg:mb-10 max-w-lg text-[#8A93A8]"
+            data-aos="fade-up" data-aos-delay="200">
             Ruang aman untuk mengurai isi kepala, membaca kembali emosi, dan beristirahat sejenak dari segala tuntutan.
           </p>
 
-          <div class="fade-left opacity-0 -translate-x-10 transition-all duration-700 ease-out mb-6 sm:mb-8">
+          <div id="sapaan-wrapper" class="fade-left opacity-0 -translate-x-10 transition-all duration-700 ease-out mb-6 sm:mb-8">
             <div id="sapaan-card"
-              class="rounded-2xl p-6 sm:p-8 bg-white/10 backdrop-blur-md border border-white/20 transition-all duration-300 min-h-[100px] shadow-xl">
-              <p id="element-judul-beranda" class="text-xl md:text-2xl font-semibold mb-2"
-                style="color:#F5F5F5; font-family:'Playfair Display',serif;"></p>
-              <p id="element-pesan-beranda" class="text-sm max-w-2xl" style="color:#8A93A8;"></p>
+              class="rounded-2xl p-6 sm:p-8 bg-[#151B2E] border border-white/10 transition-all duration-300 min-h-[100px] shadow-2xl">
+              <p id="element-judul-beranda" class="text-xl md:text-2xl font-semibold mb-2 font-serif text-[#F5F5F5]">Senang melihatmu baik-baik saja! 🌤️</p>
+              <p id="element-pesan-beranda" class="text-sm max-w-2xl text-[#8A93A8]">Yuk jaga ritme baik ini biar terus menyala hari ini.</p>
             </div>
           </div>
 
-          <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 mt-6">
+          <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 mt-6"
+            data-aos="fade-up" data-aos-delay="400">
             <a href="/index.html" class="teduh-btn-primary">
               MULAI BERTEDUH &#8599;
             </a>
@@ -90,12 +89,11 @@
 
       <!-- Stats Redesigned Block -->
       <div
-        class="rounded-3xl p-8 sm:p-10 md:p-12 flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-6 backdrop-blur-md mb-16 transition-all duration-300 overflow-hidden relative"
-        style="background:rgba(26,33,56,0.4); border:1px solid rgba(255,255,255,0.08); box-shadow:0 8px 32px rgba(0,0,0,0.37);">
+        class="rounded-3xl p-8 sm:p-10 md:p-12 flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-6 mb-16 transition-all duration-300 overflow-hidden relative bg-[#151B2E] border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.37)]"
+        data-aos="fade-up">
 
         <!-- Background subtle glow -->
-        <div class="absolute -top-20 -left-20 w-64 h-64 rounded-full blur-[80px] opacity-20"
-          style="background-color:#2DD4A8; pointer-events:none;"></div>
+        <div class="absolute -top-20 -left-20 w-64 h-64 rounded-full blur-[80px] opacity-20 bg-[#2DD4A8] pointer-events-none"></div>
 
         <!-- Left Side: Overlapping Circles -->
         <div class="w-full lg:w-1/2 flex items-center justify-center sm:justify-start relative z-10 pl-0 sm:pl-4">
@@ -103,20 +101,22 @@
             <!-- Circle 1 (Large) — Artikel -->
             <div
               class="w-48 h-48 sm:w-64 sm:h-64 rounded-full flex flex-col items-center justify-center text-center shadow-2xl transition-transform duration-500 hover:scale-105 z-30 flex-shrink-0"
+              data-aos="zoom-in" data-aos-delay="100"
               style="background:linear-gradient(135deg, #151B2E, #0a0e17); border:1px solid rgba(45, 212, 168, 0.4);">
               <h3 class="text-4xl sm:text-5xl font-bold tracking-tight text-white mb-1 counter" data-target="40"
                 data-suffix="+">0</h3>
-              <p class="text-xs sm:text-sm font-semibold tracking-wide mt-1 uppercase" style="color:#2DD4A8;">
+              <p class="text-xs sm:text-sm font-semibold tracking-wide mt-1 uppercase text-[#2DD4A8]">
                 Artikel</p>
             </div>
 
             <!-- Circle 2 (Medium) — Gratis -->
             <div
               class="w-40 h-40 sm:w-52 sm:h-52 rounded-full flex flex-col items-center justify-center text-center shadow-xl transition-transform duration-500 hover:scale-105 z-20 flex-shrink-0"
+              data-aos="zoom-in" data-aos-delay="200"
               style="background:linear-gradient(135deg, #1A2138, #111625); border:1px solid rgba(255, 255, 255, 0.12);">
               <h3 class="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-1 counter" data-target="100"
                 data-suffix="%">0</h3>
-              <p class="text-[10px] sm:text-xs font-medium tracking-wide px-4 mt-1" style="color:#8A93A8;">Gratis,
+              <p class="text-[10px] sm:text-xs font-medium tracking-wide px-4 mt-1 text-[#8A93A8]">Gratis,
                 <br>Tanpa Akun
               </p>
             </div>
@@ -125,14 +125,13 @@
 
         <!-- Right Side: Text & CTA -->
         <div
-          class="w-full lg:w-1/2 flex flex-col justify-center text-center lg:text-left mt-6 lg:mt-0 lg:pl-12 relative z-10">
-          <span class="text-[11px] sm:text-xs font-semibold tracking-widest uppercase mb-2 inline-block"
-            style="color:#2DD4A8;">Statistik BerTeduh</span>
-          <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 leading-tight"
-            style="font-family:'Playfair Display',serif; color:#F5F5F5;">
+          class="w-full lg:w-1/2 flex flex-col justify-center text-center lg:text-left mt-6 lg:mt-0 lg:pl-12 relative z-10"
+          data-aos="fade-left" data-aos-delay="200">
+          <span class="text-[11px] sm:text-xs font-semibold tracking-widest uppercase mb-2 inline-block text-[#2DD4A8]">Statistik BerTeduh</span>
+          <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 leading-tight font-serif text-[#F5F5F5]">
             Dibuat untuk menjaga kesejahteraan emosionalmu.
           </h2>
-          <p class="text-sm sm:text-base leading-relaxed mb-2 max-w-lg mx-auto lg:mx-0" style="color:#8A93A8;">
+          <p class="text-sm sm:text-base leading-relaxed mb-2 max-w-lg mx-auto lg:mx-0 text-[#8A93A8]">
             Setiap artikel dan fitur di BerTeduh dirancang untuk membantumu memahami emosi, dengan bahasa yang mudah dan
             langkah yang bisa langsung dicoba — kapan saja kamu butuh.
           </p>
@@ -140,54 +139,46 @@
       </div>
 
       <!-- KARTU FITUR / LAYANAN -->
-      <div class="mb-14 sm:mb-16">
-        <div class="text-center mb-8 sm:mb-10">
-          <span class="text-[11px] sm:text-xs font-semibold tracking-widest uppercase mb-2 inline-block"
-            style="color:#2DD4A8;">Layanan Kami</span>
-          <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-3" style="font-family:'Playfair Display',serif; color:#F5F5F5;">Jelajahi
+      <section class="mb-14 sm:mb-16" aria-labelledby="layanan-heading">
+        <div class="text-center mb-8 sm:mb-10" data-aos="fade-up">
+          <span class="text-[11px] sm:text-xs font-semibold tracking-widest uppercase mb-2 inline-block text-[#2DD4A8]">Layanan Kami</span>
+          <h2 id="layanan-heading" class="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 font-serif text-[#F5F5F5]">Jelajahi
             Fitur Teduh</h2>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           <!-- Card 1 -->
-          <div
-            class="group relative backdrop-blur-md rounded-2xl p-6 sm:p-7 transition-all duration-500 hover:-translate-y-3 hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)] hover:border-[#2DD4A8] overflow-hidden flex flex-col z-10"
-            style="background:rgba(26,33,56,0.6); border:1px solid rgba(255,255,255,0.12);">
+          <a href="/blog.html"
+            class="group relative backdrop-blur-md rounded-2xl p-6 sm:p-7 transition-all duration-500 hover:-translate-y-3 hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)] hover:border-[#2DD4A8] overflow-hidden flex flex-col z-10 cursor-pointer bg-[#151B2E] border border-white/10 block"
+            data-aos="fade-up" data-aos-delay="100">
             <div
               class="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-[-1]">
             </div>
 
-
             <div
-              class="w-[60px] h-[60px] rounded-[18px] flex items-center justify-center mb-7 text-white transition-all duration-500 group-hover:scale-110 group-hover:rotate-12 group-hover:rounded-[22px] z-10"
+              class="w-[60px] h-[60px] rounded-[18px] flex items-center justify-center mb-7 text-white transition-all duration-500 group-hover:scale-110 group-hover:-rotate-12 group-hover:rounded-[22px] z-10"
               style="background: linear-gradient(135deg, #14b8a6, #0ea5e9); box-shadow: 0 10px 20px rgba(20, 184, 166, 0.3);">
               <i class="ph ph-book-open-text text-[28px]"></i>
             </div>
 
-            <h3 class="text-lg sm:text-xl font-bold mb-3 z-10 tracking-wide"
-              style="font-family:'Playfair Display',serif; color:#F5F5F5;">Blog</h3>
-            <p class="text-sm leading-relaxed mb-7 flex-grow z-10 font-medium group-hover:text-gray-300" style="color:#8A93A8;">Temukan berbagai
+            <h3 class="text-lg sm:text-xl font-bold mb-3 z-10 tracking-wide font-serif text-[#F5F5F5]">Blog</h3>
+            <p class="text-sm leading-relaxed mb-7 flex-grow z-10 font-medium text-[#8A93A8] group-hover:text-gray-300">Temukan berbagai
               artikel inspiratif dan tips seputar kesehatan mental.</p>
 
-            <a href="./blog.html"
-              class="inline-flex items-center text-[15px] font-semibold opacity-70 group-hover:opacity-100 group-hover:translate-x-1.5 transition-all duration-300 z-10"
-              style="color:#F5F5F5;">
+            <span
+              class="inline-flex items-center text-[15px] font-semibold opacity-70 group-hover:opacity-100 group-hover:translate-x-1.5 transition-all duration-300 z-10 text-[#F5F5F5]">
               Baca Artikel
-              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                class="w-[18px] h-[18px] ml-2 transition-transform duration-300 group-hover:translate-x-1">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-              </svg>
-            </a>
-          </div>
+              <i class="ph ph-arrow-right ml-2 text-[18px] transition-transform duration-300 group-hover:translate-x-1"></i>
+            </span>
+          </a>
 
           <!-- Card 2 -->
-          <div
-            class="group relative backdrop-blur-md rounded-2xl p-6 sm:p-7 transition-all duration-500 hover:-translate-y-3 hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)] hover:border-[#0ea5e9] overflow-hidden flex flex-col z-10"
-            style="background:rgba(26,33,56,0.6); border:1px solid rgba(255,255,255,0.12);">
+          <a href="/konsultasi.html#konsultan-view"
+            class="group relative backdrop-blur-md rounded-2xl p-6 sm:p-7 transition-all duration-500 hover:-translate-y-3 hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)] hover:border-[#0ea5e9] overflow-hidden flex flex-col z-10 cursor-pointer bg-[#151B2E] border border-white/10 block"
+            data-aos="fade-up" data-aos-delay="200">
             <div
               class="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-[-1]">
             </div>
-
 
             <div
               class="w-[60px] h-[60px] rounded-[18px] flex items-center justify-center mb-7 text-white transition-all duration-500 group-hover:scale-110 group-hover:rotate-12 group-hover:rounded-[22px] z-10"
@@ -195,61 +186,49 @@
               <i class="ph ph-handshake text-[28px]"></i>
             </div>
 
-            <h3 class="text-lg sm:text-xl font-bold mb-3 z-10 tracking-wide"
-              style="font-family:'Playfair Display',serif; color:#F5F5F5;">Konsultasi Psikolog</h3>
-            <p class="text-sm leading-relaxed mb-7 flex-grow z-10 font-medium" style="color:#8A93A8;">Dapatkan penanganan
+            <h3 class="text-lg sm:text-xl font-bold mb-3 z-10 tracking-wide font-serif text-[#F5F5F5]">Konsultasi Psikolog</h3>
+            <p class="text-sm leading-relaxed mb-7 flex-grow z-10 font-medium text-[#8A93A8]">Dapatkan penanganan
               yang tepat dari psikolog profesional untuk masalah Anda.</p>
 
-            <a href="./konsultasi.html"
-              class="inline-flex items-center text-[15px] font-semibold opacity-70 group-hover:opacity-100 group-hover:translate-x-1.5 transition-all duration-300 z-10"
-              style="color:#F5F5F5;">
+            <span
+              class="inline-flex items-center text-[15px] font-semibold opacity-70 group-hover:opacity-100 group-hover:translate-x-1.5 transition-all duration-300 z-10 text-[#F5F5F5]">
               Mulai Konsultasi
-              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                class="w-[18px] h-[18px] ml-2 transition-transform duration-300 group-hover:translate-x-1">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-              </svg>
-            </a>
-          </div>
+              <i class="ph ph-arrow-right ml-2 text-[18px] transition-transform duration-300 group-hover:translate-x-1"></i>
+            </span>
+          </a>
 
           <!-- Card 3 -->
-          <div
-            class="group relative backdrop-blur-md rounded-2xl p-6 sm:p-7 transition-all duration-500 hover:-translate-y-3 hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)] hover:border-[#818cf8] overflow-hidden flex flex-col z-10"
-            style="background:rgba(26,33,56,0.6); border:1px solid rgba(255,255,255,0.12);">
+          <a href="/konsultasi.html#chat-ai-view"
+            class="group relative backdrop-blur-md rounded-2xl p-6 sm:p-7 transition-all duration-500 hover:-translate-y-3 hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)] hover:border-[#818cf8] overflow-hidden flex flex-col z-10 cursor-pointer bg-[#151B2E] border border-white/10 block"
+            data-aos="fade-up" data-aos-delay="300">
             <div
               class="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-[-1]">
             </div>
 
-
             <div
-              class="w-[60px] h-[60px] rounded-[18px] flex items-center justify-center mb-7 text-white transition-all duration-500 group-hover:scale-110 group-hover:rotate-12 group-hover:rounded-[22px] z-10"
+              class="w-[60px] h-[60px] rounded-[18px] flex items-center justify-center mb-7 text-white transition-all duration-500 group-hover:scale-110 group-hover:-rotate-12 group-hover:rounded-[22px] z-10"
               style="background: linear-gradient(135deg, #6366f1, #818cf8); box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);">
               <i class="ph ph-chat-circle-dots text-[28px]"></i>
             </div>
 
-            <h3 class="text-lg sm:text-xl font-bold mb-3 z-10 tracking-wide"
-              style="font-family:'Playfair Display',serif; color:#F5F5F5;">Konsultasi AI</h3>
-            <p class="text-sm leading-relaxed mb-7 flex-grow z-10 font-medium" style="color:#8A93A8;">Bercerita dan
+            <h3 class="text-lg sm:text-xl font-bold mb-3 z-10 tracking-wide font-serif text-[#F5F5F5]">Konsultasi AI</h3>
+            <p class="text-sm leading-relaxed mb-7 flex-grow z-10 font-medium text-[#8A93A8]">Bercerita dan
               dapatkan saran dukungan kapan saja dengan asisten AI cerdas.</p>
 
-            <a href="#"
-              class="inline-flex items-center text-[15px] font-semibold opacity-70 group-hover:opacity-100 group-hover:translate-x-1.5 transition-all duration-300 z-10"
-              style="color:#F5F5F5;">
+            <span
+              class="inline-flex items-center text-[15px] font-semibold opacity-70 group-hover:opacity-100 group-hover:translate-x-1.5 transition-all duration-300 z-10 text-[#F5F5F5]">
               Mulai Chat
-              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                class="w-[18px] h-[18px] ml-2 transition-transform duration-300 group-hover:translate-x-1">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-              </svg>
-            </a>
-          </div>
+              <i class="ph ph-arrow-right ml-2 text-[18px] transition-transform duration-300 group-hover:translate-x-1"></i>
+            </span>
+          </a>
 
           <!-- Card 4 -->
-          <div
-            class="group relative backdrop-blur-md rounded-2xl p-6 sm:p-7 transition-all duration-500 hover:-translate-y-3 hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)] hover:border-[#14b8a6] overflow-hidden flex flex-col z-10"
-            style="background:rgba(26,33,56,0.6); border:1px solid rgba(255,255,255,0.12);">
+          <a href="/relaksasi.html"
+            class="group relative backdrop-blur-md rounded-2xl p-6 sm:p-7 transition-all duration-500 hover:-translate-y-3 hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)] hover:border-[#14b8a6] overflow-hidden flex flex-col z-10 cursor-pointer bg-[#151B2E] border border-white/10 block"
+            data-aos="fade-up" data-aos-delay="400">
             <div
               class="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-[-1]">
             </div>
-
 
             <div
               class="w-[60px] h-[60px] rounded-[18px] flex items-center justify-center mb-7 text-white transition-all duration-500 group-hover:scale-110 group-hover:rotate-12 group-hover:rounded-[22px] z-10"
@@ -257,236 +236,197 @@
               <i class="ph ph-leaf text-[28px]"></i>
             </div>
 
-            <h3 class="text-lg sm:text-xl font-bold mb-3 z-10 tracking-wide"
-              style="font-family:'Playfair Display',serif; color:#F5F5F5;">Relaksasi</h3>
-            <p class="text-sm leading-relaxed mb-7 flex-grow z-10 font-medium" style="color:#8A93A8;">Nikmati berbagai
+            <h3 class="text-lg sm:text-xl font-bold mb-3 z-10 tracking-wide font-serif text-[#F5F5F5]">Relaksasi</h3>
+            <p class="text-sm leading-relaxed mb-7 flex-grow z-10 font-medium text-[#8A93A8]">Nikmati berbagai
               panduan relaksasi untuk menenangkan pikiran Anda.</p>
 
-            <a href="./relaksasi.html"
-              class="inline-flex items-center text-[15px] font-semibold opacity-70 group-hover:opacity-100 group-hover:translate-x-1.5 transition-all duration-300 z-10"
-              style="color:#F5F5F5;">
+            <span
+              class="inline-flex items-center text-[15px] font-semibold opacity-70 group-hover:opacity-100 group-hover:translate-x-1.5 transition-all duration-300 z-10 text-[#F5F5F5]">
               Mulai Relaksasi
-              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                class="w-[18px] h-[18px] ml-2 transition-transform duration-300 group-hover:translate-x-1">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-              </svg>
-            </a>
-          </div>
+              <i class="ph ph-arrow-right ml-2 text-[18px] transition-transform duration-300 group-hover:translate-x-1"></i>
+            </span>
+          </a>
         </div>
-      </div>
+      </section>
 
       <!-- MENGAPA MEMILIH KAMI -->
-      <div class="mb-14 sm:mb-16">
-        <div class="text-center mb-8 sm:mb-10">
-          <span class="text-[11px] sm:text-xs font-semibold tracking-widest uppercase mb-2 inline-block"
-            style="color:#2DD4A8;">Keunggulan Kami</span>
-          <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4" style="font-family:'Playfair Display',serif; color:#F5F5F5;">
-            Mengapa Memilih <span class="relative inline-block z-10">Kami?
+      <section class="mb-14 sm:mb-16" aria-labelledby="keunggulan-heading">
+        <div class="text-center mb-8 sm:mb-10" data-aos="fade-up">
+          <span class="text-[11px] sm:text-xs font-semibold tracking-widest uppercase mb-2 inline-block text-[#2DD4A8]">Keunggulan Kami</span>
+          <h2 id="keunggulan-heading" class="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4 font-serif text-[#F5F5F5]">
+            Mengapa Memilih Kami?
           </h2>
-          <p class="text-sm md:text-base max-w-2xl mx-auto leading-relaxed" style="color:#8A93A8;">
+          <p class="text-sm md:text-base max-w-2xl mx-auto leading-relaxed text-[#8A93A8]">
             Kami menghadirkan ruang aman untuk kesehatan mentalmu, mudah diakses, modern, dan berpusat pada ketenangan.
           </p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[minmax(280px,auto)]">
           <!-- Item 1: Wide Half (2 kolom) -->
-          <div
-            class="group relative backdrop-blur-md rounded-[40px] p-8 md:p-10 transition-all duration-700 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)] hover:border-[#2DD4A8] overflow-hidden flex flex-col md:col-span-2"
-            style="background:rgba(26,33,56,0.6); border:1px solid rgba(255,255,255,0.12);">
+          <article
+            class="group relative backdrop-blur-md rounded-[40px] p-8 md:p-10 transition-all duration-700 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)] hover:border-[#2DD4A8] overflow-hidden flex flex-col md:col-span-2 bg-[#151B2E] border border-white/10"
+            data-aos="fade-up" data-aos-delay="100">
             <!-- Orb 1 -->
             <div
-              class="absolute w-[150px] h-[150px] rounded-full blur-[50px] opacity-20 group-hover:opacity-40 group-hover:scale-125 transition-all duration-700 z-0 -top-5 -right-5"
-              style="background-color:#2DD4A8;"></div>
+              class="absolute w-[150px] h-[150px] rounded-full blur-[50px] opacity-20 group-hover:opacity-40 group-hover:scale-125 transition-all duration-700 z-0 -top-5 -right-5 bg-[#2DD4A8]"></div>
 
             <div class="relative z-10 flex flex-col h-full">
               <div
-                class="w-16 h-16 rounded-full flex items-center justify-center mb-6 shadow-lg transition-transform duration-500 group-hover:scale-110 group-hover:-translate-y-1"
-                style="background:rgba(255,255,255,0.05); color:#2DD4A8; border:1px solid rgba(255,255,255,0.1);">
-                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-7 h-7">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 008 4.07M3 15.364c.64-1.319 1-2.8 1-4.364 0-1.457.39-2.823 1.07-4" />
-                </svg>
+                class="w-16 h-16 rounded-full flex items-center justify-center mb-6 shadow-lg transition-transform duration-500 group-hover:scale-110 group-hover:-translate-y-1 bg-white/[0.05] text-[#2DD4A8] border border-white/10">
+                <i class="ph ph-fingerprint text-[28px]"></i>
               </div>
-              <h3 class="text-xl sm:text-2xl font-bold mb-3 tracking-wide"
-                style="font-family:'Playfair Display',serif; color:#F5F5F5;">Ruang Aman & Rahasia</h3>
-              <p class="text-[15px] leading-relaxed flex-grow font-normal" style="color:#8A93A8;">Setiap cerita yang kamu
+              <h3 class="text-xl sm:text-2xl font-bold mb-3 tracking-wide font-serif text-[#F5F5F5]">Ruang Aman & Rahasia</h3>
+              <p class="text-[15px] leading-relaxed flex-grow font-normal text-[#8A93A8]">Setiap cerita yang kamu
                 bagikan dilindungi dengan enkripsi tingkat tinggi. Kami menjaga privasimu sepenuh hati, agar kamu bisa
                 bercerita tanpa rasa khawatir sedikit pun.</p>
             </div>
-          </div>
+          </article>
 
           <!-- Item 2: Medium (1 kolom) -->
-          <div
-            class="group relative backdrop-blur-md rounded-[40px] p-8 md:p-10 transition-all duration-700 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)] hover:border-[#38bdf8] overflow-hidden flex flex-col md:col-span-1"
-            style="background:rgba(26,33,56,0.6); border:1px solid rgba(255,255,255,0.12);">
+          <article
+            class="group relative backdrop-blur-md rounded-[40px] p-8 md:p-10 transition-all duration-700 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)] hover:border-[#38bdf8] overflow-hidden flex flex-col md:col-span-1 bg-[#151B2E] border border-white/10"
+            data-aos="fade-up" data-aos-delay="200">
             <!-- Orb 2 -->
             <div
-              class="absolute w-[150px] h-[150px] rounded-full blur-[50px] opacity-20 group-hover:opacity-40 group-hover:scale-125 transition-all duration-700 z-0 -bottom-8 -left-8"
-              style="background-color:#38bdf8;"></div>
+              class="absolute w-[150px] h-[150px] rounded-full blur-[50px] opacity-20 group-hover:opacity-40 group-hover:scale-125 transition-all duration-700 z-0 -bottom-8 -left-8 bg-[#38bdf8]"></div>
 
             <div class="relative z-10 flex flex-col h-full">
               <div
-                class="w-16 h-16 rounded-full flex items-center justify-center mb-6 shadow-lg transition-transform duration-500 group-hover:scale-110 group-hover:-translate-y-1"
-                style="background:rgba(255,255,255,0.05); color:#38bdf8; border:1px solid rgba(255,255,255,0.1);">
-                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-7 h-7">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
+                class="w-16 h-16 rounded-full flex items-center justify-center mb-6 shadow-lg transition-transform duration-500 group-hover:scale-110 group-hover:-translate-y-1 bg-white/[0.05] text-[#38bdf8] border border-white/10">
+                <i class="ph ph-clock text-[28px]"></i>
               </div>
-              <h3 class="text-xl sm:text-2xl font-bold mb-3 tracking-wide"
-                style="font-family:'Playfair Display',serif; color:#F5F5F5;">Hadir Kapan Saja</h3>
-              <p class="text-[15px] leading-relaxed flex-grow font-normal" style="color:#8A93A8;">Dukungan emosional yang
+              <h3 class="text-xl sm:text-2xl font-bold mb-3 tracking-wide font-serif text-[#F5F5F5]">Hadir Kapan Saja</h3>
+              <p class="text-[15px] leading-relaxed flex-grow font-normal text-[#8A93A8]">Dukungan emosional yang
                 selalu ada untukmu. Asisten AI kami siap mendengarkan 24/7, kapan pun kamu butuh teman bicara.</p>
             </div>
-          </div>
+          </article>
 
           <!-- Item 3: Medium (1 kolom) -->
-          <div
-            class="group relative backdrop-blur-md rounded-[40px] p-8 md:p-10 transition-all duration-700 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)] hover:border-[#c084fc] overflow-hidden flex flex-col md:col-span-1"
-            style="background:rgba(26,33,56,0.6); border:1px solid rgba(255,255,255,0.12);">
+          <article
+            class="group relative backdrop-blur-md rounded-[40px] p-8 md:p-10 transition-all duration-700 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)] hover:border-[#c084fc] overflow-hidden flex flex-col md:col-span-1 bg-[#151B2E] border border-white/10"
+            data-aos="fade-up" data-aos-delay="100">
             <!-- Orb 3 -->
             <div
-              class="absolute w-[150px] h-[150px] rounded-full blur-[50px] opacity-20 group-hover:opacity-40 group-hover:scale-125 transition-all duration-700 z-0 -top-8 -left-8"
-              style="background-color:#c084fc;"></div>
+              class="absolute w-[150px] h-[150px] rounded-full blur-[50px] opacity-20 group-hover:opacity-40 group-hover:scale-125 transition-all duration-700 z-0 -top-8 -left-8 bg-[#c084fc]"></div>
 
             <div class="relative z-10 flex flex-col h-full">
               <div
-                class="w-16 h-16 rounded-full flex items-center justify-center mb-6 shadow-lg transition-transform duration-500 group-hover:scale-110 group-hover:-translate-y-1"
-                style="background:rgba(255,255,255,0.05); color:#c084fc; border:1px solid rgba(255,255,255,0.1);">
-                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-7 h-7">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
-                </svg>
+                class="w-16 h-16 rounded-full flex items-center justify-center mb-6 shadow-lg transition-transform duration-500 group-hover:scale-110 group-hover:-translate-y-1 bg-white/[0.05] text-[#c084fc] border border-white/10">
+                <i class="ph ph-seal-check text-[28px]"></i>
               </div>
-              <h3 class="text-xl sm:text-2xl font-bold mb-3 tracking-wide"
-                style="font-family:'Playfair Display',serif; color:#F5F5F5;">Psikolog Ahli</h3>
-              <p class="text-[15px] leading-relaxed flex-grow font-normal" style="color:#8A93A8;">Tim profesional kami
+              <h3 class="text-xl sm:text-2xl font-bold mb-3 tracking-wide font-serif text-[#F5F5F5]">Psikolog Ahli</h3>
+              <p class="text-[15px] leading-relaxed flex-grow font-normal text-[#8A93A8]">Tim profesional kami
                 penuh empati, dan berpengalaman siap untuk membantumu menemukan kembali ketenangan
                 batin.</p>
             </div>
-          </div>
+          </article>
 
           <!-- Item 4: Wide Half (2 kolom) -->
-          <div
-            class="group relative backdrop-blur-md rounded-[40px] p-8 md:p-10 transition-all duration-700 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)] hover:border-[#fb923c] overflow-hidden flex flex-col md:col-span-2"
-            style="background:rgba(26,33,56,0.6); border:1px solid rgba(255,255,255,0.12);">
+          <article
+            class="group relative backdrop-blur-md rounded-[40px] p-8 md:p-10 transition-all duration-700 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)] hover:border-[#fb923c] overflow-hidden flex flex-col md:col-span-2 bg-[#151B2E] border border-white/10"
+            data-aos="fade-up" data-aos-delay="200">
             <!-- Orb 4 -->
             <div
-              class="absolute w-[200px] h-[200px] rounded-full blur-[90px] opacity-20 group-hover:opacity-40 group-hover:scale-125 transition-all duration-700 z-0 -bottom-12 -right-8"
-              style="background-color:#fb923c;"></div>
+              class="absolute w-[200px] h-[200px] rounded-full blur-[90px] opacity-20 group-hover:opacity-40 group-hover:scale-125 transition-all duration-700 z-0 -bottom-12 -right-8 bg-[#fb923c]"></div>
 
             <div class="relative z-10 flex flex-col h-full">
               <div
-                class="w-16 h-16 rounded-full flex items-center justify-center mb-6 shadow-lg transition-transform duration-500 group-hover:scale-110 group-hover:-translate-y-1"
-                style="background:rgba(255,255,255,0.05); color:#fb923c; border:1px solid rgba(255,255,255,0.1);">
-                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-7 h-7">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />
-                </svg>
+                class="w-16 h-16 rounded-full flex items-center justify-center mb-6 shadow-lg transition-transform duration-500 group-hover:scale-110 group-hover:-translate-y-1 bg-white/[0.05] text-[#fb923c] border border-white/10">
+                <i class="ph ph-thumbs-up text-[28px]"></i>
               </div>
-              <h3 class="text-xl sm:text-2xl font-bold mb-3 tracking-wide"
-                style="font-family:'Playfair Display',serif; color:#F5F5F5;">Pendekatan Personal</h3>
-              <p class="text-[15px] leading-relaxed flex-grow font-normal" style="color:#8A93A8;">Perjalanan mental
+              <h3 class="text-xl sm:text-2xl font-bold mb-3 tracking-wide font-serif text-[#F5F5F5]">Pendekatan Personal</h3>
+              <p class="text-[15px] leading-relaxed flex-grow font-normal text-[#8A93A8]">Perjalanan mental
                 setiap orang unik. Kami memberikan rekomendasi aktivitas dan jenis terapi yang disesuaikan secara khusus
                 dengan kondisimu saat ini, memandumu langkah demi langkah.</p>
             </div>
-          </div>
+          </article>
         </div>
-      </div>
+      </section>
 
       <!-- KENAPA HARUS BERTEDUH -->
-      <div class="mb-14 sm:mb-16">
-        <div class="text-center mb-8 sm:mb-10">
-          <span class="text-[11px] sm:text-xs font-semibold tracking-widest uppercase mb-2 inline-block"
-            style="color:#2DD4A8;">Kenapa BerTeduh</span>
-          <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4" style="font-family:'Playfair Display',serif; color:#F5F5F5;">
+      <section class="mb-14 sm:mb-16" aria-labelledby="kenapa-heading">
+        <div class="text-center mb-8 sm:mb-10" data-aos="fade-up">
+          <span class="text-[11px] sm:text-xs font-semibold tracking-widest uppercase mb-2 inline-block text-[#2DD4A8]">Kenapa BerTeduh</span>
+          <h2 id="kenapa-heading" class="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4 font-serif text-[#F5F5F5]">
             Kenapa Harus BerTeduh?
           </h2>
-          <p class="text-sm md:text-base max-w-2xl mx-auto leading-relaxed" style="color:#8A93A8;">
+          <p class="text-sm md:text-base max-w-2xl mx-auto leading-relaxed text-[#8A93A8]">
             Ruang yang dibangun untuk membantumu merasa lebih baik, dengan caramu sendiri.
           </p>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           <!-- Card 1: Privasi Terjaga -->
-          <div
-            class="group slide-top relative rounded-2xl p-5 sm:p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)] hover:border-[#2DD4A8] overflow-hidden flex flex-col"
-            style="background:#1A2138; border:1px solid rgba(255,255,255,0.08);">
+          <article
+            class="group slide-top relative rounded-2xl p-5 sm:p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)] hover:border-[#2DD4A8] overflow-hidden flex flex-col bg-[#1A2138] border border-white/10"
+            data-aos="fade-up" data-aos-delay="100">
             <div
-              class="w-[60px] h-[60px] rounded-[18px] flex items-center justify-center mb-6 transition-all duration-500 group-hover:scale-110 group-hover:rotate-6"
-              style="background:rgba(45,212,168,0.1);">
-              <i class="ph ph-shield-check text-[28px]" style="color:#2DD4A8;"></i>
+              class="w-[60px] h-[60px] rounded-[18px] flex items-center justify-center mb-6 transition-all duration-500 group-hover:scale-110 group-hover:-rotate-6 bg-[#2DD4A8]/10">
+              <i class="ph ph-shield-check text-[28px] text-[#2DD4A8]"></i>
             </div>
-            <h3 class="text-lg font-bold mb-2 tracking-wide"
-              style="font-family:'Playfair Display',serif; color:#F5F5F5;">Privasi Terjaga</h3>
-            <p class="text-sm leading-relaxed font-normal flex-grow" style="color:#8A93A8;">Semua hasil quiz dan
+            <h3 class="text-lg font-bold mb-2 tracking-wide font-serif text-[#F5F5F5]">Privasi Terjaga</h3>
+            <p class="text-sm leading-relaxed font-normal flex-grow text-[#8A93A8]">Semua hasil quiz dan
               preferensimu tersimpan aman di perangkatmu sendiri.</p>
-          </div>
+          </article>
 
           <!-- Card 2: Sesuai Kondisimu -->
-          <div
-            class="group relative rounded-2xl p-5 sm:p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)] hover:border-[#2DD4A8] overflow-hidden flex flex-col"
-            style="background:#1A2138; border:1px solid rgba(255,255,255,0.08);">
+          <article
+            class="group relative rounded-2xl p-5 sm:p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)] hover:border-[#2DD4A8] overflow-hidden flex flex-col bg-[#1A2138] border border-white/10"
+            data-aos="fade-up" data-aos-delay="200">
             <div
-              class="w-[60px] h-[60px] rounded-[18px] flex items-center justify-center mb-6 transition-all duration-500 group-hover:scale-110 group-hover:rotate-6"
-              style="background:rgba(45,212,168,0.1);">
-              <i class="ph ph-compass text-[28px]" style="color:#2DD4A8;"></i>
+              class="w-[60px] h-[60px] rounded-[18px] flex items-center justify-center mb-6 transition-all duration-500 group-hover:scale-110 group-hover:rotate-6 bg-[#2DD4A8]/10">
+              <i class="ph ph-sliders-horizontal text-[28px] text-[#2DD4A8]"></i>
             </div>
-            <h3 class="text-lg font-bold mb-2 tracking-wide"
-              style="font-family:'Playfair Display',serif; color:#F5F5F5;">Sesuai Kondisimu</h3>
-            <p class="text-sm leading-relaxed font-normal flex-grow" style="color:#8A93A8;">Rekomendasi menyesuaikan
+            <h3 class="text-lg font-bold mb-2 tracking-wide font-serif text-[#F5F5F5]">Sesuai Kondisimu</h3>
+            <p class="text-sm leading-relaxed font-normal flex-grow text-[#8A93A8]">Rekomendasi menyesuaikan
               hasil Cek-Emosi, bukan konten generik untuk semua orang.</p>
-          </div>
+          </article>
 
           <!-- Card 3: Tanpa Menghakimi -->
-          <div
-            class="group relative rounded-2xl p-5 sm:p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)] hover:border-[#2DD4A8] overflow-hidden flex flex-col"
-            style="background:#1A2138; border:1px solid rgba(255,255,255,0.08);">
+          <article
+            class="group relative rounded-2xl p-5 sm:p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)] hover:border-[#2DD4A8] overflow-hidden flex flex-col bg-[#1A2138] border border-white/10"
+            data-aos="fade-up" data-aos-delay="300">
             <div
-              class="w-[60px] h-[60px] rounded-[18px] flex items-center justify-center mb-6 transition-all duration-500 group-hover:scale-110 group-hover:rotate-6"
-              style="background:rgba(45,212,168,0.1);">
-              <i class="ph ph-hand-heart text-[28px]" style="color:#2DD4A8;"></i>
+              class="w-[60px] h-[60px] rounded-[18px] flex items-center justify-center mb-6 transition-all duration-500 group-hover:scale-110 group-hover:-rotate-6 bg-[#2DD4A8]/10">
+              <i class="ph ph-hand-heart text-[28px] text-[#2DD4A8]"></i>
             </div>
-            <h3 class="text-lg font-bold mb-2 tracking-wide"
-              style="font-family:'Playfair Display',serif; color:#F5F5F5;">Tanpa Menghakimi</h3>
-            <p class="text-sm leading-relaxed font-normal flex-grow" style="color:#8A93A8;">Ruang buat cerita atau
+            <h3 class="text-lg font-bold mb-2 tracking-wide font-serif text-[#F5F5F5]">Tanpa Menghakimi</h3>
+            <p class="text-sm leading-relaxed font-normal flex-grow text-[#8A93A8]">Ruang buat cerita atau
               sekadar membaca, tanpa perlu takut dinilai.</p>
-          </div>
+          </article>
 
           <!-- Card 4: Mulai Kapan Saja -->
-          <div
-            class="group relative rounded-2xl p-5 sm:p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)] hover:border-[#2DD4A8] overflow-hidden flex flex-col"
-            style="background:#1A2138; border:1px solid rgba(255,255,255,0.08);">
+          <article
+            class="group relative rounded-2xl p-5 sm:p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)] hover:border-[#2DD4A8] overflow-hidden flex flex-col bg-[#1A2138] border border-white/10"
+            data-aos="fade-up" data-aos-delay="400">
             <div
-              class="w-[60px] h-[60px] rounded-[18px] flex items-center justify-center mb-6 transition-all duration-500 group-hover:scale-110 group-hover:rotate-6"
-              style="background:rgba(45,212,168,0.1);">
-              <i class="ph ph-clock-countdown text-[28px]" style="color:#2DD4A8;"></i>
+              class="w-[60px] h-[60px] rounded-[18px] flex items-center justify-center mb-6 transition-all duration-500 group-hover:scale-110 group-hover:rotate-6 bg-[#2DD4A8]/10">
+              <i class="ph ph-clock-countdown text-[28px] text-[#2DD4A8]"></i>
             </div>
-            <h3 class="text-lg font-bold mb-2 tracking-wide"
-              style="font-family:'Playfair Display',serif; color:#F5F5F5;">Mulai Kapan Saja</h3>
-            <p class="text-sm leading-relaxed font-normal flex-grow" style="color:#8A93A8;">Nggak perlu janji temu, mulai
+            <h3 class="text-lg font-bold mb-2 tracking-wide font-serif text-[#F5F5F5]">Mulai Kapan Saja</h3>
+            <p class="text-sm leading-relaxed font-normal flex-grow text-[#8A93A8]">Nggak perlu janji temu, mulai
               dari langkah kecil kapan pun kamu siap.</p>
-          </div>
+          </article>
         </div>
-      </div>
+      </section>
 
       <!-- Bagian Rekomendasi artikel -->
-      <div class="flex items-center justify-between mb-6">
-        <div>
-          <p id="rekomendasi-label" class="text-[11px] sm:text-xs font-semibold uppercase tracking-widest mb-2"
-            style="color:#2DD4A8;"></p>
-          <h2 id="rekomendasi-title" class="text-2xl sm:text-3xl font-bold"
-            style="color:#F5F5F5; font-family:'Playfair Display',serif;"></h2>
+      <section class="mb-6" aria-labelledby="rekomendasi-title" data-aos="fade-up">
+        <div class="flex items-center justify-between mb-6">
+          <div>
+            <p id="rekomendasi-label" class="text-[11px] sm:text-xs font-semibold uppercase tracking-widest mb-2 text-[#2DD4A8]"></p>
+            <h2 id="rekomendasi-title" class="text-2xl sm:text-3xl font-bold font-serif text-[#F5F5F5]"></h2>
+          </div>
+          <a href="./blog.html" class="text-xs sm:text-sm font-semibold text-[#2DD4A8] hover:text-[#25b892] transition-colors">Lihat semua &rarr;</a>
         </div>
-        <a href="./blog.html" class="text-xs sm:text-sm font-semibold" style="color:#2DD4A8;">Lihat semua &rarr;</a>
-      </div>
 
-      <!-- Grid Artikel -->
-      <div id="artikel-grid" class="flex flex-col gap-4">
-        <div class="tile rounded-2xl h-72 animate-pulse" style="background:#151B2E;"></div>
-        <div class="tile rounded-2xl h-72 animate-pulse" style="background:#151B2E;"></div>
-        <div class="tile rounded-2xl h-72 animate-pulse" style="background:#151B2E;"></div>
-      </div>
+        <!-- Grid Artikel -->
+        <div id="artikel-grid" class="flex flex-col gap-6" data-aos="fade-up" data-aos-delay="150">
+          <div class="tile rounded-2xl h-72 animate-pulse bg-[#151B2E]"></div>
+          <div class="tile rounded-2xl h-72 animate-pulse bg-[#151B2E]"></div>
+          <div class="tile rounded-2xl h-72 animate-pulse bg-[#151B2E]"></div>
+        </div>
+      </section>
     </section>
 
     <script src="/js/ArtikelCard.js"></script>
@@ -494,158 +434,163 @@
     <script src="/js/beranda/Beranda.js"></script>
 
     <!-- Header FAQs -->
-    <section class="w-full relative pt-12 sm:pt-16 pb-6 text-center">
+    <section class="w-full relative pt-12 sm:pt-16 pb-6 text-center" data-aos="fade-up">
       <div class="max-w-2xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
-        <h1 class="text-2xl sm:text-3xl md:text-4xl font-medium mb-3"
-          style="font-family:'Playfair Display',serif; color:#F5F5F5;">Frequently Asked Questions</h1>
-        <p class="text-xs sm:text-sm" style="color:#8A93A8;">
+        <span class="text-[11px] sm:text-xs font-semibold tracking-widest uppercase mb-2 inline-block text-[#2DD4A8]">Pusat Bantuan</span>
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-medium mb-3 font-serif text-[#F5F5F5]">Frequently Asked Questions</h2>
+        <p class="text-xs sm:text-sm text-[#8A93A8]">
           Apa yang perlu kamu ketahui dari BerTeduh.
-          <a href="/konsultasi.html" class="underline underline-offset-2 transition" style="color:#2DD4A8;"
-            onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Konsultasi</a> pada kami.
+          <a href="/konsultasi.html" class="underline underline-offset-2 transition text-[#2DD4A8] hover:opacity-80">Konsultasi</a> pada kami.
         </p>
       </div>
     </section>
 
     <!-- FAQs Accordion Content -->
-    <section class="max-w-2xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 pb-20 sm:pb-24">
-      <div class="space-y-3">
+    <section class="max-w-2xl md:max-w-4xl lg:max-w-5xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 pb-20 sm:pb-24">
+      <div class="space-y-3.5">
 
-        <details class="faq-item rounded-xl p-5 group [&_summary::-webkit-details-marker]:hidden" open>
-          <summary class="flex items-center justify-between cursor-pointer list-none">
-            <div class="flex items-center gap-4">
-              <div class="w-10 h-10 flex items-center justify-center rounded-lg shrink-0"
+        <!-- FAQ Item 1 -->
+        <div class="faq-row" data-faq-item data-aos="fade-up" data-aos-delay="50">
+          <button type="button" class="faq-card" id="faq-btn-1" aria-expanded="false" aria-controls="faq-drawer-1">
+            <div class="faq-card-left">
+              <div class="faq-card-icon"
                 style="background:rgba(45,212,168,0.1); border:1px solid rgba(45,212,168,0.2);">
                 <span class="text-xl">&#x1F60A;</span>
               </div>
-              <h3 class="text-base font-medium" style="color:#F5F5F5;">Cara konsultasi?</h3>
+              <h3 class="faq-card-title">Cara konsultasi?</h3>
             </div>
-            <svg aria-hidden="true" class="w-5 h-5 shrink-0 transition-transform duration-300 group-open:-rotate-180"
-              style="color:#8A93A8;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-              stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-            </svg>
-          </summary>
-          <div class="faq-answer">
-            <p class="pt-4 ps-14 text-sm leading-relaxed" style="color:#8A93A8;">
-              Kamu bisa langsung mengunjungi halaman <a href="/konsultasi.html" class="underline"
-                style="color:#2DD4A8;">Konsultasi</a> dan memilih jadwal yang tersedia.
-            </p>
+            <div class="faq-card-arrow">
+              <i aria-hidden="true" class="ph ph-caret-down text-xl shrink-0 faq-arrow"></i>
+            </div>
+          </button>
+          <div class="faq-drawer" id="faq-drawer-1" role="region" aria-labelledby="faq-btn-1">
+            <div class="faq-drawer-inner">
+              <p class="faq-drawer-text">
+                Kamu bisa langsung mengunjungi halaman <a href="/konsultasi.html" class="underline"
+                  style="color:#2DD4A8;">Konsultasi</a> dan memilih jadwal yang tersedia.
+              </p>
+            </div>
           </div>
-        </details>
+        </div>
 
-        <details class="faq-item rounded-xl p-5 group [&_summary::-webkit-details-marker]:hidden">
-          <summary class="flex items-center justify-between cursor-pointer list-none">
-            <div class="flex items-center gap-4">
-              <div class="w-10 h-10 flex items-center justify-center rounded-lg shrink-0"
+        <!-- FAQ Item 2 -->
+        <div class="faq-row" data-faq-item data-aos="fade-up" data-aos-delay="100">
+          <button type="button" class="faq-card" id="faq-btn-2" aria-expanded="false" aria-controls="faq-drawer-2">
+            <div class="faq-card-left">
+              <div class="faq-card-icon"
                 style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.08);">
                 <span class="text-xl">&#x1F4CB;</span>
               </div>
-              <h3 class="text-base font-medium" style="color:#F5F5F5;">Apakah layanan ini gratis?</h3>
+              <h3 class="faq-card-title">Apakah layanan ini gratis?</h3>
             </div>
-            <svg aria-hidden="true" class="w-5 h-5 shrink-0 transition-transform duration-300 group-open:-rotate-180"
-              style="color:#8A93A8;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-              stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-            </svg>
-          </summary>
-          <div class="faq-answer">
-            <p class="pt-4 ps-14 text-sm leading-relaxed" style="color:#8A93A8;">
-              Sebagian besar konten di BerTeduh dapat diakses secara gratis. Beberapa fitur konsultasi lanjutan mungkin
-              memerlukan pendaftaran.
-            </p>
+            <div class="faq-card-arrow">
+              <i aria-hidden="true" class="ph ph-caret-down text-xl shrink-0 faq-arrow"></i>
+            </div>
+          </button>
+          <div class="faq-drawer" id="faq-drawer-2" role="region" aria-labelledby="faq-btn-2">
+            <div class="faq-drawer-inner">
+              <p class="faq-drawer-text">
+                Sebagian besar konten di BerTeduh dapat diakses secara gratis. Beberapa fitur konsultasi lanjutan mungkin
+                memerlukan pendaftaran.
+              </p>
+            </div>
           </div>
-        </details>
+        </div>
 
-        <details class="faq-item rounded-xl p-5 group [&_summary::-webkit-details-marker]:hidden">
-          <summary class="flex items-center justify-between cursor-pointer list-none">
-            <div class="flex items-center gap-4">
-              <div class="w-10 h-10 flex items-center justify-center rounded-lg shrink-0"
+        <!-- FAQ Item 3 -->
+        <div class="faq-row" data-faq-item data-aos="fade-up" data-aos-delay="150">
+          <button type="button" class="faq-card" id="faq-btn-3" aria-expanded="false" aria-controls="faq-drawer-3">
+            <div class="faq-card-left">
+              <div class="faq-card-icon"
                 style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.08);">
                 <span class="text-xl">&#x1F512;</span>
               </div>
-              <h3 class="text-base font-medium" style="color:#F5F5F5;">Apakah data saya aman dan privat?</h3>
+              <h3 class="faq-card-title">Apakah data saya aman dan privat?</h3>
             </div>
-            <svg aria-hidden="true" class="w-5 h-5 shrink-0 transition-transform duration-300 group-open:-rotate-180"
-              style="color:#8A93A8;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-              stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-            </svg>
-          </summary>
-          <div class="faq-answer">
-            <p class="pt-4 ps-14 text-sm leading-relaxed" style="color:#8A93A8;">
-              Ya. Semua jawaban kuesioner disimpan secara lokal di browser kamu dan tidak dikirim ke server mana pun.
-              Privasi kamu adalah prioritas kami.
-            </p>
+            <div class="faq-card-arrow">
+              <i aria-hidden="true" class="ph ph-caret-down text-xl shrink-0 faq-arrow"></i>
+            </div>
+          </button>
+          <div class="faq-drawer" id="faq-drawer-3" role="region" aria-labelledby="faq-btn-3">
+            <div class="faq-drawer-inner">
+              <p class="faq-drawer-text">
+                Ya. Semua jawaban kuesioner disimpan secara lokal di browser kamu dan tidak dikirim ke server mana pun.
+                Privasi kamu adalah prioritas kami.
+              </p>
+            </div>
           </div>
-        </details>
+        </div>
 
-        <details class="faq-item rounded-xl p-5 group [&_summary::-webkit-details-marker]:hidden">
-          <summary class="flex items-center justify-between cursor-pointer list-none">
-            <div class="flex items-center gap-4">
-              <div class="w-10 h-10 flex items-center justify-center rounded-lg shrink-0"
+        <!-- FAQ Item 4 -->
+        <div class="faq-row" data-faq-item data-aos="fade-up" data-aos-delay="200">
+          <button type="button" class="faq-card" id="faq-btn-4" aria-expanded="false" aria-controls="faq-drawer-4">
+            <div class="faq-card-left">
+              <div class="faq-card-icon"
                 style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.08);">
                 <span class="text-xl">&#x1F9D8;</span>
               </div>
-              <h3 class="text-base font-medium" style="color:#F5F5F5;">Apa itu fitur Relaksasi?</h3>
+              <h3 class="faq-card-title">Apa itu fitur Relaksasi?</h3>
             </div>
-            <svg aria-hidden="true" class="w-5 h-5 shrink-0 transition-transform duration-300 group-open:-rotate-180"
-              style="color:#8A93A8;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-              stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-            </svg>
-          </summary>
-          <div class="faq-answer">
-            <p class="pt-4 ps-14 text-sm leading-relaxed" style="color:#8A93A8;">
-              Fitur Relaksasi menyediakan panduan meditasi, latihan pernapasan, dan teknik grounding untuk membantu kamu
-              menenangkan pikiran kapan saja.
-            </p>
+            <div class="faq-card-arrow">
+              <i aria-hidden="true" class="ph ph-caret-down text-xl shrink-0 faq-arrow"></i>
+            </div>
+          </button>
+          <div class="faq-drawer" id="faq-drawer-4" role="region" aria-labelledby="faq-btn-4">
+            <div class="faq-drawer-inner">
+              <p class="faq-drawer-text">
+                Fitur Relaksasi menyediakan panduan meditasi, latihan pernapasan, dan teknik grounding untuk membantu kamu
+                menenangkan pikiran kapan saja.
+              </p>
+            </div>
           </div>
-        </details>
+        </div>
 
-        <details class="faq-item rounded-xl p-5 group [&_summary::-webkit-details-marker]:hidden">
-          <summary class="flex items-center justify-between cursor-pointer list-none">
-            <div class="flex items-center gap-4">
-              <div class="w-10 h-10 flex items-center justify-center rounded-lg shrink-0"
+        <!-- FAQ Item 5 -->
+        <div class="faq-row" data-faq-item data-aos="fade-up" data-aos-delay="250">
+          <button type="button" class="faq-card" id="faq-btn-5" aria-expanded="false" aria-controls="faq-drawer-5">
+            <div class="faq-card-left">
+              <div class="faq-card-icon"
                 style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.08);">
                 <span class="text-xl">&#x1F4DD;</span>
               </div>
-              <h3 class="text-base font-medium" style="color:#F5F5F5;">Apakah hasil kuesioner saya tersimpan?</h3>
+              <h3 class="faq-card-title">Apakah hasil kuesioner saya tersimpan?</h3>
             </div>
-            <svg aria-hidden="true" class="w-5 h-5 shrink-0 transition-transform duration-300 group-open:-rotate-180"
-              style="color:#8A93A8;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-              stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-            </svg>
-          </summary>
-          <div class="faq-answer">
-            <p class="pt-4 ps-14 text-sm leading-relaxed" style="color:#8A93A8;">
-              Hasil kuesioner disimpan di localStorage browser kamu, sehingga rekomendasi tetap terjaga selama kamu
-              menggunakan perangkat yang sama.
-            </p>
+            <div class="faq-card-arrow">
+              <i aria-hidden="true" class="ph ph-caret-down text-xl shrink-0 faq-arrow"></i>
+            </div>
+          </button>
+          <div class="faq-drawer" id="faq-drawer-5" role="region" aria-labelledby="faq-btn-5">
+            <div class="faq-drawer-inner">
+              <p class="faq-drawer-text">
+                Hasil kuesioner disimpan di localStorage browser kamu, sehingga rekomendasi tetap terjaga selama kamu
+                menggunakan perangkat yang sama.
+              </p>
+            </div>
           </div>
-        </details>
+        </div>
 
-        <details class="faq-item rounded-xl p-5 group [&_summary::-webkit-details-marker]:hidden">
-          <summary class="flex items-center justify-between cursor-pointer list-none">
-            <div class="flex items-center gap-4">
-              <div class="w-10 h-10 flex items-center justify-center rounded-lg shrink-0"
+        <!-- FAQ Item 6 -->
+        <div class="faq-row" data-faq-item data-aos="fade-up" data-aos-delay="300">
+          <button type="button" class="faq-card" id="faq-btn-6" aria-expanded="false" aria-controls="faq-drawer-6">
+            <div class="faq-card-left">
+              <div class="faq-card-icon"
                 style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.08);">
                 <span class="text-xl">&#x1F4AC;</span>
               </div>
-              <h3 class="text-base font-medium" style="color:#F5F5F5;">Bagaimana cara menghubungi tim?</h3>
+              <h3 class="faq-card-title">Bagaimana cara menghubungi tim?</h3>
             </div>
-            <svg aria-hidden="true" class="w-5 h-5 shrink-0 transition-transform duration-300 group-open:-rotate-180"
-              style="color:#8A93A8;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-              stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-            </svg>
-          </summary>
-          <div class="faq-answer">
-            <p class="pt-4 ps-14 text-sm leading-relaxed" style="color:#8A93A8;">
-              Kamu dapat menghubungi kami melalui email atau media sosial yang tersedia di bagian footer halaman ini.
-            </p>
+            <div class="faq-card-arrow">
+              <i aria-hidden="true" class="ph ph-caret-down text-xl shrink-0 faq-arrow"></i>
+            </div>
+          </button>
+          <div class="faq-drawer" id="faq-drawer-6" role="region" aria-labelledby="faq-btn-6">
+            <div class="faq-drawer-inner">
+              <p class="faq-drawer-text">
+                Kamu dapat menghubungi kami melalui email atau media sosial yang tersedia di bagian footer halaman ini.
+              </p>
+            </div>
           </div>
-        </details>
+        </div>
 
       </div>
     </section>

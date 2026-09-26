@@ -38,4 +38,43 @@
 
   // 4. Jalankan fungsi highlight ketika DOM telah selesai dirender (HTML sudah di-load browser)
   document.addEventListener("DOMContentLoaded", highlightActiveNav);
+
+  /**
+   * 5. Pemuat Otomatis Chat Overlay AI (Site-wide)
+   * Menyuntikkan js/chat-service.js dan js/chat-overlay.js di semua halaman secara terpusat.
+   */
+  function ensureChatOverlay() {
+    if (window.__btChatOverlayBootstrapped) return;
+    window.__btChatOverlayBootstrapped = true;
+
+    function loadScript(src) {
+      return new Promise((resolve) => {
+        if (document.querySelector(`script[src="${src}"]`)) {
+          resolve();
+          return;
+        }
+        const s = document.createElement('script');
+        s.src = src;
+        s.async = false;
+        s.onload = resolve;
+        s.onerror = resolve;
+        document.head.appendChild(s);
+      });
+    }
+
+    const isLocal = window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost';
+    const initPromise = isLocal ? loadScript('/env.js') : Promise.resolve();
+
+    initPromise.then(() => {
+      return loadScript('/js/chat-service.js');
+    }).then(() => {
+      loadScript('/js/chat-overlay.js');
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener("DOMContentLoaded", ensureChatOverlay);
+  } else {
+    ensureChatOverlay();
+  }
 })();

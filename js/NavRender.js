@@ -55,5 +55,12 @@ async function loadNavigasi(navPath = "/component/Nav.html", slotId = "navbar-sl
   }
 }
 
-// Di file-file halaman utama (misalnya Beranda.js), 
-// loadNavigasi() dipanggil agar navbar tampil.
+// Fallback otomatis jika script halaman belum/lupa memanggil loadNavigasi
+if (typeof document !== 'undefined') {
+  document.addEventListener("DOMContentLoaded", () => {
+    const slot = document.getElementById("navbar-slot");
+    if (slot && slot.children.length === 0) {
+      loadNavigasi();
+    }
+  });
+}

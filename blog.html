@@ -13,35 +13,37 @@
   <link rel="icon" type="image/png" href="/assets/Images/for-icon.png">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css" />
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css" />
   <link rel="stylesheet" href="/assets/css/main.css" />
 </head>
 <body data-page="blog" style="background:#0D1220; color:#F5F5F5;">
   
   <!-- Fixed Background Image (Like Konsultasi) -->
   <div class="fixed inset-0 w-full h-full pointer-events-none -z-10 overflow-hidden">
-    <img data-session-bg src="/assets/Images/artikel/hutan1.webp" class="w-full h-full object-cover" alt="Background" onerror="this.onerror=null; this.src='/assets/Images/placeholder.svg';">
+    <img data-session-bg src="/assets/Images/artikel/hutan1.webp" class="w-full h-full object-cover object-center" alt="Background" onerror="this.onerror=null; this.src='/assets/Images/placeholder.svg';">
     <div class="absolute inset-0 bg-gradient-to-b from-[#0D1220]/85 via-[#0D1220]/70 to-[#0D1220]"></div>
   </div>
 
-  <div id="navbar-slot" class="relative z-50"></div>
+  <header id="navbar-slot" class="relative z-50"></header>
 
   <main id="app-content" data-page="blog">
     
     <!-- Header Blog -->
-    <section class="w-full relative pt-28 sm:pt-36 pb-10 sm:pb-12 mb-12 sm:mb-16">
+    <section class="w-full relative pt-28 sm:pt-36 pb-10 sm:pb-12 mb-12 sm:mb-16" data-aos="fade-up" aria-labelledby="blog-page-title">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 text-center">
-        <span class="text-[11px] sm:text-xs font-semibold tracking-widest uppercase mb-2 inline-block" style="color:#2DD4A8;">Kumpulan Artikel</span>
-        <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-3 sm:mb-4" style="font-family:'Playfair Display',serif; color:#F5F5F5;">
+        <span class="text-[11px] sm:text-xs font-semibold tracking-widest uppercase mb-3 sm:mb-4 inline-block text-[#2DD4A8]">Kumpulan Artikel</span>
+        <h1 id="blog-page-title" class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-3 sm:mb-4" style="font-family:'Playfair Display',serif; color:#F5F5F5;">
           Ruang Baca
         </h1>
-        <p class="text-sm sm:text-base leading-relaxed max-w-xl mx-auto" style="color:#8A93A8;">
+        <p class="text-sm sm:text-base leading-relaxed max-w-xl mx-auto text-[#8A93A8]">
           Kumpulan wawasan, cerita, dan panduan praktis untuk membantu merawat pikiranmu hari ini.
         </p>
       </div>
     </section>
 
     <!-- Featured Section -->
-    <section class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 pb-12">
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 pb-12" data-aos="fade-up" aria-label="Artikel Pilihan Utama">
       <div id="featured-artikel-slot" class="w-full">
         <!-- Featured artikel placeholder -->
         <div class="rounded-2xl h-80 animate-pulse bg-white/10 backdrop-blur-md border border-white/20"></div>
@@ -49,135 +51,123 @@
     </section>
 
     <!-- "Untuk Kamu" Section (Personalized, condition-based) -->
-    <section id="section-untuk-kamu" class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 pb-12">
-      <div class="rounded-2xl p-6 sm:p-8 bg-white/10 backdrop-blur-md border border-white/20 shadow-xl">
+    <section id="section-untuk-kamu" class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 pb-12" data-aos="fade-up" aria-labelledby="untuk-kamu-heading">
+      <div class="rounded-2xl p-6 sm:p-8 bg-[#151B2E] border border-white/10 shadow-2xl">
         
-        <div class="mb-6">
-          <span class="text-[11px] sm:text-xs font-semibold tracking-widest uppercase mb-2 inline-block" style="color:#2DD4A8;">ARTIKEL POPULER</span>
-          <h2 class="text-2xl sm:text-3xl font-bold mb-3" style="font-family:'Playfair Display',serif; color:#F5F5F5;">
+        <div class="text-center max-w-2xl mx-auto mb-8">
+          <span class="text-[11px] sm:text-xs font-semibold tracking-widest uppercase mb-2 sm:mb-3 inline-block text-[#2DD4A8]">ARTIKEL POPULER</span>
+          <h2 id="untuk-kamu-heading" class="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4" style="font-family:'Playfair Display',serif; color:#F5F5F5;">
             Untuk Kamu
           </h2>
-          <p id="untuk-kamu-subheading" class="text-xs sm:text-sm leading-relaxed" style="color:#8A93A8;">
+          <p id="untuk-kamu-subheading" class="text-xs sm:text-sm md:text-base leading-relaxed text-[#8A93A8]">
             Artikel pilihan sesuai kondisimu saat ini
           </p>
         </div>
 
         <!-- 2x2 Grid for 4 articles -->
-        <div id="untuk-kamu-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div id="untuk-kamu-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <!-- Compact article cards injected via JS -->
         </div>
 
         <!-- Fallback if no quiz result in localStorage -->
-        <div id="untuk-kamu-fallback" class="hidden text-center py-8 px-4 rounded-xl bg-white/5 border border-dashed border-white/20">
+        <div id="untuk-kamu-fallback" class="hidden text-center py-8 px-4 rounded-xl bg-[#1A2138] border border-dashed border-white/15">
           <p class="text-base font-semibold text-[#F5F5F5] mb-2">Ingin rekomendasi artikel yang sesuai kondisimu?</p>
           <p class="text-xs sm:text-sm text-[#8A93A8] max-w-md mx-auto mb-5">Yuk ikuti kuis Cek Emosi singkat untuk memahami perasaanmu saat ini dan menemukan bacaan yang tepat.</p>
-          <a href="/index.html" class="inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-xs font-bold bg-[#2DD4A8] text-[#0D1220] hover:bg-[#25b892] transition-colors shadow-md">
-            Mulai Cek Emosi &rarr;
+          <a href="/index.html" class="teduh-btn-primary">
+            Mulai Cek Emosi &#8599;
           </a>
         </div>
       </div>
     </section>
 
-    <!-- Filter, Search, and Grid Section -->
-    <section class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 pb-20 sm:pb-24">
+    <!-- SECTION YOGA: GERAKAN & KETENANGAN (Rekomendasi Curated Preview) -->
+    <section id="section-yoga" class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 pb-12" data-aos="fade-up" aria-labelledby="yoga-heading">
+      <div class="rounded-2xl p-6 sm:p-8 md:p-10 bg-[#151B2E] border border-white/10 shadow-2xl">
+        <div class="text-center max-w-2xl mx-auto mb-8">
+          <span class="text-[11px] sm:text-xs font-semibold tracking-widest uppercase mb-2 sm:mb-3 inline-block text-[#2DD4A8]">GERAKAN & KETENANGAN</span>
+          <h2 id="yoga-heading" class="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2 sm:mb-3" style="font-family:'Playfair Display',serif;">
+            Yoga untuk Pikiranmu
+          </h2>
+          <p class="text-xs sm:text-sm md:text-base text-[#8A93A8] max-w-xl mx-auto leading-relaxed mb-4">
+            Gerakan fisik lembut dan olah napas terpandu untuk membantu merilis ketegangan batin dan menyelaraskan tubuh.
+          </p>
+          <button id="view-all-yoga-btn" type="button" class="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-[#2DD4A8] hover:text-[#25b892] transition-colors whitespace-nowrap cursor-pointer">
+            Lihat semua artikel Yoga &rarr;
+          </button>
+        </div>
+
+        <!-- Yoga 2x2 Grid (Fixed 4 preview items) -->
+        <div id="yoga-artikel-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Injected via JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION SEMUA ARTIKEL: Filter, Search, Grid, and Pagination -->
+    <section id="section-semua-artikel" class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 pb-20 sm:pb-24" data-aos="fade-up" aria-labelledby="semua-artikel-heading">
       
-      <!-- Search & Category Filter Controls -->
+      <!-- Section Title & Search/Filter Controls -->
       <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8">
-        
-        <div class="flex items-center gap-3">
-          <span class="text-[11px] sm:text-xs font-semibold tracking-widest uppercase" style="color:#2DD4A8;">Eksplorasi</span>
-          <span class="text-xs text-[#8A93A8]">• Cari bacaan yang kamu butuhkan</span>
+        <div>
+          <span class="text-[11px] sm:text-xs font-semibold tracking-widest uppercase mb-1 sm:mb-2 inline-block text-[#2DD4A8]">Eksplorasi</span>
+          <h2 id="semua-artikel-heading" class="text-2xl sm:text-3xl md:text-4xl font-bold text-white" style="font-family:'Playfair Display',serif;">
+            Semua Artikel
+          </h2>
         </div>
 
         <div class="flex items-center gap-3 w-full md:w-auto">
           <!-- Button Toggle Filter -->
-          <button id="toggle-filter-btn" type="button" class="flex items-center justify-center gap-2 text-sm text-[#8A93A8] hover:text-[#F5F5F5] transition px-4 py-2.5 bg-white/10 backdrop-blur-md rounded-full border border-white/20 whitespace-nowrap shrink-0 hover:border-[#2DD4A8]">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/>
-            </svg>
+          <button id="toggle-filter-btn" type="button" aria-expanded="false" aria-controls="filter-panel" class="flex items-center justify-center gap-2 text-sm text-[#8A93A8] hover:text-[#F5F5F5] transition px-4 py-2.5 bg-[#151B2E] rounded-full border border-white/15 whitespace-nowrap shrink-0 hover:border-[#2DD4A8]">
+            <i class="ph ph-funnel text-base"></i>
             <span class="hidden sm:inline">Kategori</span>
           </button>
 
           <!-- Search Bar -->
           <div class="relative flex-1 md:w-64 lg:w-72">
-            <input type="text" id="blog-search-input" placeholder="Cari artikel..." 
-                   class="w-full bg-white/10 backdrop-blur-md border border-white/20 rounded-full py-2.5 pl-5 pr-12 text-sm text-[#F5F5F5] placeholder-[#8A93A8] focus:outline-none focus:border-[#2DD4A8] transition">
-            <svg class="w-5 h-5 absolute right-4 top-1/2 -translate-y-1/2 text-[#8A93A8]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-            </svg>
+            <input type="search" id="blog-search-input" placeholder="Cari artikel..." aria-label="Cari artikel"
+                   class="w-full bg-[#151B2E] border border-white/15 rounded-full py-2.5 pl-5 pr-12 text-sm text-[#F5F5F5] placeholder-[#8A93A8] focus:outline-none focus:border-[#2DD4A8] transition">
+            <i class="ph ph-magnifying-glass text-lg absolute right-4 top-1/2 -translate-y-1/2 text-[#8A93A8]" aria-hidden="true"></i>
           </div>
         </div>
       </div>
 
-      <!-- Kategori Panel (Tersembunyi by default) -->
-      <div id="filter-panel" class="hidden mb-8 p-6 bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 shadow-xl">
+      <!-- Kategori Panel (Tersembunyi by default, toggleable) -->
+      <div id="filter-panel" class="hidden mb-8 p-6 bg-[#151B2E] rounded-2xl border border-white/10 shadow-xl" role="region" aria-label="Filter Kategori">
         <p class="text-sm text-[#8A93A8] mb-4">Pilih Kategori:</p>
         <div id="blog-category-filter" class="flex flex-wrap gap-3">
           <!-- Kategori dinamis akan di-inject lewat JS -->
         </div>
       </div>
 
-      <!-- SECTION YOGA: GERAKAN & KETENANGAN -->
-      <div id="section-yoga" class="mb-14 sm:mb-16">
-        <div class="rounded-2xl p-6 sm:p-8 md:p-10 bg-white/10 backdrop-blur-md border border-white/20 shadow-xl">
-          <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
-            <div>
-              <span class="text-[11px] sm:text-xs font-semibold tracking-widest uppercase mb-2 inline-block" style="color:#2DD4A8;">GERAKAN & KETENANGAN</span>
-              <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2" style="font-family:'Playfair Display',serif;">
-                Yoga untuk Pikiranmu
-              </h2>
-              <p class="text-xs sm:text-sm text-[#8A93A8] max-w-xl leading-relaxed">
-                Gerakan fisik lembut dan olah napas terpandu untuk membantu merilis ketegangan batin dan menyelaraskan tubuh.
-              </p>
-            </div>
-            <button id="view-all-yoga-btn" type="button" class="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-[#2DD4A8] hover:text-[#25b892] transition-colors whitespace-nowrap self-start sm:self-auto cursor-pointer">
-              Lihat 20 Artikel Yoga &rarr;
-            </button>
-          </div>
-
-          <!-- Yoga 2x2 Grid -->
-          <div id="yoga-artikel-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <!-- Injected via JS -->
-          </div>
-        </div>
-      </div>
-
-      <!-- Section Title: Semua Artikel -->
-      <div class="flex items-center justify-between mb-6">
-        <h2 class="text-2xl sm:text-3xl font-bold shrink-0 mb-3 sm:mb-4" style="font-family:'Playfair Display',serif; color:#F5F5F5;">
-          Semua Artikel
-        </h2>
-      </div>
-
       <!-- Grid Artikel -->
-      <div id="blog-artikel-grid" class="flex flex-col gap-4">
-        <div class="tile rounded-2xl h-72 animate-pulse bg-white/10 backdrop-blur-md border border-white/20"></div>
-        <div class="tile rounded-2xl h-72 animate-pulse bg-white/10 backdrop-blur-md border border-white/20"></div>
-        <div class="tile rounded-2xl h-72 animate-pulse bg-white/10 backdrop-blur-md border border-white/20"></div>
+      <div id="blog-artikel-grid" class="flex flex-col gap-6" aria-live="polite">
+        <div class="tile rounded-2xl h-72 animate-pulse bg-[#151B2E] border border-white/10"></div>
+        <div class="tile rounded-2xl h-72 animate-pulse bg-[#151B2E] border border-white/10"></div>
+        <div class="tile rounded-2xl h-72 animate-pulse bg-[#151B2E] border border-white/10"></div>
       </div>
 
       <!-- Pagination Container -->
-      <div id="blog-pagination" class="flex items-center justify-center gap-2 mt-12 flex-wrap"></div>
+      <nav id="blog-pagination" aria-label="Navigasi Halaman Artikel" class="flex items-center justify-center gap-2 mt-12 flex-wrap"></nav>
 
       <!-- Static Support Info Card -->
-      <div class="mt-14 sm:mt-16 w-full rounded-2xl p-6 sm:p-8 md:p-10 bg-white/10 backdrop-blur-md border border-white/20 shadow-xl transition-all duration-300">
+      <aside aria-labelledby="support-heading" class="mt-14 sm:mt-16 w-full rounded-2xl p-6 sm:p-8 md:p-10 bg-[#151B2E] border border-white/10 shadow-xl transition-all duration-300" data-aos="fade-up">
         <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div class="max-w-2xl">
-            <span class="text-[11px] sm:text-xs font-bold uppercase tracking-widest mb-2 inline-block" style="color:#2DD4A8;">Dukungan Untukmu</span>
-            <h3 class="text-xl sm:text-2xl font-bold mb-2 leading-snug" style="font-family:'Playfair Display',serif; color:#F5F5F5;">
+            <span class="text-[11px] sm:text-xs font-bold uppercase tracking-widest mb-2 sm:mb-3 inline-block text-[#2DD4A8]">Dukungan Untukmu</span>
+            <h3 id="support-heading" class="text-xl sm:text-2xl md:text-3xl font-bold mb-2 leading-snug" style="font-family:'Playfair Display',serif; color:#F5F5F5;">
               Butuh teman bicara soal apa yang kamu baca?
             </h3>
-            <p class="text-xs sm:text-sm md:text-base leading-relaxed" style="color:#8A93A8;">
+            <p class="text-xs sm:text-sm md:text-base leading-relaxed text-[#8A93A8]">
               Membaca artikel adalah langkah awal yang baik, namun kamu tidak harus memproses semuanya sendirian. Jika ada perasaan yang terasa mengganjal atau butuh ruang aman untuk bercerita, konsultan profesional kami selalu siap mendampingimu.
             </p>
           </div>
           <div class="shrink-0 w-full sm:w-auto">
-            <a href="/konsultasi.html" class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full text-xs sm:text-sm font-bold bg-[#2DD4A8] text-[#0D1220] hover:bg-[#25b892] transition-all duration-300 w-full sm:w-auto shadow-lg hover:shadow-[0_0_20px_rgba(45,212,168,0.4)]">
-              Mulai Konsultasi &rarr;
+            <a href="/konsultasi.html" class="teduh-btn-primary w-full sm:w-auto">
+              Mulai Konsultasi &#8599;
             </a>
           </div>
         </div>
-      </div>
+      </aside>
     </section>
 
     <script src="/js/ArtikelCard.js"></script>
@@ -189,5 +179,6 @@
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <script src="/js/Nav.js"></script>
   <script src="/js/Footer.js"></script>
+  <script src="/js/main.js"></script>
 </body>
 </html>

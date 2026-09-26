@@ -81,6 +81,7 @@ TECHNIQUES.forEach(tech => {
 // 3. ELEMEN UI & VARIABEL STATE
 // ==========================================
 const CIRCLE_CIRCUMFERENCE = 565.48;
+const HOLD_THRESHOLD = 350; // ms threshold untuk deteksi tahan (hold) vs ketuk (tap)
 
 let currentTechIndex = 0;       // Teknik aktif saat ini (default: 4-7-8)
 let currentPhaseIndex = 0;      // Indeks fase aktif di dalam teknik saat ini
@@ -90,13 +91,18 @@ let phaseStartTime = 0;         // Waktu mulai fase aktif (performance.now)
 let pausedTimeLeft = 0;         // Sisa durasi saat dijeda
 let animationFrameId = null;
 
+// Pointer / interaction state
+let holdTimer = null;
+let isHoldGesture = false;
+let hintTimeout = null;
+
 const UI = {
   progress: document.getElementById('breathe-progress'),
   dot: document.getElementById('breathe-dot'),
   phaseText: document.getElementById('breathe-phase-text'),
   countdown: document.getElementById('breathe-countdown'),
-  btnToggle: document.getElementById('btn-breathe-toggle'),
-  btnStop: document.getElementById('btn-breathe-stop'),
+  hint: document.getElementById('breathe-hint'),
+  circleTrigger: document.getElementById('breathe-circle-trigger'),
   switcherContainer: document.getElementById('technique-switcher'),
   focusText: document.getElementById('breathe-focus-text'),
   phasesContainer: document.getElementById('breathe-phases-container')
@@ -259,11 +265,15 @@ function updateVisuals(progressPercent, phase, timeLeft, activeIdx) {
     UI.phaseText.style.textShadow = '0 2px 8px rgba(0,0,0,0.95), 0 0 3px rgba(0,0,0,0.9)';
   }
   if (UI.countdown) {
+    UI.countdown.classList.remove('hidden');
     UI.countdown.textContent = Math.ceil(timeLeft);
     UI.countdown.style.textShadow = '0 2px 8px rgba(0,0,0,0.95), 0 0 3px rgba(0,0,0,0.9)';
   }
+  if (UI.hint && (!hintTimeout || UI.hint.classList.contains('opacity-0'))) {
+    UI.hint.classList.add('opacity-0');
+  }
 
-  // Update garis stroke & dot lingkaran
+  // Update garis stroke & dot lingkaran sinkron dengan fase pernapasan
   if (UI.progress) {
     UI.progress.style.stroke = phase.color;
     const offset = CIRCLE_CIRCUMFERENCE - (progressPercent * CIRCLE_CIRCUMFERENCE);
@@ -289,13 +299,19 @@ function updateVisuals(progressPercent, phase, timeLeft, activeIdx) {
 
 function resetVisuals() {
   if (UI.phaseText) {
-    UI.phaseText.textContent = "Siap";
+    UI.phaseText.textContent = "Mulai";
     UI.phaseText.style.color = "#2DD4A8";
     UI.phaseText.style.textShadow = '0 2px 8px rgba(0,0,0,0.95), 0 0 3px rgba(0,0,0,0.9)';
   }
   if (UI.countdown) {
     UI.countdown.textContent = "--";
+    UI.countdown.classList.add('hidden');
     UI.countdown.style.textShadow = '0 2px 8px rgba(0,0,0,0.95), 0 0 3px rgba(0,0,0,0.9)';
+  }
+  if (UI.hint) {
+    UI.hint.textContent = "Ketuk untuk mulai";
+    UI.hint.classList.remove('opacity-0', 'hidden');
+    UI.hint.classList.add('opacity-100');
   }
 
   if (UI.progress) {
@@ -310,16 +326,6 @@ function resetVisuals() {
     UI.dot.style.top = "5%";
   }
 
-  if (UI.btnToggle) {
-    UI.btnToggle.textContent = "Mulai Latihan";
-    UI.btnToggle.disabled = false;
-    UI.btnToggle.classList.remove('opacity-50', 'cursor-not-allowed');
-  }
-
-  if (UI.btnStop) {
-    UI.btnStop.classList.add('hidden');
-  }
-
   highlightActivePhase(-1);
 }
 
@@ -327,7 +333,7 @@ function resetVisuals() {
 // 7. ENGINE PERNAPASAN (LOOP / TICK)
 // ==========================================
 function tick(timestamp) {
-  if (!isRunning) return;
+  if (!isRunning || isPaused) return;
 
   const tech = TECHNIQUES[currentTechIndex];
   const curPhase = tech.phases[currentPhaseIndex];
@@ -346,20 +352,18 @@ function tick(timestamp) {
   const activePhaseMs = activePhase.duration * 1000;
   const timeLeft = Math.max(0, (activePhaseMs - elapsedInPhase) / 1000);
 
-  // Hitung progres siklus keseluruhan untuk pergerakan dot dan lingkaran
-  const phaseOffset = getPhaseOffsetMs(tech, currentPhaseIndex);
-  const totalCycleElapsed = phaseOffset + elapsedInPhase;
-  const progressPercent = Math.min(1, Math.max(0, totalCycleElapsed / tech.totalDurationMs));
+  // Hitung progres fase aktif (0 sampai 1) untuk stroke-dashoffset dan pergerakan dot
+  const phaseProgress = Math.min(1, Math.max(0, elapsedInPhase / activePhaseMs));
 
-  updateVisuals(progressPercent, activePhase, timeLeft, currentPhaseIndex);
+  updateVisuals(phaseProgress, activePhase, timeLeft, currentPhaseIndex);
 
-  if (isRunning) {
+  if (isRunning && !isPaused) {
     animationFrameId = requestAnimationFrame(tick);
   }
 }
 
 // ==========================================
-// 8. KONTROL INTERAKSI (START, JUMP, SWITCH, STOP)
+// 8. KONTROL INTERAKSI (START, PAUSE, RESUME, STOP, JUMP, SWITCH)
 // ==========================================
 function startSession(startPhase = 0) {
   isRunning = true;
@@ -367,11 +371,11 @@ function startSession(startPhase = 0) {
   currentPhaseIndex = startPhase;
   phaseStartTime = performance.now();
 
-  if (UI.btnToggle) {
-    UI.btnToggle.textContent = "Jeda";
+  if (UI.countdown) {
+    UI.countdown.classList.remove('hidden');
   }
-  if (UI.btnStop) {
-    UI.btnStop.classList.remove('hidden');
+  if (UI.hint) {
+    UI.hint.classList.add('opacity-0');
   }
 
   cancelAnimationFrame(animationFrameId);
@@ -388,8 +392,18 @@ function pauseSession() {
   const elapsedInPhase = performance.now() - phaseStartTime;
   pausedTimeLeft = Math.max(0, (curPhase.duration * 1000 - elapsedInPhase));
 
-  if (UI.btnToggle) {
-    UI.btnToggle.textContent = "Lanjutkan";
+  if (UI.phaseText) {
+    UI.phaseText.textContent = "Jeda";
+    UI.phaseText.style.color = "#FB923C";
+    UI.phaseText.style.textShadow = '0 2px 8px rgba(0,0,0,0.95), 0 0 3px rgba(0,0,0,0.9)';
+  }
+  if (UI.countdown) {
+    UI.countdown.classList.add('hidden');
+  }
+  if (UI.hint) {
+    UI.hint.textContent = "Ketuk untuk lanjut · Tahan untuk berhenti";
+    UI.hint.classList.remove('opacity-0', 'hidden');
+    UI.hint.classList.add('opacity-100');
   }
 }
 
@@ -401,8 +415,16 @@ function resumeSession() {
   const curPhase = tech.phases[currentPhaseIndex];
   phaseStartTime = performance.now() - (curPhase.duration * 1000 - pausedTimeLeft);
 
-  if (UI.btnToggle) {
-    UI.btnToggle.textContent = "Jeda";
+  if (UI.phaseText) {
+    UI.phaseText.textContent = curPhase.label;
+    UI.phaseText.style.color = curPhase.color;
+    UI.phaseText.style.textShadow = '0 2px 8px rgba(0,0,0,0.95), 0 0 3px rgba(0,0,0,0.9)';
+  }
+  if (UI.countdown) {
+    UI.countdown.classList.remove('hidden');
+  }
+  if (UI.hint) {
+    UI.hint.classList.add('opacity-0');
   }
 
   cancelAnimationFrame(animationFrameId);
@@ -412,6 +434,11 @@ function resumeSession() {
 function stopSession() {
   isRunning = false;
   isPaused = false;
+  if (holdTimer) {
+    clearTimeout(holdTimer);
+    holdTimer = null;
+  }
+  isHoldGesture = false;
   cancelAnimationFrame(animationFrameId);
   currentPhaseIndex = 0;
   resetVisuals();
@@ -433,13 +460,9 @@ function jumpToPhase(targetIndex) {
   } else {
     // Segera perbarui tampilan dengan durasi penuh fase tujuan
     const activePhase = tech.phases[currentPhaseIndex];
-    const phaseOffset = getPhaseOffsetMs(tech, currentPhaseIndex);
-    const progressPercent = phaseOffset / tech.totalDurationMs;
-    updateVisuals(progressPercent, activePhase, activePhase.duration, currentPhaseIndex);
-
-    if (UI.btnToggle) {
-      UI.btnToggle.textContent = "Jeda";
-    }
+    updateVisuals(0, activePhase, activePhase.duration, currentPhaseIndex);
+    cancelAnimationFrame(animationFrameId);
+    animationFrameId = requestAnimationFrame(tick);
   }
 }
 
@@ -457,7 +480,7 @@ function switchTechnique(newTechIndex) {
   renderPhaseEmojis();
 
   if (isRunning) {
-    // Reset timer ke durasi fase teknik baru, mulai segar dari fase Inhale
+    // Reset timer ke durasi fase teknik baru, mulai segar dari fase pertama
     phaseStartTime = performance.now();
     isPaused = false;
 
@@ -465,24 +488,159 @@ function switchTechnique(newTechIndex) {
     const firstPhase = tech.phases[0];
     updateVisuals(0, firstPhase, firstPhase.duration, 0);
 
-    if (UI.btnToggle) {
-      UI.btnToggle.textContent = "Jeda";
-    }
+    cancelAnimationFrame(animationFrameId);
+    animationFrameId = requestAnimationFrame(tick);
   } else {
     resetVisuals();
   }
 }
 
 // ==========================================
-// 9. INISIALISASI EVENT LISTENERS
+// 9. LOGIKA TRIGGER LINGKARAN & 3-STATE INTERAKSI
+// ==========================================
+function showQuickHint(msg) {
+  if (!UI.hint) return;
+  UI.hint.textContent = msg;
+  UI.hint.classList.remove('opacity-0', 'hidden');
+  UI.hint.classList.add('opacity-100');
+
+  if (hintTimeout) clearTimeout(hintTimeout);
+  hintTimeout = setTimeout(() => {
+    if (isRunning && !isPaused && UI.hint) {
+      UI.hint.classList.add('opacity-0');
+    }
+  }, 1200);
+}
+
+function handlePointerDown(e) {
+  // Hanya tombol utama (sentuhan / klik kiri)
+  if (e.button !== undefined && e.button !== 0) return;
+  isHoldGesture = false;
+
+  if (holdTimer) {
+    clearTimeout(holdTimer);
+    holdTimer = null;
+  }
+
+  // Jika sedang berjalan atau dijeda, jalankan timer deteksi tahan (hold)
+  if (isRunning) {
+    holdTimer = setTimeout(() => {
+      isHoldGesture = true;
+      if (!isPaused) {
+        // Sedang berjalan + tahan -> Jeda (pause)
+        pauseSession();
+      } else {
+        // Sedang dijeda + tahan -> Berhenti (stop/reset ke idle)
+        stopSession();
+      }
+      if (typeof navigator !== 'undefined' && typeof navigator.vibrate === 'function') {
+        try { navigator.vibrate(40); } catch (_) {}
+      }
+    }, HOLD_THRESHOLD);
+  }
+}
+
+function handlePointerUp(e) {
+  if (holdTimer) {
+    clearTimeout(holdTimer);
+    holdTimer = null;
+  }
+
+  // Jika aksi hold sudah terpicu (tahan >= HOLD_THRESHOLD), jangan lakukan aksi ketuk (tap)
+  if (isHoldGesture) {
+    isHoldGesture = false;
+    return;
+  }
+
+  // 1. Ketuk saat idle -> Mulai siklus pernapasan
+  if (!isRunning) {
+    startSession(0);
+  }
+  // 2. Ketuk saat paused -> Lanjutkan latihan dari titik terakhir (resume)
+  else if (isPaused) {
+    resumeSession();
+  }
+  // 3. Ketuk saat running -> Hentikan latihan & reset penuh ke status idle ("Mulai")
+  else {
+    stopSession();
+  }
+}
+
+function handlePointerCancel() {
+  if (holdTimer) {
+    clearTimeout(holdTimer);
+    holdTimer = null;
+  }
+  isHoldGesture = false;
+}
+
+function setupCircleTrigger() {
+  const trigger = UI.circleTrigger || document.getElementById('breathe-circle-trigger');
+  if (!trigger) return;
+
+  trigger.addEventListener('pointerdown', handlePointerDown);
+  trigger.addEventListener('pointerup', handlePointerUp);
+  trigger.addEventListener('pointercancel', handlePointerCancel);
+  trigger.addEventListener('pointerleave', handlePointerCancel);
+  trigger.addEventListener('contextmenu', (e) => e.preventDefault());
+
+  // Aksesibilitas Keyboard (Space / Enter)
+  let keyHoldTimer = null;
+  let isKeyHold = false;
+
+  trigger.addEventListener('keydown', (e) => {
+    if (e.key === ' ' || e.key === 'Enter') {
+      if (e.repeat) return;
+      e.preventDefault();
+      isKeyHold = false;
+
+      if (isRunning) {
+        keyHoldTimer = setTimeout(() => {
+          isKeyHold = true;
+          if (!isPaused) {
+            pauseSession();
+          } else {
+            stopSession();
+          }
+        }, HOLD_THRESHOLD);
+      }
+    }
+  });
+
+  trigger.addEventListener('keyup', (e) => {
+    if (e.key === ' ' || e.key === 'Enter') {
+      e.preventDefault();
+      if (keyHoldTimer) {
+        clearTimeout(keyHoldTimer);
+        keyHoldTimer = null;
+      }
+
+      if (isKeyHold) {
+        isKeyHold = false;
+        return;
+      }
+
+      if (!isRunning) {
+        startSession(0);
+      } else if (isPaused) {
+        resumeSession();
+      } else {
+        stopSession();
+      }
+    }
+  });
+}
+
+// ==========================================
+// 10. INISIALISASI APLIKASI PERNAPASAN
 // ==========================================
 function initBreathingApp() {
   UI.progress = document.getElementById('breathe-progress');
   UI.dot = document.getElementById('breathe-dot');
   UI.phaseText = document.getElementById('breathe-phase-text');
   UI.countdown = document.getElementById('breathe-countdown');
-  UI.btnToggle = document.getElementById('btn-breathe-toggle');
-  UI.btnStop = document.getElementById('btn-breathe-stop');
+  UI.hint = document.getElementById('breathe-hint');
+  UI.circleTrigger = document.getElementById('breathe-circle-trigger');
   UI.switcherContainer = document.getElementById('technique-switcher');
   UI.focusText = document.getElementById('breathe-focus-text');
   UI.phasesContainer = document.getElementById('breathe-phases-container');
@@ -490,23 +648,8 @@ function initBreathingApp() {
   renderTechniqueSwitcher();
   updateFocusText();
   renderPhaseEmojis();
+  setupCircleTrigger();
   resetVisuals();
-
-  if (UI.btnToggle) {
-    UI.btnToggle.addEventListener('click', () => {
-      if (!isRunning) {
-        startSession(0);
-      } else if (isPaused) {
-        resumeSession();
-      } else {
-        pauseSession();
-      }
-    });
-  }
-
-  if (UI.btnStop) {
-    UI.btnStop.addEventListener('click', stopSession);
-  }
 }
 
 // Jalankan ketika DOM sudah siap

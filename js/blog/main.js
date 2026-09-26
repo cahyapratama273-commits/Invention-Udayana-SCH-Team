@@ -48,9 +48,19 @@
     var currentPage = 1;
     var ITEMS_PER_PAGE = 6;
     
-    // -- Extract unique categories and sort
-    var categories = [...new Set(semuaArtikel.map(a => a.kategori))].sort();
+    // -- Extract unique categories dynamically from artikel.json
+    var categories = [...new Set(semuaArtikel.map(a => a.kategori))].filter(Boolean).sort();
     categories.unshift("Semua");
+
+    // -- Read initial category filter from URL query param if present (?kategori=Yoga)
+    var urlParams = new URLSearchParams(window.location.search);
+    var paramCat = urlParams.get("kategori");
+    if (paramCat) {
+      var matchedCat = categories.find(c => c.toLowerCase() === paramCat.trim().toLowerCase());
+      if (matchedCat) {
+        currentFilter = matchedCat;
+      }
+    }
 
     // -- Helper: Get user mood from localStorage
     function getFeaturedArtikel() {
@@ -166,7 +176,7 @@
       if (untukKamuSection) untukKamuSection.classList.remove("hidden");
     }
 
-    // -- Render "Yoga untuk Pikiranmu" Section (kategori === "Yoga")
+    // -- Render "Yoga untuk Pikiranmu" Section (Fixed curated preview of 4 Yoga articles)
     function renderYogaSection() {
       var yogaGrid = document.getElementById("yoga-artikel-grid");
       if (!yogaGrid) return;
@@ -305,10 +315,10 @@
           if (targetPage >= 1 && targetPage <= totalPages && targetPage !== currentPage) {
             currentPage = targetPage;
             renderArticles();
-            // Scroll ke atas grid dengan mulus
-            var scrollTarget = document.getElementById("blog-artikel-grid");
+            // Scroll ke atas grid Semua Artikel dengan mulus
+            var scrollTarget = document.getElementById("section-semua-artikel") || document.getElementById("blog-artikel-grid");
             if (scrollTarget) {
-              const yOffset = -120;
+              const yOffset = -90;
               const y = scrollTarget.getBoundingClientRect().top + window.pageYOffset + yOffset;
               window.scrollTo({ top: y, behavior: 'smooth' });
             }
@@ -317,7 +327,7 @@
       });
     }
 
-    // -- Render Grid Articles based on Filter, Search, and Pagination (8 per page)
+    // -- Render Grid Articles based on Filter, Search, and Pagination (6 per page)
     function renderArticles() {
       if (!gridEl) return;
       
@@ -326,12 +336,13 @@
         ? semuaArtikel 
         : semuaArtikel.filter(a => a.kategori === currentFilter);
         
-      // Filter by search query (title & summary)
+      // Filter by search query (title, summary, or category name)
       if (searchQuery.trim() !== "") {
-        var q = searchQuery.toLowerCase();
+        var q = searchQuery.toLowerCase().trim();
         filtered = filtered.filter(a => 
-          a.judul.toLowerCase().includes(q) || 
-          a.ringkasan.toLowerCase().includes(q)
+          (a.judul && a.judul.toLowerCase().includes(q)) || 
+          (a.ringkasan && a.ringkasan.toLowerCase().includes(q)) ||
+          (a.kategori && a.kategori.toLowerCase().includes(q))
         );
       }
 
@@ -355,6 +366,47 @@
 
       // Render pagination
       renderPagination(totalCount);
+      if (window.AOS) window.AOS.refresh();
+    }
+
+    // -- Programmatic Category Filter Setter
+    function setCategoryFilter(categoryName, shouldScroll) {
+      currentFilter = categoryName;
+      currentPage = 1;
+      searchQuery = "";
+      if (searchInput) searchInput.value = "";
+
+      // Open filter panel if filtering by a specific category
+      if (filterPanel && categoryName !== "Semua") {
+        filterPanel.classList.remove('hidden');
+        if (toggleBtn) {
+          toggleBtn.classList.add('bg-white', 'text-black');
+          toggleBtn.classList.remove('bg-white/10', 'text-[#8A93A8]');
+        }
+      }
+
+      // Update URL search params
+      try {
+        var newUrl = new URL(window.location);
+        if (categoryName === "Semua") {
+          newUrl.searchParams.delete('kategori');
+        } else {
+          newUrl.searchParams.set('kategori', categoryName);
+        }
+        window.history.replaceState({}, '', newUrl);
+      } catch (e) {}
+
+      renderFilters();
+      renderArticles();
+
+      if (shouldScroll) {
+        var scrollTarget = document.getElementById("section-semua-artikel") || document.getElementById("blog-artikel-grid");
+        if (scrollTarget) {
+          const yOffset = -90;
+          const y = scrollTarget.getBoundingClientRect().top + window.pageYOffset + yOffset;
+          window.scrollTo({ top: y, behavior: 'smooth' });
+        }
+      }
     }
 
     // -- Events bindings
@@ -363,10 +415,8 @@
         var tab = e.target.closest('.category-tab');
         if (!tab) return;
         
-        currentFilter = tab.getAttribute('data-cat');
-        currentPage = 1; // Reset ke page 1
-        renderFilters();
-        renderArticles();
+        var selectedCat = tab.getAttribute('data-cat');
+        setCategoryFilter(selectedCat, false);
       });
     }
 
@@ -383,8 +433,9 @@
     var filterPanel = document.getElementById("filter-panel");
     if (toggleBtn && filterPanel) {
       toggleBtn.addEventListener('click', function() {
-        filterPanel.classList.toggle('hidden');
-        if (filterPanel.classList.contains('hidden')) {
+        var isHidden = filterPanel.classList.toggle('hidden');
+        toggleBtn.setAttribute('aria-expanded', String(!isHidden));
+        if (isHidden) {
           toggleBtn.classList.remove('bg-white', 'text-black');
           toggleBtn.classList.add('bg-white/10', 'text-[#8A93A8]');
         } else {
@@ -392,22 +443,21 @@
           toggleBtn.classList.remove('bg-white/10', 'text-[#8A93A8]');
         }
       });
+
+      // If query param set a filter on load, open the filter panel
+      if (currentFilter !== "Semua") {
+        filterPanel.classList.remove('hidden');
+        toggleBtn.setAttribute('aria-expanded', 'true');
+        toggleBtn.classList.add('bg-white', 'text-black');
+        toggleBtn.classList.remove('bg-white/10', 'text-[#8A93A8]');
+      }
     }
 
     // View all Yoga button handler
     var viewAllYogaBtn = document.getElementById("view-all-yoga-btn");
     if (viewAllYogaBtn) {
       viewAllYogaBtn.addEventListener('click', function() {
-        currentFilter = "Yoga";
-        currentPage = 1;
-        renderFilters();
-        renderArticles();
-        var scrollTarget = document.getElementById("blog-artikel-grid");
-        if (scrollTarget) {
-          const yOffset = -120;
-          const y = scrollTarget.getBoundingClientRect().top + window.pageYOffset + yOffset;
-          window.scrollTo({ top: y, behavior: 'smooth' });
-        }
+        setCategoryFilter("Yoga", true);
       });
     }
 
@@ -417,6 +467,7 @@
     renderYogaSection();
     renderFilters();
     renderArticles();
+    if (window.AOS) window.AOS.refresh();
 
   } catch (err) {
     console.error("Error merender blog:", err);

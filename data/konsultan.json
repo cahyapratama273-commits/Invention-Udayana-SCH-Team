@@ -8,7 +8,7 @@
     "rating": 4.9,
     "review_count": 142,
     "isFeatured": true,
-    "badge": "Rekomendasi Utama",
+    "badge": "Tim Kami",
     "gambar": "https://images.unsplash.com/photo-1594824813572-c0ff0f37c35f?auto=format&fit=crop&w=600&q=80",
     "fallback_gambar": "/assets/Images/artikel/hutan21.webp",
     "deskripsi": "Berpengalaman mendampingi individu dalam mengatasi gangguan kecemasan berat, depresi klinis, serta manajemen stres kerja dengan pendekatan empati medis.",
@@ -18,7 +18,7 @@
       "Manajemen Burnout",
       "Regulasi Mood"
     ],
-    "kontak_wa": "https://wa.me/6281234567890?text=Halo%20dr.%20Maya%20Chen,%20saya%20ingin%20menjadwalkan%20sesi%20konsultasi%20melalui%20BerTeduh."
+    "kontak_wa": "https://wa.me/6281222917632?text=Halo%20dr.%20Maya%20Chen,%20saya%20ingin%20menjadwalkan%20sesi%20konsultasi%20melalui%20BerTeduh."
   },
   {
     "id": "andika-pratama",
@@ -39,7 +39,7 @@
       "Hubungan & Komunikasi",
       "Terapi CBT"
     ],
-    "kontak_wa": "https://wa.me/6281234567890?text=Halo%20Mas%20Andika,%20saya%20ingin%20konsultasi%20psikologi%20melalui%20BerTeduh."
+    "kontak_wa": "https://wa.me/6281222917632?text=Halo%20Mas%20Andika,%20saya%20ingin%20konsultasi%20psikologi%20melalui%20BerTeduh."
   },
   {
     "id": "sarah-amalia",
@@ -58,7 +58,7 @@
       "Kecemasan Sosial",
       "Self-Compassion"
     ],
-    "kontak_wa": "https://wa.me/6281234567890?text=Halo%20Mbak%20Sarah,%20saya%20ingin%20menjadwalkan%20sesi%20konsultasi%20melalui%20BerTeduh."
+    "kontak_wa": "https://wa.me/6281222917632?text=Halo%20Mbak%20Sarah,%20saya%20ingin%20menjadwalkan%20sesi%20konsultasi%20melalui%20BerTeduh."
   },
   {
     "id": "dr-farhan-malik",
@@ -77,7 +77,7 @@
       "Stres Kerja & Eksekutif",
       "Farmakoterapi & Konseling"
     ],
-    "kontak_wa": "https://wa.me/6281234567890?text=Halo%20dr.%20Farhan,%20saya%20ingin%20konsultasi%20melalui%20BerTeduh."
+    "kontak_wa": "https://wa.me/6281222917632?text=Halo%20dr.%20Farhan,%20saya%20ingin%20konsultasi%20melalui%20BerTeduh."
   },
   {
     "id": "nadia-paramita",
@@ -96,7 +96,7 @@
       "Komunikasi Asertif",
       "Resolusi Konflik"
     ],
-    "kontak_wa": "https://wa.me/6281234567890?text=Halo%20Mbak%20Nadia,%20saya%20ingin%20menjadwalkan%20konseling%20melalui%20BerTeduh."
+    "kontak_wa": "https://wa.me/6281222917632?text=Halo%20Mbak%20Nadia,%20saya%20ingin%20menjadwalkan%20konseling%20melalui%20BerTeduh."
   },
   {
     "id": "reza-rahardian",
@@ -115,6 +115,6 @@
       "Pengembangan Diri",
       "Mindfulness Therapy"
     ],
-    "kontak_wa": "https://wa.me/6281234567890?text=Halo%20Mas%20Reza,%20saya%20ingin%20konsultasi%20melalui%20BerTeduh."
+    "kontak_wa": "https://wa.me/6281222917632?text=Halo%20Mas%20Reza,%20saya%20ingin%20konsultasi%20melalui%20BerTeduh."
   }
 ]

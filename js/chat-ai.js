@@ -1,196 +1,147 @@
-$(document).ready(function() {
-  // API Key GEMINI 
-  const apiKeys = [
-    "YOUR_API_KEY_1", // API akan otomatis swap ke key berikutnya jika sudah mencapai limit
-    "YOUR_API_KEY_2", 
-    "YOUR_API_KEY_3", 
-    "YOUR_API_KEY_4", 
-    "YOUR_API_KEY_5"
-  ].filter(key => key && !key.startsWith("YOUR_API_KEY"));
+/**
+ * js/chat-ai.js — View Pengontrol Chat AI pada Halaman Konsultasi
+ * Terintegrasi penuh dengan TeduhChatService dan localStorage 'bt_ai_chat_history'
+ */
 
-  let currentKeyIndex = 0;
-  
-  // History chat internal, jadi system prompt tidak dikirim di awal, diset ke payload
-  let chatHistory = [];
+(function () {
+  'use strict';
 
-  const $chatContainer = $("#chat-container");
-  const $chatInput = $("#chat-input");
-  const $sendBtn = $("#chat-send-btn");
+  function initKonsultasiChat() {
+    const $chatContainer = $("#chat-container");
+    const $chatInput = $("#chat-input");
+    const $sendBtn = $("#chat-send-btn");
 
-  // Inisialisasi sapaan awal
-  $chatContainer.empty();
-  const initialMessage = "Halo! Aku asisten virtual BerTeduh. Ada yang lagi mengganggu pikiranmu hari ini? Ceritakan santai aja ya, aku siap dengerin.";
-  
-  // Tampilkan bubble awal
-  addBubble("model", initialMessage);
-  // Simpan ke history agar Gemini tau konteksnya
-  chatHistory.push({ role: "model", parts: [{ text: initialMessage }] });
+    if (!$chatContainer.length) return;
 
-  /**
-   * Menggulir chat ke paling bawah
-   */
-  function scrollToBottom() {
-    $chatContainer.scrollTop($chatContainer[0].scrollHeight);
-  }
-
-  /**
-   * Menambahkan bubble ke UI
-   */
-  function addBubble(role, text) {
-    let bubbleHtml = "";
-    if (role === "user") {
-      bubbleHtml = `
-        <div class="flex items-start gap-3 w-[90%] md:w-5/6 self-end flex-row-reverse">
-          <div class="w-8 h-8 rounded-full shrink-0 flex items-center justify-center text-xs font-bold bg-gray-600 text-white">KM</div>
-          <div class="p-4 rounded-2xl rounded-tr-none text-sm" style="background:#2DD4A8; color:#0D1220;">
-            ${text}
-          </div>
-        </div>
-      `;
-    } else {
-      bubbleHtml = `
-        <div class="flex items-start gap-3 w-[90%] md:w-5/6">
-          <div class="w-8 h-8 rounded-full shrink-0 flex items-center justify-center text-xs font-bold" style="background:#2DD4A8; color:#0D1220;">AI</div>
-          <div class="p-4 rounded-2xl rounded-tl-none text-sm leading-relaxed" style="background:rgba(255,255,255,0.05); color:#F5F5F5;">
-            ${text}
-          </div>
-        </div>
-      `;
-    }
-    $chatContainer.append(bubbleHtml);
-    scrollToBottom();
-  }
-
-  /**
-   * Menambahkan efek "AI sedang mengetik..."
-   */
-  function addTypingIndicator() {
-    const typingHtml = `
-      <div id="typing-indicator" class="flex items-start gap-3 w-[90%] md:w-5/6">
-        <div class="w-8 h-8 rounded-full shrink-0 flex items-center justify-center text-xs font-bold" style="background:#2DD4A8; color:#0D1220;">AI</div>
-        <div class="p-4 rounded-2xl rounded-tl-none text-sm text-gray-400 italic" style="background:rgba(255,255,255,0.05);">
-          Mengetik pesan...
-        </div>
-      </div>
-    `;
-    $chatContainer.append(typingHtml);
-    scrollToBottom();
-  }
-
-  function removeTypingIndicator() {
-    $("#typing-indicator").remove();
-  }
-
-  /**
-   * Logika memutar (swap) API Key jika kena limit (error 429)
-   */
-  function rotateApiKey() {
-    if (apiKeys.length > 1) {
-      const oldIndex = currentKeyIndex;
-      currentKeyIndex = (currentKeyIndex + 1) % apiKeys.length;
-      console.warn(`[WARNING] API Key #${oldIndex + 1} Limit. Swapping ke API Key #${currentKeyIndex + 1}`);
-      return true;
-    }
-    return false;
-  }
-
-  /**
-   * Memanggil API Gemini (terstruktur dan mendukung retry otomatis)
-   */
-  async function fetchGeminiResponse(retryCount = 0) {
-    if (apiKeys.length === 0) {
-      return "Silakan konfigurasi API Key terlebih dahulu di file js/chat-ai.js";
-    }
-
-    const apiKey = apiKeys[currentKeyIndex];
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
-
-    const systemPrompt = `Kamu adalah asisten virtual bernama 'AI BerTeduh'.
-Kamu adalah teman ngobrol yang hangat, berempati, dan pengertian terkait kesehatan mental.
-Tugasmu:
-1. Menjadi pendengar yang baik untuk keluh kesah pengguna.
-2. Memberikan saran ringan (seperti relaksasi, napas dalam) jika mereka cemas.
-3. Selalu ingatkan bahwa kamu adalah AI dan BUKAN pengganti psikolog profesional. Sarankan psikolog jika depresi berat.
-4. Gunakan bahasa Indonesia yang santai, ramah, dan empatik. Gunakan panggilan 'kamu' kepada pengguna.`;
-
-    const payload = {
-      system_instruction: { parts: [{ text: systemPrompt }] },
-      contents: chatHistory,
-      generationConfig: {
-        temperature: 0.7,
-        maxOutputTokens: 500,
+    function scrollToBottom() {
+      if ($chatContainer.length && $chatContainer[0]) {
+        $chatContainer.scrollTop($chatContainer[0].scrollHeight);
       }
-    };
+    }
 
-    try {
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        if (response.status === 429) {
-          throw new Error("RATE_LIMIT");
+    /**
+     * Render seluruh percakapan dari riwayat terpadu
+     */
+    function renderHistory(history) {
+      $chatContainer.empty();
+      (history || []).forEach(msg => {
+        let bubbleHtml = "";
+        if (msg.role === "user") {
+          bubbleHtml = `
+            <div class="flex items-start gap-3 w-[90%] md:w-5/6 self-end flex-row-reverse">
+              <div class="w-8 h-8 rounded-full shrink-0 flex items-center justify-center text-xs font-bold bg-gray-600 text-white">KM</div>
+              <div class="p-4 rounded-2xl rounded-tr-none text-sm shadow-md" style="background:#2DD4A8; color:#0D1220;">
+                ${escapeHtml(msg.content)}
+              </div>
+            </div>
+          `;
+        } else {
+          bubbleHtml = `
+            <div class="flex items-start gap-3 w-[90%] md:w-5/6">
+              <div class="w-8 h-8 rounded-full shrink-0 flex items-center justify-center text-xs font-bold shadow-md" style="background:#2DD4A8; color:#0D1220;">AI</div>
+              <div class="p-4 rounded-2xl rounded-tl-none text-sm leading-relaxed border border-white/5 shadow-md" style="background:rgba(255,255,255,0.05); color:#F5F5F5;">
+                ${escapeHtml(msg.content)}
+              </div>
+            </div>
+          `;
         }
-        throw new Error(data.error?.message || "API Error");
-      }
-
-      return data.candidates[0].content.parts[0].text;
-
-    } catch (error) {
-      if (error.message === "RATE_LIMIT" && retryCount < apiKeys.length - 1) {
-        rotateApiKey();
-        return fetchGeminiResponse(retryCount + 1); // Rekursif ke API key selanjutnya
-      }
-      console.error("Gemini API Error:", error);
-      return "Maaf, sistem AI sedang sibuk atau mengalami gangguan jaringan. Silakan coba sesaat lagi.";
+        $chatContainer.append(bubbleHtml);
+      });
+      scrollToBottom();
     }
-  }
 
-  /**
-   * Event handler saat user menekan kirim
-   */
-  async function handleSend() {
-    const text = $chatInput.val().trim();
-    if (!text) return;
+    function addTypingIndicator() {
+      removeTypingIndicator();
+      const typingHtml = `
+        <div id="typing-indicator" class="flex items-start gap-3 w-[90%] md:w-5/6">
+          <div class="w-8 h-8 rounded-full shrink-0 flex items-center justify-center text-xs font-bold" style="background:#2DD4A8; color:#0D1220;">AI</div>
+          <div class="p-4 rounded-2xl rounded-tl-none text-sm text-gray-400 italic flex items-center gap-1.5" style="background:rgba(255,255,255,0.05);">
+            <span>Mengetik pesan</span>
+            <span class="inline-flex gap-1">
+              <span class="animate-bounce">.</span>
+              <span class="animate-bounce" style="animation-delay:0.2s">.</span>
+              <span class="animate-bounce" style="animation-delay:0.4s">.</span>
+            </span>
+          </div>
+        </div>
+      `;
+      $chatContainer.append(typingHtml);
+      scrollToBottom();
+    }
 
-    // 1. Tampilkan di UI & simpan di history
-    $chatInput.val("");
-    addBubble("user", text);
-    
-    chatHistory.push({ role: "user", parts: [{ text: text }] });
+    function removeTypingIndicator() {
+      $("#typing-indicator").remove();
+    }
 
-    // 2. Munculkan loading
-    addTypingIndicator();
-    $sendBtn.prop("disabled", true).css("opacity", "0.5");
+    function escapeHtml(text) {
+      if (!text) return "";
+      return String(text)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
 
-    // 3. Panggil API
-    const botReply = await fetchGeminiResponse();
+    // Pastikan service tersedia
+    if (!window.TeduhChatService) {
+      console.warn('[TeduhChat] TeduhChatService belum terload. Menunggu...');
+      window.addEventListener('bt-chat-service-ready', initKonsultasiChat, { once: true });
+      return;
+    }
 
-    // 4. Hapus loading, tampilkan balasan & simpan di history
-    removeTypingIndicator();
-    $sendBtn.prop("disabled", false).css("opacity", "1");
-    
-    addBubble("model", botReply);
-    chatHistory.push({ role: "model", parts: [{ text: botReply }] });
-  }
+    // Berlangganan perubahan riwayat (sinkronisasi dua arah otomatis)
+    window.TeduhChatService.subscribe(renderHistory);
 
-  // Event Listeners
-  $sendBtn.on("click", handleSend);
-  $chatInput.on("keypress", function(e) {
-    if (e.which === 13) {
+    /**
+     * Handler pengiriman pesan
+     */
+    async function handleSend() {
+      const text = $chatInput.val().trim();
+      if (!text) return;
+
+      $chatInput.val("");
+      addTypingIndicator();
+      $sendBtn.prop("disabled", true).css("opacity", "0.5");
+
+      try {
+        await window.TeduhChatService.sendMessage(text);
+      } catch (err) {
+        console.error('[TeduhChat] Send error:', err);
+      } finally {
+        removeTypingIndicator();
+        $sendBtn.prop("disabled", false).css("opacity", "1");
+        $chatInput.focus();
+      }
+    }
+
+    // Event Listeners
+    $sendBtn.off("click").on("click", handleSend);
+    $chatInput.off("keypress").on("keypress", function (e) {
+      if (e.which === 13) {
+        handleSend();
+      }
+    });
+
+    // Handler untuk Quick-Select Topics (Chip buttons)
+    $(document).off("click", ".quick-chip").on("click", ".quick-chip", function () {
+      const topicText = $(this).attr("data-topic") || $(this).text().trim();
+      $chatInput.val(topicText);
       handleSend();
-    }
-  });
+    });
+  }
 
-  // Handler untuk Quick-Select Topics (Chip buttons)
-  $(document).on("click", ".quick-chip", function() {
-    const topicText = $(this).attr("data-topic") || $(this).text().trim();
-    $chatInput.val(topicText);
-    handleSend();
-  });
+  // Inisialisasi saat DOM dan jQuery siap
+  if (typeof jQuery !== 'undefined') {
+    $(document).ready(initKonsultasiChat);
+  } else {
+    document.addEventListener("DOMContentLoaded", () => {
+      if (typeof jQuery !== 'undefined') {
+        initKonsultasiChat();
+      }
+    });
+  }
 
-});
+  window.initKonsultasiChat = initKonsultasiChat;
+
+})();

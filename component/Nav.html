@@ -1,50 +1,40 @@
 <!--  komponen navbar akan di-fetch & disuntik oleh loadNavigasi() lewat NavRender.js -->
-<nav style="background:rgba(13,18,32,0.85); border-bottom:1px solid rgba(255,255,255,0.08);"
-  class="w-full fixed top-0 left-0 right-0 z-40 backdrop-blur-md">
+<nav class="w-full fixed top-0 left-0 right-0 z-40 bg-[#0D1220]/90 border-b border-white/10 backdrop-blur-md transition-all duration-300">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
     <div class="flex items-center justify-between h-16 gap-6">
 
       <!-- logo -->
-      <a href="/beranda.html" class="flex items-center gap-2 shrink-0">
-        <span class="font-semibold text-lg tracking-tight" style="color:#F5F5F5;">Ber<span
-            style="color:#2DD4A8;">Teduh.</span></span>
+      <a href="/beranda.html" class="flex items-center gap-2 shrink-0 group">
+        <span class="font-semibold text-lg tracking-tight text-[#F5F5F5] transition-transform duration-300 group-hover:scale-105">Ber<span class="text-[#2DD4A8]">Teduh.</span></span>
       </a>
 
       <!-- menu desktop -->
-      <div class="hidden lg:flex items-center gap-1 shrink-0" id="nav-menu">
+      <div class="hidden md:flex items-center gap-1 shrink-0" id="nav-menu">
         <a href="/beranda.html" data-nav="beranda"
-          class="nav-link px-4 py-2 rounded-full text-sm font-medium text-[#8A93A8] hover:text-[#2DD4A8] hover:bg-[rgba(45,212,168,0.12)]  transition">Beranda</a>
+          class="nav-link px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full text-sm font-medium text-[#8A93A8] hover:text-[#2DD4A8] hover:bg-[rgba(45,212,168,0.12)] transition-all duration-200 hover:scale-105">Beranda</a>
         <a href="/blog.html" data-nav="blog"
-          class="nav-link px-4 py-2 rounded-full text-sm font-medium text-[#8A93A8] hover:text-[#2DD4A8] hover:bg-[rgba(45,212,168,0.12)] transition">Blog</a>
+          class="nav-link px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full text-sm font-medium text-[#8A93A8] hover:text-[#2DD4A8] hover:bg-[rgba(45,212,168,0.12)] transition-all duration-200 hover:scale-105">Blog</a>
         <a href="/konsultasi.html" data-nav="konsultasi"
-          class="nav-link px-4 py-2 rounded-full text-sm font-medium text-[#8A93A8] hover:text-[#2DD4A8] hover:bg-[rgba(45,212,168,0.12)] transition">Konsultasi</a>
+          class="nav-link px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full text-sm font-medium text-[#8A93A8] hover:text-[#2DD4A8] hover:bg-[rgba(45,212,168,0.12)] transition-all duration-200 hover:scale-105">Konsultasi</a>
         <a href="/relaksasi.html" data-nav="relaksasi"
-          class="nav-link px-4 py-2 rounded-full text-sm font-medium text-[#8A93A8] hover:text-[#2DD4A8] hover:bg-[rgba(45,212,168,0.12)] transition">Relaksasi</a>
+          class="nav-link px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full text-sm font-medium text-[#8A93A8] hover:text-[#2DD4A8] hover:bg-[rgba(45,212,168,0.12)] transition-all duration-200 hover:scale-105">Relaksasi</a>
         <a href="/riak.html" data-nav="riak"
-          class="nav-link px-4 py-2 rounded-full text-sm font-medium text-[#8A93A8] hover:text-[#2DD4A8] hover:bg-[rgba(45,212,168,0.12)] transition">Riak</a>
+          class="nav-link px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full text-sm font-medium text-[#8A93A8] hover:text-[#2DD4A8] hover:bg-[rgba(45,212,168,0.12)] transition-all duration-200 hover:scale-105">Riak</a>
       </div>
 
-      <!-- tombol menu krabby patty -->
-      <button id="nav-burger" class="lg:hidden p-2 rounded-lg" style="color:#8A93A8;">
-        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-        </svg>
+      <!-- tombol menu hamburger (hanya muncul di mobile < 768px) -->
+      <button id="nav-burger" type="button" class="md:hidden p-2 rounded-xl text-[#8A93A8] hover:text-white hover:bg-white/10 transition-all duration-300 active:scale-90 flex items-center justify-center cursor-pointer" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-menu-mobile">
+        <i id="nav-burger-icon" class="ph ph-list text-2xl transition-transform duration-300 transform"></i>
       </button>
     </div>
 
-    <!-- menu mobile -->
-    <div id="nav-menu-mobile" class="hidden lg:hidden flex flex-col gap-1 absolute top-full left-0 right-0 shadow-lg"
-      style="background:#0D1220; border-bottom:1px solid rgba(255,255,255,0.08);">
-      <a href="/beranda.html" data-nav="beranda" class="nav-link px-6 py-3 text-sm font-medium transition"
-        style="color:#8A93A8;">Beranda</a>
-      <a href="/blog.html" data-nav="blog" class="nav-link px-6 py-3 text-sm font-medium transition"
-        style="color:#8A93A8;">Blog</a>
-      <a href="/konsultasi.html" data-nav="konsultasi" class="nav-link px-6 py-3 text-sm font-medium transition"
-        style="color:#8A93A8;">Konsultasi</a>
-      <a href="/relaksasi.html" data-nav="relaksasi" class="nav-link px-6 py-3 text-sm font-medium transition"
-        style="color:#8A93A8;">Relaksasi</a>
-      <a href="/riak.html" data-nav="riak" class="nav-link px-6 py-3 text-sm font-medium transition"
-        style="color:#8A93A8;">Riak</a>
+    <!-- menu mobile drawer (hanya untuk layar < 768px dan tersembunyi secara default dengan animasi) -->
+    <div id="nav-menu-mobile" class="hidden md:hidden flex-col gap-1.5 absolute top-full left-0 right-0 shadow-2xl px-4 py-4 transition-all duration-300 opacity-0 -translate-y-3 pointer-events-none bg-[#0D1220] border-b border-white/10">
+      <a href="/beranda.html" data-nav="beranda" class="nav-link px-4 py-2.5 rounded-xl text-sm font-medium text-[#8A93A8] hover:text-[#2DD4A8] hover:bg-[rgba(45,212,168,0.12)] transition-all duration-200 hover:translate-x-1">Beranda</a>
+      <a href="/blog.html" data-nav="blog" class="nav-link px-4 py-2.5 rounded-xl text-sm font-medium text-[#8A93A8] hover:text-[#2DD4A8] hover:bg-[rgba(45,212,168,0.12)] transition-all duration-200 hover:translate-x-1">Blog</a>
+      <a href="/konsultasi.html" data-nav="konsultasi" class="nav-link px-4 py-2.5 rounded-xl text-sm font-medium text-[#8A93A8] hover:text-[#2DD4A8] hover:bg-[rgba(45,212,168,0.12)] transition-all duration-200 hover:translate-x-1">Konsultasi</a>
+      <a href="/relaksasi.html" data-nav="relaksasi" class="nav-link px-4 py-2.5 rounded-xl text-sm font-medium text-[#8A93A8] hover:text-[#2DD4A8] hover:bg-[rgba(45,212,168,0.12)] transition-all duration-200 hover:translate-x-1">Relaksasi</a>
+      <a href="/riak.html" data-nav="riak" class="nav-link px-4 py-2.5 rounded-xl text-sm font-medium text-[#8A93A8] hover:text-[#2DD4A8] hover:bg-[rgba(45,212,168,0.12)] transition-all duration-200 hover:translate-x-1">Riak</a>
     </div>
   </div>
 </nav>
@@ -52,17 +42,40 @@
 <script>
   (function () {
     const burger = document.getElementById("nav-burger");
+    const burgerIcon = document.getElementById("nav-burger-icon");
     const mobileMenu = document.getElementById("nav-menu-mobile");
     if (burger && mobileMenu) {
-      burger.addEventListener("click", () => mobileMenu.classList.toggle("hidden"));
-    }
-
-    const current = document.body.dataset.page;
-    if (current) {
-      document.querySelectorAll(`[data-nav="${current}"]`).forEach((el) => {
-        el.style.color = "#2DD4A8";
-        el.style.fontWeight = "600";
-        el.style.background = "rgba(45,212,168,0.12)";
+      burger.addEventListener("click", () => {
+        const isOpen = mobileMenu.classList.contains("nav-mobile-open");
+        if (!isOpen) {
+          burger.setAttribute("aria-expanded", "true");
+          mobileMenu.classList.remove("hidden", "pointer-events-none", "-translate-y-3", "opacity-0");
+          mobileMenu.classList.add("flex", "nav-mobile-open", "translate-y-0", "opacity-100");
+          if (burgerIcon) {
+            burgerIcon.style.transform = "rotate(180deg) scale(1.1)";
+            setTimeout(() => {
+              burgerIcon.className = "ph ph-x text-2xl transition-transform duration-300 transform";
+              burgerIcon.style.transform = "rotate(0deg) scale(1)";
+            }, 120);
+          }
+        } else {
+          burger.setAttribute("aria-expanded", "false");
+          mobileMenu.classList.remove("nav-mobile-open", "translate-y-0", "opacity-100");
+          mobileMenu.classList.add("-translate-y-3", "opacity-0", "pointer-events-none");
+          if (burgerIcon) {
+            burgerIcon.style.transform = "rotate(-180deg) scale(1.1)";
+            setTimeout(() => {
+              burgerIcon.className = "ph ph-list text-2xl transition-transform duration-300 transform";
+              burgerIcon.style.transform = "rotate(0deg) scale(1)";
+            }, 120);
+          }
+          setTimeout(() => {
+            if (!mobileMenu.classList.contains("nav-mobile-open")) {
+              mobileMenu.classList.remove("flex");
+              mobileMenu.classList.add("hidden");
+            }
+          }, 300);
+        }
       });
     }
   })();

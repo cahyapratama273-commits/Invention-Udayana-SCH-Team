@@ -1,3 +1,7 @@
+@import "./animation.css";
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
+
 *,
 html,
 body {
@@ -26,13 +30,6 @@ body {
     color: var(--text-heading);
     font-family: 'Inter', system-ui, sans-serif;
 }
-
-
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
-
-@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
-
-
 
 h1,
 h2,
@@ -96,12 +93,15 @@ a {
     border: 1px solid var(--border-subtle);
     border-radius: 1rem;
     /* 16px */
-    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.28s ease, box-shadow 0.28s ease;
+    transition-delay: 0s !important;
+    will-change: transform;
 }
 
 .teduh-card:hover {
     border-color: var(--accent);
     box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+    transition-delay: 0s !important;
 }
 
 /* ─── BUTTON VARIANTS ─── */
@@ -245,18 +245,6 @@ a {
     z-index: 10;
 }
 
-/* ─── BATEN QUIZ ─── */
-.option-btn {
-    background: var(--bg-card-alt) !important;
-    border-color: var(--border-subtle) !important;
-    color: var(--text-heading) !important;
-}
-
-.option-btn:hover {
-    transform: scale(1.02);
-    background: var(--accent-bg) !important;
-    color: var(--text-heading) !important;
-}
 
 /* ─── CUSTOM VIDEO PLAYER STYLES ─── */
 .video-player-container {
@@ -286,7 +274,7 @@ a {
     justify-content: space-between;
     padding: 12px 14px;
     z-index: 20;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.75s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
 @media (min-width: 640px) {
@@ -581,4 +569,79 @@ input[type="range"].v-slider::-moz-range-thumb {
     font-family: monospace, system-ui, sans-serif;
     color: #FFFFFF;
     font-weight: 700;
+}
+
+/* ─── QUIZ OPTION CARD & EMOJI BOX (JS DRIVEN HOVER & SELECTION) ─── */
+.option-btn,
+.option-btn:hover,
+.option-btn:focus,
+.option-btn:active,
+.option-btn.is-hovered,
+.option-btn.is-selected {
+    background: transparent !important;
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+.option-btn .option-card {
+    transition: border-color 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                background-color 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.option-btn:hover .option-card,
+.option-btn.is-hovered .option-card {
+    background-color: rgba(255, 255, 255, 0.07) !important;
+}
+
+/* Emoji terpisah total dari card & background, tidak ada border maupun bg */
+.option-btn .emoji-box {
+    background: transparent !important;
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* Sembunyikan emoji saat kondisi normal (selain hover / selected) */
+.option-btn .option-emoji {
+    opacity: 0;
+    transform: scale(0.65);
+    transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+}
+
+/* Tampilkan emoji saat mouse in / hover / selected */
+.option-btn.is-hovered .option-emoji,
+.option-btn:hover .option-emoji,
+.option-btn.is-selected .option-emoji {
+    opacity: 1 !important;
+    transform: scale(1) !important;
+}
+
+/* Sedikit elevate saat di-hover */
+.option-btn.is-hovered,
+.option-btn:hover {
+    transform: translateY(-1px);
+}
+
+/* Ubah border option card tanpa mengubah background atau emoji box */
+.option-btn[data-score="hijau"].is-hovered .option-card,
+.option-btn[data-score="hijau"]:hover .option-card,
+.option-btn[data-score="hijau"].is-selected .option-card {
+    border-color: #4ADE80 !important;
+}
+
+.option-btn[data-score="kuning"].is-hovered .option-card,
+.option-btn[data-score="kuning"]:hover .option-card,
+.option-btn[data-score="kuning"].is-selected .option-card {
+    border-color: #FB923C !important;
+}
+
+.option-btn[data-score="merah"].is-hovered .option-card,
+.option-btn[data-score="merah"]:hover .option-card,
+.option-btn[data-score="merah"].is-selected .option-card {
+    border-color: #F87171 !important;
 }
