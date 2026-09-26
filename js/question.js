@@ -229,6 +229,31 @@
     closeExitModal();
   });
 
+  /**
+   * Mengambil URL tujuan redirect dari parameter query atau sessionStorage
+   * (misalnya jika pengguna datang dari link berparameter /relaksasi.html?id=2)
+   */
+  function getRedirectDestination() {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      const redirectParam = params.get("redirect");
+      const storedUrl = sessionStorage.getItem("intendedRedirectUrl");
+      const candidate = redirectParam || storedUrl;
+
+      if (candidate && typeof candidate === "string") {
+        const trimmed = candidate.trim();
+        // Validasi keamanan: hanya path internal relatif (diawali satu slash '/')
+        if (trimmed.startsWith("/") && !trimmed.startsWith("//") && !trimmed.startsWith("/\\")) {
+          sessionStorage.removeItem("intendedRedirectUrl");
+          return trimmed;
+        }
+      }
+    } catch (e) {
+      console.warn("Redirect parse error:", e);
+    }
+    return "/beranda.html";
+  }
+
   // Abandon quiz entirely via modal
   $(document).off("click.firstCheck", "#confirm-exit-btn");
   $(document).on("click.firstCheck", "#confirm-exit-btn", function () {
@@ -239,7 +264,8 @@
     localStorage.setItem("userMentalMessage", "Kamu belum sempat menyelesaikan cek emosi — nggak apa-apa, kamu bisa coba lagi kapan pun. Luangkan waktumu sejenak di sini.");
     localStorage.setItem("userMentalCheckedAt", new Date().toISOString());
 
-    window.location.href = "/beranda.html";
+    const destination = getRedirectDestination();
+    window.location.href = destination;
   });
 
   $(document).off("click.firstCheck", "#exit-modal");
@@ -458,8 +484,9 @@
     localStorage.setItem("userMentalMessage", selectedMessage);
     localStorage.setItem("userMentalCheckedAt", new Date().toISOString());
 
-    // Arahkan ke Beranda
-    window.location.href = "/beranda.html";
+    // Arahkan ke halaman tujuan semula (dengan parameternya) atau default ke Beranda
+    const destination = getRedirectDestination();
+    window.location.href = destination;
   }
 
   // Jalankan kuis saat script dimuat
