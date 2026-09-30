@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <script src="/js/session-gate.js"></script>
+  <script src="/js/bg-randomizer.js"></script>
+  <meta name="author" content="SCH Team - Invention Udayana 2026">
+  <meta property="og:title" content="BerTeduh">
+  <meta property="og:description" content="Atasi stres dan cemas dengan Teduh">
+  <meta property="og:image" content="/assets/Images/Image-Bertapa.webp">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Teduh - Beranda</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="image" href="/assets/Images/artikel/hutan1.webp" fetchpriority="high">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/assets/css/main.css" />
+  <link rel="stylesheet" href="/assets/css/faqs.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css" />
+</head>
+
+<body data-page="beranda" style="background:#0D1220; color:#F5F5F5;">
+
+  <!-- Fixed Background Image -->
+  <div class="absolute top-0 left-0 w-full h-[120vh] pointer-events-none -z-10 overflow-hidden">
+    <img data-session-bg src="/assets/Images/artikel/hutan1.webp" class="w-full h-full object-cover object-center" alt="Background"
+      onerror="this.onerror=null; this.src='/assets/Images/placeholder.svg';">
+    <div class="absolute inset-0 bg-gradient-to-b from-[#0D1220]/80 via-[#0D1220]/90 to-[#0D1220]"></div>
+  </div>
+
+  <canvas id="starfield-canvas" aria-hidden="true"></canvas>
+
+  <header id="navbar-slot" class="relative z-50"></header>
+
+  <main id="app-content" data-page="beranda">
+
+    <!-- HERO SECTION -->
+    <section class="relative w-full text-white overflow-hidden pt-28 sm:pt-36 pb-12 sm:pb-16 mb-12 sm:mb-16">
+      <!-- Main Content Container -->
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 w-full">
+        <div class="max-w-2xl">
+          <div class="flex items-center gap-2 mb-3 sm:mb-4" data-aos="fade-down">
+            <span class="text-[11px] sm:text-xs font-semibold tracking-widest uppercase text-[#2DD4A8]" style="text-shadow: 0 1px 6px rgba(0,0,0,0.9);">Ruang
+              aman untukmu</span>
+          </div>
+
+          <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-4 sm:mb-6 font-serif text-[#F5F5F5]" style="text-shadow: 0 2px 10px rgba(0,0,0,0.85);" data-aos="fade-up" data-aos-delay="100">
+            Dunia Terlalu Terik. <br>
+            <span class="text-[#2DD4A8] italic">Mari Berteduh</span> Sejenak.
+          </h1>
+
+          <p class="text-sm sm:text-base leading-relaxed mb-6 sm:mb-8 lg:mb-10 max-w-lg text-[#CBD5E1]"
+            style="text-shadow: 0 1px 6px rgba(0,0,0,0.9);"
+            data-aos="fade-up" data-aos-delay="200">
+            Ruang aman untuk mengurai isi kepala, membaca kembali emosi, dan beristirahat sejenak dari segala tuntutan.
+          </p>
+
+          <div id="sapaan-wrapper" class="fade-left opacity-0 -translate-x-10 transition-[transform,opacity] duration-700 ease-out mb-6 sm:mb-8">
+            <div id="sapaan-card"
+              class="rounded-2xl p-6 sm:p-8 bg-white/10 backdrop-blur-md border border-white/20 transition-colors duration-300 min-h-[100px] shadow-2xl">
+              <p id="element-judul-beranda" class="text-xl md:text-2xl font-semibold mb-2 font-serif text-[#F5F5F5]">Senang melihatmu baik-baik saja!</p>
+              <p id="element-pesan-beranda" class="text-sm max-w-2xl text-slate-200">Yuk jaga ritme baik ini biar terus menyala hari ini.</p>
+            </div>
+          </div>
+
+          <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 mt-6"
+            data-aos="fade-up" data-aos-delay="400">
+            <a href="/index.html" class="teduh-btn-primary">
+              MULAI BERTEDUH &#8599;
+            </a>
+            <a href="/konsultasi.html" class="teduh-btn-secondary">
+              Konsultasi &#8599;
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Bagian statistik &  artikel -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 pb-16">
+
+
+      <!-- Stats Redesigned Block -->
+      <div
+        class="rounded-3xl p-8 sm:p-10 md:p-12 flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-6 mb-16 transition-all duration-300 overflow-hidden relative bg-[#151B2E] border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.37)]"
+        data-aos="fade-up">
+
+        <!-- Background subtle glow -->
+        <div class="absolute -top-20 -left-20 w-64 h-64 rounded-full blur-[80px] opacity-20 bg-[#2DD4A8] pointer-events-none"></div>
+
+        <!-- Left Side: Overlapping Circles -->
+        <div class="w-full lg:w-1/2 flex items-center justify-center sm:justify-start relative z-10 pl-0 sm:pl-4">
+          <div class="flex items-center -space-x-8 sm:-space-x-12">
+            <!-- Circle 1 (Large) — Artikel -->
+            <div
+              class="w-48 h-48 sm:w-64 sm:h-64 rounded-full flex flex-col items-center justify-center text-center shadow-2xl transition-transform duration-500 hover:scale-105 z-30 flex-shrink-0"
+              data-aos="zoom-in" data-aos-delay="100"
+              style="background:linear-gradient(135deg, #151B2E, #0a0e17); border:1px solid rgba(45, 212, 168, 0.4);">
+              <h3 class="text-4xl sm:text-5xl font-bold tracking-tight text-white mb-1 counter" data-target="40"
+                data-suffix="+">0</h3>
+              <p class="text-xs sm:text-sm font-semibold tracking-wide mt-1 uppercase text-[#2DD4A8]">
+                Artikel</p>
+            </div>
+
+            <!-- Circle 2 (Medium) — Gratis -->
+            <div
+              class="w-40 h-40 sm:w-52 sm:h-52 rounded-full flex flex-col items-center justify-center text-center shadow-xl transition-transform duration-500 hover:scale-105 z-20 flex-shrink-0"
+              data-aos="zoom-in" data-aos-delay="200"
+              style="background:linear-gradient(135deg, #1A2138, #111625); border:1px solid rgba(255, 255, 255, 0.12);">
+              <h3 class="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-1 counter" data-target="100"
+                data-suffix="%">0</h3>
+              <p class="text-[10px] sm:text-xs font-medium tracking-wide px-4 mt-1 text-[#8A93A8]">Gratis,
+                <br>Tanpa Akun
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Side: Text & CTA -->
+        <div
+          class="w-full lg:w-1/2 flex flex-col justify-center text-center lg:text-left mt-6 lg:mt-0 lg:pl-12 relative z-10"
+          data-aos="fade-left" data-aos-delay="200">
+          <span class="text-[11px] sm:text-xs font-semibold tracking-widest uppercase mb-2 inline-block text-[#2DD4A8]">Statistik BerTeduh</span>
+          <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 leading-tight font-serif text-[#F5F5F5]">
+            Dibuat untuk menjaga kesejahteraan emosionalmu.
+          </h2>
+          <p class="text-sm sm:text-base leading-relaxed mb-2 max-w-lg mx-auto lg:mx-0 text-[#8A93A8]">
+            Setiap artikel dan fitur di BerTeduh dirancang untuk membantumu memahami emosi, dengan bahasa yang mudah dan
+            langkah yang bisa langsung dicoba — kapan saja kamu butuh.
+          </p>
+        </div>
+      </div>
+
+      <!-- KARTU FITUR / LAYANAN -->
+      <section class="mb-14 sm:mb-16" aria-labelledby="layanan-heading">
+        <div class="text-center mb-8 sm:mb-10" data-aos="fade-up">
+          <span class="text-[11px] sm:text-xs font-semibold tracking-widest uppercase mb-2 inline-block text-[#2DD4A8]">Layanan Kami</span>
+          <h2 id="layanan-heading" class="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 font-serif text-[#F5F5F5]">Jelajahi
+            Fitur Teduh</h2>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <!-- Card 1 -->
+          <a href="/blog.html"
+            class="service-card group relative backdrop-blur-md rounded-2xl p-6 sm:p-7 transition-all duration-700 hover:-translate-y-3 hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)] hover:border-[#2DD4A8] overflow-hidden flex flex-col z-10 cursor-pointer bg-[#151B2E] border border-white/10 block"
+            data-aos="fade-up" data-aos-delay="100">
+            <div
+              class="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-[-1]">
+            </div>
+
+            <div
+              class="w-[60px] h-[60px] rounded-[18px] flex items-center justify-center mb-7 text-white transition-all duration-500 group-hover:scale-110 group-hover:-rotate-12 group-hover:rounded-[22px] z-10"
+              style="background: linear-gradient(135deg, #14b8a6, #0ea5e9); box-shadow: 0 10px 20px rgba(20, 184, 166, 0.3);">
+              <i class="ph ph-book-open-text text-[28px]"></i>
+            </div>
+
+            <h3 class="text-lg sm:text-xl font-bold mb-3 z-10 tracking-wide font-serif text-[#F5F5F5]">Blog</h3>
+            <p class="text-sm leading-relaxed mb-7 flex-grow z-10 font-medium text-[#8A93A8] group-hover:text-gray-300">Temukan berbagai
+              artikel inspiratif dan tips seputar kesehatan mental.</p>
+
+            <span
+              class="inline-flex items-center text-[15px] font-semibold opacity-70 group-hover:opacity-100 group-hover:translate-x-1.5 transition-all duration-300 z-10 text-[#F5F5F5]">
+              Baca Artikel
+              <i class="ph ph-arrow-right ml-2 text-[18px] transition-transform duration-300 group-hover:translate-x-1"></i>
+            </span>
+          </a>
+
+          <!-- Card 2 -->
+          <a href="/konsultasi.html#psikolog"
+            class="service-card group relative backdrop-blur-md rounded-2xl p-6 sm:p-7 transition-all duration-700 hover:-translate-y-3 hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)] hover:border-[#0ea5e9] overflow-hidden flex flex-col z-10 cursor-pointer bg-[#151B2E] border border-white/10 block"
+            data-aos="fade-up" data-aos-delay="200">
+            <div
+              class="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-[-1]">
+            </div>
+
+            <div
+              class="w-[60px] h-[60px] rounded-[18px] flex items-center justify-center mb-7 text-white transition-all duration-500 group-hover:scale-110 group-hover:rotate-12 group-hover:rounded-[22px] z-10"
+              style="background: linear-gradient(135deg, #0ea5e9, #38bdf8); box-shadow: 0 10px 20px rgba(14, 165, 233, 0.3);">
+              <i class="ph ph-handshake text-[28px]"></i>
+            </div>
+
+            <h3 class="text-lg sm:text-xl font-bold mb-3 z-10 tracking-wide font-serif text-[#F5F5F5]">Konsultasi Psikolog</h3>
+            <p class="text-sm leading-relaxed mb-7 flex-grow z-10 font-medium text-[#8A93A8]">Temukan jalur untuk berbicara dengan psikolog profesional.</p>
+
+            <span
+              class="inline-flex items-center text-[15px] font-semibold opacity-70 group-hover:opacity-100 group-hover:translate-x-1.5 transition-all duration-300 z-10 text-[#F5F5F5]">
+              Mulai Konsultasi
+              <i class="ph ph-arrow-right ml-2 text-[18px] transition-transform duration-300 group-hover:translate-x-1"></i>
+            </span>
+          </a>
+
+          <!-- Card 3 -->
+          <a href="/konsultasi.html#chat-ai"
+            class="service-card group relative backdrop-blur-md rounded-2xl p-6 sm:p-7 transition-all duration-700 hover:-translate-y-3 hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)] hover:border-[#818cf8] overflow-hidden flex flex-col z-10 cursor-pointer bg-[#151B2E] border border-white/10 block"
+            data-aos="fade-up" data-aos-delay="300">
+            <div
+              class="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-[-1]">
+            </div>
+
+            <div
+              class="w-[60px] h-[60px] rounded-[18px] flex items-center justify-center mb-7 text-white transition-all duration-500 group-hover:scale-110 group-hover:-rotate-12 group-hover:rounded-[22px] z-10"
+              style="background: linear-gradient(135deg, #6366f1, #818cf8); box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);">
+              <i class="ph ph-chat-circle-dots text-[28px]"></i>
+            </div>
+
+            <h3 class="text-lg sm:text-xl font-bold mb-3 z-10 tracking-wide font-serif text-[#F5F5F5]">Teman Cerita AI</h3>
+            <p class="text-sm leading-relaxed mb-7 flex-grow z-10 font-medium text-[#8A93A8]">Bercerita kapan saja dengan Teman Cerita AI. Bukan pengganti psikolog.</p>
+
+            <span
+              class="inline-flex items-center text-[15px] font-semibold opacity-70 group-hover:opacity-100 group-hover:translate-x-1.5 transition-all duration-300 z-10 text-[#F5F5F5]">
+              Mulai Chat
+              <i class="ph ph-arrow-right ml-2 text-[18px] transition-transform duration-300 group-hover:translate-x-1"></i>
+            </span>
+          </a>
+
+          <!-- Card 4 -->
+          <a href="/relaksasi.html"
+            class="service-card group relative backdrop-blur-md rounded-2xl p-6 sm:p-7 transition-all duration-700 hover:-translate-y-3 hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)] hover:border-[#14b8a6] overflow-hidden flex flex-col z-10 cursor-pointer bg-[#151B2E] border border-white/10 block"
+            data-aos="fade-up" data-aos-delay="400">
+            <div
+              class="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-[-1]">
+            </div>
+
+            <div
+              class="w-[60px] h-[60px] rounded-[18px] flex items-center justify-center mb-7 text-white transition-all duration-500 group-hover:scale-110 group-hover:rotate-12 group-hover:rounded-[22px] z-10"
+              style="background: linear-gradient(135deg, #14b8a6, #0ea5e9); box-shadow: 0 10px 20px rgba(20, 184, 166, 0.3);">
+              <i class="ph ph-leaf text-[28px]"></i>
+            </div>
+
+            <h3 class="text-lg sm:text-xl font-bold mb-3 z-10 tracking-wide font-serif text-[#F5F5F5]">Relaksasi</h3>
+            <p class="text-sm leading-relaxed mb-7 flex-grow z-10 font-medium text-[#8A93A8]">Nikmati berbagai
+              panduan relaksasi untuk menenangkan pikiranmu.</p>
+
+            <span
+              class="inline-flex items-center text-[15px] font-semibold opacity-70 group-hover:opacity-100 group-hover:translate-x-1.5 transition-all duration-300 z-10 text-[#F5F5F5]">
+              Mulai Relaksasi
+              <i class="ph ph-arrow-right ml-2 text-[18px] transition-transform duration-300 group-hover:translate-x-1"></i>
+            </span>
+          </a>
+        </div>
+      </section>
+
+      <!-- MENGAPA MEMILIH KAMI -->
+      <section class="mb-14 sm:mb-16" aria-labelledby="keunggulan-heading">
+        <div class="text-center mb-8 sm:mb-10" data-aos="fade-up">
+          <span class="text-[11px] sm:text-xs font-semibold tracking-widest uppercase mb-2 inline-block text-[#2DD4A8]">Keunggulan Kami</span>
+          <h2 id="keunggulan-heading" class="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4 font-serif text-[#F5F5F5]">
+            Mengapa Memilih Kami?
+          </h2>
+          <p class="text-sm md:text-base max-w-2xl mx-auto leading-relaxed text-[#8A93A8]">
+            Kami menghadirkan ruang aman untuk kesehatan mentalmu, mudah diakses, modern, dan berpusat pada ketenangan.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[minmax(280px,auto)]">
+          <!-- Item 1: Wide Half (2 kolom) -->
+          <article
+            class="group relative backdrop-blur-md rounded-[40px] p-8 md:p-10 transition-all duration-700 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)] hover:border-[#2DD4A8] overflow-hidden flex flex-col md:col-span-2 bg-[#151B2E] border border-white/10"
+            data-aos="fade-up" data-aos-delay="100">
+            <!-- Orb 1 -->
+            <div
+              class="absolute w-[150px] h-[150px] rounded-full blur-[50px] opacity-20 group-hover:opacity-40 group-hover:scale-125 transition-all duration-700 z-0 -top-5 -right-5 bg-[#2DD4A8]"></div>
+
+            <div class="relative z-10 flex flex-col h-full">
+              <div
+                class="w-16 h-16 rounded-full flex items-center justify-center mb-6 shadow-lg transition-transform duration-500 group-hover:scale-110 group-hover:-translate-y-1 bg-white/[0.05] text-[#2DD4A8] border border-white/10">
+                <i class="ph ph-fingerprint text-[28px]"></i>
+              </div>
+              <h3 class="text-xl sm:text-2xl font-bold mb-3 tracking-wide font-serif text-[#F5F5F5]">Ruang Aman untuk Bercerita</h3>
+              <p class="text-[15px] leading-relaxed flex-grow font-normal text-[#8A93A8]">Hasil Cek Emosi tersimpan di perangkatmu dan kamu tidak perlu membuat akun. Percakapan dengan Teman Cerita AI diproses layanan AI pihak ketiga, jadi hindari membagikan data pribadi yang sensitif.</p>
+            </div>
+          </article>
+
+          <!-- Item 2: Medium (1 kolom) -->
+          <article
+            class="group relative backdrop-blur-md rounded-[40px] p-8 md:p-10 transition-all duration-700 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)] hover:border-[#38bdf8] overflow-hidden flex flex-col md:col-span-1 bg-[#151B2E] border border-white/10"
+            data-aos="fade-up" data-aos-delay="200">
+            <!-- Orb 2 -->
+            <div
+              class="absolute w-[150px] h-[150px] rounded-full blur-[50px] opacity-20 group-hover:opacity-40 group-hover:scale-125 transition-all duration-700 z-0 -bottom-8 -left-8 bg-[#38bdf8]"></div>
+
+            <div class="relative z-10 flex flex-col h-full">
+              <div
+                class="w-16 h-16 rounded-full flex items-center justify-center mb-6 shadow-lg transition-transform duration-500 group-hover:scale-110 group-hover:-translate-y-1 bg-white/[0.05] text-[#38bdf8] border border-white/10">
+                <i class="ph ph-clock text-[28px]"></i>
+              </div>
+              <h3 class="text-xl sm:text-2xl font-bold mb-3 tracking-wide font-serif text-[#F5F5F5]">Hadir Kapan Saja</h3>
+              <p class="text-[15px] leading-relaxed flex-grow font-normal text-[#8A93A8]">Dukungan emosional yang
+                selalu ada untukmu. Asisten AI kami siap mendengarkan 24/7, kapan pun kamu butuh teman bicara.</p>
+            </div>
+          </article>
+
+          <!-- Item 3: Medium (1 kolom) -->
+          <article
+            class="group relative backdrop-blur-md rounded-[40px] p-8 md:p-10 transition-all duration-700 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)] hover:border-[#c084fc] overflow-hidden flex flex-col md:col-span-1 bg-[#151B2E] border border-white/10"
+            data-aos="fade-up" data-aos-delay="100">
+            <!-- Orb 3 -->
+            <div
+              class="absolute w-[150px] h-[150px] rounded-full blur-[50px] opacity-20 group-hover:opacity-40 group-hover:scale-125 transition-all duration-700 z-0 -top-8 -left-8 bg-[#c084fc]"></div>
+
+            <div class="relative z-10 flex flex-col h-full">
+              <div
+                class="w-16 h-16 rounded-full flex items-center justify-center mb-6 shadow-lg transition-transform duration-500 group-hover:scale-110 group-hover:-translate-y-1 bg-white/[0.05] text-[#c084fc] border border-white/10">
+                <i class="ph ph-seal-check text-[28px]"></i>
+              </div>
+              <h3 class="text-xl sm:text-2xl font-bold mb-3 tracking-wide font-serif text-[#F5F5F5]">Jembatan ke Psikolog</h3>
+              <p class="text-[15px] leading-relaxed flex-grow font-normal text-[#8A93A8]">Kami membantu kamu menemukan jalur bantuan profesional saat kamu butuh pendampingan lebih dari sekadar membaca dan berlatih.</p>
+            </div>
+          </article>
+
+          <!-- Item 4: Wide Half (2 kolom) -->
+          <article
+            class="group relative backdrop-blur-md rounded-[40px] p-8 md:p-10 transition-all duration-700 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)] hover:border-[#fb923c] overflow-hidden flex flex-col md:col-span-2 bg-[#151B2E] border border-white/10"
+            data-aos="fade-up" data-aos-delay="200">
+            <!-- Orb 4 -->
+            <div
+              class="absolute w-[200px] h-[200px] rounded-full blur-[90px] opacity-20 group-hover:opacity-40 group-hover:scale-125 transition-all duration-700 z-0 -bottom-12 -right-8 bg-[#fb923c]"></div>
+
+            <div class="relative z-10 flex flex-col h-full">
+              <div
+                class="w-16 h-16 rounded-full flex items-center justify-center mb-6 shadow-lg transition-transform duration-500 group-hover:scale-110 group-hover:-translate-y-1 bg-white/[0.05] text-[#fb923c] border border-white/10">
+                <i class="ph ph-thumbs-up text-[28px]"></i>
+              </div>
+              <h3 class="text-xl sm:text-2xl font-bold mb-3 tracking-wide font-serif text-[#F5F5F5]">Pendekatan Personal</h3>
+              <p class="text-[15px] leading-relaxed flex-grow font-normal text-[#8A93A8]">Perjalanan setiap orang unik. Rekomendasi bacaan dan latihan disesuaikan dengan kondisimu saat ini, langkah demi langkah.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- KENAPA HARUS BERTEDUH -->
+      <section class="mb-14 sm:mb-16" aria-labelledby="kenapa-heading">
+        <div class="text-center mb-8 sm:mb-10" data-aos="fade-up">
+          <span class="text-[11px] sm:text-xs font-semibold tracking-widest uppercase mb-2 inline-block text-[#2DD4A8]">Kenapa BerTeduh</span>
+          <h2 id="kenapa-heading" class="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4 font-serif text-[#F5F5F5]">
+            Kenapa Harus BerTeduh?
+          </h2>
+          <p class="text-sm md:text-base max-w-2xl mx-auto leading-relaxed text-[#8A93A8]">
+            Ruang yang dibangun untuk membantumu merasa lebih baik, dengan caramu sendiri.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <!-- Card 1: Privasi Terjaga -->
+          <article
+            class="group slide-top relative rounded-2xl p-5 sm:p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)] hover:border-[#2DD4A8] overflow-hidden flex flex-col bg-[#1A2138] border border-white/10"
+            data-aos="fade-up" data-aos-delay="100">
+            <div
+              class="w-[60px] h-[60px] rounded-[18px] flex items-center justify-center mb-6 transition-all duration-500 group-hover:scale-110 group-hover:-rotate-6 bg-[#2DD4A8]/10">
+              <i class="ph ph-shield-check text-[28px] text-[#2DD4A8]"></i>
+            </div>
+            <h3 class="text-lg font-bold mb-2 tracking-wide font-serif text-[#F5F5F5]">Privasi Terjaga</h3>
+            <p class="text-sm leading-relaxed font-normal flex-grow text-[#8A93A8]">Semua hasil quiz dan
+              preferensimu tersimpan aman di perangkatmu sendiri.</p>
+          </article>
+
+          <!-- Card 2: Sesuai Kondisimu -->
+          <article
+            class="group relative rounded-2xl p-5 sm:p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)] hover:border-[#2DD4A8] overflow-hidden flex flex-col bg-[#1A2138] border border-white/10"
+            data-aos="fade-up" data-aos-delay="200">
+            <div
+              class="w-[60px] h-[60px] rounded-[18px] flex items-center justify-center mb-6 transition-all duration-500 group-hover:scale-110 group-hover:rotate-6 bg-[#2DD4A8]/10">
+              <i class="ph ph-sliders-horizontal text-[28px] text-[#2DD4A8]"></i>
+            </div>
+            <h3 class="text-lg font-bold mb-2 tracking-wide font-serif text-[#F5F5F5]">Sesuai Kondisimu</h3>
+            <p class="text-sm leading-relaxed font-normal flex-grow text-[#8A93A8]">Rekomendasi menyesuaikan
+              hasil Cek-Emosi, bukan konten generik untuk semua orang.</p>
+          </article>
+
+          <!-- Card 3: Tanpa Menghakimi -->
+          <article
+            class="group relative rounded-2xl p-5 sm:p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)] hover:border-[#2DD4A8] overflow-hidden flex flex-col bg-[#1A2138] border border-white/10"
+            data-aos="fade-up" data-aos-delay="300">
+            <div
+              class="w-[60px] h-[60px] rounded-[18px] flex items-center justify-center mb-6 transition-all duration-500 group-hover:scale-110 group-hover:-rotate-6 bg-[#2DD4A8]/10">
+              <i class="ph ph-hand-heart text-[28px] text-[#2DD4A8]"></i>
+            </div>
+            <h3 class="text-lg font-bold mb-2 tracking-wide font-serif text-[#F5F5F5]">Tanpa Menghakimi</h3>
+            <p class="text-sm leading-relaxed font-normal flex-grow text-[#8A93A8]">Ruang buat cerita atau
+              sekadar membaca, tanpa perlu takut dinilai.</p>
+          </article>
+
+          <!-- Card 4: Mulai Kapan Saja -->
+          <article
+            class="group relative rounded-2xl p-5 sm:p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)] hover:border-[#2DD4A8] overflow-hidden flex flex-col bg-[#1A2138] border border-white/10"
+            data-aos="fade-up" data-aos-delay="400">
+            <div
+              class="w-[60px] h-[60px] rounded-[18px] flex items-center justify-center mb-6 transition-all duration-500 group-hover:scale-110 group-hover:rotate-6 bg-[#2DD4A8]/10">
+              <i class="ph ph-clock-countdown text-[28px] text-[#2DD4A8]"></i>
+            </div>
+            <h3 class="text-lg font-bold mb-2 tracking-wide font-serif text-[#F5F5F5]">Mulai Kapan Saja</h3>
+            <p class="text-sm leading-relaxed font-normal flex-grow text-[#8A93A8]">Nggak perlu janji temu, mulai
+              dari langkah kecil kapan pun kamu siap.</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- Bagian Rekomendasi artikel -->
+      <section class="mb-6" aria-labelledby="rekomendasi-title" data-aos="fade-up">
+        <div class="flex items-center justify-between mb-6">
+          <div>
+            <p id="rekomendasi-label" class="text-[11px] sm:text-xs font-semibold uppercase tracking-widest mb-2 text-[#2DD4A8]"></p>
+            <h2 id="rekomendasi-title" class="text-2xl sm:text-3xl font-bold font-serif text-[#F5F5F5]"></h2>
+          </div>
+          <a href="./blog.html" class="text-xs sm:text-sm font-semibold text-[#2DD4A8] hover:text-[#25b892] transition-colors">Lihat semua &rarr;</a>
+        </div>
+
+        <!-- Grid Artikel -->
+        <div id="artikel-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" data-aos="fade-up" data-aos-delay="150">
+          <div class="tile rounded-2xl h-72 animate-pulse bg-[#151B2E]"></div>
+          <div class="tile rounded-2xl h-72 animate-pulse bg-[#151B2E]"></div>
+          <div class="tile rounded-2xl h-72 animate-pulse bg-[#151B2E]"></div>
+        </div>
+      </section>
+    </section>
+
+    <!-- Header FAQs -->
+    <section class="w-full relative pt-12 sm:pt-16 pb-6 text-center" data-aos="fade-up">
+      <div class="max-w-2xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
+        <span class="text-[11px] sm:text-xs font-semibold tracking-widest uppercase mb-2 inline-block text-[#2DD4A8]">Pusat Bantuan</span>
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-medium mb-3 font-serif text-[#F5F5F5]">Frequently Asked Questions</h2>
+        <p class="text-xs sm:text-sm text-[#8A93A8]">
+          Apa yang perlu kamu ketahui dari BerTeduh.
+          <a href="/konsultasi.html" class="underline underline-offset-2 transition text-[#2DD4A8] hover:opacity-80">Konsultasi</a> pada kami.
+        </p>
+      </div>
+    </section>
+
+    <!-- FAQs Accordion Content -->
+    <section class="max-w-2xl md:max-w-4xl lg:max-w-5xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 pb-20 sm:pb-24">
+      <div class="space-y-3.5">
+
+        <!-- FAQ Item 1 -->
+        <div class="faq-row" data-faq-item data-aos="fade-up" data-aos-delay="50">
+          <button type="button" class="faq-card" id="faq-btn-1" aria-expanded="false" aria-controls="faq-drawer-1">
+            <div class="faq-card-left">
+              <div class="faq-card-icon">
+                <i class="ph ph-chat-circle-dots text-xl"></i>
+              </div>
+              <h3 class="faq-card-title">Cara konsultasi?</h3>
+            </div>
+            <div class="faq-card-arrow">
+              <i aria-hidden="true" class="ph ph-caret-down text-xl shrink-0 faq-arrow"></i>
+            </div>
+          </button>
+          <div class="faq-drawer" id="faq-drawer-1" role="region" aria-labelledby="faq-btn-1">
+            <div class="faq-drawer-inner">
+              <div class="faq-drawer-mobile-back">
+                <i class="ph ph-arrow-left text-sm" aria-hidden="true"></i>
+                <span>Kembali ke pertanyaan</span>
+              </div>
+              <p class="faq-drawer-text">
+                Kamu bisa langsung mengunjungi halaman <a href="/konsultasi.html" class="underline"
+                  style="color:#2DD4A8;">Konsultasi</a> dan memilih jadwal yang tersedia.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ Item 2 -->
+        <div class="faq-row" data-faq-item data-aos="fade-up" data-aos-delay="100">
+          <button type="button" class="faq-card" id="faq-btn-2" aria-expanded="false" aria-controls="faq-drawer-2">
+            <div class="faq-card-left">
+              <div class="faq-card-icon">
+                <i class="ph ph-sparkle text-xl"></i>
+              </div>
+              <h3 class="faq-card-title">Apakah layanan ini gratis?</h3>
+            </div>
+            <div class="faq-card-arrow">
+              <i aria-hidden="true" class="ph ph-caret-down text-xl shrink-0 faq-arrow"></i>
+            </div>
+          </button>
+          <div class="faq-drawer" id="faq-drawer-2" role="region" aria-labelledby="faq-btn-2">
+            <div class="faq-drawer-inner">
+              <div class="faq-drawer-mobile-back">
+                <i class="ph ph-arrow-left text-sm" aria-hidden="true"></i>
+                <span>Kembali ke pertanyaan</span>
+              </div>
+              <p class="faq-drawer-text">
+                Sebagian besar konten di BerTeduh dapat diakses secara gratis. Beberapa fitur konsultasi lanjutan mungkin
+                memerlukan pendaftaran.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ Item 3 -->
+        <div class="faq-row" data-faq-item data-aos="fade-up" data-aos-delay="150">
+          <button type="button" class="faq-card" id="faq-btn-3" aria-expanded="false" aria-controls="faq-drawer-3">
+            <div class="faq-card-left">
+              <div class="faq-card-icon">
+                <i class="ph ph-shield-check text-xl"></i>
+              </div>
+              <h3 class="faq-card-title">Apakah data saya aman dan privat?</h3>
+            </div>
+            <div class="faq-card-arrow">
+              <i aria-hidden="true" class="ph ph-caret-down text-xl shrink-0 faq-arrow"></i>
+            </div>
+          </button>
+          <div class="faq-drawer" id="faq-drawer-3" role="region" aria-labelledby="faq-btn-3">
+            <div class="faq-drawer-inner">
+              <div class="faq-drawer-mobile-back">
+                <i class="ph ph-arrow-left text-sm" aria-hidden="true"></i>
+                <span>Kembali ke pertanyaan</span>
+              </div>
+              <p class="faq-drawer-text">
+                Ya. Semua jawaban kuesioner disimpan secara lokal di browser kamu dan tidak dikirim ke server mana pun. Privasi kamu adalah prioritas kami. Pesan yang kamu kirim ke Teman Cerita AI diproses oleh layanan AI pihak ketiga (Google Gemini).
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ Item 4 -->
+        <div class="faq-row" data-faq-item data-aos="fade-up" data-aos-delay="200">
+          <button type="button" class="faq-card" id="faq-btn-4" aria-expanded="false" aria-controls="faq-drawer-4">
+            <div class="faq-card-left">
+              <div class="faq-card-icon">
+                <i class="ph ph-flower-lotus text-xl"></i>
+              </div>
+              <h3 class="faq-card-title">Apa itu fitur Relaksasi?</h3>
+            </div>
+            <div class="faq-card-arrow">
+              <i aria-hidden="true" class="ph ph-caret-down text-xl shrink-0 faq-arrow"></i>
+            </div>
+          </button>
+          <div class="faq-drawer" id="faq-drawer-4" role="region" aria-labelledby="faq-btn-4">
+            <div class="faq-drawer-inner">
+              <div class="faq-drawer-mobile-back">
+                <i class="ph ph-arrow-left text-sm" aria-hidden="true"></i>
+                <span>Kembali ke pertanyaan</span>
+              </div>
+              <p class="faq-drawer-text">
+                Fitur Relaksasi menyediakan panduan meditasi, latihan pernapasan, dan teknik grounding untuk membantu kamu
+                menenangkan pikiran kapan saja.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ Item 5 -->
+        <div class="faq-row" data-faq-item data-aos="fade-up" data-aos-delay="250">
+          <button type="button" class="faq-card" id="faq-btn-5" aria-expanded="false" aria-controls="faq-drawer-5">
+            <div class="faq-card-left">
+              <div class="faq-card-icon">
+                <i class="ph ph-clipboard-text text-xl"></i>
+              </div>
+              <h3 class="faq-card-title">Apakah hasil kuesioner saya tersimpan?</h3>
+            </div>
+            <div class="faq-card-arrow">
+              <i aria-hidden="true" class="ph ph-caret-down text-xl shrink-0 faq-arrow"></i>
+            </div>
+          </button>
+          <div class="faq-drawer" id="faq-drawer-5" role="region" aria-labelledby="faq-btn-5">
+            <div class="faq-drawer-inner">
+              <div class="faq-drawer-mobile-back">
+                <i class="ph ph-arrow-left text-sm" aria-hidden="true"></i>
+                <span>Kembali ke pertanyaan</span>
+              </div>
+              <p class="faq-drawer-text">
+                Hasil kuesioner disimpan di localStorage browser kamu, sehingga rekomendasi tetap terjaga selama kamu
+                menggunakan perangkat yang sama.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ Item 6 -->
+        <div class="faq-row" data-faq-item data-aos="fade-up" data-aos-delay="300">
+          <button type="button" class="faq-card" id="faq-btn-6" aria-expanded="false" aria-controls="faq-drawer-6">
+            <div class="faq-card-left">
+              <div class="faq-card-icon">
+                <i class="ph ph-envelope-simple text-xl"></i>
+              </div>
+              <h3 class="faq-card-title">Bagaimana cara menghubungi tim?</h3>
+            </div>
+            <div class="faq-card-arrow">
+              <i aria-hidden="true" class="ph ph-caret-down text-xl shrink-0 faq-arrow"></i>
+            </div>
+          </button>
+          <div class="faq-drawer" id="faq-drawer-6" role="region" aria-labelledby="faq-btn-6">
+            <div class="faq-drawer-inner">
+              <div class="faq-drawer-mobile-back">
+                <i class="ph ph-arrow-left text-sm" aria-hidden="true"></i>
+                <span>Kembali ke pertanyaan</span>
+              </div>
+              <p class="faq-drawer-text">
+                Kamu dapat menghubungi kami melalui email atau media sosial yang tersedia di bagian footer halaman ini.
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <div id="footer"></div>
+
+  <script defer src="/js/ArtikelCard.js"></script>
+  <script defer src="/js/NavRender.js"></script>
+  <script defer src="/js/beranda/Beranda.js"></script>
+  <script defer src="/js/Nav.js"></script>
+  <script defer src="/js/Footer.js"></script>
+  <script defer src="/js/main.js"></script>
+  <script defer src="/js/beranda/Count.js"></script>
+  <script defer src="/js/faqs/faq.js"></script>
+</body>
+
+</html>

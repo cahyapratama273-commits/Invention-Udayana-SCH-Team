@@ -1,0 +1,71 @@
+<!-- ========================================================================== -->
+<!-- BAGIAN: Komponen Kuis Pertanyaan 7 (Evaluasi Stabilitas Emosi / Mood Swings)-->
+<!-- FUNGSI: Mengidentifikasi fluktuasi emosi drastis atau sensitivitas berlebih -->
+<!-- SUMBER: Modul Kuesioner BerTeduh (component/questions/q7.html)             -->
+<!-- ========================================================================== -->
+<div class="question-card py-2 px-2 sm:px-4" data-index="7" data-dimensi="emosi">
+
+  <!-- BAGIAN: Judul Utama Pertanyaan (Heading) -->
+  <!-- FUNGSI: Menanyakan kestabilan atau kecenderungan naik-turun emosi pengguna -->
+  <!-- SUMBER: Naskah Pertanyaan Kuesioner BerTeduh -->
+  <h2 class="font-sans text-[19px] sm:text-[22px] font-semibold text-white mt-1 mb-5 leading-relaxed tracking-wide">
+    Ngomongin soal pikiran, gimana perasaanmu? Suka naik-turun drastis atau relatif stabil?
+  </h2>
+
+  <!-- BAGIAN: Kontainer Opsi Pilihan Jawaban -->
+  <!-- FUNGSI: Membungkus tombol-tombol pilihan stabilitas emosi beserta ikon wajah CDN -->
+  <div class="space-y-3">
+
+    <!-- BAGIAN: Tombol Opsi 1 (Skor Hijau - Emosi Stabil) -->
+    <!-- FUNGSI: Memilih indikator emosi stabil dan tenang -->
+    <!-- SUMBER CDN ICON: Twitter Twemoji SVG via jsDelivr CDN (1f60a.svg - Smiling Face with Smiling Eyes) -->
+    <button type="button" class="option-btn flex items-center gap-3 w-full text-left bg-transparent p-0 border-0 cursor-pointer outline-none select-none" data-score="hijau">
+      <!-- FUNGSI: Kartu teks pilihan jawaban -->
+      <div class="option-card flex-1 min-w-0 p-3 sm:p-3.5 rounded-xl border border-white/10 bg-white/[0.04]">
+        <span class="text-base sm:text-[17px] font-medium text-[#F5F5F5] leading-relaxed block">
+          Relatif stabil, nggak naik-turun drastis
+        </span>
+      </div>
+      <!-- FUNGSI: Kontainer ikon ekspresi wajah -->
+      <div class="emoji-box w-10 h-10 min-w-[40px] min-h-[40px] shrink-0 flex items-center justify-center">
+        <!-- SUMBER: https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f60a.svg -->
+        <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f60a.svg" alt="Stabil" class="option-emoji w-6 h-6 object-contain pointer-events-none">
+      </div>
+    </button>
+
+    <!-- BAGIAN: Tombol Opsi 2 (Skor Kuning - Emosi Sensitif / Gampang Tersulut) -->
+    <!-- FUNGSI: Memilih indikator emosi agak sensitif dari biasanya -->
+    <!-- SUMBER CDN ICON: Twitter Twemoji SVG via jsDelivr CDN (1f641.svg - Slightly Frowning Face) -->
+    <button type="button" class="option-btn flex items-center gap-3 w-full text-left bg-transparent p-0 border-0 cursor-pointer outline-none select-none" data-score="kuning">
+      <!-- FUNGSI: Kartu teks pilihan jawaban -->
+      <div class="option-card flex-1 min-w-0 p-3 sm:p-3.5 rounded-xl border border-white/10 bg-white/[0.04]">
+        <span class="text-base sm:text-[17px] font-medium text-[#F5F5F5] leading-relaxed block">
+          Kadang gampang tersulut atau gampang sedih dari biasanya
+        </span>
+      </div>
+      <!-- FUNGSI: Kontainer ikon ekspresi wajah -->
+      <div class="emoji-box w-10 h-10 min-w-[40px] min-h-[40px] shrink-0 flex items-center justify-center">
+        <!-- SUMBER: https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f641.svg -->
+        <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f641.svg" alt="Sensitif" class="option-emoji w-6 h-6 object-contain pointer-events-none">
+      </div>
+    </button>
+
+    <!-- BAGIAN: Tombol Opsi 3 (Skor Merah - Mood Swings Ekstrem / Mudah Sedih & Marah) -->
+    <!-- FUNGSI: Memilih emosi fluktuatif tinggi yang ekstrem -->
+    <!-- SUMBER CDN ICON: Twitter Twemoji SVG via jsDelivr CDN (1f622.svg - Crying Face) -->
+    <button type="button" class="option-btn flex items-center gap-3 w-full text-left bg-transparent p-0 border-0 cursor-pointer outline-none select-none" data-score="merah">
+      <!-- FUNGSI: Kartu teks pilihan jawaban -->
+      <div class="option-card flex-1 min-w-0 p-3 sm:p-3.5 rounded-xl border border-white/10 bg-white/[0.04]">
+        <span class="text-base sm:text-[17px] font-medium text-[#F5F5F5] leading-relaxed block">
+          Lumayan naik-turun, kadang gampang banget marah, sedih, atau nangis
+        </span>
+      </div>
+      <!-- FUNGSI: Kontainer ikon ekspresi wajah -->
+      <div class="emoji-box w-10 h-10 min-w-[40px] min-h-[40px] shrink-0 flex items-center justify-center">
+        <!-- SUMBER: https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f622.svg -->
+        <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f622.svg" alt="Naik Turun" class="option-emoji w-6 h-6 object-contain pointer-events-none">
+      </div>
+    </button>
+
+  </div>
+</div>

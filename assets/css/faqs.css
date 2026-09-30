@@ -1,0 +1,351 @@
+/* ═══════════════════════════════════════════════════════════════
+   BERTLDUH FAQ — HORIZONTAL DRAWER (DESKTOP) & VERTICAL ACCORDION (MOBILE)
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ─── FAQ ROW CONTAINER (MOBILE SLIDING DECK) ─── */
+.faq-row {
+  display: block;
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 16px;
+  box-sizing: border-box;
+  transition: min-height 500ms cubic-bezier(0.16, 1, 0.3, 1),
+              margin-bottom 400ms ease;
+}
+
+/* ─── FAQ QUESTION CARD (BUTTON) ─── */
+.faq-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 1.15rem 1.25rem;
+  background: rgba(21, 27, 46, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-left: 4px solid transparent;
+  border-radius: 16px;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  outline: none;
+  text-align: left;
+  user-select: none;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 2;
+  transform: translateX(0);
+  opacity: 1;
+  transition: transform 520ms cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 420ms cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.faq-card:hover {
+  background: rgba(26, 33, 56, 0.85);
+  border-color: rgba(255, 255, 255, 0.15);
+  border-left-color: #2DD4A8;
+}
+
+.faq-card:focus-visible {
+  outline: 2px solid #2DD4A8;
+  outline-offset: 3px;
+}
+
+/* On mobile, when open, question slides out to the left */
+.faq-row.is-open .faq-card {
+  transform: translateX(-105%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.faq-card-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  min-width: 0;
+}
+
+.faq-card-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.65rem;
+  flex-shrink: 0;
+  background: rgba(45, 212, 168, 0.1);
+  border: 1px solid rgba(45, 212, 168, 0.2);
+  color: #2DD4A8;
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+.faq-card:hover .faq-card-icon,
+.faq-row.is-open .faq-card-icon {
+  background: rgba(45, 212, 168, 0.2);
+  border-color: rgba(45, 212, 168, 0.4);
+  color: #2DD4A8;
+}
+
+.faq-card-title {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #F5F5F5;
+  line-height: 1.4;
+  margin: 0;
+  transition: color 0.2s ease;
+}
+
+.faq-card:hover .faq-card-title,
+.faq-row.is-open .faq-card-title {
+  color: #FFFFFF;
+}
+
+.faq-card-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-left: 0.75rem;
+}
+
+.faq-arrow {
+  color: #8A93A8;
+  transform: rotate(-90deg); /* Points Right, showing horizontal slide affordance */
+  transition: transform 550ms cubic-bezier(0.16, 1, 0.3, 1),
+              color 300ms ease;
+}
+
+.faq-row.is-open .faq-arrow {
+  transform: rotate(90deg);
+  color: #2DD4A8;
+}
+
+/* ─── FAQ DRAWER (MOBILE HORIZONTAL SLIDE-IN) ─── */
+.faq-drawer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 100%;
+  z-index: 3;
+  transform: translateX(105%);
+  opacity: 0;
+  pointer-events: none;
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(26, 33, 56, 0.96) 0%, rgba(17, 23, 40, 0.98) 100%);
+  border: 1px solid rgba(45, 212, 168, 0.35);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 0 0 20px rgba(45, 212, 168, 0.1);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 520ms cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 420ms cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 400ms ease,
+              box-shadow 400ms ease;
+}
+
+.faq-row.is-open .faq-drawer {
+  transform: translateX(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.faq-row.is-open .faq-drawer:hover {
+  border-color: rgba(45, 212, 168, 0.55);
+}
+
+.faq-drawer-inner {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 1.15rem 1.25rem;
+  opacity: 0;
+  transform: translateX(20px);
+  transition: opacity 400ms ease 80ms,
+              transform 500ms cubic-bezier(0.16, 1, 0.3, 1) 40ms;
+}
+
+.faq-row.is-open .faq-drawer-inner {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.faq-drawer-mobile-back {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.725rem;
+  font-weight: 600;
+  color: #2DD4A8;
+  margin-bottom: 0.45rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  user-select: none;
+}
+
+.faq-drawer-text {
+  color: #CBD5E1;
+  font-size: 0.875rem;
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   DESKTOP & TABLET: HORIZONTAL SLIDING DRAWER (≥768px)
+   Pertanyaan terpusat di tengah saat idle.
+   Saat diklik, pertanyaan bergeser ke kiri dan drawer jawaban slide ke kanan,
+   mempertahankan spacing rata kanan-kiri yang simetris dan seimbang.
+   ═══════════════════════════════════════════════════════════════ */
+@media (min-width: 768px) {
+  .faq-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    position: relative;
+    overflow: visible;
+    min-height: auto !important;
+  }
+
+  /* Card pertanyaan: Lebar proporsional di tengah, bergeser mulus ke kiri saat dibuka */
+  .faq-card {
+    position: relative !important;
+    width: 440px;
+    flex-shrink: 0;
+    min-height: 80px;
+    transform: none !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    transition: width 600ms cubic-bezier(0.16, 1, 0.3, 1),
+                background-color 400ms cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 400ms cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 400ms cubic-bezier(0.16, 1, 0.3, 1),
+                transform 250ms ease-out;
+  }
+
+  .faq-row.is-open .faq-card {
+    width: 370px;
+    transform: none !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    background: rgba(26, 33, 56, 0.95);
+    border-color: rgba(45, 212, 168, 0.35);
+    border-left-color: #2DD4A8;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35), 0 0 20px rgba(45, 212, 168, 0.08);
+  }
+
+  /* Panah desktop: Menunjuk ke kanan saat tertutup, berputar ke kiri saat laci terbuka */
+  .faq-arrow {
+    transform: rotate(-90deg); /* Points Right */
+    transition: transform 600ms cubic-bezier(0.16, 1, 0.3, 1),
+                color 300ms ease;
+  }
+
+  .faq-row.is-open .faq-arrow {
+    transform: rotate(90deg); /* Points Left towards question */
+    color: #2DD4A8;
+  }
+
+  /* Laci jawaban yang meluncur keluar ke sisi kanan */
+  .faq-drawer {
+    display: block;
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    transform: none !important;
+    grid-template-rows: none;
+    width: 0;
+    min-height: auto;
+    margin-top: 0 !important;
+    margin-left: 0;
+    opacity: 0;
+    overflow: hidden;
+    white-space: normal;
+    border-radius: 20px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    background: linear-gradient(135deg, rgba(26, 33, 56, 0.94) 0%, rgba(17, 23, 40, 0.96) 100%);
+    border: 1px solid transparent;
+    pointer-events: none;
+    transition: width 600ms cubic-bezier(0.16, 1, 0.3, 1),
+                border-radius 600ms cubic-bezier(0.16, 1, 0.3, 1),
+                border-top-left-radius 600ms cubic-bezier(0.16, 1, 0.3, 1),
+                border-bottom-left-radius 600ms cubic-bezier(0.16, 1, 0.3, 1),
+                opacity 600ms cubic-bezier(0.16, 1, 0.3, 1),
+                margin-left 600ms cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 600ms ease,
+                box-shadow 600ms ease;
+  }
+
+  .faq-row.is-open .faq-drawer {
+    width: 450px;
+    opacity: 1;
+    margin-left: 14px;
+    border-color: rgba(45, 212, 168, 0.28);
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.4), 
+                0 0 20px rgba(45, 212, 168, 0.06),
+                inset 1px 0 12px rgba(45, 212, 168, 0.1);
+    pointer-events: auto;
+    cursor: pointer;
+    /* Lengkungan petal organik di sisi kiri yang menyatu dengan card */
+    border-top-left-radius: 56px 50%;
+    border-bottom-left-radius: 56px 50%;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+  }
+
+  .faq-row.is-open .faq-drawer:hover {
+    border-color: rgba(45, 212, 168, 0.45);
+  }
+
+  /* Konten teks dalam laci tidak jitter reflow saat animasi meluncur */
+  .faq-drawer-inner {
+    width: 450px;
+    padding: 1.25rem 1.5rem 1.25rem 2.6rem;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: opacity 550ms cubic-bezier(0.16, 1, 0.3, 1), 
+                transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .faq-row.is-open .faq-drawer-inner {
+    opacity: 1;
+    transform: translateX(0);
+    padding: 1.25rem 1.5rem 1.25rem 2.6rem;
+  }
+}
+
+/* ─── TABLET TUNING (768px sampai 1023px) ─── */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .faq-card {
+    width: 380px;
+    padding: 1.1rem 1.15rem;
+  }
+
+  .faq-row.is-open .faq-card {
+    width: 310px;
+  }
+
+  .faq-row.is-open .faq-drawer {
+    width: 380px;
+    margin-left: 10px;
+  }
+
+  .faq-drawer-inner {
+    width: 380px;
+    padding: 1.15rem 1.25rem 1.15rem 2.25rem;
+  }
+
+  .faq-row.is-open .faq-drawer-inner {
+    padding: 1.15rem 1.25rem 1.15rem 2.25rem;
+  }
+}

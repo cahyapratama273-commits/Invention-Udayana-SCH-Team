@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <script src="/js/session-gate.js"></script>
+  <script src="/js/bg-randomizer.js"></script>
+  <meta name="author" content="SCH Team - Invention Udayana 2026">
+  <meta property="og:title" content="BerTeduh — Blog">
+  <meta property="og:description" content="Kumpulan artikel kesehatan mental.">
+  <meta property="og:image" content="/assets/Images/Image-Bertapa.webp">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Teduh | Blog</title>
+  <link rel="icon" type="image/png" href="/assets/Images/for-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/assets/css/main.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css" />
+</head>
+<body data-page="blog" style="background:#0D1220; color:#F5F5F5;">
+  
+  <!-- Fixed Background Image (Like Konsultasi) -->
+  <div class="absolute top-0 left-0 w-full h-[120vh] pointer-events-none -z-10 overflow-hidden">
+    <img data-session-bg src="/assets/Images/artikel/hutan1.webp" class="w-full h-full object-cover object-center" alt="Background" onerror="this.onerror=null; this.src='/assets/Images/placeholder.svg';">
+    <div class="absolute inset-0 bg-gradient-to-b from-[#0D1220]/80 via-[#0D1220]/90 to-[#0D1220]"></div>
+  </div>
+
+  <header id="navbar-slot" class="relative z-50"></header>
+
+  <main id="app-content" data-page="blog">
+    
+    <!-- Header Blog -->
+    <section class="w-full relative pt-28 sm:pt-36 pb-10 sm:pb-12 mb-12 sm:mb-16" data-aos="fade-up" aria-labelledby="blog-page-title">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 text-center">
+        <span class="text-[11px] sm:text-xs font-semibold tracking-widest uppercase mb-3 sm:mb-4 inline-block text-[#2DD4A8]" style="text-shadow: 0 1px 6px rgba(0,0,0,0.9);">Kumpulan Artikel</span>
+        <h1 id="blog-page-title" class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-3 sm:mb-4" style="font-family:'Plus Jakarta Sans', sans-serif; color:#F5F5F5; text-shadow: 0 2px 10px rgba(0,0,0,0.85);">
+          Ruang Baca
+        </h1>
+        <p class="text-sm sm:text-base leading-relaxed max-w-xl mx-auto text-[#CBD5E1]" style="text-shadow: 0 1px 6px rgba(0,0,0,0.9);">
+          Kumpulan wawasan, cerita, dan panduan praktis untuk membantu merawat pikiranmu hari ini.
+        </p>
+      </div>
+    </section>
+
+    <!-- Featured Section -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 pb-12" data-aos="fade-up" aria-label="Artikel Pilihan Utama">
+      <div id="featured-artikel-slot" class="w-full">
+        <!-- Featured artikel placeholder -->
+        <div class="rounded-2xl h-80 animate-pulse bg-white/10 backdrop-blur-md border border-white/20"></div>
+      </div>
+    </section>
+
+    <!-- "Untuk Kamu" Section (Personalized, condition-based) -->
+    <section id="section-untuk-kamu" class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 pb-12" data-aos="fade-up" aria-labelledby="untuk-kamu-heading">
+      <div class="text-center max-w-2xl mx-auto mb-8">
+        <span class="text-[11px] sm:text-xs font-semibold tracking-widest uppercase mb-2 sm:mb-3 inline-block text-[#2DD4A8]">ARTIKEL POPULER</span>
+        <h2 id="untuk-kamu-heading" class="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4" style="font-family:'Plus Jakarta Sans', sans-serif; color:#F5F5F5;">
+          Untuk Kamu
+        </h2>
+        <p id="untuk-kamu-desc" class="text-xs sm:text-sm text-[#8A93A8] leading-relaxed">
+          Rekomendasi bacaan yang dipilih khusus untuk menemani harimu.
+        </p>
+      </div>
+
+      <div id="untuk-kamu-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+        <!-- Placeholder skeletons (2x2) -->
+        <div class="rounded-2xl h-64 animate-pulse bg-white/5 border border-white/10"></div>
+        <div class="rounded-2xl h-64 animate-pulse bg-white/5 border border-white/10"></div>
+        <div class="rounded-2xl h-64 animate-pulse bg-white/5 border border-white/10"></div>
+        <div class="rounded-2xl h-64 animate-pulse bg-white/5 border border-white/10"></div>
+      </div>
+
+      <div id="untuk-kamu-fallback" class="hidden text-center py-8">
+        <p class="text-sm text-[#8A93A8] mb-4">Ingin rekomendasi yang lebih pas dengan kondisimu?</p>
+        <a href="/index.html" class="inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-xs font-semibold text-[#0D1220] bg-[#2DD4A8] hover:bg-[#25b892] transition-colors shadow-lg">
+          Isi Kuesioner Emosi &rarr;
+        </a>
+      </div>
+    </section>
+
+    <!-- Kategori Khusus: Yoga untuk Pikiranmu -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 pb-16" data-aos="fade-up" aria-labelledby="yoga-heading">
+      <div class="rounded-3xl p-6 sm:p-8 md:p-10 relative overflow-hidden bg-gradient-to-br from-[#151B2E] via-[#1A2138] to-[#151B2E] border border-white/10 shadow-2xl">
+        <div class="absolute -right-16 -top-16 w-64 h-64 rounded-full bg-[#2DD4A8]/10 blur-3xl pointer-events-none"></div>
+        <div class="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mb-8">
+          <div>
+            <span class="text-[11px] sm:text-xs font-bold uppercase tracking-widest mb-2 sm:mb-3 inline-block text-[#2DD4A8]">Spesial Relaksasi Tubuh & Pikiran</span>
+            <h2 id="yoga-heading" class="text-2xl sm:text-3xl md:text-4xl font-bold font-serif text-[#F5F5F5] mb-2">
+              Yoga untuk Pikiranmu
+            </h2>
+            <p class="text-xs sm:text-sm text-[#8A93A8] max-w-xl leading-relaxed">
+              Kumpulan gerakan, pose peregangan, dan teknik pernapasan sederhana untuk melepas ketegangan otot serta meredakan kecemasan fisik.
+            </p>
+          </div>
+          <a href="#semua-artikel-heading" id="view-all-yoga-btn" onclick="if(window.selectBlogCategory){window.selectBlogCategory('Yoga');}return false;" class="shrink-0 text-xs sm:text-sm font-semibold text-[#2DD4A8] hover:underline flex items-center gap-1 cursor-pointer">
+            Lihat Semua Yoga &rarr;
+          </a>
+        </div>
+        
+        <div id="yoga-artikel-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 relative z-10">
+          <!-- Placeholder skeletons -->
+          <div class="rounded-2xl h-64 animate-pulse bg-white/5 border border-white/10"></div>
+          <div class="rounded-2xl h-64 animate-pulse bg-white/5 border border-white/10"></div>
+          <div class="rounded-2xl h-64 animate-pulse bg-white/5 border border-white/10"></div>
+          <div class="rounded-2xl h-64 animate-pulse bg-white/5 border border-white/10"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main All Articles Section with Filter & Search -->
+    <section id="section-semua-artikel" class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 pb-16" data-aos="fade-up" aria-labelledby="semua-artikel-heading">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
+        <div>
+          <span class="text-[11px] sm:text-xs font-semibold tracking-widest uppercase mb-2 inline-block text-[#2DD4A8]">Eksplorasi</span>
+          <h2 id="semua-artikel-heading" class="text-2xl sm:text-3xl font-bold font-serif text-[#F5F5F5]">Semua Artikel</h2>
+        </div>
+        
+        <!-- Search bar -->
+        <div class="w-full md:w-80 relative">
+          <label for="blog-search-input" class="sr-only">Cari artikel...</label>
+          <input 
+            type="search" 
+            id="blog-search-input" 
+            placeholder="Cari artikel..." 
+            class="w-full pl-4 pr-11 py-2.5 rounded-full text-sm bg-[#151B2E] border border-white/15 text-[#F5F5F5] placeholder-[#8A93A8] focus:outline-none focus:border-[#2DD4A8] transition-colors"
+          />
+          <i class="ph ph-magnifying-glass text-lg absolute right-4 top-1/2 -translate-y-1/2 text-[#8A93A8]" aria-hidden="true"></i>
+        </div>
+      </div>
+
+      <!-- Category Filter Bar with 'Lihat Semua Kategori' Overlay Trigger (No Horizontal Scroll) -->
+      <div class="flex flex-wrap items-center justify-between gap-3 mb-8">
+        <div id="blog-category-filter" class="flex flex-wrap items-center gap-2" role="tablist" aria-label="Kategori Artikel Cepat">
+          <!-- Quick category pills generated via JS -->
+        </div>
+
+        <!-- Button to open vertical overlay modal -->
+        <button id="btn-open-categories" type="button"
+                class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/15 bg-[#151B2E] hover:bg-white/10 text-white text-xs sm:text-sm font-semibold transition-all duration-200 hover:border-[#2DD4A8] hover:text-[#2DD4A8] cursor-pointer shadow-md"
+                aria-haspopup="dialog"
+                aria-expanded="false"
+                aria-controls="category-overlay-modal">
+          <i class="ph ph-squares-four text-base text-[#2DD4A8]" aria-hidden="true"></i>
+          <span id="btn-open-categories-label">Semua Kategori</span>
+          <span id="category-badge-count" class="px-2 py-0.5 rounded-full text-[10px] bg-[#2DD4A8]/20 text-[#2DD4A8] border border-[#2DD4A8]/40 font-mono font-bold"></span>
+          <i class="ph ph-caret-down text-xs ml-0.5 transition-transform" id="category-caret" aria-hidden="true"></i>
+        </button>
+      </div>
+
+      <!-- OVERLAY MODAL SEMUA KATEGORI (Scroll Vertikal ke Bawah) -->
+      <div id="category-overlay-modal" 
+           role="dialog" 
+           aria-modal="true" 
+           aria-label="Semua Kategori Artikel" 
+           class="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md hidden transition-opacity duration-300 opacity-0 pointer-events-none">
+        
+        <!-- Modal Card with Vertical Scroll -->
+        <div id="category-modal-card" 
+             class="w-full max-w-2xl rounded-3xl border border-white/20 bg-[#151B2E] p-6 sm:p-8 text-white relative shadow-2xl max-h-[85vh] flex flex-col transform transition-transform duration-300 scale-95">
+          
+          <!-- Modal Header -->
+          <div class="flex items-center justify-between pb-4 border-b border-white/10 mb-4 shrink-0">
+            <div>
+              <span class="text-[11px] font-semibold tracking-widest uppercase text-[#2DD4A8]">Jelajahi Topik</span>
+              <h3 class="text-xl sm:text-2xl font-bold font-serif text-[#F5F5F5] mt-0.5">Semua Kategori Artikel</h3>
+            </div>
+            <button id="category-modal-close-btn" 
+                    type="button" 
+                    class="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 text-[#8A93A8] hover:text-white flex items-center justify-center transition cursor-pointer"
+                    aria-label="Tutup pilihan kategori">
+              <i class="ph ph-x text-lg"></i>
+            </button>
+          </div>
+
+          <!-- Quick Search Filter for Categories inside overlay -->
+          <div class="mb-4 shrink-0 relative">
+            <input type="text" 
+                   id="category-search-input" 
+                   placeholder="Cari kategori topik (misal: Kecemasan, Tidur, Fokus)..." 
+                   class="w-full pl-10 pr-4 py-2.5 rounded-xl text-xs sm:text-sm bg-[#1A2138] border border-white/10 text-white placeholder-[#8A93A8] focus:outline-none focus:border-[#2DD4A8] transition" />
+            <i class="ph ph-magnifying-glass text-base absolute left-3.5 top-1/2 -translate-y-1/2 text-[#8A93A8]" aria-hidden="true"></i>
+          </div>
+
+          <!-- Modal Body with Vertical Scroll ("overlaynya itu nanti scroll ke bawah") -->
+          <div id="category-modal-list" 
+               class="flex-1 overflow-y-auto custom-scrollbar pr-2 py-2 flex flex-wrap gap-2.5 content-start">
+            <!-- All categories rendered here as pills -->
+          </div>
+
+          <!-- Modal Footer -->
+          <div class="pt-4 border-t border-white/10 mt-4 flex items-center justify-between text-xs text-[#8A93A8] shrink-0">
+            <span id="category-modal-selected-text">Kategori aktif: <strong class="text-[#2DD4A8]">Semua</strong></span>
+            <button id="category-modal-reset-btn" type="button" class="text-[#2DD4A8] hover:underline font-semibold cursor-pointer">
+              Tampilkan Semua
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Articles Grid Slot -->
+      <div id="blog-artikel-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" aria-live="polite">
+        <!-- Artikel cards rendered here -->
+      </div>
+
+      <!-- Pagination Navigation Slot -->
+      <nav id="blog-pagination" aria-label="Navigasi Halaman Artikel" class="flex items-center justify-center gap-2 mt-12 flex-wrap"></nav>
+
+      <!-- Static Support Info Card -->
+      <aside aria-labelledby="support-heading" class="mt-14 sm:mt-16 w-full rounded-2xl p-6 sm:p-8 md:p-10 bg-[#151B2E] border border-white/10 shadow-xl transition-all duration-300" data-aos="fade-up">
+        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+          <div class="max-w-2xl">
+            <span class="text-[11px] sm:text-xs font-bold uppercase tracking-widest mb-2 sm:mb-3 inline-block text-[#2DD4A8]">Dukungan Untukmu</span>
+            <h3 id="support-heading" class="text-xl sm:text-2xl md:text-3xl font-bold mb-2 leading-snug" style="font-family:'Plus Jakarta Sans', sans-serif; color:#F5F5F5;">
+              Butuh teman bicara soal apa yang kamu baca?
+            </h3>
+            <p class="text-xs sm:text-sm md:text-base leading-relaxed text-[#8A93A8]">
+              Membaca artikel adalah langkah awal yang baik, namun kamu tidak harus memproses semuanya sendirian. Jika ada perasaan yang terasa mengganjal atau butuh ruang aman untuk bercerita, konsultan profesional kami selalu siap mendampingimu.
+            </p>
+          </div>
+          <div class="shrink-0 w-full sm:w-auto">
+            <a href="/konsultasi.html" class="teduh-btn-primary w-full sm:w-auto">
+              Mulai Konsultasi &#8599;
+            </a>
+          </div>
+        </div>
+      </aside>
+    </section>
+  </main>
+
+  <div id="footer"></div>
+
+  <script defer src="/js/ArtikelCard.js"></script>
+  <script defer src="/js/NavRender.js"></script>
+  <script defer src="/js/blog/main.js"></script>
+  <script defer src="/js/Nav.js"></script>
+  <script defer src="/js/Footer.js"></script>
+  <script defer src="/js/main.js"></script>
+</body>
+</html>

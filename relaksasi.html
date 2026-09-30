@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <script src="/js/session-gate.js"></script>
+  <script src="/js/bg-randomizer.js"></script>
+  <meta name="author" content="SCH Team - Invention Udayana 2026">
+  <meta property="og:title" content="BerTeduh — Relaksasi">
+  <meta property="og:description"
+    content="Atasi stres dan cemas dengan Teduh, platform yang membantu kamu memahami emosi dan meningkatkan kesehatan mental.">
+  <meta property="og:image" content="/assets/Images/Image-Bertapa.webp">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Teduh — Relaksasi</title>
+  <link rel="icon" type="image/png" href="/assets/Images/for-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/assets/css/main.css" />
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css" />
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css" />
+</head>
+
+<body data-page="relaksasi" style="background:#0D1220; color:#F5F5F5;">
+
+  <!-- Fixed Background Image -->
+  <div class="absolute top-0 left-0 w-full h-[120vh] pointer-events-none -z-10 overflow-hidden">
+    <img id="detail-bg-img" data-session-bg src="/assets/Images/artikel/hutan1.webp" class="w-full h-full object-cover object-center" alt="Background"
+      onerror="this.onerror=null; this.src='/assets/Images/artikel/hutan1.webp';">
+    <div class="absolute inset-0 bg-gradient-to-b from-[#0D1220]/80 via-[#0D1220]/90 to-[#0D1220]"></div>
+  </div>
+
+  <header id="navbar-slot" class="relative z-50"></header>
+
+  <main id="app-content" data-page="relaksasi">
+
+    <!-- Header Ruang Relaksasi -->
+    <section class="w-full relative pt-28 sm:pt-36 pb-10 sm:pb-12 px-4 sm:px-6 md:px-8 lg:px-12 flex justify-center text-center" data-aos="fade-up" aria-labelledby="relaksasi-hero-title">
+      <div class="max-w-3xl w-full">
+        <span
+          class="text-[11px] sm:text-xs font-semibold uppercase tracking-widest mb-3 sm:mb-4 inline-block text-[#2DD4A8]" style="text-shadow: 0 1px 6px rgba(0,0,0,0.9);">Ruang
+          Pemulihan Diri</span>
+        <h1 id="relaksasi-hero-title" class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-3 sm:mb-4 text-white"
+          style="font-family:'Plus Jakarta Sans', sans-serif; text-shadow: 0 2px 10px rgba(0,0,0,0.85);">
+          Ruang Relaksasi
+        </h1>
+        <p class="text-sm sm:text-base leading-relaxed text-[#CBD5E1]" style="text-shadow: 0 1px 6px rgba(0,0,0,0.9);">
+          Ambil jeda sejenak. Selaraskan kembali napas, lepaskan ketegangan otot tubuh, dan temukan ruang tenang di
+          dalam pikiranmu.
+        </p>
+      </div>
+    </section>
+
+    <!-- SECTION 2: PERNAPASAN RITMIS -->
+    <section class="max-w-4xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 mb-16 sm:mb-20 text-center" data-aos="fade-up" aria-labelledby="pernapasan-title">
+      <div class="w-full">
+
+        <div class="mb-6 sm:mb-8">
+          <span class="text-[11px] sm:text-xs font-semibold tracking-widest uppercase mb-2 inline-block" style="color:#2DD4A8; text-shadow: 0 1px 6px rgba(0,0,0,0.9);">Latihan Interaktif</span>
+          <h2 id="pernapasan-title" class="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2 sm:mb-3"
+            style="font-family:'Plus Jakarta Sans', sans-serif; text-shadow: 0 2px 10px rgba(0,0,0,0.85);">
+            Pernapasan Ritmis
+          </h2>
+        </div>
+
+        <!-- 1. Technique Switcher Tabs -->
+        <div id="technique-switcher" class="flex items-center justify-center gap-2 sm:gap-3 flex-wrap mb-3" role="tablist" aria-label="Teknik Pernapasan"></div>
+
+        <!-- 2. Technique Focus Text -->
+        <div id="breathe-focus-container" class="max-w-xl mx-auto mb-8 min-h-[36px] flex items-center justify-center px-4">
+          <p id="breathe-focus-text" class="text-xs sm:text-sm text-[#CBD5E1] leading-relaxed text-center" style="text-shadow: 0 1px 6px rgba(0,0,0,0.9);"></p>
+        </div>
+
+        <!-- 3. Breathing Circular Track (Interactive Center Trigger) -->
+        <div id="breathe-circle-trigger"
+          class="relative w-64 h-64 sm:w-72 sm:h-72 mx-auto flex items-center justify-center cursor-pointer select-none group transition-transform duration-200 active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2DD4A8] rounded-full"
+          role="button" tabindex="0" aria-label="Kontrol Latihan Pernapasan" style="touch-action: manipulation;">
+          <!-- Subtle Backdrop Disc for High-Contrast Legibility -->
+          <div class="absolute inset-4 rounded-full bg-[#0D1220]/60 backdrop-blur-[4px] border border-white/10 group-hover:border-[#2DD4A8]/40 transition-colors pointer-events-none -z-0"></div>
+
+          <!-- SVG Track -->
+          <svg class="absolute inset-0 w-full h-full transform -rotate-90 z-10 pointer-events-none" viewBox="0 0 200 200" aria-hidden="true">
+            <circle cx="100" cy="100" r="90" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="4"></circle>
+            <circle id="breathe-progress" cx="100" cy="100" r="90" fill="none" stroke="#2DD4A8" stroke-width="6"
+              stroke-linecap="round" stroke-dasharray="565.48" stroke-dashoffset="565.48"
+              class="transition-colors duration-200"></circle>
+          </svg>
+
+          <!-- Glowing Dot -->
+          <div id="breathe-dot"
+            class="absolute w-4 h-4 rounded-full bg-[#2DD4A8] shadow-[0_0_15px_#2DD4A8] transition-colors duration-200 z-20 pointer-events-none"
+            style="left: 50%; top: 5%; transform: translate(-50%, -50%);" aria-hidden="true"></div>
+
+          <!-- Central Text Info -->
+          <div class="flex flex-col items-center justify-center relative z-20 px-4 text-center pointer-events-none">
+            <div id="breathe-phase-text" class="text-2xl sm:text-3xl font-bold mb-1 transition-colors duration-200"
+              style="color:#2DD4A8; text-shadow: 0 2px 8px rgba(0,0,0,0.95), 0 0 3px rgba(0,0,0,0.9);">Mulai</div>
+            <div id="breathe-countdown" class="text-3xl sm:text-4xl font-light text-white font-mono hidden"
+              style="text-shadow: 0 2px 8px rgba(0,0,0,0.95), 0 0 3px rgba(0,0,0,0.9);">--</div>
+            <div id="breathe-hint" class="text-xs text-[#8A93A8] transition-opacity duration-200">Ketuk untuk mulai</div>
+          </div>
+        </div>
+
+        <!-- Helper Text Under Circle -->
+        <p id="breathe-helper-text" class="text-[11px] sm:text-xs text-[#CBD5E1]/90 text-center tracking-wide mt-3 mb-6 select-none font-normal" style="text-shadow: 0 1px 4px rgba(0,0,0,0.9);">
+          Ketuk lingkaran untuk mulai / berhenti · Tahan untuk jeda
+        </p>
+
+        <!-- 4. Interactive Phase Emojis Container -->
+        <div id="breathe-phases-container" class="flex items-center justify-center gap-2.5 sm:gap-4 mb-4 flex-wrap" aria-label="Fase Pernapasan"></div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: ALUR LANGKAH RELAKSASI TUBUH & PIKIRAN (CARD GRID) -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 pb-20 sm:pb-24" data-aos="fade-up" aria-labelledby="alur-relaksasi-title">
+
+      <!-- Section Header -->
+      <div class="text-center max-w-2xl mx-auto mb-10">
+        <span class="text-[11px] sm:text-xs font-semibold uppercase tracking-widest text-[#2DD4A8] mb-2 sm:mb-3 inline-block" style="text-shadow: 0 1px 6px rgba(0,0,0,0.9);">PANDUAN
+          YOGA</span>
+        <h2 id="alur-relaksasi-title" class="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3 sm:mb-4"
+          style="font-family:'Plus Jakarta Sans', sans-serif; text-shadow: 0 2px 10px rgba(0,0,0,0.85);">
+          Alur Relaksasi Tubuh &amp; Pikiran
+        </h2>
+        <p class="text-sm sm:text-base text-[#CBD5E1] mb-6" style="text-shadow: 0 1px 6px rgba(0,0,0,0.9);">
+          Ikuti alur gerakan bertahap di bawah ini untuk melepaskan ketegangan otot leher, bahu, dan punggung secara
+          optimal.
+        </p>
+
+        <!-- Filter Tingkat Kesulitan -->
+        <div class="flex items-center justify-center">
+          <div id="relaksasi-filter-container" class="inline-flex items-center gap-1.5 p-1 rounded-full bg-[#0D1220]/80 backdrop-blur-md border border-white/10" role="tablist" aria-label="Filter Tingkat Kesulitan">
+            <button type="button" data-filter="all" class="relaksasi-filter-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-[#2DD4A8] text-[#0D1220] transition-all cursor-pointer">Semua</button>
+            <button type="button" data-filter="pemula" class="relaksasi-filter-btn px-4 py-1.5 rounded-full text-xs font-semibold text-[#8A93A8] hover:text-white transition-all cursor-pointer">Pemula</button>
+            <button type="button" data-filter="menengah" class="relaksasi-filter-btn px-4 py-1.5 rounded-full text-xs font-semibold text-[#8A93A8] hover:text-white transition-all cursor-pointer">Menengah</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card Grid Container (2 cols desktop, 1 col mobile) -->
+      <div id="relaksasi-grid-container" class="grid grid-cols-1 md:grid-cols-2 gap-6" aria-live="polite">
+        <!-- Skeleton Loaders -->
+        <div class="rounded-2xl h-96 animate-pulse bg-white/10 backdrop-blur-md border border-white/20"></div>
+        <div class="rounded-2xl h-96 animate-pulse bg-white/10 backdrop-blur-md border border-white/20"></div>
+      </div>
+
+    </section>
+
+    <!-- POSE DETAIL VIDEO MODAL OVERLAY -->
+    <div id="pose-modal-overlay" class="fixed inset-0 z-50 overflow-y-auto bg-[#0D1220]/95 backdrop-blur-md hidden transition-opacity duration-300 opacity-0 pointer-events-none" role="dialog" aria-modal="true" aria-labelledby="breadcrumb-current-pose">
+      <div class="min-h-screen max-w-4xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 pt-6 sm:pt-10 pb-20 sm:pb-24 relative">
+        
+        <!-- Top Sticky Header inside Overlay: Breadcrumb & Close X Button -->
+        <div class="flex items-center justify-between gap-4 mb-4 pb-3 border-b border-white/10 sticky top-0 bg-[#0D1220]/90 backdrop-blur-md z-40 py-2">
+          <!-- Breadcrumb Navigation -->
+          <nav aria-label="Breadcrumb">
+            <ol class="flex items-center flex-wrap gap-1.5 text-xs sm:text-sm text-[#8A93A8]">
+              <li>
+                <a href="/beranda.html" class="hover:text-[#2DD4A8] transition-colors">Beranda</a>
+              </li>
+              <li class="select-none text-white/30">/</li>
+              <li>
+                <button type="button" onclick="closePoseOverlay()" class="hover:text-[#2DD4A8] transition-colors bg-transparent border-0 cursor-pointer p-0 text-left">Relaksasi</button>
+              </li>
+              <li class="select-none text-white/30">/</li>
+              <li id="breadcrumb-current-pose" class="text-[#F5F5F5] font-medium truncate max-w-[140px] sm:max-w-xs md:max-w-md" aria-current="page">
+                Detail Pose
+              </li>
+            </ol>
+          </nav>
+
+          <!-- Close (X) Button -->
+          <button id="pose-modal-close-btn" type="button" onclick="closePoseOverlay()" class="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 flex items-center justify-center text-white hover:text-[#2DD4A8] transition-colors cursor-pointer shrink-0" title="Tutup Pemutar Video (Esc)" aria-label="Tutup Pemutar Video">
+            <i class="ph ph-x text-lg" aria-hidden="true"></i>
+          </button>
+        </div>
+
+        <!-- Back Navigation Link -->
+        <div class="mb-6">
+          <button type="button" onclick="closePoseOverlay()" class="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#2DD4A8] hover:text-white transition-colors bg-transparent border-0 cursor-pointer">
+            <i class="ph ph-arrow-left text-sm leading-none shrink-0"></i>
+            <span>Kembali ke Panduan Relaksasi</span>
+          </button>
+        </div>
+
+        <!-- Container for Dynamic Player & Pose Details -->
+        <div id="relaksasi-detail-container"></div>
+      </div>
+    </div>
+
+    <script defer src="/js/NavRender.js"></script>
+    <script defer src="/js/relaksasi/main.js"></script>
+    <script defer src="/js/relaksasi/breathing.js"></script>
+    <script defer src="/js/Relaksasi.js"></script>
+  </main>
+
+  <div id="footer"></div>
+  <script defer src="/js/Nav.js"></script>
+  <script defer src="/js/Footer.js"></script>
+  <script defer src="/js/main.js"></script>
+</body>
+
+</html>

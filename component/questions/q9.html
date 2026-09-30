@@ -1,0 +1,71 @@
+<!-- ========================================================================== -->
+<!-- BAGIAN: Komponen Kuis Pertanyaan 9 (Evaluasi Self-Talk & Self-Compassion)  -->
+<!-- FUNGSI: Mengukur tingkat kebaikan dialog batin terhadap diri sendiri       -->
+<!-- SUMBER: Modul Kuesioner BerTeduh (component/questions/q9.html)             -->
+<!-- ========================================================================== -->
+<div class="question-card py-2 px-2 sm:px-4" data-index="8" data-dimensi="diri_sendiri">
+
+  <!-- BAGIAN: Judul Utama Pertanyaan (Heading) -->
+  <!-- FUNGSI: Menanyakan pola penerimaan dan perlakuan terhadap diri sendiri -->
+  <!-- SUMBER: Naskah Pertanyaan Kuesioner BerTeduh -->
+  <h2 class="font-sans text-[19px] sm:text-[22px] font-semibold text-white mt-1 mb-5 leading-relaxed tracking-wide">
+    Masih soal hubungan, kali ini sama diri sendiri. Gimana biasanya kamu ngomong ke diri sendiri belakangan ini?
+  </h2>
+
+  <!-- BAGIAN: Kontainer Opsi Pilihan Jawaban -->
+  <!-- FUNGSI: Membungkus tombol-tombol dialog batin beserta ikon ekspresi wajah CDN -->
+  <div class="space-y-3">
+
+    <!-- BAGIAN: Tombol Opsi 1 (Skor Hijau - Self-Talk Positif & Memahami Diri) -->
+    <!-- FUNGSI: Memilih indikator penerimaan diri tanpa menghakimi berlebihan -->
+    <!-- SUMBER CDN ICON: Twitter Twemoji SVG via jsDelivr CDN (1f642.svg - Slightly Smiling Face) -->
+    <button type="button" class="option-btn flex items-center gap-3 w-full text-left bg-transparent p-0 border-0 cursor-pointer outline-none select-none" data-score="hijau">
+      <!-- FUNGSI: Kartu teks pilihan jawaban -->
+      <div class="option-card flex-1 min-w-0 p-3 sm:p-3.5 rounded-xl border border-white/10 bg-white/[0.04]">
+        <span class="text-base sm:text-[17px] font-medium text-[#F5F5F5] leading-relaxed block">
+          Masih cukup baik, nggak terlalu keras nge-judge diri sendiri
+        </span>
+      </div>
+      <!-- FUNGSI: Kontainer ikon ekspresi wajah -->
+      <div class="emoji-box w-10 h-10 min-w-[40px] min-h-[40px] shrink-0 flex items-center justify-center">
+        <!-- SUMBER: https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f642.svg -->
+        <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f642.svg" alt="Baik" class="option-emoji w-6 h-6 object-contain pointer-events-none">
+      </div>
+    </button>
+
+    <!-- BAGIAN: Tombol Opsi 2 (Skor Kuning - Kecenderungan Menyalahkan Diri) -->
+    <!-- FUNGSI: Memilih indikator dialog batin yang mulai sering menyalahkan diri -->
+    <!-- SUMBER CDN ICON: Twitter Twemoji SVG via jsDelivr CDN (1f61f.svg - Worried Face) -->
+    <button type="button" class="option-btn flex items-center gap-3 w-full text-left bg-transparent p-0 border-0 cursor-pointer outline-none select-none" data-score="kuning">
+      <!-- FUNGSI: Kartu teks pilihan jawaban -->
+      <div class="option-card flex-1 min-w-0 p-3 sm:p-3.5 rounded-xl border border-white/10 bg-white/[0.04]">
+        <span class="text-base sm:text-[17px] font-medium text-[#F5F5F5] leading-relaxed block">
+          Kadang suka nyalahin diri sendiri lebih dari biasanya
+        </span>
+      </div>
+      <!-- FUNGSI: Kontainer ikon ekspresi wajah -->
+      <div class="emoji-box w-10 h-10 min-w-[40px] min-h-[40px] shrink-0 flex items-center justify-center">
+        <!-- SUMBER: https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f61f.svg -->
+        <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f61f.svg" alt="Menyalahkan" class="option-emoji w-6 h-6 object-contain pointer-events-none">
+      </div>
+    </button>
+
+    <!-- BAGIAN: Tombol Opsi 3 (Skor Merah - Self-Kritik Tajam & Menghakimi Diri) -->
+    <!-- FUNGSI: Memilih dialog batin destruktif dan sering merasa tidak berharga -->
+    <!-- SUMBER CDN ICON: Twitter Twemoji SVG via jsDelivr CDN (1f623.svg - Persevering Face) -->
+    <button type="button" class="option-btn flex items-center gap-3 w-full text-left bg-transparent p-0 border-0 cursor-pointer outline-none select-none" data-score="merah">
+      <!-- FUNGSI: Kartu teks pilihan jawaban -->
+      <div class="option-card flex-1 min-w-0 p-3 sm:p-3.5 rounded-xl border border-white/10 bg-white/[0.04]">
+        <span class="text-base sm:text-[17px] font-medium text-[#F5F5F5] leading-relaxed block">
+          Lumayan sering ngerasa nggak berharga atau nge-judge diri sendiri
+        </span>
+      </div>
+      <!-- FUNGSI: Kontainer ikon ekspresi wajah -->
+      <div class="emoji-box w-10 h-10 min-w-[40px] min-h-[40px] shrink-0 flex items-center justify-center">
+        <!-- SUMBER: https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f623.svg -->
+        <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f623.svg" alt="Menghakimi" class="option-emoji w-6 h-6 object-contain pointer-events-none">
+      </div>
+    </button>
+
+  </div>
+</div>

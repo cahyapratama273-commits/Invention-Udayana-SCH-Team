@@ -1,0 +1,71 @@
+<!-- ========================================================================== -->
+<!-- BAGIAN: Komponen Kuis Pertanyaan 11 (Evaluasi Kapasitas Menghadapi Tekanan) -->
+<!-- FUNGSI: Mengukur daya tahan dan rasa kewalahan saat menghadapi stresor     -->
+<!-- SUMBER: Modul Kuesioner BerTeduh (component/questions/q11.html)            -->
+<!-- ========================================================================== -->
+<div class="question-card py-2 px-2 sm:px-4" data-index="11" data-dimensi="stres">
+
+  <!-- BAGIAN: Judul Utama Pertanyaan (Heading) -->
+  <!-- FUNGSI: Menanyakan koping respons pengguna saat diterpa banyak tekanan -->
+  <!-- SUMBER: Naskah Pertanyaan Kuesioner BerTeduh -->
+  <h2 class="font-sans text-[19px] sm:text-[22px] font-semibold text-white mt-1 mb-5 leading-relaxed tracking-wide">
+    Satu lagi nih, kalau lagi banyak tekanan atau hal yang harus diselesaikan, biasanya kamu ngerasa gimana ngadepinnya?
+  </h2>
+
+  <!-- BAGIAN: Kontainer Opsi Pilihan Jawaban -->
+  <!-- FUNGSI: Membungkus tombol pilihan koping stres beserta ikon ekspresi wajah CDN -->
+  <div class="space-y-3">
+
+    <!-- BAGIAN: Tombol Opsi 1 (Skor Hijau - Mampu & Terkendali) -->
+    <!-- FUNGSI: Memilih kondisi mampu menghadapi tekanan secara bertahap -->
+    <!-- SUMBER CDN ICON: Twitter Twemoji SVG via jsDelivr CDN (1f60a.svg - Smiling Face with Smiling Eyes) -->
+    <button type="button" class="option-btn flex items-center gap-3 w-full text-left bg-transparent p-0 border-0 cursor-pointer outline-none select-none" data-score="hijau">
+      <!-- FUNGSI: Kartu teks pilihan jawaban -->
+      <div class="option-card flex-1 min-w-0 p-3 sm:p-3.5 rounded-xl border border-white/10 bg-white/[0.04]">
+        <span class="text-base sm:text-[17px] font-medium text-[#F5F5F5] leading-relaxed block">
+          Masih bisa dihadapi pelan-pelan, nggak terlalu kewalahan
+        </span>
+      </div>
+      <!-- FUNGSI: Kontainer ikon ekspresi wajah -->
+      <div class="emoji-box w-10 h-10 min-w-[40px] min-h-[40px] shrink-0 flex items-center justify-center">
+        <!-- SUMBER: https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f60a.svg -->
+        <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f60a.svg" alt="Mampu" class="option-emoji w-6 h-6 object-contain pointer-events-none">
+      </div>
+    </button>
+
+    <!-- BAGIAN: Tombol Opsi 2 (Skor Kuning - Merasa Numpuk / Bingung) -->
+    <!-- FUNGSI: Memilih kondisi beban terasa menumpuk dan membingungkan -->
+    <!-- SUMBER CDN ICON: Twitter Twemoji SVG via jsDelivr CDN (1f914.svg - Thinking Face) -->
+    <button type="button" class="option-btn flex items-center gap-3 w-full text-left bg-transparent p-0 border-0 cursor-pointer outline-none select-none" data-score="kuning">
+      <!-- FUNGSI: Kartu teks pilihan jawaban -->
+      <div class="option-card flex-1 min-w-0 p-3 sm:p-3.5 rounded-xl border border-white/10 bg-white/[0.04]">
+        <span class="text-base sm:text-[17px] font-medium text-[#F5F5F5] leading-relaxed block">
+          Kerasa numpuk, suka bingung mulai dari mana
+        </span>
+      </div>
+      <!-- FUNGSI: Kontainer ikon ekspresi wajah -->
+      <div class="emoji-box w-10 h-10 min-w-[40px] min-h-[40px] shrink-0 flex items-center justify-center">
+        <!-- SUMBER: https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f914.svg -->
+        <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f914.svg" alt="Numpuk" class="option-emoji w-6 h-6 object-contain pointer-events-none">
+      </div>
+    </button>
+
+    <!-- BAGIAN: Tombol Opsi 3 (Skor Merah - Sangat Kewalahan / Overwhelmed) -->
+    <!-- FUNGSI: Memilih kondisi beban terlalu banyak dan kewalahan -->
+    <!-- SUMBER CDN ICON: Twitter Twemoji SVG via jsDelivr CDN (1f62b.svg - Tired Face) -->
+    <button type="button" class="option-btn flex items-center gap-3 w-full text-left bg-transparent p-0 border-0 cursor-pointer outline-none select-none" data-score="merah">
+      <!-- FUNGSI: Kartu teks pilihan jawaban -->
+      <div class="option-card flex-1 min-w-0 p-3 sm:p-3.5 rounded-xl border border-white/10 bg-white/[0.04]">
+        <span class="text-base sm:text-[17px] font-medium text-[#F5F5F5] leading-relaxed block">
+          Lumayan berat, kayak semuanya kerasa terlalu banyak buat dihadapi
+        </span>
+      </div>
+      <!-- FUNGSI: Kontainer ikon ekspresi wajah -->
+      <div class="emoji-box w-10 h-10 min-w-[40px] min-h-[40px] shrink-0 flex items-center justify-center">
+        <!-- SUMBER: https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f62b.svg -->
+        <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f62b.svg" alt="Kewalahan" class="option-emoji w-6 h-6 object-contain pointer-events-none">
+      </div>
+    </button>
+
+  </div>
+</div>

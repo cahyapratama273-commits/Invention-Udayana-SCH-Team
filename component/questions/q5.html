@@ -1,0 +1,71 @@
+<!-- ========================================================================== -->
+<!-- BAGIAN: Komponen Kuis Pertanyaan 5 (Evaluasi Ketenangan / Kepadatan Pikiran)-->
+<!-- FUNGSI: Mengukur tingkat kejelasan pikiran dan fenomena ruminasi mental    -->
+<!-- SUMBER: Modul Kuesioner BerTeduh (component/questions/q5.html)             -->
+<!-- ========================================================================== -->
+<div class="question-card py-2 px-2 sm:px-4" data-index="5" data-dimensi="pikiran">
+
+  <!-- BAGIAN: Judul Utama Pertanyaan (Heading) -->
+  <!-- FUNGSI: Menanyakan kondisi ketenangan atau kebingungan di dalam pikiran -->
+  <!-- SUMBER: Naskah Pertanyaan Kuesioner BerTeduh -->
+  <h2 class="font-sans text-[19px] sm:text-[22px] font-semibold text-white mt-1 mb-5 leading-relaxed tracking-wide">
+    Dari tubuh, coba geser ke isi kepala. Pas lagi sendirian, biasanya isi kepalamu kayak gimana?
+  </h2>
+
+  <!-- BAGIAN: Kontainer Opsi Pilihan Jawaban -->
+  <!-- FUNGSI: Membungkus pilihan kondisi pikiran beserta ikon ekspresi wajah -->
+  <div class="space-y-3">
+
+    <!-- BAGIAN: Tombol Opsi 1 (Skor Hijau - Pikiran Tenang & Jernih) -->
+    <!-- FUNGSI: Memilih kondisi pikiran tenang dan mudah fokus -->
+    <!-- SUMBER CDN ICON: Twitter Twemoji SVG via jsDelivr CDN (1f60c.svg - Relieved Face) -->
+    <button type="button" class="option-btn flex items-center gap-3 w-full text-left bg-transparent p-0 border-0 cursor-pointer outline-none select-none" data-score="hijau">
+      <!-- FUNGSI: Kartu teks pilihan jawaban -->
+      <div class="option-card flex-1 min-w-0 p-3 sm:p-3.5 rounded-xl border border-white/10 bg-white/[0.04]">
+        <span class="text-base sm:text-[17px] font-medium text-[#F5F5F5] leading-relaxed block">
+          Relatif tenang, gampang fokus ke satu hal
+        </span>
+      </div>
+      <!-- FUNGSI: Kontainer ikon ekspresi wajah -->
+      <div class="emoji-box w-10 h-10 min-w-[40px] min-h-[40px] shrink-0 flex items-center justify-center">
+        <!-- SUMBER: https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f60c.svg -->
+        <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f60c.svg" alt="Tenang" class="option-emoji w-6 h-6 object-contain pointer-events-none">
+      </div>
+    </button>
+
+    <!-- BAGIAN: Tombol Opsi 2 (Skor Kuning - Pikiran Ramai / Overthinking Ringan) -->
+    <!-- FUNGSI: Memilih kondisi pikiran sibuk memikirkan banyak hal sekaligus -->
+    <!-- SUMBER CDN ICON: Twitter Twemoji SVG via jsDelivr CDN (1f914.svg - Thinking Face) -->
+    <button type="button" class="option-btn flex items-center gap-3 w-full text-left bg-transparent p-0 border-0 cursor-pointer outline-none select-none" data-score="kuning">
+      <!-- FUNGSI: Kartu teks pilihan jawaban -->
+      <div class="option-card flex-1 min-w-0 p-3 sm:p-3.5 rounded-xl border border-white/10 bg-white/[0.04]">
+        <span class="text-base sm:text-[17px] font-medium text-[#F5F5F5] leading-relaxed block">
+          Rame, suka muter-muter mikirin banyak hal sekaligus
+        </span>
+      </div>
+      <!-- FUNGSI: Kontainer ikon ekspresi wajah -->
+      <div class="emoji-box w-10 h-10 min-w-[40px] min-h-[40px] shrink-0 flex items-center justify-center">
+        <!-- SUMBER: https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f914.svg -->
+        <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f914.svg" alt="Rame" class="option-emoji w-6 h-6 object-contain pointer-events-none">
+      </div>
+    </button>
+
+    <!-- BAGIAN: Tombol Opsi 3 (Skor Merah - Pikiran Penuh & Kewalahan Mental) -->
+    <!-- FUNGSI: Memilih kondisi pikiran sangat padat hingga sulit berpikir jernih -->
+    <!-- SUMBER CDN ICON: Twitter Twemoji SVG via jsDelivr CDN (1f616.svg - Confounded Face) -->
+    <button type="button" class="option-btn flex items-center gap-3 w-full text-left bg-transparent p-0 border-0 cursor-pointer outline-none select-none" data-score="merah">
+      <!-- FUNGSI: Kartu teks pilihan jawaban -->
+      <div class="option-card flex-1 min-w-0 p-3 sm:p-3.5 rounded-xl border border-white/10 bg-white/[0.04]">
+        <span class="text-base sm:text-[17px] font-medium text-[#F5F5F5] leading-relaxed block">
+          Lumayan penuh, jadi agak susah buat mikir jernih
+        </span>
+      </div>
+      <!-- FUNGSI: Kontainer ikon ekspresi wajah -->
+      <div class="emoji-box w-10 h-10 min-w-[40px] min-h-[40px] shrink-0 flex items-center justify-center">
+        <!-- SUMBER: https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f616.svg -->
+        <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f616.svg" alt="Penuh" class="option-emoji w-6 h-6 object-contain pointer-events-none">
+      </div>
+    </button>
+
+  </div>
+</div>

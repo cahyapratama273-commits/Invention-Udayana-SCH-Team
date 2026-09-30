@@ -1,0 +1,308 @@
+/**
+ * artikel/main.js — Logika Halaman Detail Artikel BerTeduh
+ * 
+ * Script ini bertanggung jawab untuk:
+ * 1. Mengambil parameter query URL (?id=... atau ?slug=...) untuk mencari artikel yang dimaksud.
+ * 2. Mengambil database seluruh artikel dari file JSON (data/artikel.json).
+ * 3. Menampilkan isi lengkap artikel, kategori, waktu baca, ringkasan kutipan, dan daftar referensi ilmiah.
+ * 4. Menyediakan navigasi Breadcrumb dan Call to Action (ajakan ngobrol ke AI atau cari konsultan).
+ */
+
+// Variabel penampung seluruh data artikel dari file JSON
+let dataArtikel = [];
+
+/**
+ * Mengubah string judul menjadi format slug URL (huruf kecil, spasi diganti strip)
+ */
+function createSlug(text) {
+  return text ? text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') : '';
+}
+
+/**
+ * Mengambil (fetch) file data artikel dari server dan memulai inisialisasi halaman
+ */
+async function loadArtikel() {
+  // Muat komponen navbar atas
+  if (typeof loadNavigasi === 'function') {
+    try { await loadNavigasi(); } catch(e) {}
+  }
+  
+  const container = document.querySelector('#detail-container');
+  if (!container) return;
+
+  // Daftar kemungkinan path URL untuk mengambil data/artikel.json
+  const paths = [
+    '/data/artikel.json',
+    '../data/artikel.json',
+    '../../data/artikel.json',
+    'data/artikel.json'
+  ];
+
+  let loaded = false;
+  for (const p of paths) {
+    try {
+      const res = await fetch(p);
+      if (res.ok) {
+        dataArtikel = await res.json();
+        loaded = true;
+        break; // Berhenti jika file JSON berhasil dimuat
+      }
+    } catch (e) {
+      // Lanjutkan mencoba path berikutnya
+    }
+  }
+
+  // Jika berhasil memuat data artikel, jalankan inisialisasi detail
+  if (loaded && dataArtikel.length > 0) {
+    init();
+  } else {
+    // Tampilan pesan error jika file data gagal dimuat
+    container.innerHTML = `
+      <div class="text-center py-16">
+        <div class="w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center text-2xl bg-white/5 border border-white/10 text-[#2DD4A8]">⚠️</div>
+        <h2 class="text-xl font-bold text-white mb-2" style="font-family:'Plus Jakarta Sans', sans-serif;">Gagal Memuat Data Artikel</h2>
+        <p class="text-sm text-[#8A93A8] mb-6 max-w-md mx-auto">Kami tidak dapat mengambil konten artikel saat ini. Silakan periksa koneksi atau coba kembali.</p>
+        <a href="/blog.html" class="inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-xs font-bold bg-[#2DD4A8] text-[#0D1220] hover:bg-[#25b892] transition-colors">
+          &larr; Kembali ke Blog
+        </a>
+      </div>
+    `;
+  }
+}
+
+/**
+ * Mencari data artikel yang cocok berdasarkan ID atau Slug dari URL browser
+ */
+function init() {
+  const container = document.querySelector('#detail-container');
+  if (!container) return;
+
+  // Baca parameter query dari URL (misal: /artikel/?id=3 atau ?slug=mengatasi-cemas)
+  const params = new URLSearchParams(window.location.search);
+  const artikelId = params.get('id');
+  const slug = params.get('slug');
+
+  let artikel = null;
+
+  // Prioritaskan pencarian berdasarkan ID
+  if (artikelId) {
+    artikel = dataArtikel.find(item => String(item.id) === String(artikelId));
+  } else if (slug) {
+    artikel = dataArtikel.find(item => createSlug(item.judul) === slug);
+  }
+
+  // Jika artikel ditemukan, render kontennya ke layar
+  if (artikel) {
+    renderDetailArtikel(artikel);
+  } else {
+    // Tampilan jika ID atau slug tidak cocok dengan data artikel manapun
+    container.innerHTML = `
+      <div class="text-center py-16">
+        <div class="w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center text-2xl bg-white/5 border border-white/10 text-[#8A93A8]">🔍</div>
+        <h2 class="text-2xl font-bold text-white mb-2" style="font-family:'Plus Jakarta Sans', sans-serif;">Artikel Tidak Ditemukan</h2>
+        <p class="text-sm text-[#8A93A8] mb-6">Artikel yang kamu cari tidak tersedia atau mungkin sudah dipindahkan.</p>
+        <a href="/blog.html" class="inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-xs font-bold bg-[#2DD4A8] text-[#0D1220] hover:bg-[#25b892] transition-colors">
+          &larr; Kembali ke Daftar Artikel
+        </a>
+      </div>
+    `;
+  }
+}
+
+/**
+ * Merender seluruh komponen detail artikel ke dalam `#detail-container`
+ */
+function renderDetailArtikel(artikel) {
+  const container = document.querySelector('#detail-container');
+  if (!container) return;
+
+  // 1. Perbarui Judul Tab Browser
+  document.title = `${artikel.judul} — BerTeduh`;
+
+  // 2. Pasang Gambar Artikel sebagai Latar Belakang Hero secara Dinamis
+  const bgImg = document.getElementById('detail-bg-img');
+  if (bgImg && artikel.gambar) {
+    bgImg.src = artikel.gambar;
+  }
+
+  // 3. Susun paragraf isi artikel (mendukung array teks maupun string biasa)
+  const kontenHtml = Array.isArray(artikel.konten)
+    ? artikel.konten.map(p => `<p class="text-[#E2E8F0] text-base sm:text-lg lg:text-xl leading-relaxed sm:leading-loose mb-6 font-normal">${p}</p>`).join('')
+    : `<p class="text-[#E2E8F0] text-base sm:text-lg lg:text-xl leading-relaxed sm:leading-loose mb-6">${artikel.konten || artikel.ringkasan}</p>`;
+
+  // 4. Susun daftar referensi / sumber medis jika tersedia
+  let referensiHtml = '';
+  if (Array.isArray(artikel.sumber) && artikel.sumber.length > 0) {
+    const listItems = artikel.sumber.map(s => {
+      const nama = s.nama || s.url || 'Referensi';
+      const url = s.url || '#';
+      return `
+        <li class="flex items-start gap-2.5 text-xs sm:text-sm text-[#8A93A8]">
+          <span class="text-[#2DD4A8] select-none leading-relaxed">•</span>
+          <a href="${url}" target="_blank" rel="noopener" 
+             class="text-[#8A93A8] hover:text-[#2DD4A8] transition-colors underline underline-offset-4 decoration-white/20 hover:decoration-[#2DD4A8] inline-flex items-center gap-1.5 leading-relaxed group">
+            <span>${nama}</span>
+            <svg class="w-3.5 h-3.5 opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all shrink-0 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
+          </a>
+        </li>
+      `;
+    }).join('');
+
+    referensiHtml = `
+      <!-- Referensi Ilmiah Artikel -->
+      <section class="mt-12 pt-8 border-t border-white/10" aria-label="Referensi Artikel">
+        <h2 class="text-xs font-semibold uppercase tracking-widest text-[#8A93A8] mb-3">Referensi</h2>
+        <ul class="space-y-2.5 list-none p-0 m-0">
+          ${listItems}
+        </ul>
+      </section>
+    `;
+  }
+
+  // 5. Masukkan seluruh struktur HTML ke kontainer utama
+  container.innerHTML = `
+    <!-- Navigasi Breadcrumb -->
+    <nav aria-label="Breadcrumb" class="mb-4">
+      <ol class="flex items-center flex-wrap gap-2 text-xs sm:text-sm text-[#8A93A8]">
+        <li>
+          <a href="/beranda.html" class="hover:text-[#2DD4A8] transition-colors">Beranda</a>
+        </li>
+        <li class="select-none text-white/30">/</li>
+        <li>
+          <a href="/blog.html" class="hover:text-[#2DD4A8] transition-colors">Blog</a>
+        </li>
+        <li class="select-none text-white/30">/</li>
+        <li class="text-[#F5F5F5] font-medium truncate max-w-[200px] sm:max-w-xs md:max-w-md" aria-current="page">
+          ${artikel.judul}
+        </li>
+      </ol>
+    </nav>
+
+    <!-- Tombol Kembali dan Label Kategori -->
+    <div class="flex items-center justify-between gap-4 mb-8 pb-4 border-b border-white/15">
+      <a href="/blog.html" class="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-[#2DD4A8] hover:text-[#25b892] transition-colors group">
+        <span class="group-hover:-translate-x-1 transition-transform">&larr;</span> Kembali ke Semua Artikel
+      </a>
+      <div class="flex items-center gap-3">
+        <span class="px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-[#2DD4A8]/20 text-[#2DD4A8] border border-[#2DD4A8]/40 backdrop-blur-md">
+          ${artikel.kategori}
+        </span>
+        <span class="text-xs text-[#CBD5E1] hidden sm:inline flex items-center gap-1"><i class="ph ph-clock text-xs text-[#2DD4A8]"></i> ${artikel.waktu_baca}</span>
+      </div>
+    </div>
+
+    <!-- Header Judul Artikel -->
+    <div class="mb-10">
+      <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight drop-shadow-md" style="font-family:'Plus Jakarta Sans', sans-serif;">
+        ${artikel.judul}
+      </h1>
+      <p class="text-xs sm:text-sm text-[#CBD5E1] flex items-center gap-3">
+        <span class="flex items-center gap-1"><i class="ph ph-clock text-xs text-[#2DD4A8]"></i> ${artikel.waktu_baca}</span>
+        <span>•</span>
+        <span>Ditinjau oleh Tim BerTeduh berdasarkan referensi tepercaya</span>
+      </p>
+    </div>
+
+    <!-- Kutipan Ringkasan Utama (Blockquote) -->
+    <blockquote class="p-6 sm:p-8 rounded-2xl mb-12 border-l-4 border-[#2DD4A8] bg-white/10 backdrop-blur-md border border-white/20 shadow-2xl m-0">
+      <p class="text-lg sm:text-xl text-[#F8FAFC] italic font-serif leading-relaxed">
+        "${artikel.ringkasan}"
+      </p>
+    </blockquote>
+
+    <!-- Paragraf Isi Utama Artikel -->
+    <div class="article-body max-w-none text-[#E2E8F0] space-y-6">
+      ${kontenHtml}
+    </div>
+
+    ${referensiHtml}
+
+    <!-- Info Penulis & Tombol Jelajah Artikel Lainnya -->
+    <div class="${referensiHtml ? 'mt-10' : 'mt-16'} pt-8 border-t border-white/15 flex flex-col sm:flex-row items-center justify-between gap-6">
+      <div class="flex items-center gap-3.5 w-full sm:w-auto">
+        <div class="w-12 h-12 rounded-2xl bg-[#2DD4A8]/20 border border-[#2DD4A8]/40 text-[#2DD4A8] flex items-center justify-center font-bold text-xl shrink-0 shadow-md" aria-hidden="true">
+          <i class="ph ph-leaf text-xl text-[#2DD4A8]"></i>
+        </div>
+        <div>
+          <p class="text-xs text-[#94A3B8] uppercase tracking-wider font-semibold">Ditinjau oleh</p>
+          <p class="text-sm font-bold text-white">By Team BerTeduh</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-3 w-full sm:w-auto justify-end">
+        <a href="/blog.html" class="teduh-btn-primary w-full sm:w-auto">
+          Jelajahi Artikel Lainnya &#8599;
+        </a>
+      </div>
+    </div>
+
+    <!-- Section Ajakan Dukungan: Butuh teman untuk memprosesnya? -->
+    <section class="mt-12 pt-8 border-t border-white/15" aria-labelledby="cta-support-title">
+      <h2 id="cta-support-title" class="font-semibold text-xl mb-1.5 text-white" style="font-family:'Plus Jakarta Sans', sans-serif;">Butuh teman untuk memprosesnya?</h2>
+      <p class="text-sm text-[#8A93A8] mb-5 max-w-[46ch]">
+        Kamu bisa lanjut ngobrol soal artikel ini, atau bicara langsung dengan orang yang lebih paham.
+      </p>
+
+      <div class="grid gap-3">
+        <!-- Kartu Aksi 1: Tanya AI BerTeduh -->
+        <div class="flex gap-4 items-start bg-white/10 backdrop-blur-md text-white rounded-2xl p-5 border border-white/20 shadow-lg">
+          <div class="shrink-0 w-[38px] h-[38px] rounded-full bg-white/10 flex items-center justify-center">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+              <path d="M4 5h16v11H8l-4 4V5Z" stroke="#2DD4A8" stroke-width="1.6" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="flex-1">
+            <h3 class="font-semibold text-[15.5px] mb-1">Tanya Teman Cerita AI soal artikel ini</h3>
+            <p class="text-[13.5px] leading-relaxed text-white/70 mb-3.5">
+              Obrolan singkat untuk menerjemahkan artikel ini ke situasi kamu sendiri.
+            </p>
+            <button onclick="onTanyaAI()"
+                    class="font-medium text-[13.5px] bg-[#2DD4A8] text-[#0D1220] rounded-full px-4 py-2.5 hover:bg-[#25b892] transition cursor-pointer">
+              Mulai obrolan
+            </button>
+          </div>
+        </div>
+
+        <!-- Kartu Aksi 2: Konsultasi Psikolog Langsung -->
+        <div class="flex gap-4 items-start bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-5 shadow-lg">
+          <div class="shrink-0 w-[38px] h-[38px] rounded-[10px] flex items-center justify-center bg-[#38BDF8]/15">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="8" r="3.4" stroke="#38BDF8" stroke-width="1.6"/>
+              <path d="M5 20c1.4-4 4-6 7-6s5.6 2 7 6" stroke="#38BDF8" stroke-width="1.6" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="flex-1">
+            <h3 class="font-semibold text-[15.5px] mb-1 text-white">Cari psikolog untuk konsultasi langsung</h3>
+            <p class="text-[13.5px] leading-relaxed text-[#8A93A8] mb-3.5">
+              Terhubung dengan psikolog lewat direktori kami yang siap mendampingi lebih jauh.
+            </p>
+            <button onclick="onCariPsikolog()"
+                    class="font-medium text-[13.5px] bg-transparent border border-[#38BDF8] text-[#38BDF8] rounded-full px-4 py-2 hover:bg-[#38BDF8]/10 transition cursor-pointer">
+              Buka direktori
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  `;
+  if (window.AOS) window.AOS.refresh();
+}
+
+// ─── AKSI GLOBAL TOMBOL AJAKAN (CTA) ───
+window.onTanyaAI = function() {
+  if (window.TeduhChatOverlay && typeof window.TeduhChatOverlay.open === 'function') {
+    window.TeduhChatOverlay.open();
+  } else {
+    window.location.href = '/konsultasi.html#chat-ai';
+  }
+};
+
+window.onCariPsikolog = function() {
+  window.location.href = '/konsultasi.html#psikolog';
+};
+
+// Mulai muat artikel ketika dokumen HTML siap
+document.addEventListener('DOMContentLoaded', () => {
+  loadArtikel();
+});

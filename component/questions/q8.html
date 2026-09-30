@@ -1,0 +1,71 @@
+<!-- ========================================================================== -->
+<!-- BAGIAN: Komponen Kuis Pertanyaan 8 (Evaluasi Keinginan Interaksi Sosial)   -->
+<!-- FUNGSI: Mengukur kenyamanan pengguna dalam bersosialisasi vs menyendiri    -->
+<!-- SUMBER: Modul Kuesioner BerTeduh (component/questions/q8.html)             -->
+<!-- ========================================================================== -->
+<div class="question-card py-2 px-2 sm:px-4" data-index="7" data-dimensi="sosial">
+
+  <!-- BAGIAN: Judul Utama Pertanyaan (Heading) -->
+  <!-- FUNGSI: Menanyakan tingkat keinginan bertemu atau berinteraksi sosial -->
+  <!-- SUMBER: Naskah Pertanyaan Kuesioner BerTeduh -->
+  <h2 class="font-sans text-[19px] sm:text-[22px] font-semibold text-white mt-1 mb-5 leading-relaxed tracking-wide">
+    Nah, kalau soal orang-orang di sekitar, gimana keinginanmu buat ketemu atau ngobrol sama mereka belakangan ini?
+  </h2>
+
+  <!-- BAGIAN: Kontainer Opsi Pilihan Jawaban -->
+  <!-- FUNGSI: Membungkus tombol pilihan preferensi sosial beserta ikon wajah CDN -->
+  <div class="space-y-3">
+
+    <!-- BAGIAN: Tombol Opsi 1 (Skor Hijau - Nyaman Bersosialisasi) -->
+    <!-- FUNGSI: Memilih kondisi tetap ingin dan nyaman berinteraksi -->
+    <!-- SUMBER CDN ICON: Twitter Twemoji SVG via jsDelivr CDN (1f60a.svg - Smiling Face) -->
+    <button type="button" class="option-btn flex items-center gap-3 w-full text-left bg-transparent p-0 border-0 cursor-pointer outline-none select-none" data-score="hijau">
+      <!-- FUNGSI: Kartu teks pilihan jawaban -->
+      <div class="option-card flex-1 min-w-0 p-3 sm:p-3.5 rounded-xl border border-white/10 bg-white/[0.04]">
+        <span class="text-base sm:text-[17px] font-medium text-[#F5F5F5] leading-relaxed block">
+          Masih pengen dan nyaman-nyaman aja
+        </span>
+      </div>
+      <!-- FUNGSI: Kontainer ikon ekspresi wajah -->
+      <div class="emoji-box w-10 h-10 min-w-[40px] min-h-[40px] shrink-0 flex items-center justify-center">
+        <!-- SUMBER: https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f60a.svg -->
+        <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f60a.svg" alt="Nyaman" class="option-emoji w-6 h-6 object-contain pointer-events-none">
+      </div>
+    </button>
+
+    <!-- BAGIAN: Tombol Opsi 2 (Skor Kuning - Kadang Memilih Sendirian) -->
+    <!-- FUNGSI: Memilih kondisi sesekali ingin jeda sosial (me-time) -->
+    <!-- SUMBER CDN ICON: Twitter Twemoji SVG via jsDelivr CDN (1f610.svg - Neutral Face) -->
+    <button type="button" class="option-btn flex items-center gap-3 w-full text-left bg-transparent p-0 border-0 cursor-pointer outline-none select-none" data-score="kuning">
+      <!-- FUNGSI: Kartu teks pilihan jawaban -->
+      <div class="option-card flex-1 min-w-0 p-3 sm:p-3.5 rounded-xl border border-white/10 bg-white/[0.04]">
+        <span class="text-base sm:text-[17px] font-medium text-[#F5F5F5] leading-relaxed block">
+          Kadang lebih milih sendirian dulu
+        </span>
+      </div>
+      <!-- FUNGSI: Kontainer ikon ekspresi wajah -->
+      <div class="emoji-box w-10 h-10 min-w-[40px] min-h-[40px] shrink-0 flex items-center justify-center">
+        <!-- SUMBER: https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f610.svg -->
+        <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f610.svg" alt="Sendiri" class="option-emoji w-6 h-6 object-contain pointer-events-none">
+      </div>
+    </button>
+
+    <!-- BAGIAN: Tombol Opsi 3 (Skor Merah - Penarikan Diri Sosial / Isolasi) -->
+    <!-- FUNGSI: Memilih kecenderungan menarik diri dari keramaian -->
+    <!-- SUMBER CDN ICON: Twitter Twemoji SVG via jsDelivr CDN (1f614.svg - Pensive Face) -->
+    <button type="button" class="option-btn flex items-center gap-3 w-full text-left bg-transparent p-0 border-0 cursor-pointer outline-none select-none" data-score="merah">
+      <!-- FUNGSI: Kartu teks pilihan jawaban -->
+      <div class="option-card flex-1 min-w-0 p-3 sm:p-3.5 rounded-xl border border-white/10 bg-white/[0.04]">
+        <span class="text-base sm:text-[17px] font-medium text-[#F5F5F5] leading-relaxed block">
+          Belakangan lebih sering pengen menyendiri aja
+        </span>
+      </div>
+      <!-- FUNGSI: Kontainer ikon ekspresi wajah -->
+      <div class="emoji-box w-10 h-10 min-w-[40px] min-h-[40px] shrink-0 flex items-center justify-center">
+        <!-- SUMBER: https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f614.svg -->
+        <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f614.svg" alt="Menyendiri" class="option-emoji w-6 h-6 object-contain pointer-events-none">
+      </div>
+    </button>
+
+  </div>
+</div>

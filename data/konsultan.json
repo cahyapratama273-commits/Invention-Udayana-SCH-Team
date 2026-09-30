@@ -1,0 +1,134 @@
+[
+  {
+    "id": "dr-elanoir-gray",
+    "nama": "dr. Elanoir Gray",
+    "gelar": "Spesialis Kedokteran Jiwa (Psikiater)",
+    "jenis_kelamin": "Perempuan",
+    "instansi": "RS Pusat Jiwa & Sanatorium Harmoni Jakarta",
+    "pengalaman": "12 Tahun Praktik",
+    "inisial": "EG",
+    "foto": "/assets/Images/konsultan/dr-elanoir-gray.jpg",
+    "gambar": "/assets/Images/konsultan/dr-elanoir-gray.jpg",
+    "avatar_gradient": "linear-gradient(135deg, #0d9488, #2dd4a8)",
+    "avatar_color": "#042f2e",
+    "deskripsi": "Berpengalaman mendampingi individu dalam mengelola gangguan kecemasan, suasana hati, serta manajemen stres kerja dengan pendekatan empati profesional.",
+    "bidang": [
+      "Kecemasan (Anxiety)",
+      "Depresi Klinis",
+      "Manajemen Burnout",
+      "Regulasi Mood"
+    ],
+    "kategori": ["all", "Stres & Kecemasan", "Burnout Kerja"],
+    "kontak_wa": "https://wa.me/6281222917632?text=Halo%20dr.%20Elanoir%20Gray,%20saya%20ingin%20menjadwalkan%20sesi%20konsultasi%20melalui%20BerTeduh."
+  },
+  {
+    "id": "Wiliam-Games-Moriarty",
+    "nama": "Wiliam Games Moriarty, M.Psi., Psikolog",
+    "gelar": "Psikolog Klinis Dewasa",
+    "jenis_kelamin": "Laki-laki",
+    "instansi": "Pusat Pemulihan Psikologis Nusantara & Klinik Jiwa Sehat",
+    "pengalaman": "8 Tahun Praktik",
+    "inisial": "WM",
+    "foto": "/assets/Images/konsultan/Wiliam.jpg",
+    "gambar": "/assets/Images/konsultan/Wiliam.jpg",
+    "avatar_gradient": "linear-gradient(135deg, #0284c7, #38bdf8)",
+    "avatar_color": "#082f49",
+    "deskripsi": "Menggunakan pendekatan Cognitive Behavioral Therapy (CBT) dan Mindfulness untuk membantu kamu mengurai overthinking, krisis kepercayaan diri, dan relasi interpersonal.",
+    "bidang": [
+      "Overthinking & Stres",
+      "Krisis Identitas / Quarter-life",
+      "Hubungan & Komunikasi",
+      "Terapi CBT"
+    ],
+    "kategori": ["all", "Stres & Kecemasan", "Pengembangan Diri", "Hubungan & Keluarga"],
+    "kontak_wa": "https://wa.me/6281222917632?text=Halo%20Mas%20Wiliam,%20saya%20ingin%20konsultasi%20psikologi%20melalui%20BerTeduh."
+  },
+  {
+    "id": "dr-tara-senjaya",
+    "nama": "Dr. Tara Senjaya, M.Psi.",
+    "gelar": "Psikolog Klinis & Terapi Trauma",
+    "jenis_kelamin": "Perempuan",
+    "instansi": "Lembaga Konseling Jiwa Harapan Bandung",
+    "pengalaman": "10 Tahun Praktik",
+    "inisial": "TS",
+    "foto": "/assets/Images/konsultan/dr-tara-senjaya.jpg",
+    "gambar": "/assets/Images/konsultan/dr-tara-senjaya.jpg",
+    "avatar_gradient": "linear-gradient(135deg, #7c3aed, #a78bfa)",
+    "avatar_color": "#2e1065",
+    "deskripsi": "Fokus pada pemulihan luka emosional masa lalu, inner child healing, serta pendampingan kecemasan berlebih akibat trauma dan kehilangan.",
+    "bidang": [
+      "Pemulihan Trauma",
+      "Inner Child Healing",
+      "Kecemasan Sosial",
+      "Self-Compassion"
+    ],
+    "kategori": ["all", "Trauma & Pemulihan", "Stres & Kecemasan"],
+    "kontak_wa": "https://wa.me/6281222917632?text=Halo%20Dr.%20Tara%20Senjaya,%20saya%20ingin%20menjadwalkan%20sesi%20konsultasi%20melalui%20BerTeduh."
+  },
+  {
+    "id": "dr-reian-baskara",
+    "nama": "Dr. Reian Baskara, Sp.KJ",
+    "gelar": "Psikiater & Konselor Kesehatan Holistik",
+    "jenis_kelamin": "Laki-laki",
+    "instansi": "Klinik Utama Sehat Mental Surabaya",
+    "pengalaman": "14 Tahun Praktik",
+    "inisial": "RB",
+    "foto": "/assets/Images/konsultan/dr-reian-baskara.jpg",
+    "gambar": "/assets/Images/konsultan/dr-reian-baskara.jpg",
+    "avatar_gradient": "linear-gradient(135deg, #d97706, #fbbf24)",
+    "avatar_color": "#451a03",
+    "deskripsi": "Membantu individu dengan gangguan tidur kronis (insomnia), gangguan psikosomatis, serta regulasi emosi akibat tekanan pekerjaan yang tinggi.",
+    "bidang": [
+      "Insomnia & Gangguan Tidur",
+      "Psikosomatis",
+      "Stres Kerja & Eksekutif",
+      "Farmakoterapi & Konseling"
+    ],
+    "kategori": ["all", "Burnout Kerja", "Stres & Kecemasan"],
+    "kontak_wa": "https://wa.me/6281222917632?text=Halo%20Dr.%20Reian%20Baskara,%20saya%20ingin%20konsultasi%20melalui%20BerTeduh."
+  },
+  {
+    "id": "dr-mikael-kalashnikov",
+    "nama": "dr. Mikael Kalashnikov",
+    "gelar": "Dokter & Konselor Kesehatan Jiwa Keluarga",
+    "jenis_kelamin": "Laki-laki",
+    "instansi": "Bina Asih Family Wellness Center Yogyakarta",
+    "pengalaman": "9 Tahun Praktik",
+    "inisial": "MK",
+    "foto": "/assets/Images/konsultan/dr-mikael-kalashnikov.jpg",
+    "gambar": "/assets/Images/konsultan/dr-mikael-kalashnikov.jpg",
+    "avatar_gradient": "linear-gradient(135deg, #0284c7, #38bdf8)",
+    "avatar_color": "#082f49",
+    "deskripsi": "Mendampingi pasangan dan keluarga dalam mengurai konflik komunikasi, parenting fatigue, serta pencarian ruang aman di dalam dinamika rumah tangga.",
+    "bidang": [
+      "Konseling Pasangan",
+      "Parenting & Family Stress",
+      "Komunikasi Asertif",
+      "Resolusi Konflik"
+    ],
+    "kategori": ["all", "Hubungan & Keluarga"],
+    "kontak_wa": "https://wa.me/6281222917632?text=Halo%20dr.%20Mikael,%20saya%20ingin%20menjadwalkan%20konseling%20melalui%20BerTeduh."
+  },
+  {
+    "id": "psikolog-albert-vianne",
+    "nama": "psikolog Albert Vianne",
+    "gelar": "Psikolog Klinis Remaja & Dewasa Muda",
+    "jenis_kelamin": "Laki-laki",
+    "instansi": "Youth Mental Space Indonesia",
+    "pengalaman": "6 Tahun Praktik",
+    "inisial": "AV",
+    "foto": "/assets/Images/konsultan/psikolog-albert-vianne.jpg",
+    "gambar": "/assets/Images/konsultan/psikolog-albert-vianne.jpg",
+    "avatar_gradient": "linear-gradient(135deg, #059669, #34d399)",
+    "avatar_color": "#064e3b",
+    "deskripsi": "Pendekatan santai dan suportif untuk mahasiswa atau pekerja muda yang merasa cemas dengan masa depan, kesepian, atau tantangan akademik dan karir.",
+    "bidang": [
+      "Kecemasan Karir & Akademik",
+      "Kesepian & Isolasi Diri",
+      "Pengembangan Diri",
+      "Mindfulness Therapy"
+    ],
+    "kategori": ["all", "Pengembangan Diri", "Stres & Kecemasan"],
+    "kontak_wa": "https://wa.me/6281222917632?text=Halo%20psikolog%20Albert%20Vianne,%20saya%20ingin%20konsultasi%20melalui%20BerTeduh."
+  }
+]
